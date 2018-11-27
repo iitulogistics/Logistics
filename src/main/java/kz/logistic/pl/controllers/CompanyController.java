@@ -33,10 +33,24 @@ public class CompanyController {
   @RequestMapping(value = "/add", method = RequestMethod.POST)
   public ResponseEntity<?> add(
           @RequestParam String companyNameRu,
-          @RequestParam String companyNameKk,
-          @RequestParam String companyNameEn,
-          @RequestParam String companyPhoneNumber) {
-    this.companyService.addCompany(companyNameRu, companyNameKk, companyNameEn, companyPhoneNumber);
+          @RequestParam(required = false) String companyNameKk,
+          @RequestParam(required = false) String companyNameEn,
+          @RequestParam String companyPhoneNumber,
+          @RequestParam String mobilePhone,
+          @RequestParam String bin,
+          @RequestParam String email,
+          @RequestParam String username,
+          @RequestParam String password) {
+    this.companyService.addCompany(
+            companyNameRu,
+            companyNameKk,
+            companyNameEn,
+            companyPhoneNumber,
+            mobilePhone,
+            bin,
+            email,
+            username,
+            password);
     return ResponseEntity.ok(true);
   }
 }

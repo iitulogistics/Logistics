@@ -5,5 +5,8 @@ CREATE TABLE company(
 	name_kk varchar(256),
 	name_ru varchar(256),
 	name_en varchar(256),
-	company_phone varchar(256)
+	phone varchar(256),
+	mobile_phone varchar(256),
+	bin varchar(256),
+	email varchar(256)
 );

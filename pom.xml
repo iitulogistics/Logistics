@@ -6,7 +6,7 @@
     <groupId>kz.logistic</groupId>
     <artifactId>pl</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>pl</name>
     <description>Project for logistics</description>

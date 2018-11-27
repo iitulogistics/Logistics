@@ -10,6 +10,24 @@ public class DefaultCompany implements Company {
   private Long id;
   private LocalizedMessage companyName;
   private String companyPhoneNumber;
+  private String mobilePhoneNumber;
+  private String email;
+  private String bin;
+
+  @Override
+  public String getBin() {
+    return bin;
+  }
+
+  @Override
+  public String getMobilePhone() {
+    return mobilePhoneNumber;
+  }
+
+  @Override
+  public String getEmail() {
+    return email;
+  }
 
   @Override
   public long getCompanyId() {

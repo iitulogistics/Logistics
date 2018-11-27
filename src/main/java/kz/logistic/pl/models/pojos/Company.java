@@ -8,4 +8,10 @@ public interface Company {
 
   String getCompanyPhoneNumber();
 
+  String getMobilePhone();
+
+  String getEmail();
+
+  String getBin();
+
 }
