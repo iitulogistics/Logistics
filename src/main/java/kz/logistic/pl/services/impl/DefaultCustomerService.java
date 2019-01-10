@@ -24,18 +24,13 @@ public class DefaultCustomerService implements CustomerService {
     public List<Customer> customers() {
         List<CustomerEntity> entities = this.customerRepository.findAll();
 
-        return entities.stream().map(companyEntity -> DefaultCustomer
+
+        return entities.stream().map(loginEntity -> DefaultCustomer
                 .builder()
-                .id(companyEntity.getId())
-                .companyName(
-                        localizedMessageBuilderFactory.builder()
-                                .kk(companyEntity.getNameKk())
-                                .ru(companyEntity.getNameRu())
-                                .en(companyEntity.getNameEn()).build())
-                .companyPhoneNumber(companyEntity.getPhone())
-                .mobilePhoneNumber(companyEntity.getMobilePhone())
-                .email(companyEntity.getEmail())
-                .bin(companyEntity.getBin())
+                .id(loginEntity.getId())
+                .userName(loginEntity.getName())
+                .mobilePhone(loginEntity.getMobile_phone())
+                .email(loginEntity.getEmail())
                 .build()).collect(Collectors.toList());
     }
 
