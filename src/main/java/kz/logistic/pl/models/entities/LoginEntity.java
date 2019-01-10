@@ -31,8 +31,10 @@ public class LoginEntity {
   @JoinColumn(name = "company_id")
   private CompanyEntity companyEntity;
 
-  @Column(name = "client_id")
-  private Long clientId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id")
+    private CustomerEntity customerEntity;
+
   @Column(name = "role_id")
   private Long roleId;
 

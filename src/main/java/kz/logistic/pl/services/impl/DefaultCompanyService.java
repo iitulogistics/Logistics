@@ -48,7 +48,6 @@ public class DefaultCompanyService implements CompanyService {
             .build()).collect(Collectors.toList());
   }
 
-
   @Override
   public void addCompany(String companyNameKk, String companyNameRu,
                          String companyNameEn, String companyPhoneNumber,
@@ -72,5 +71,13 @@ public class DefaultCompanyService implements CompanyService {
 
     log.info("Added new company: " + companyNameRu + " " + new Date());
     this.companyRepository.save(entity);
+  }
+
+  @Override
+  public void editCompany(String companyNameKk, String companyNameRu,
+                          String companyNameEn, String companyPhoneNumber,
+                          String mobilePhone, String bin,
+                          String email, String username, String password) {
+
   }
 }

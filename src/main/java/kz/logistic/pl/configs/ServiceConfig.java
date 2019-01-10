@@ -5,6 +5,7 @@ import kz.logistic.pl.models.builders.impl.MessageSourceLocalizedMessageModelBui
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
 import kz.logistic.pl.models.factories.impl.MessageSourceBuilderFactory;
 import kz.logistic.pl.services.impl.DefaultCompanyService;
+import kz.logistic.pl.services.impl.DefaultCustomerService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +17,12 @@ public class ServiceConfig {
   public DefaultCompanyService companyService() {
     return new DefaultCompanyService();
   }
+//
+//  @Bean
+//  @Qualifier("defaultCustomerService")
+//  public DefaultCustomerService customerService() {
+//    return new DefaultCustomerService();
+//  }
 
   @Bean
   public LocalizedMessageBuilderFactory localizedMessageBuilderFactory() {
