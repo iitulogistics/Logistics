@@ -9,21 +9,20 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = "customer")
-public class CustomerEntity {
+public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "mobile_phone")
-    private String mobile_phone;
+    private Long customer_id;
+    @Column(name = "customer_name")
+    private String customerName;
+    @Column(name = "iin_or_bin")
+    private Long iinOrBin;
+    @Column(name = "phone_number")
+    private String phoneNumber;
     @Column(name = "email")
     private String email;
-    @Column(name = "name")
-    private String name;
     @Column(name = "address")
     private String address;
-
-    @OneToOne(mappedBy = "customerEntity", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-    private LoginEntity loginEntity;
+    @Column(name = "add_info")
+    private String addInfo;
 }

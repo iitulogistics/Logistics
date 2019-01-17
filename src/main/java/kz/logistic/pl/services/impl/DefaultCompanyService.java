@@ -4,23 +4,21 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import kz.logistic.pl.models.entities.CompanyEntity;
-import kz.logistic.pl.models.entities.LoginEntity;
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
 import kz.logistic.pl.models.pojos.Company;
 import kz.logistic.pl.models.pojos.impl.DefaultCompany;
-import kz.logistic.pl.repositories.CompanyRepository;
+import kz.logistic.pl.repositories.LoginRepository;
 import kz.logistic.pl.services.CompanyService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
 public class DefaultCompanyService implements CompanyService {
-  private CompanyRepository companyRepository;
+  private LoginRepository companyRepository;
   private LocalizedMessageBuilderFactory localizedMessageBuilderFactory;
 
   @Autowired(required = false)
-  public void setCompanyRepository(CompanyRepository companyRepository) {
+  public void setCompanyRepository(LoginRepository companyRepository) {
     this.companyRepository = companyRepository;
   }
 

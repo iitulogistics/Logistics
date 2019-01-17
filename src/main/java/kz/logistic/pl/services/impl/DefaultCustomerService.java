@@ -1,6 +1,5 @@
 package kz.logistic.pl.services.impl;
 
-import kz.logistic.pl.models.entities.CustomerEntity;
 import kz.logistic.pl.models.pojos.Customer;
 import kz.logistic.pl.models.pojos.impl.DefaultCustomer;
 import kz.logistic.pl.repositories.CustomerRepository;
