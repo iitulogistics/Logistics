@@ -1,4 +1,4 @@
-CREATE TABLE company(
+CREATE TABLE Seller_company(
 	id bigserial not null
 		constraint company_pkey
 			primary key,
