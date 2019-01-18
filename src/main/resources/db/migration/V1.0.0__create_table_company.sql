@@ -1,5 +1,5 @@
 CREATE TABLE Seller_company(
-	id bigserial not null
+	seller_company_id bigserial not null
 		constraint company_pkey
 			primary key,
 	name_kk varchar(256),
@@ -8,5 +8,6 @@ CREATE TABLE Seller_company(
 	phone varchar(256),
 	mobile_phone varchar(256),
 	bin varchar(256),
-	email varchar(256)
+	email varchar(256),
+	seller_category_id integer
 );

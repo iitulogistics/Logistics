@@ -1,4 +1,4 @@
-CREATE TABLE login(
+CREATE TABLE Login(
 	id bigserial not null
 		constraint login_pkey
 			primary key,
