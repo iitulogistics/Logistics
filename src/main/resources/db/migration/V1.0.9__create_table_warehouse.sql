@@ -7,5 +7,5 @@ CREATE TABLE Warehouse(
 	wh_name_en varchar(256),
   wh_address_id integer,
   seller_company_id integer,
-  add_info message_text
+  add_info varchar(500)
 );

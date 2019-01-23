@@ -28,5 +28,5 @@ public class SellerCompanyEntity {
     @Column(name = "email")
     private String email;
     @Column(name = "seller_category_id")
-    private Long sellerCategoryId;
+    private Integer sellerCategoryId;
 }

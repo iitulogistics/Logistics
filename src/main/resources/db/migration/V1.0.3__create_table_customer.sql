@@ -10,5 +10,5 @@ CREATE TABLE Customer(
 	mobile_phone varchar(256),
 	email varchar(256),
 	address varchar(256),
-	add_info message_text
+	add_info varchar(500)
 );

@@ -13,7 +13,7 @@ public class DefaultSellerCompany implements SellerCompany {
     private String sellerCompanyMobilePhone;
     private String sellerCompanyBin;
     private String sellerCompanyEmail;
-    private Long sellerCategoryId;
+    private Integer sellerCategoryId;
 
     @Override
     public long getSellerCompanyId() {

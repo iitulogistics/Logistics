@@ -8,5 +8,5 @@ CREATE TABLE Shipping(
       shipping_address varchar(255),
       accept_date date,
       shipping_date date,
-      add_info message_text
+      add_info varchar(500)
  );

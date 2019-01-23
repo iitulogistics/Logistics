@@ -5,5 +5,5 @@ CREATE TABLE Seller_category(
 	category_name_kk varchar(256),
 	category_name_ru varchar(256),
 	category_name_en varchar(256),
-  add_info message_text
+  add_info varchar(500)
 );

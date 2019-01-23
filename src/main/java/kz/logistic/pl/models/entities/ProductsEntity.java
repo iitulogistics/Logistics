@@ -21,7 +21,7 @@ public class ProductsEntity {
     @Column(name = "product_name_en")
     private String product_name_en;
     @Column(name = "product_category_id")
-    private Long product_category_id;
+    private Integer product_category_id;
     @Column(name = "unique_id_number")
     private String unique_id_number;
     @Column(name = "serial_number")

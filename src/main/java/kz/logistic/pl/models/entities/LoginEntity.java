@@ -18,11 +18,11 @@ public class LoginEntity {
     @Column(name = "password")
     private String password;
     @Column(name = "roles_id")
-    private Long roles_id;
+    private Integer roles_id;
     @Column(name = "customer_id")
-    private Long customer_id;
+    private Integer customer_id;
     @Column(name = "seller_company_id")
-    private Long seller_company_id;
+    private Integer seller_company_id;
     @Column(name = "shipper_id")
-    private Long shipper_id;
+    private Integer shipper_id;
 }

@@ -3,5 +3,5 @@ CREATE TABLE Roles(
 		constraint roles_pkey
 			primary key,
 	role_name varchar(256),
-	description message_text
+	description varchar (500)
 );
