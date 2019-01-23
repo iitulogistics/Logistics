@@ -21,8 +21,8 @@ public class SellerCompanyEntity {
     private String companyNameEn;
     @Column(name = "phone")
     private String phone;
-    @Column(name = "mobilePhone")
-    private String mobile_phone;
+    @Column(name = "mobile_phone")
+    private String mobilePhone;
     @Column(name = "bin")
     private String bin;
     @Column(name = "email")

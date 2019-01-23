@@ -32,18 +32,9 @@ public class DefaultSellerCompanyService implements SellerCompanyService {
     public List<SellerCompany> showAllSellerCompanies() {
         List<SellerCompanyEntity> entities = this.sellerCompanyRepository.findAll();
 
-        return entities.stream().map(sellerCompanyEntity -> DefaultSellerCompany
-                .builder()
-                .id(sellerCompanyEntity.getSellerCompanyId())
-                .sellerCompanyName(localizedMessageBuilderFactory.builder()
-                        .kk(sellerCompanyEntity.getCompanyNameKk())
-                        .ru(sellerCompanyEntity.getCompanyNameRu())
-                        .en(sellerCompanyEntity.getCompanyNameEn()).build())
-                .sellerCompanyPhone(sellerCompanyEntity.getPhone())
-                .sellerCompanyMobilePhone(sellerCompanyEntity.getMobile_phone())
-                .sellerCompanyBin(sellerCompanyEntity.getBin())
-                .sellerCompanyEmail(sellerCompanyEntity.getEmail())
-                .sellerCategoryId(sellerCompanyEntity.getSellerCategoryId())).collect(Collectors.toList());
+        return (List<SellerCompany>) entities.stream().map(sellerCompanyEntity -> DefaultSellerCompany.builder()
+                .id(sellerCompanyEntity.getSellerCompanyId()).build()).collect(Collectors.toList());
+
     }
 
     @Override
