@@ -49,7 +49,10 @@ public class DefaultSellerCompanyService implements SellerCompanyService {
     }
 
     @Override
-    public void addSellerCompany(String sellerCompanyNameKk, String sellerCompanyNameRu, String sellerCompanyNameEn, String sellerCompanyPhone, String sellerCompanyMobilePhone, String sellerCompanyBin, String sellerCompanyEmail, long sellerCategoryId, String username, String password) {
+    public void addSellerCompany(String sellerCompanyNameKk, String sellerCompanyNameRu,
+                                 String sellerCompanyNameEn, String sellerCompanyPhone,
+                                 String sellerCompanyMobilePhone, String sellerCompanyBin,
+                                 String sellerCompanyEmail, String username, String password) {
 
     }
 

@@ -40,7 +40,6 @@ public class SellerCompanyController {
           @RequestParam String sellerCompanyMobilePhone,
           @RequestParam String sellerCompanyBin,
           @RequestParam String sellerCompanyEmail,
-          @RequestParam Long sellerCategoryId,
           @RequestParam String username,
           @RequestParam String password) {
     this.sellerCompanyService.addSellerCompany(
@@ -51,7 +50,6 @@ public class SellerCompanyController {
             sellerCompanyMobilePhone,
             sellerCompanyBin,
             sellerCompanyEmail,
-            sellerCategoryId,
             username,
             password);
     return ResponseEntity.ok(true);

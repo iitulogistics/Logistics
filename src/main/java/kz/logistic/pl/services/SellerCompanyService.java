@@ -14,8 +14,7 @@ public interface SellerCompanyService {
     void addSellerCompany(String sellerCompanyNameKk, String sellerCompanyNameRu,
                           String sellerCompanyNameEn, String sellerCompanyPhone,
                           String sellerCompanyMobilePhone, String sellerCompanyBin,
-                          String sellerCompanyEmail, long sellerCategoryId,
-                          String username, String password);
+                          String sellerCompanyEmail, String username, String password);
 
     //Изменить данные продавца
     void updateSellerCompany(String sellerCompanyNameKk, String sellerCompanyNameRu,
