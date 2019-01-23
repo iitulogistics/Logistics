@@ -1,5 +1,5 @@
 CREATE TABLE Seller_company(
-	seller_company_id bigserial not null
+	seller_company_id bigserial
 		constraint seller_company_pkey
 			primary key,
 	company_name_kk varchar(256),

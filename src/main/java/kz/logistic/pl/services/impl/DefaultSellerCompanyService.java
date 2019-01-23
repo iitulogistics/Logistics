@@ -1,5 +1,6 @@
 package kz.logistic.pl.services.impl;
 
+import kz.logistic.pl.models.entities.LoginEntity;
 import kz.logistic.pl.models.entities.SellerCompanyEntity;
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
 import kz.logistic.pl.models.pojos.SellerCompany;
@@ -9,7 +10,9 @@ import kz.logistic.pl.services.SellerCompanyService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -53,6 +56,42 @@ public class DefaultSellerCompanyService implements SellerCompanyService {
                                  String sellerCompanyNameEn, String sellerCompanyPhone,
                                  String sellerCompanyMobilePhone, String sellerCompanyBin,
                                  String sellerCompanyEmail, String username, String password) {
+
+        String exists = this.sellerCompanyRepository.findByMobilePhone(sellerCompanyMobilePhone);
+
+
+        if (exists.isEmpty()) {
+            SellerCompanyEntity sellerCompanyEntity = new SellerCompanyEntity();
+            sellerCompanyEntity.setCompanyNameKk(sellerCompanyNameKk);
+            sellerCompanyEntity.setCompanyNameRu(sellerCompanyNameRu);
+            sellerCompanyEntity.setCompanyNameEn(sellerCompanyNameEn);
+            sellerCompanyEntity.setPhone(sellerCompanyPhone);
+            sellerCompanyEntity.setMobilePhone(sellerCompanyMobilePhone);
+            sellerCompanyEntity.setBin(sellerCompanyBin);
+            sellerCompanyEntity.setEmail(sellerCompanyEmail);
+
+            //this.sellerCompanyRepository.save(sellerCompanyEntity);
+
+            LoginEntity loginEntity = new LoginEntity();
+            loginEntity.setUsername(username);
+            loginEntity.setPassword(password);
+            loginEntity.setSellerCompanyEntity(sellerCompanyEntity);
+
+            sellerCompanyEntity.setLoginEntity(loginEntity);
+
+            this.sellerCompanyRepository.save(sellerCompanyEntity);
+            log.info("Added new seller company: " + sellerCompanyNameRu + " " + new Date());
+        } else {
+            try {
+
+            } catch (Exception e) {
+
+            }
+        }
+
+
+
+
 
     }
 

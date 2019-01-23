@@ -6,6 +6,6 @@ CREATE TABLE Login(
 	password varchar(256),
 	roles_id integer,
 	customer_id integer,
-	seller_company_id integer,
+	seller_company_id bigserial,
 	shipper_id integer
 );

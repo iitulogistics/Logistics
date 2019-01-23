@@ -13,6 +13,7 @@ public class SellerCompanyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long sellerCompanyId;
+
     @Column(name = "company_name_kk")
     private String companyNameKk;
     @Column(name = "company_name_ru")
@@ -29,4 +30,8 @@ public class SellerCompanyEntity {
     private String email;
     @Column(name = "seller_category_id")
     private Integer sellerCategoryId;
+
+    @OneToOne(mappedBy = "sellerCompanyEntity", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+    private LoginEntity loginEntity;
 }
