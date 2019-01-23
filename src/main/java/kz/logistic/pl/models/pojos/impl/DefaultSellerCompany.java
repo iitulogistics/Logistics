@@ -47,6 +47,6 @@ public class DefaultSellerCompany implements SellerCompany {
 
     @Override
     public long getSellerCategoryId() {
-        return sellerCategoryId;
+        return 0;
     }
 }

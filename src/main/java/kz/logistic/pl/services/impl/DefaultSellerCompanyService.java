@@ -46,7 +46,7 @@ public class DefaultSellerCompanyService implements SellerCompanyService {
                 .sellerCompanyMobilePhone(sellerCompanyEntity.getMobilePhone())
                 .sellerCompanyBin(sellerCompanyEntity.getBin())
                 .sellerCompanyEmail(sellerCompanyEntity.getEmail())
-                .sellerCategoryId(sellerCompanyEntity.getSellerCategoryId())
+                //.sellerCategoryId(sellerCompanyEntity.getSellerCategoryId())
                 .build()).collect(Collectors.toList());
 
     }
@@ -57,40 +57,27 @@ public class DefaultSellerCompanyService implements SellerCompanyService {
                                  String sellerCompanyMobilePhone, String sellerCompanyBin,
                                  String sellerCompanyEmail, String username, String password) {
 
-        String exists = this.sellerCompanyRepository.findByMobilePhone(sellerCompanyMobilePhone);
 
+        SellerCompanyEntity sellerCompanyEntity = new SellerCompanyEntity();
+        sellerCompanyEntity.setCompanyNameKk(sellerCompanyNameKk);
+        sellerCompanyEntity.setCompanyNameRu(sellerCompanyNameRu);
+        sellerCompanyEntity.setCompanyNameEn(sellerCompanyNameEn);
+        sellerCompanyEntity.setPhone(sellerCompanyPhone);
+        sellerCompanyEntity.setMobilePhone(sellerCompanyMobilePhone);
+        sellerCompanyEntity.setBin(sellerCompanyBin);
+        sellerCompanyEntity.setEmail(sellerCompanyEmail);
 
-        if (exists.isEmpty()) {
-            SellerCompanyEntity sellerCompanyEntity = new SellerCompanyEntity();
-            sellerCompanyEntity.setCompanyNameKk(sellerCompanyNameKk);
-            sellerCompanyEntity.setCompanyNameRu(sellerCompanyNameRu);
-            sellerCompanyEntity.setCompanyNameEn(sellerCompanyNameEn);
-            sellerCompanyEntity.setPhone(sellerCompanyPhone);
-            sellerCompanyEntity.setMobilePhone(sellerCompanyMobilePhone);
-            sellerCompanyEntity.setBin(sellerCompanyBin);
-            sellerCompanyEntity.setEmail(sellerCompanyEmail);
+        //this.sellerCompanyRepository.save(sellerCompanyEntity);
 
-            //this.sellerCompanyRepository.save(sellerCompanyEntity);
+        LoginEntity loginEntity = new LoginEntity();
+        loginEntity.setUsername(username);
+        loginEntity.setPassword(password);
+        loginEntity.setSellerCompanyEntity(sellerCompanyEntity);
 
-            LoginEntity loginEntity = new LoginEntity();
-            loginEntity.setUsername(username);
-            loginEntity.setPassword(password);
-            loginEntity.setSellerCompanyEntity(sellerCompanyEntity);
+        sellerCompanyEntity.setLoginEntity(loginEntity);
 
-            sellerCompanyEntity.setLoginEntity(loginEntity);
-
-            this.sellerCompanyRepository.save(sellerCompanyEntity);
-            log.info("Added new seller company: " + sellerCompanyNameRu + " " + new Date());
-        } else {
-            try {
-
-            } catch (Exception e) {
-
-            }
-        }
-
-
-
+        this.sellerCompanyRepository.save(sellerCompanyEntity);
+        log.info("Added new seller company: " + sellerCompanyNameRu + " " + new Date());
 
 
     }
