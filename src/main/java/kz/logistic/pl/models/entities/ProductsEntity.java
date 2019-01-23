@@ -9,29 +9,32 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = "products")
-public class Product {
+public class ProductsEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long product_id;
-
+    private Long product_id;
     @Column(name = "product_name_kk")
-    private String productNameKk;
+    private String product_name_kk;
     @Column(name = "product_name_ru")
-    private String productNameRu;
+    private String product_name_ru;
     @Column(name = "product_name_en")
-    private String productNameEn;
+    private String product_name_en;
     @Column(name = "product_category_id")
-    private Long productCategoryId;
+    private Long product_category_id;
     @Column(name = "unique_id_number")
-    private Long uniqueIdNumber;
+    private String unique_id_number;
     @Column(name = "serial_number")
-    private Long serialNumber;
+    private String serial_number;
     @Column(name = "manufacturer")
-    private Long manufacturer;
+    private String manufacturer;
     @Column(name = "size")
-    private Long size;
+    private String size;
     @Column(name = "weight")
-    private Long weight;
+    private Integer weight;
     @Column(name = "price")
-    private Long price;
+    private Integer price;
+    @Column(name = "product_description")
+    private String product_description;
+
 }

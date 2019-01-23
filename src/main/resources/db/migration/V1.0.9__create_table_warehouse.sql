@@ -5,7 +5,7 @@ CREATE TABLE Warehouse(
 	wh_name_kk varchar(256),
 	wh_name_ru varchar(256),
 	wh_name_en varchar(256),
-  wh_address_id intersect ,
+  wh_address_id integer,
   seller_company_id integer,
   add_info message_text
 );

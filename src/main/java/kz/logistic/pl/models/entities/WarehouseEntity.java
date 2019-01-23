@@ -9,20 +9,20 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = "warehouse")
-public class Warehouse {
+public class WarehouseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long warehouse_id;
     @Column(name = "wh_name_kk")
-    private String whNameKk;
+    private String wh_name_kk;
     @Column(name = "wh_name_ru")
-    private String whNameRu;
+    private String wh_name_ru;
     @Column(name = "wh_name_en")
-    private String whNameEn;
+    private String wh_name_en;
     @Column(name = "wh_address_id")
-    private String whAddressId;
+    private Integer wh_address_id;
     @Column(name = "seller_company_id")
-    private String sellerCompanyId;
-    @Column(name = "seller_id")
-    private String sellerId;
+    private Integer seller_company_id;
+    @Column(name = "add_info")
+    private String add_info;
 }

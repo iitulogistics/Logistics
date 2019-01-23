@@ -10,20 +10,22 @@ import java.util.Date;
 @Getter
 @Entity
 @Table(name = "shipping")
-public class Shipping {
+public class ShippingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long shipping_id;
-    @Column(name = "order_number")
-    private Long orderNumber;
+    @Column(name = "shipper_id")
+    private Integer shipper_id;
     @Column(name = "order_id")
-    private Long orderId;
+    private Integer order_id;
+    @Column(name = "order_number")
+    private Integer order_number;
     @Column(name = "shipping_address")
-    private String shippingAddress;
+    private String shipping_address;
     @Column(name = "accept_date")
-    private Date acceptDate;
+    private Date accept_date;
     @Column(name = "shipping_date")
-    private Date shippingDate;
+    private Date shipping_date;
     @Column(name = "add_info")
-    private String addInfo;
+    private String add_info;
 }

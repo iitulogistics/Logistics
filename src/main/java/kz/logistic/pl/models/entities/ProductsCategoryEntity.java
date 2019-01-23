@@ -9,14 +9,16 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = "products_category")
-public class ProductsCategory {
+public class ProductsCategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long product_category_id;
     @Column(name = "category_name_kk")
-    private String categoryNameKk;
+    private String category_name_kk;
     @Column(name = "category_name_ru")
-    private String categoryNameRu;
+    private String category_name_ru;
     @Column(name = "category_name_en")
-    private String categoryNameEn;
+    private String category_name_en;
+    @Column(name = "add_info")
+    private String add_info;
 }

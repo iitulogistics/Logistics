@@ -12,6 +12,5 @@ CREATE TABLE Products(
 	size varchar(256),
 	weight integer,
 	price integer,
-	product_discription message_text,
-	product_category_id integer
+	product_description message_text
 );

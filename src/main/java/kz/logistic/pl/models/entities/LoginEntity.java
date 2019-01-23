@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = "login")
-public class Login {
+public class LoginEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long login_id;
@@ -17,16 +17,12 @@ public class Login {
     private String username;
     @Column(name = "password")
     private String password;
-    @Column(name = "role_id")
-    private Long roleId;
+    @Column(name = "roles_id")
+    private Long roles_id;
     @Column(name = "customer_id")
-    private Long customerId;
-    @Column(name = "shipper_id")
-    private Long shipperId;
-    @Column(name = "company_id")
-    private Long companyId;
+    private Long customer_id;
     @Column(name = "seller_company_id")
-    private Long sellerCompanyId;
-    @Column(name = "seller_id")
-    private String sellerId;
+    private Long seller_company_id;
+    @Column(name = "shipper_id")
+    private Long shipper_id;
 }

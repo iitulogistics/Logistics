@@ -9,26 +9,24 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = "shipper")
-public class Shipper {
+public class ShipperEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long shipper_id;
     @Column(name = "shipper_name_kk")
-    private String shipperNameKk;
+    private String shipper_name_kk;
     @Column(name = "shipper_name_ru")
-    private String shipperNameRu;
+    private String shipper_name_ru;
     @Column(name = "shipper_name_en")
-    private String shipperNameEn;
-    @Column(name = "phone")
-    private String phone;
+    private String shipper_name_en;
+    @Column(name = "phone_number")
+    private String phone_number;
     @Column(name = "mobile_phone")
-    private String mobilePhone;
+    private String mobile_phone;
+    @Column(name = "bin")
+    private String bin;
     @Column(name = "email")
     private String email;
-    @Column(name = "bin")
-    private Long bin;
     @Column(name = "address")
     private String address;
-    @Column(name = "shipping_id")
-    private String shippingId;
 }

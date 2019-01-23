@@ -9,16 +9,16 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = "warehouse_address")
-public class WarehouseAddress {
+public class WarehouseAddressEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long wh_address_id;
     @Column(name = "region_name")
-    private String regionName;
+    private String region_name;
     @Column(name = "city_name")
-    private String cityName;
+    private String city_name;
     @Column(name = "street_name")
-    private String streetName;
+    private String street_name;
     @Column(name = "zip_code")
-    private String zipCode;
+    private String zip_code;
 }
