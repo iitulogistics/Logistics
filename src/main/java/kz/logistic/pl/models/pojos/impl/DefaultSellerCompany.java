@@ -4,6 +4,8 @@ import kz.logistic.pl.models.pojos.LocalizedMessage;
 import kz.logistic.pl.models.pojos.SellerCompany;
 import lombok.Builder;
 
+import java.util.Objects;
+
 @Builder
 public class DefaultSellerCompany implements SellerCompany {
 
@@ -47,6 +49,10 @@ public class DefaultSellerCompany implements SellerCompany {
 
     @Override
     public long getSellerCategoryId() {
-        return 0;
+        if (Objects.isNull(sellerCategoryId))
+            return 0;
+        else {
+            return sellerCategoryId;
+        }
     }
 }

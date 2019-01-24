@@ -46,7 +46,7 @@ public class DefaultSellerCompanyService implements SellerCompanyService {
                 .sellerCompanyMobilePhone(sellerCompanyEntity.getMobilePhone())
                 .sellerCompanyBin(sellerCompanyEntity.getBin())
                 .sellerCompanyEmail(sellerCompanyEntity.getEmail())
-                //.sellerCategoryId(sellerCompanyEntity.getSellerCategoryId())
+                .sellerCategoryId(sellerCompanyEntity.getSellerCategoryId())
                 .build()).collect(Collectors.toList());
 
     }
