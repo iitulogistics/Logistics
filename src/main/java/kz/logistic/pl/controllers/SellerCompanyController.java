@@ -54,4 +54,6 @@ public class SellerCompanyController {
             password);
     return ResponseEntity.ok(true);
   }
+
+
 }

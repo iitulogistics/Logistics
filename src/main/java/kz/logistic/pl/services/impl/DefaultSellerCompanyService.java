@@ -67,7 +67,6 @@ public class DefaultSellerCompanyService implements SellerCompanyService {
         sellerCompanyEntity.setBin(sellerCompanyBin);
         sellerCompanyEntity.setEmail(sellerCompanyEmail);
 
-        //this.sellerCompanyRepository.save(sellerCompanyEntity);
 
         LoginEntity loginEntity = new LoginEntity();
         loginEntity.setUsername(username);

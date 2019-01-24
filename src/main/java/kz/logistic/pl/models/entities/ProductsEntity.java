@@ -20,7 +20,7 @@ public class ProductsEntity {
     private String product_name_ru;
     @Column(name = "product_name_en")
     private String product_name_en;
-    @Column(name = "product_category_id")
+    @Column(name = "product_subcategory_id")
     private Integer product_category_id;
     @Column(name = "unique_id_number")
     private String unique_id_number;
