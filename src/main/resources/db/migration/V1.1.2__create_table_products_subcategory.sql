@@ -1,4 +1,4 @@
-CREATE TABLE Products_category(
+CREATE TABLE Products_subcategory(
 	product_subcategory_id bigserial not null
 		constraint product_subcategory_pkey
 			primary key,
