@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class ProductsSubCategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long product_subcategory_id;
+    private Long productSubcategoryId;
     @Column(name = "subcategory_name_kk")
     private String subCategoryNameKk;
     @Column(name = "subcategory_name_ru")
@@ -20,7 +20,7 @@ public class ProductsSubCategoryEntity {
     @Column(name = "subcategory_name_en")
     private String subCategoryNameEn;
     @Column(name = "product_category_id")
-    private Integer product_category_id;
+    private Integer productCategoryId;
     @Column(name = "subcategory_add_info")
     private String subCategoryAddInfo;
 }
