@@ -58,6 +58,6 @@ public class DefaultProductSubCategoryService implements ProductSubCategoryServi
         subCategoryEntity.setSubCategoryAddInfo(subCategoryAddInfo);
 
         this.productSubCategoryRepository.save(subCategoryEntity);
-        log.info("Added new subCategory: " + subCategoryNameRu + " " + new Date());
+        log.info("Added new ProductSubCategory: " + subCategoryNameRu + " " + new Date());
     }
 }
