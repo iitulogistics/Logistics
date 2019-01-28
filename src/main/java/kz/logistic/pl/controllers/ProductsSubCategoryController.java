@@ -30,7 +30,7 @@ public class ProductsSubCategoryController {
         return ResponseEntity.ok(this.productSubCategoryService.showAllProductSubCategory());
     }
 
-    @ApiOperation(value = "")
+    @ApiOperation(value = "Добавляет новую подкатегорию продуктов")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<?> add(
             @RequestParam(required = false) String subCategoryNameKk,
