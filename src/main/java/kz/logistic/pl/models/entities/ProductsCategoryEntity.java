@@ -12,13 +12,13 @@ import javax.persistence.*;
 public class ProductsCategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long product_category_id;
+    private Long productCategoryId;
     @Column(name = "category_name_kk")
-    private String category_name_kk;
+    private String categoryNameKk;
     @Column(name = "category_name_ru")
-    private String category_name_ru;
+    private String categoryNameRu;
     @Column(name = "category_name_en")
-    private String category_name_en;
+    private String categoryNameEn;
     @Column(name = "add_info")
-    private String add_info;
+    private String addInfo;
 }
