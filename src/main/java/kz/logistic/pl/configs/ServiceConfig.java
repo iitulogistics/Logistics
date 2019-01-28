@@ -4,6 +4,7 @@ import kz.logistic.pl.models.builders.LocalizedMessageModelBuilder;
 import kz.logistic.pl.models.builders.impl.MessageSourceLocalizedMessageModelBuilder;
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
 import kz.logistic.pl.models.factories.impl.MessageSourceBuilderFactory;
+import kz.logistic.pl.services.impl.DefaultProductCategoryService;
 import kz.logistic.pl.services.impl.DefaultProductSubCategoryService;
 import kz.logistic.pl.services.impl.DefaultSellerCompanyService;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,6 +25,12 @@ public class ServiceConfig {
   public DefaultProductSubCategoryService productSubCategoryService() {
     return new DefaultProductSubCategoryService();
   }
+
+    @Bean
+    @Qualifier("defaultProductCategoryService")
+    public DefaultProductCategoryService productCategoryService() {
+        return new DefaultProductCategoryService();
+    }
 
   @Bean
   public LocalizedMessageBuilderFactory localizedMessageBuilderFactory() {
