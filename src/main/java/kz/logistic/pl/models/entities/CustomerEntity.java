@@ -33,5 +33,6 @@ public class CustomerEntity {
     private String address;
     @Column(name = "add_info")
     private String addInfo;
+    ///Twest
 
 }
