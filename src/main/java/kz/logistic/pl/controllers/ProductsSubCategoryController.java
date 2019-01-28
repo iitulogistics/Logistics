@@ -42,6 +42,6 @@ public class ProductsSubCategoryController {
                 subCategoryNameKk, subCategoryNameRu, subCategoryNameEn,
                 productCategoryId, subCategoryAddInfo
         );
-        return ResponseEntity.ok("Новая подкатегория добавлена");
+        return ResponseEntity.ok("Новая подкатегория продуктов добавлена");
     }
 }
