@@ -4,6 +4,7 @@ import kz.logistic.pl.models.builders.LocalizedMessageModelBuilder;
 import kz.logistic.pl.models.builders.impl.MessageSourceLocalizedMessageModelBuilder;
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
 import kz.logistic.pl.models.factories.impl.MessageSourceBuilderFactory;
+import kz.logistic.pl.services.impl.DefaultCustomerService;
 import kz.logistic.pl.services.impl.DefaultProductCategoryService;
 import kz.logistic.pl.services.impl.DefaultProductSubCategoryService;
 import kz.logistic.pl.services.impl.DefaultSellerCompanyService;
@@ -30,6 +31,12 @@ public class ServiceConfig {
     @Qualifier("defaultProductCategoryService")
     public DefaultProductCategoryService productCategoryService() {
         return new DefaultProductCategoryService();
+    }
+
+    @Bean
+    @Qualifier("defaultCustomerService")
+    public DefaultCustomerService customerService() {
+        return new DefaultCustomerService();
     }
 
   @Bean

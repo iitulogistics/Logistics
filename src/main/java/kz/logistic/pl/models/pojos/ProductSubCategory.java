@@ -8,5 +8,5 @@ public interface ProductSubCategory {
 
     int getProductCategoryId();
 
-    String getsubCategoryAddInfo();
+    String getSubCategoryAddInfo();
 }

@@ -28,7 +28,7 @@ public class DefaulProductSubCategory implements ProductSubCategory {
     }
 
     @Override
-    public String getsubCategoryAddInfo() {
+    public String getSubCategoryAddInfo() {
         return subCategoryAddInfo;
     }
 }
