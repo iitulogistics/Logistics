@@ -23,13 +23,15 @@ public class LoginEntity {
 
     @Column(name = "roles_id")
     private Integer roles_id;
-    @Column(name = "customer_id")
-    private Integer customer_id;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seller_company_id")
     private SellerCompanyEntity sellerCompanyEntity;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
+    private CustomerEntity customerEntity;
+
     @Column(name = "shipper_id")
-    private Integer shipper_id;
+    private Long shipper_id;
 }

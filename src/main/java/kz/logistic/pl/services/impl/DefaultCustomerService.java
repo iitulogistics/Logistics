@@ -1,6 +1,7 @@
 package kz.logistic.pl.services.impl;
 
 import kz.logistic.pl.models.entities.CustomerEntity;
+import kz.logistic.pl.models.entities.LoginEntity;
 import kz.logistic.pl.models.entities.ProductsCategoryEntity;
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
 import kz.logistic.pl.models.pojos.Customer;
@@ -35,7 +36,7 @@ public class DefaultCustomerService implements CustomerService {
         return entities.stream().map(customerEntity -> DefaultCustomer.builder()
                 .customerId(customerEntity.getCustomerId())
                 .mobilePhone(customerEntity.getMobilePhone())
-                .password(customerEntity.getPassword()).build()).collect(Collectors.toList());
+                .build()).collect(Collectors.toList());
     }
 
 
@@ -43,7 +44,13 @@ public class DefaultCustomerService implements CustomerService {
     public void addCustomer(String mobilePhone, String password) {
         CustomerEntity customerEntity = new CustomerEntity();
         customerEntity.setMobilePhone(mobilePhone);
-        customerEntity.setPassword(password);
+
+        LoginEntity loginEntity = new LoginEntity();
+        loginEntity.setUsername(mobilePhone);
+        loginEntity.setPassword(password);
+        loginEntity.setCustomerEntity(customerEntity);
+
+        customerEntity.setLoginEntity(loginEntity);
         this.customerRepository.save(customerEntity);
         log.info("Added new customer, mobile phone: " + mobilePhone + ". " + new Date());
     }

@@ -34,4 +34,8 @@ public class CustomerEntity {
     @Column(name = "add_info")
     private String addInfo;
 
+    @OneToOne(mappedBy = "customerEntity", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+    private LoginEntity loginEntity;
+
 }
