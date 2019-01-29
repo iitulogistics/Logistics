@@ -35,7 +35,7 @@ public class DefaultCustomerService implements CustomerService {
         return entities.stream().map(customerEntity -> DefaultCustomer.builder()
                 .customerId(customerEntity.getCustomerId())
                 .mobilePhone(customerEntity.getMobilePhone())
-                .password(customerEntity.getPassword()).build()).collect(Collectors.toList());
+                .build()).collect(Collectors.toList());
     }
 
 
@@ -43,7 +43,7 @@ public class DefaultCustomerService implements CustomerService {
     public void addCustomer(String mobilePhone, String password) {
         CustomerEntity customerEntity = new CustomerEntity();
         customerEntity.setMobilePhone(mobilePhone);
-        customerEntity.setPassword(password);
+
         this.customerRepository.save(customerEntity);
         log.info("Added new customer, mobile phone: " + mobilePhone + ". " + new Date());
     }

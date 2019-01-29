@@ -19,10 +19,11 @@ public class WarehouseEntity {
     private String wh_name_ru;
     @Column(name = "wh_name_en")
     private String wh_name_en;
-    @Column(name = "wh_address_id")
-    private Integer wh_address_id;
     @Column(name = "seller_company_id")
     private Integer seller_company_id;
+    @Column(name = "address_id")
+    private Long addressId;
     @Column(name = "add_info")
     private String add_info;
+
 }

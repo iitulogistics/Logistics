@@ -12,13 +12,9 @@ import javax.persistence.*;
 public class WarehouseAddressEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long wh_address_id;
-    @Column(name = "region_name")
-    private String region_name;
-    @Column(name = "city_name")
-    private String city_name;
-    @Column(name = "street_name")
-    private String street_name;
-    @Column(name = "zip_code")
-    private String zip_code;
+    private Long wh_id;
+    @Column(name = "seller_company_id")
+    private Long sellerCompanyId;
+    @Column(name = "address")
+    private AddressEntity address;
 }
