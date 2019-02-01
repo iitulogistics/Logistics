@@ -1,0 +1,45 @@
+package kz.logistic.pl.services.impl;
+
+import kz.logistic.pl.models.entities.RolesEntity;
+import kz.logistic.pl.models.pojos.Roles;
+import kz.logistic.pl.models.pojos.impl.DefaultRoles;
+import kz.logistic.pl.repositories.RoleRepository;
+import kz.logistic.pl.services.RoleService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Slf4j
+public class DefaultRoleService implements RoleService {
+    private RoleRepository roleRepository;
+
+    @Autowired
+    public void setRoleRepository(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
+    }
+
+    @Override
+    public List<Roles> showAllRoles() {
+        List<RolesEntity> rolesEntities = this.roleRepository.findAll();
+
+        return rolesEntities.stream().map(rolesEntity -> DefaultRoles.builder()
+                .roleId(rolesEntity.getRoleId())
+                .roleName(rolesEntity.getRoleName())
+                .roleDescription(rolesEntity.getDescription()).build()
+        ).collect(Collectors.toList());
+    }
+
+    @Override
+    public void addRole(String name, String Description) {
+        RolesEntity rolesEntity = new RolesEntity();
+        rolesEntity.setRoleName(name);
+        rolesEntity.setDescription(Description);
+
+        this.roleRepository.save(rolesEntity);
+        log.info("Added new Role " + name + " " + new Date());
+
+    }
+}
