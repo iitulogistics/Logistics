@@ -10,7 +10,7 @@ public class DefaultCustomer implements Customer {
 
     private Long customerId;
     private LocalizedMessage customerName;
-    private String mobilePhone;
+    private String username;
     private String password;
 
     @Override
@@ -24,8 +24,8 @@ public class DefaultCustomer implements Customer {
     }
 
     @Override
-    public String getCustomerMobilePhone() {
-        return mobilePhone;
+    public String getCustomerUsername() {
+        return username;
     }
 
     @Override

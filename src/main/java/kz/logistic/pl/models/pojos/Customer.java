@@ -6,7 +6,7 @@ public interface Customer {
 
     LocalizedMessage getCustomerName();
 
-    String getCustomerMobilePhone();
-
     String getCustomerPassword();
+
+    String getCustomerUsername();
 }

@@ -42,7 +42,8 @@ public class DefaultCustomerService implements CustomerService {
         List<CustomerEntity> entities = this.customerRepository.findAll();
         return entities.stream().map(customerEntity -> DefaultCustomer.builder()
                 .customerId(customerEntity.getCustomerId())
-                .mobilePhone(customerEntity.getMobilePhone())
+                .username(loginRepository.getOne(customerEntity.getLoginEntityId()).getUsername())
+                .password(loginRepository.getOne(customerEntity.getLoginEntityId()).getPassword())
                 .build()).collect(Collectors.toList());
     }
 
