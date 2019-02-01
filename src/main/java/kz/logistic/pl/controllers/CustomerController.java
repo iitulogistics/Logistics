@@ -36,10 +36,10 @@ public class CustomerController {
     @ApiOperation(value = "Добавляет клиента")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<?> add(
-            @RequestParam String mobilePhone,
+            @RequestParam String username,
             @RequestParam String password) {
-        this.customerService.addCustomer(mobilePhone, password);
-        return ResponseEntity.ok("Новая клиент добавлен");
+        this.customerService.addCustomer(username, password);
+        return ResponseEntity.ok("Новый клиент добавлен");
     }
 
 }

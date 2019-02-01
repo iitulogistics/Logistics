@@ -14,7 +14,8 @@ public class CustomerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long customerId;
-
+    @Column(name = "login_entity_id")
+    private Long loginEntityId;
     @Column(name = "customer_name_kk")
     private String customerNameKk;
     @Column(name = "customer_name_ru")
@@ -33,6 +34,5 @@ public class CustomerEntity {
     private String address;
     @Column(name = "add_info")
     private String addInfo;
-    ///Twest
 
 }
