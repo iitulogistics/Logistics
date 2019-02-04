@@ -3,6 +3,7 @@ package kz.logistic.pl.services.impl;
 import kz.logistic.pl.models.entities.RolesEntity;
 import kz.logistic.pl.models.pojos.Roles;
 import kz.logistic.pl.models.pojos.impl.DefaultRoles;
+import kz.logistic.pl.models.pojos.json.RolesJson;
 import kz.logistic.pl.repositories.RoleRepository;
 import kz.logistic.pl.services.RoleService;
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +41,16 @@ public class DefaultRoleService implements RoleService {
 
         this.roleRepository.save(rolesEntity);
         log.info("Added new Role " + name + " " + new Date());
-
     }
+
+    @Override
+    public void addRoleJson(RolesJson roles) {
+        RolesEntity rolesEntity = new RolesEntity();
+        rolesEntity.setRoleName(roles.getRoleName());
+        rolesEntity.setDescription(roles.getRoleDescription());
+        this.roleRepository.save(rolesEntity);
+        log.info("Added new Role с помощью JSON формата" + roles.getRoleName() + " " + new Date());
+    }
+
+
 }
