@@ -18,6 +18,13 @@ public class ServiceConfig {
     return new DefaultRoleService();
   }
 
+    @Bean
+    @Qualifier("defaultShipperService")
+    public DefaultShipperService shipperService() {
+        return new DefaultShipperService();
+    }
+
+
   @Bean
   @Qualifier("defaultSellerCompanyService")
   public DefaultSellerCompanyService sellerCompanyService() {

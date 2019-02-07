@@ -34,6 +34,7 @@ public class LoginEntity {
     @JoinColumn(name = "customer_id")
     private CustomerEntity customerEntity;
 
-    @Column(name = "shipper_id")
-    private Long shipperId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "shipper_id")
+    private ShipperEntity shipperEntity;
 }

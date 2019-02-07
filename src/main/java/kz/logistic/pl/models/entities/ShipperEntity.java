@@ -12,21 +12,25 @@ import javax.persistence.*;
 public class ShipperEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long shipper_id;
+    private Long shipperId;
     @Column(name = "shipper_name_kk")
-    private String shipper_name_kk;
+    private String shipperNameKk;
     @Column(name = "shipper_name_ru")
-    private String shipper_name_ru;
+    private String shipperNameRu;
     @Column(name = "shipper_name_en")
-    private String shipper_name_en;
+    private String shipperNameEn;
     @Column(name = "phone_number")
-    private String phone_number;
+    private String phoneNumber;
     @Column(name = "mobile_phone")
-    private String mobile_phone;
+    private String mobilePhone;
     @Column(name = "bin")
     private String bin;
     @Column(name = "email")
     private String email;
     @Column(name = "address")
     private String address;
+
+    @OneToOne(mappedBy = "shipperEntity", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+    private LoginEntity loginEntity;
 }
