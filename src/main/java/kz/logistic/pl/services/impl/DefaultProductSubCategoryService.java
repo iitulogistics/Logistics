@@ -4,6 +4,7 @@ import kz.logistic.pl.models.entities.ProductsSubCategoryEntity;
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
 import kz.logistic.pl.models.pojos.ProductSubCategory;
 import kz.logistic.pl.models.pojos.impl.DefaulProductSubCategory;
+import kz.logistic.pl.models.pojos.json.ProductSubCategoryJson;
 import kz.logistic.pl.repositories.ProductSubCategoryRepository;
 import kz.logistic.pl.services.ProductSubCategoryService;
 import lombok.extern.slf4j.Slf4j;
@@ -59,5 +60,18 @@ public class DefaultProductSubCategoryService implements ProductSubCategoryServi
 
         this.productSubCategoryRepository.save(subCategoryEntity);
         log.info("Added new ProductSubCategory: " + subCategoryNameRu + " " + new Date());
+    }
+
+    @Override
+    public void addProductSubCategoryJson(ProductSubCategoryJson productSubCategoryJson) {
+        ProductsSubCategoryEntity subCategoryEntity = new ProductsSubCategoryEntity();
+        subCategoryEntity.setSubCategoryNameKk(productSubCategoryJson.getSubCategoryNameKk());
+        subCategoryEntity.setSubCategoryNameRu(productSubCategoryJson.getSubCategoryNameRu());
+        subCategoryEntity.setSubCategoryNameEn(productSubCategoryJson.getSubCategoryNameEn());
+        subCategoryEntity.setProductCategoryId(productSubCategoryJson.getProductCategoryId());
+        subCategoryEntity.setSubCategoryAddInfo(productSubCategoryJson.getSubCategoryAddInfo());
+
+        this.productSubCategoryRepository.save(subCategoryEntity);
+        log.info("Added new ProductSubCategory: " + productSubCategoryJson.getSubCategoryNameRu() + " via Json " + new Date());
     }
 }
