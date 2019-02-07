@@ -14,15 +14,16 @@ public class WarehouseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long warehouse_id;
     @Column(name = "wh_name_kk")
-    private String wh_name_kk;
+    private String whNameKk;
     @Column(name = "wh_name_ru")
-    private String wh_name_ru;
+    private String whnNameRu;
     @Column(name = "wh_name_en")
-    private String wh_name_en;
-    @Column(name = "wh_address_id")
-    private Integer wh_address_id;
+    private String whNameEn;
+
     @Column(name = "seller_company_id")
-    private Integer seller_company_id;
+    private Long sellerCompanyId;
+    @Column(name = "address_id")
+    private Long addressId;
     @Column(name = "add_info")
-    private String add_info;
+    private String addInfo;
 }

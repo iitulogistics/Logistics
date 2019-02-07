@@ -74,6 +74,6 @@ public class DefaultCustomerService implements CustomerService {
         this.customerRepository.save(customerEntity);
         loginEntity.setCustomerEntity(customerEntity);
         this.loginRepository.save(loginEntity);
-        log.info("Added new customer, username " + customerJson.getUsername() + ". " + new Date());
+        log.info("Added new customer via JSON, username " + customerJson.getUsername() + ". " + new Date());
     }
 }
