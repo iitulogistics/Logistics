@@ -4,6 +4,7 @@ import kz.logistic.pl.models.entities.ProductsCategoryEntity;
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
 import kz.logistic.pl.models.pojos.ProductCategory;
 import kz.logistic.pl.models.pojos.impl.DefaultProductCategory;
+import kz.logistic.pl.models.pojos.json.ProductCategoryJson;
 import kz.logistic.pl.repositories.ProductsCategoryRepository;
 import kz.logistic.pl.services.ProductCategoryService;
 import lombok.extern.slf4j.Slf4j;
@@ -53,5 +54,17 @@ public class DefaultProductCategoryService implements ProductCategoryService {
 
         this.productsCategoryRepository.save(categoryEntity);
         log.info("Added new ProductCategory " + categoryNameRu + " " + new Date());
+    }
+
+    @Override
+    public void addCategoryJson(ProductCategoryJson productCategoryJson) {
+        ProductsCategoryEntity categoryEntity = new ProductsCategoryEntity();
+        categoryEntity.setCategoryNameKk(productCategoryJson.getCategoryNameKk());
+        categoryEntity.setCategoryNameRu(productCategoryJson.getCategoryNameRu());
+        categoryEntity.setCategoryNameEn(productCategoryJson.getCategoryNameEn());
+        categoryEntity.setAddInfo(productCategoryJson.getAddInfo());
+
+        this.productsCategoryRepository.save(categoryEntity);
+        log.info("Added new ProductCategory " + productCategoryJson.getCategoryNameRu() + " via JSON " + new Date());
     }
 }

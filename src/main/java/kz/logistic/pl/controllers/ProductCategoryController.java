@@ -2,14 +2,13 @@ package kz.logistic.pl.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import kz.logistic.pl.models.pojos.json.CustomerJson;
+import kz.logistic.pl.models.pojos.json.ProductCategoryJson;
 import kz.logistic.pl.services.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Api(tags = {"Категория продуктов"}, description = "API для категории продуктов")
 @RestController
@@ -30,7 +29,7 @@ public class ProductCategoryController {
         return ResponseEntity.ok(this.productCategoryService.showAllProduct());
     }
 
-    @ApiOperation(value = "")
+    @ApiOperation(value = "Добавляет категорию продуктов")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<?> add(
             @RequestParam(required = false) String categoryNameKk,
@@ -39,6 +38,15 @@ public class ProductCategoryController {
             @RequestParam(required = false) String addInfo) {
         this.productCategoryService.addCategory(categoryNameKk, categoryNameRu, categoryNameEn, addInfo);
         return ResponseEntity.ok("Новая категория продуктов добавлена");
+    }
+
+    @ApiOperation(value = "Добавляет категорию продуктов посредством JSON")
+    @RequestMapping(value = "/addJson", method = RequestMethod.POST)
+    public ResponseEntity<?> addJson(
+            @RequestBody ProductCategoryJson productCategoryJson
+    ) {
+        this.productCategoryService.addCategoryJson(productCategoryJson);
+        return ResponseEntity.ok("Новая категория продуктов добавлена посредством JSON");
     }
 
 }
