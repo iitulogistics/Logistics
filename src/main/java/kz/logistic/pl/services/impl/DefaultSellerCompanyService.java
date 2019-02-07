@@ -5,6 +5,7 @@ import kz.logistic.pl.models.entities.SellerCompanyEntity;
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
 import kz.logistic.pl.models.pojos.SellerCompany;
 import kz.logistic.pl.models.pojos.impl.DefaultSellerCompany;
+import kz.logistic.pl.models.pojos.json.SellerCompanyJson;
 import kz.logistic.pl.repositories.SellerCompanyRepository;
 import kz.logistic.pl.services.SellerCompanyService;
 import lombok.extern.slf4j.Slf4j;
@@ -83,5 +84,27 @@ public class DefaultSellerCompanyService implements SellerCompanyService {
     @Override
     public void updateSellerCompany(String sellerCompanyNameKk, String sellerCompanyNameRu, String sellerCompanyNameEn, String sellerCompanyPhone, String sellerCompanyMobilePhone, String sellerCompanyBin, String sellerCompanyEmail, long sellerCategoryId) {
 
+    }
+
+    @Override
+    public void addSellerCompanyJson(SellerCompanyJson sellerCompanyJson) {
+        SellerCompanyEntity sellerCompanyEntity = new SellerCompanyEntity();
+        sellerCompanyEntity.setCompanyNameKk(sellerCompanyJson.getSellerCompanyNameKk());
+        sellerCompanyEntity.setCompanyNameRu(sellerCompanyJson.getSellerCompanyNameRu());
+        sellerCompanyEntity.setCompanyNameEn(sellerCompanyJson.getSellerCompanyNameEn());
+        sellerCompanyEntity.setPhone(sellerCompanyJson.getSellerCompanyPhone());
+        sellerCompanyEntity.setMobilePhone(sellerCompanyJson.getSellerCompanyMobilePhone());
+        sellerCompanyEntity.setBin(sellerCompanyJson.getSellerCompanyBin());
+        sellerCompanyEntity.setEmail(sellerCompanyJson.getSellerCompanyEmail());
+
+        LoginEntity loginEntity = new LoginEntity();
+        loginEntity.setUsername(sellerCompanyJson.getUsername());
+        loginEntity.setPassword(sellerCompanyJson.getPassword());
+        loginEntity.setSellerCompanyEntity(sellerCompanyEntity);
+
+        sellerCompanyEntity.setLoginEntity(loginEntity);
+
+        this.sellerCompanyRepository.save(sellerCompanyEntity);
+        log.info("Added new seller company: " + sellerCompanyJson.getSellerCompanyNameRu() + " via Json" + new Date());
     }
 }

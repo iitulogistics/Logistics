@@ -2,6 +2,7 @@ package kz.logistic.pl.services;
 
 
 import kz.logistic.pl.models.pojos.SellerCompany;
+import kz.logistic.pl.models.pojos.json.SellerCompanyJson;
 
 import java.util.List;
 
@@ -21,5 +22,7 @@ public interface SellerCompanyService {
                              String sellerCompanyNameEn, String sellerCompanyPhone,
                              String sellerCompanyMobilePhone, String sellerCompanyBin,
                              String sellerCompanyEmail, long sellerCategoryId);
+
+    void addSellerCompanyJson(SellerCompanyJson sellerCompanyJson);
 
 }
