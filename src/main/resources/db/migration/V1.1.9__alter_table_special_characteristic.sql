@@ -1,0 +1,2 @@
+ALTER TABLE Special_characteristic
+RENAME COLUMN special_characterisric_id to special_characteristic_id
