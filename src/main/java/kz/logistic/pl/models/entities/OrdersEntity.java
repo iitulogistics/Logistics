@@ -2,6 +2,7 @@ package kz.logistic.pl.models.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CollectionId;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -32,5 +33,8 @@ public class OrdersEntity {
     private Integer customer_id;
     @Column(name = "delivering_status")
     private String delivering_status;
-
+    @Column(name = "product_amount")
+    private Integer productAmount;
+    @Column(name = "order_amount")
+    private Integer orderAmount;
 }

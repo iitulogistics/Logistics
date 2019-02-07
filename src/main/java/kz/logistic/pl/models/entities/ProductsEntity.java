@@ -36,5 +36,8 @@ public class ProductsEntity {
     private Integer price;
     @Column(name = "product_description")
     private String product_description;
-
+    @Column(name = "seller_company_id")
+    private Integer sellerCompanyId;
+    @Column(name = "special_characteristic_id")
+    private Integer special_characteristic_id;
 }
