@@ -9,9 +9,27 @@ import lombok.Builder;
 public class DefaultCustomer implements Customer {
 
     private Long customerId;
+    private Long loginId;
+    private String username;
+    private String password;
     private LocalizedMessage customerName;
     private String mobilePhone;
-    private String password;
+
+
+    @Override
+    public long getLoginId() {
+        return loginId;
+    }
+
+    @Override
+    public String getLoginName() {
+        return username;
+    }
+
+    @Override
+    public String getLoginPassword() {
+        return password;
+    }
 
     @Override
     public long getCustomerId() {
@@ -28,8 +46,5 @@ public class DefaultCustomer implements Customer {
         return mobilePhone;
     }
 
-    @Override
-    public String getCustomerPassword() {
-        return password;
-    }
+
 }

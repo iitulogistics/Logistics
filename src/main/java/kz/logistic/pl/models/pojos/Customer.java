@@ -4,9 +4,13 @@ public interface Customer {
 
     long getCustomerId();
 
+    long getLoginId();
+
+    String getLoginName();
+
+    String getLoginPassword();
+
     LocalizedMessage getCustomerName();
 
     String getCustomerMobilePhone();
-
-    String getCustomerPassword();
 }

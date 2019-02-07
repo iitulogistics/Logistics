@@ -8,7 +8,9 @@ import kz.logistic.pl.models.pojos.Customer;
 import kz.logistic.pl.models.pojos.ProductCategory;
 import kz.logistic.pl.models.pojos.impl.DefaultCustomer;
 import kz.logistic.pl.models.pojos.impl.DefaultProductCategory;
+import kz.logistic.pl.models.pojos.json.CustomerJson;
 import kz.logistic.pl.repositories.CustomerRepository;
+import kz.logistic.pl.repositories.LoginRepository;
 import kz.logistic.pl.repositories.ProductsCategoryRepository;
 import kz.logistic.pl.services.CustomerService;
 import kz.logistic.pl.services.ProductCategoryService;
@@ -23,35 +25,55 @@ import java.util.stream.Collectors;
 public class DefaultCustomerService implements CustomerService {
 
     private CustomerRepository customerRepository;
+    private LoginRepository loginRepository;
 
     @Autowired
     public void setCustomerRepository(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 
+    @Autowired
+    public void setLoginRepository(LoginRepository loginRepository) {
+        this.loginRepository = loginRepository;
+    }
 
     @Override
     public List<Customer> showAllCustomers() {
-        List<CustomerEntity> entities = this.customerRepository.findAll();
+        List<LoginEntity> entities = this.loginRepository.findByCustomerEntityCustomerIdIsNotNull();
+
         return entities.stream().map(customerEntity -> DefaultCustomer.builder()
-                .customerId(customerEntity.getCustomerId())
-                .mobilePhone(customerEntity.getMobilePhone())
+                .loginId(customerEntity.getLoginId())
+                .username(customerEntity.getUsername())
+                .password(customerEntity.getPassword())
+                .customerId(customerEntity.getCustomerEntity().getCustomerId())
+                .mobilePhone(customerEntity.getCustomerEntity().getMobilePhone())
                 .build()).collect(Collectors.toList());
     }
 
 
     @Override
-    public void addCustomer(String mobilePhone, String password) {
-        CustomerEntity customerEntity = new CustomerEntity();
-        customerEntity.setMobilePhone(mobilePhone);
-
+    public void addCustomer(String username, String password) {
         LoginEntity loginEntity = new LoginEntity();
-        loginEntity.setUsername(mobilePhone);
+        loginEntity.setUsername(username);
         loginEntity.setPassword(password);
-        loginEntity.setCustomerEntity(customerEntity);
 
-        customerEntity.setLoginEntity(loginEntity);
+        CustomerEntity customerEntity = new CustomerEntity();
         this.customerRepository.save(customerEntity);
-        log.info("Added new customer, mobile phone: " + mobilePhone + ". " + new Date());
+        loginEntity.setCustomerEntity(customerEntity);
+        this.loginRepository.save(loginEntity);
+        log.info("Added new customer, username: " + username + ". " + new Date());
+    }
+
+    @Override
+    public void addCustomerJson(CustomerJson customerJson) {
+        LoginEntity loginEntity = new LoginEntity();
+        loginEntity.setUsername(customerJson.getUsername());
+        loginEntity.setPassword(customerJson.getPassword());
+
+        CustomerEntity customerEntity = new CustomerEntity();
+        this.customerRepository.save(customerEntity);
+        loginEntity.setCustomerEntity(customerEntity);
+        this.loginRepository.save(loginEntity);
+        log.info("Added new customer, username " + customerJson.getUsername() + ". " + new Date());
     }
 }
