@@ -22,7 +22,7 @@ public class CityEntity {
     private String cityNameRu;
 
     @Column(name = "city_name_en")
-    private String ciityNameEn;
+    private String cityNameEn;
 
     @Column(name = "region_id")
     private Long regionId;
