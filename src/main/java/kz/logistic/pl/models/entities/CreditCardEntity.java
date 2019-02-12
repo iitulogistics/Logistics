@@ -15,7 +15,7 @@ public class CreditCardEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cc_id;
+    private Long ccId;
 
     @Column(name = "cc_number")
     private Integer creditCardNumber;
