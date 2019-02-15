@@ -49,7 +49,7 @@ public class DefaultProductSubCategoryService implements ProductSubCategoryServi
 
     @Override
     public void addProductSubCategory(String subCategoryNameKk, String subCategoryNameRu,
-                                      String subCategoryNameEn, Integer productCategoryId,
+                                      String subCategoryNameEn, Long productCategoryId,
                                       String subCategoryAddInfo) {
         ProductsSubCategoryEntity subCategoryEntity = new ProductsSubCategoryEntity();
         subCategoryEntity.setSubCategoryNameKk(subCategoryNameKk);

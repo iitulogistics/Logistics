@@ -9,7 +9,7 @@ public class DefaulProductSubCategory implements ProductSubCategory {
 
     private Long id;
     private LocalizedMessage subCategoryName;
-    private Integer productCategoryId;
+    private Long productCategoryId;
     private String subCategoryAddInfo;
 
     @Override
@@ -23,7 +23,7 @@ public class DefaulProductSubCategory implements ProductSubCategory {
     }
 
     @Override
-    public int getProductCategoryId() {
+    public Long getProductCategoryId() {
         return productCategoryId;
     }
 

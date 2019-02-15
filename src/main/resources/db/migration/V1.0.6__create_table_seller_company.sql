@@ -9,5 +9,5 @@ CREATE TABLE Seller_company(
 	mobile_phone varchar(256),
 	bin varchar(256),
 	email varchar(256),
-	seller_category_id integer
+	seller_category_id bigserial
 );

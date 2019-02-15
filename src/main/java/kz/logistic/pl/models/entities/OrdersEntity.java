@@ -18,9 +18,9 @@ public class OrdersEntity {
     @Column(name = "order_number")
     private Integer order_number;
     @Column(name = "product_id")
-    private Integer product_id;
+    private Long product_id;
     @Column(name = "seller_company_id")
-    private Integer seller_company_id;
+    private Long seller_company_id;
     @Column(name = "order_date")
     private Date order_date;
     @Column(name = "product_count")
@@ -30,7 +30,7 @@ public class OrdersEntity {
     @Column(name = "total_price")
     private Integer total_price;
     @Column(name = "customer_id")
-    private Integer customer_id;
+    private Long customer_id;
     @Column(name = "delivering_status")
     private String delivering_status;
     @Column(name = "product_amount")

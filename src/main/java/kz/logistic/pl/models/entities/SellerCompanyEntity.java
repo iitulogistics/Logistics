@@ -29,7 +29,7 @@ public class SellerCompanyEntity {
     @Column(name = "email")
     private String email;
     @Column(name = "seller_category_id")
-    private Integer sellerCategoryId;
+    private Long sellerCategoryId;
 
     @OneToOne(mappedBy = "sellerCompanyEntity", cascade = CascadeType.ALL,
             fetch = FetchType.LAZY, optional = false)

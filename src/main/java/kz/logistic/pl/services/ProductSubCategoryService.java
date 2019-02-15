@@ -12,7 +12,7 @@ public interface ProductSubCategoryService {
 
     //Добавить новую подкатегорию
     void addProductSubCategory(String subCategoryNameKk, String subCategoryNameRu,
-                               String subCategoryNameEn, Integer productCategoryId,
+                               String subCategoryNameEn, Long productCategoryId,
                                String subCategoryAddInfo);
 
     void addProductSubCategoryJson(ProductSubCategoryJson productSubCategoryJson);

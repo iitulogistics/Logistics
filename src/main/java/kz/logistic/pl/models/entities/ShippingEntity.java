@@ -15,9 +15,9 @@ public class ShippingEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long shipping_id;
     @Column(name = "shipper_id")
-    private Integer shipper_id;
+    private Long shipper_id;
     @Column(name = "order_id")
-    private Integer order_id;
+    private Long order_id;
     @Column(name = "order_number")
     private Integer order_number;
     @Column(name = "shipping_address")

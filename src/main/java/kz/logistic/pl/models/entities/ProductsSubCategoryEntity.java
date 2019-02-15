@@ -20,7 +20,7 @@ public class ProductsSubCategoryEntity {
     @Column(name = "subcategory_name_en")
     private String subCategoryNameEn;
     @Column(name = "product_category_id")
-    private Integer productCategoryId;
+    private Long productCategoryId;
     @Column(name = "subcategory_add_info")
     private String subCategoryAddInfo;
 }

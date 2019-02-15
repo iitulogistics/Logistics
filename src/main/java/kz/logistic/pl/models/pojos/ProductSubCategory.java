@@ -6,7 +6,7 @@ public interface ProductSubCategory {
 
     LocalizedMessage getSubcategoryName();
 
-    int getProductCategoryId();
+    Long getProductCategoryId();
 
     String getSubCategoryAddInfo();
 }

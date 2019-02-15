@@ -25,10 +25,10 @@ public class PaymentEntity {
     private Date timestamp;
 
     @Column(name = "order_id")
-    private Integer orderId;
+    private Long orderId;
 
     @Column(name = "cc_id")
-    private Integer ccId;
+    private Long ccId;
 
     @Column(name = "payment_status")
     private Integer paymentStatus;

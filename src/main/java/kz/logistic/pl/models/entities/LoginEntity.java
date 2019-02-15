@@ -22,7 +22,7 @@ public class LoginEntity {
     private String password;
 
     @Column(name = "roles_id")
-    private Integer rolesId;
+    private Long rolesId;
     //  @Column(name = "customer_id")
     //  private Integer customerId;
 

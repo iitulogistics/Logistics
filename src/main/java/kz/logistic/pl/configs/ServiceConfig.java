@@ -45,6 +45,11 @@ public class ServiceConfig {
         return new DefaultShipperService();
     }
 
+    @Bean
+    @Qualifier("defaultProductService")
+    public DefaultProductService productService() {
+        return new DefaultProductService();
+    }
 
   @Bean
   @Qualifier("defaultSellerCompanyService")

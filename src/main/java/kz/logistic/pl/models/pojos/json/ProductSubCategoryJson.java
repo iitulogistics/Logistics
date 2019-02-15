@@ -20,7 +20,7 @@ public class ProductSubCategoryJson implements Serializable {
     private String subCategoryNameEn;
 
     @JsonProperty
-    private Integer productCategoryId;
+    private Long productCategoryId;
 
     @JsonProperty
     private String subCategoryAddInfo;

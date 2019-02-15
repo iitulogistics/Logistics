@@ -34,7 +34,7 @@ public class ProductsSubCategoryController {
             @RequestParam(required = false) String subCategoryNameKk,
             @RequestParam String subCategoryNameRu,
             @RequestParam(required = false) String subCategoryNameEn,
-            @RequestParam Integer productCategoryId,
+            @RequestParam Long productCategoryId,
             @RequestParam String subCategoryAddInfo) {
         this.productSubCategoryService.addProductSubCategory(
                 subCategoryNameKk, subCategoryNameRu, subCategoryNameEn,

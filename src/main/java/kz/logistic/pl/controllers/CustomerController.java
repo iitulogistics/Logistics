@@ -40,7 +40,7 @@ public class CustomerController {
     }
 
     @ApiOperation(value = "Добавляет клиента посредством JSON")
-    @RequestMapping(value = "/addJson", method = RequestMethod.POST)
+    @RequestMapping(value = "/addJson", method = RequestMethod.PATCH)
     public ResponseEntity<?> addJson(
             @RequestBody CustomerJson customerJson
     ) {
