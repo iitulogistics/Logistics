@@ -11,8 +11,10 @@ public interface CustomerService {
     List<Customer> showAllCustomers();
 
     //Добавить нового клиента
-    void addCustomer(String username, String password);
+    String addCustomer(String username, String password);
 
     //Добавить нового клиента посредством JSON
-    void addCustomerJson(CustomerJson customerJson);
+    String addCustomerJson(CustomerJson customerJson);
+
+    boolean exists(String username);
 }

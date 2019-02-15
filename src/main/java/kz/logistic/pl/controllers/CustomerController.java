@@ -36,8 +36,7 @@ public class CustomerController {
     public ResponseEntity<?> add(
             @RequestParam String username,
             @RequestParam String password) {
-        this.customerService.addCustomer(username, password);
-        return ResponseEntity.ok("Новая клиент добавлен");
+        return ResponseEntity.ok(this.customerService.addCustomer(username, password));
     }
 
     @ApiOperation(value = "Добавляет клиента посредством JSON")
@@ -45,8 +44,7 @@ public class CustomerController {
     public ResponseEntity<?> addJson(
             @RequestBody CustomerJson customerJson
     ) {
-        this.customerService.addCustomerJson(customerJson);
-        return ResponseEntity.ok("Новый клиент добавлен посредством JSON");
+        return ResponseEntity.ok(this.customerService.addCustomerJson(customerJson));
     }
 
 }

@@ -17,6 +17,7 @@ import kz.logistic.pl.services.ProductCategoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -50,9 +51,16 @@ public class DefaultCustomerService implements CustomerService {
                 .build()).collect(Collectors.toList());
     }
 
+    @Override
+    public boolean exists(String username) {
+        ArrayList<LoginEntity> loginEntities = this.loginRepository.findByUsername(username);
+        return loginEntities.size() > 0;
+    }
 
     @Override
-    public void addCustomer(String username, String password) {
+    public String addCustomer(String username, String password) {
+        if (exists(username))
+            return "Данный логин уже занят";
         LoginEntity loginEntity = new LoginEntity();
         loginEntity.setUsername(username);
         loginEntity.setPassword(password);
@@ -62,10 +70,13 @@ public class DefaultCustomerService implements CustomerService {
         loginEntity.setCustomerEntity(customerEntity);
         this.loginRepository.save(loginEntity);
         log.info("Added new customer, username: " + username + ". " + new Date());
+        return "Пользователь добавлен";
     }
 
     @Override
-    public void addCustomerJson(CustomerJson customerJson) {
+    public String addCustomerJson(CustomerJson customerJson) {
+        if (exists(customerJson.getUsername()))
+            return "Данный логин уже занят";
         LoginEntity loginEntity = new LoginEntity();
         loginEntity.setUsername(customerJson.getUsername());
         loginEntity.setPassword(customerJson.getPassword());
@@ -75,5 +86,6 @@ public class DefaultCustomerService implements CustomerService {
         loginEntity.setCustomerEntity(customerEntity);
         this.loginRepository.save(loginEntity);
         log.info("Added new customer via JSON, username " + customerJson.getUsername() + ". " + new Date());
+        return "Пользователь добавлен ";
     }
 }
