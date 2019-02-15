@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api(tags = {"Список городов"}, description = "API для городов")
+@Api(tags = {"Список городов"}, description = "API для списка городов")
 @RestController
 @RequestMapping(value = "/city")
 public class CityController {
@@ -24,7 +24,7 @@ public class CityController {
         this.cityService = cityService;
     }
 
-    @ApiOperation(value = "Показывает все города")
+    @ApiOperation(value = "Показывает весь список городов")
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity<?> all() {
         return ResponseEntity.ok(this.cityService.showAllCities());
@@ -38,16 +38,14 @@ public class CityController {
             @RequestParam(required = false) String cityNameEn,
             @RequestParam Long regionId,
             @RequestParam Long countryId) {
-        this.cityService.addCity(cityNamekk, cityNameRu, cityNameEn, regionId, countryId);
-        return ResponseEntity.ok("Новый город добавлен");
+        return ResponseEntity.ok(this.cityService.addCity(cityNamekk, cityNameRu, cityNameEn, regionId, countryId));
     }
 
-    @ApiOperation(value = "Добавляет город")
+    @ApiOperation(value = "Добавляет город посредством JSON")
     @RequestMapping(value = "/addJson", method = RequestMethod.POST)
     public ResponseEntity<?> addJson(
             @RequestBody CityJson cityJson
     ) {
-        this.cityService.addCityJson(cityJson);
-        return ResponseEntity.ok("Новый город добавлен посредством JSON");
+        return ResponseEntity.ok(this.cityService.addCityJson(cityJson));
     }
 }

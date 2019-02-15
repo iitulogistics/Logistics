@@ -9,8 +9,8 @@ public interface CityService {
 
     List<City> showAllCities();
 
-    void addCity(String cityNameKk, String cityNameRu,
-                 String cityNameEn, Long regionId, Long countryId);
+    String addCity(String cityNameKk, String cityNameRu,
+                   String cityNameEn, Long regionId, Long countryId);
 
-    void addCityJson(CityJson cityJson);
+    String addCityJson(CityJson cityJson);
 }
