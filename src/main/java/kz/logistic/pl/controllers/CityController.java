@@ -36,8 +36,9 @@ public class CityController {
             @RequestParam(required = false) String cityNamekk,
             @RequestParam String cityNameRu,
             @RequestParam(required = false) String cityNameEn,
-            @RequestParam Long regionId) {
-        this.cityService.addCity(cityNamekk, cityNameRu, cityNameEn, regionId);
+            @RequestParam Long regionId,
+            @RequestParam Long countryId) {
+        this.cityService.addCity(cityNamekk, cityNameRu, cityNameEn, regionId, countryId);
         return ResponseEntity.ok("Новый город добавлен");
     }
 

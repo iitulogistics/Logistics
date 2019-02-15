@@ -18,7 +18,7 @@ public class AddressesEntity {
     @Column(name = "district_id")
     private Long districtId;
 
-    @Column(name = "ihn_locality_id")
+    @Column(name = "inh_locality_id")
     private Long ihnLocalityId;
 
     @Column(name = "street_name_kk")

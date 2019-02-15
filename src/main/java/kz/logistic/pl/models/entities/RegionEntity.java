@@ -24,6 +24,6 @@ public class RegionEntity {
     private String regionNameEn;
 
     @Column(name = "country_id")
-    private Long country_id;
+    private Long countryId;
 
 }

@@ -6,4 +6,6 @@ public interface City {
     LocalizedMessage getCityName();
 
     Long getRegionId();
+
+    Long getCountryId();
 }

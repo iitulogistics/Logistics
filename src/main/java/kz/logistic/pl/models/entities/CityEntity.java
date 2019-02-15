@@ -26,4 +26,7 @@ public class CityEntity {
 
     @Column(name = "region_id")
     private Long regionId;
+
+    @Column(name = "country_id")
+    private Long countryId;
 }

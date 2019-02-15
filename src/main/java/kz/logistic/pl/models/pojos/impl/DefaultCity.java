@@ -10,6 +10,7 @@ public class DefaultCity implements City {
     private Long cityId;
     private LocalizedMessage cityName;
     private Long regionId;
+    private Long countryId;
 
     @Override
     public Long getCityId() {
@@ -24,5 +25,10 @@ public class DefaultCity implements City {
     @Override
     public Long getRegionId() {
         return regionId;
+    }
+
+    @Override
+    public Long getCountryId() {
+        return countryId;
     }
 }

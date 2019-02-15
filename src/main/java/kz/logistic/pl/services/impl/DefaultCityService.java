@@ -48,13 +48,15 @@ public class DefaultCityService implements CityService {
 
     @Override
     public void addCity(String cityNameKk, String cityNameRu,
-                        String cityNameEn, Long regionId) {
+                        String cityNameEn, Long regionId, Long countryId) {
 
         CityEntity cityEntity = new CityEntity();
         cityEntity.setCityNameEn(cityNameEn);
         cityEntity.setCityNameRu(cityNameRu);
         cityEntity.setCityNameKk(cityNameKk);
         cityEntity.setRegionId(regionId);
+        cityEntity.setCountryId(countryId);
+
 
         this.cityRepository.save(cityEntity);
         log.info("Added new city " + cityNameRu + " " + new Date());
@@ -67,6 +69,7 @@ public class DefaultCityService implements CityService {
         cityEntity.setCityNameRu(cityJson.getCityNameRu());
         cityEntity.setCityNameEn(cityJson.getCityNameEn());
         cityEntity.setRegionId(cityJson.getRegionId());
+        cityEntity.setCountryId(cityJson.getCountryId());
 
         this.cityRepository.save(cityEntity);
         log.info("Added new city " + cityJson.getCityNameRu() + " via JSON " + new Date());

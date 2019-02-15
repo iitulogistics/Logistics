@@ -22,4 +22,7 @@ public class CityJson implements Serializable {
     @JsonProperty
     private Long regionId;
 
+    @JsonProperty
+    private Long countryId;
+
 }
