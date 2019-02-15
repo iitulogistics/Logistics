@@ -11,9 +11,7 @@ import kz.logistic.pl.services.CountryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -77,4 +75,28 @@ public class DefaultCountryService implements CountryService {
         return "Страна добавлена посредством JSON";
     }
 
+    @Override
+    public String updateCountry(Long countryId, CountryJson countryJson) {
+        CountryEntity countryEntity = this.countryRepository.findById(countryId).orElse(null);
+        if (Objects.nonNull(countryEntity)) {
+            countryEntity.setCountryNameKk(countryJson.getCountryNameKk());
+            countryEntity.setCountryNameEn(countryJson.getCountryNameEn());
+            countryEntity.setCountryNameRu(countryJson.getCountryNameRu());
+            this.countryRepository.save(countryEntity);
+            log.info("Updated " + countryJson.getCountryNameEn() + "country " + new Date());
+            return "Страна обнавлена";
+        } else {
+            return "Страны с таким id не существует";
+        }
+    }
+
+    @Override
+    public String deleteCountry(Long countryId) {
+        CountryEntity countryEntity = this.countryRepository.findById(countryId).orElse(null);
+        if (Objects.nonNull(countryEntity)) {
+            this.countryRepository.delete(countryEntity);
+        }
+        log.info("Deleted " + countryEntity.getCountryNameEn() + "country " + new Date());
+        return "Страна удалена";
+    }
 }

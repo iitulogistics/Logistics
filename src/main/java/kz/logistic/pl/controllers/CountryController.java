@@ -45,4 +45,19 @@ public class CountryController {
     ) {
         return ResponseEntity.ok(this.countryService.addCountryJson(countryJson));
     }
+
+    @ApiOperation(value = "Обновляет страну")
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.PATCH)
+    public ResponseEntity<?> update(
+            @PathVariable(value = "id") Long countryId,
+            @RequestBody CountryJson countryJson
+    ) {
+        return ResponseEntity.ok(this.countryService.updateCountry(countryId, countryJson));
+    }
+
+    @ApiOperation(value = "Удаляет страну")
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long countryId) {
+        return ResponseEntity.ok(this.countryService.deleteCountry(countryId));
+    }
 }

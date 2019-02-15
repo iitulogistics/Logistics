@@ -13,4 +13,7 @@ public interface CountryService {
 
     String addCountryJson(CountryJson countryJson);
 
+    String updateCountry(Long countryId, CountryJson countryJson);
+
+    String deleteCountry(Long countryId);
 }
