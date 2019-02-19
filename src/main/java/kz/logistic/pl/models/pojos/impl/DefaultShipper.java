@@ -7,29 +7,29 @@ import lombok.Builder;
 @Builder
 public class DefaultShipper implements Shipper {
 
-    private Long shipperId;
-    private String username;
-    private String password;
-    private LocalizedMessage shipperName;
+  private Long shipperId;
+  private String username;
+  private String password;
+  private LocalizedMessage shipperName;
 
-    @Override
-    public Long getShipperId() {
-        return shipperId;
-    }
+  @Override
+  public Long getShipperId() {
+    return shipperId;
+  }
 
-    @Override
-    public String getShipperUsername() {
-        return username;
-    }
+  @Override
+  public String getShipperUsername() {
+    return username;
+  }
 
-    @Override
-    public String getShipperPassword() {
-        return password;
-    }
+  @Override
+  public String getShipperPassword() {
+    return password;
+  }
 
-    @Override
-    public LocalizedMessage getShipperName() {
-        return shipperName;
-    }
+  @Override
+  public LocalizedMessage getShipperName() {
+    return shipperName;
+  }
 
 }

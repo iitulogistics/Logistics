@@ -2,11 +2,11 @@ package kz.logistic.pl.models.pojos;
 
 public interface ProductSubCategory {
 
-    long getProductSubcategoryId();
+  long getProductSubcategoryId();
 
-    LocalizedMessage getSubcategoryName();
+  LocalizedMessage getSubcategoryName();
 
-    Long getProductCategoryId();
+  Long getProductCategoryId();
 
-    String getSubCategoryAddInfo();
+  String getSubCategoryAddInfo();
 }

@@ -7,28 +7,28 @@ import lombok.Builder;
 @Builder
 public class DefaultCity implements City {
 
-    private Long cityId;
-    private LocalizedMessage cityName;
-    private Long regionId;
-    private Long countryId;
+  private Long cityId;
+  private LocalizedMessage cityName;
+  private Long regionId;
+  private Long countryId;
 
-    @Override
-    public Long getCityId() {
-        return cityId;
-    }
+  @Override
+  public Long getCityId() {
+    return cityId;
+  }
 
-    @Override
-    public LocalizedMessage getCityName() {
-        return cityName;
-    }
+  @Override
+  public LocalizedMessage getCityName() {
+    return cityName;
+  }
 
-    @Override
-    public Long getRegionId() {
-        return regionId;
-    }
+  @Override
+  public Long getRegionId() {
+    return regionId;
+  }
 
-    @Override
-    public Long getCountryId() {
-        return countryId;
-    }
+  @Override
+  public Long getCountryId() {
+    return countryId;
+  }
 }

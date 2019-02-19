@@ -14,42 +14,42 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/product/category/subcategory")
 public class ProductsSubCategoryController {
 
-    private ProductSubCategoryService productSubCategoryService;
+  private ProductSubCategoryService productSubCategoryService;
 
-    @Qualifier("defaultProductSubCategoryService")
-    @Autowired(required = false)
-    public void setProductSubCategoryService(ProductSubCategoryService productSubCategoryService) {
-        this.productSubCategoryService = productSubCategoryService;
-    }
+  @Qualifier("defaultProductSubCategoryService")
+  @Autowired(required = false)
+  public void setProductSubCategoryService(ProductSubCategoryService productSubCategoryService) {
+    this.productSubCategoryService = productSubCategoryService;
+  }
 
-    @ApiOperation(value = "Показывает всю подкатегорию продуктов")
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public ResponseEntity<?> all() {
-        return ResponseEntity.ok(this.productSubCategoryService.showAllProductSubCategory());
-    }
+  @ApiOperation(value = "Показывает всю подкатегорию продуктов")
+  @RequestMapping(value = "/all", method = RequestMethod.GET)
+  public ResponseEntity<?> all() {
+    return ResponseEntity.ok(this.productSubCategoryService.showAllProductSubCategory());
+  }
 
-    @ApiOperation(value = "Добавляет новую подкатегорию продуктов")
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<?> add(
-            @RequestParam(required = false) String subCategoryNameKk,
-            @RequestParam String subCategoryNameRu,
-            @RequestParam(required = false) String subCategoryNameEn,
-            @RequestParam Long productCategoryId,
-            @RequestParam String subCategoryAddInfo) {
-        this.productSubCategoryService.addProductSubCategory(
-                subCategoryNameKk, subCategoryNameRu, subCategoryNameEn,
-                productCategoryId, subCategoryAddInfo
-        );
-        return ResponseEntity.ok("Новая подкатегория продуктов добавлена");
-    }
+  @ApiOperation(value = "Добавляет новую подкатегорию продуктов")
+  @RequestMapping(value = "/add", method = RequestMethod.POST)
+  public ResponseEntity<?> add(
+    @RequestParam(required = false) String subCategoryNameKk,
+    @RequestParam String subCategoryNameRu,
+    @RequestParam(required = false) String subCategoryNameEn,
+    @RequestParam Long productCategoryId,
+    @RequestParam String subCategoryAddInfo) {
+    this.productSubCategoryService.addProductSubCategory(
+      subCategoryNameKk, subCategoryNameRu, subCategoryNameEn,
+      productCategoryId, subCategoryAddInfo
+    );
+    return ResponseEntity.ok("Новая подкатегория продуктов добавлена");
+  }
 
-    @ApiOperation(value = "Добавляет подкатегорию продуктов посредством JSON")
-    @RequestMapping(value = "/addJson", method = RequestMethod.POST)
-    public ResponseEntity<?> addJson(
-            @RequestBody ProductSubCategoryJson productSubCategoryJson
-    ) {
-        this.productSubCategoryService.addProductSubCategoryJson(productSubCategoryJson);
-        return ResponseEntity.ok("Новая подкатегория продуктов добавлена посредством JSON");
-    }
+  @ApiOperation(value = "Добавляет подкатегорию продуктов посредством JSON")
+  @RequestMapping(value = "/addJson", method = RequestMethod.POST)
+  public ResponseEntity<?> addJson(
+    @RequestBody ProductSubCategoryJson productSubCategoryJson
+  ) {
+    this.productSubCategoryService.addProductSubCategoryJson(productSubCategoryJson);
+    return ResponseEntity.ok("Новая подкатегория продуктов добавлена посредством JSON");
+  }
 
 }

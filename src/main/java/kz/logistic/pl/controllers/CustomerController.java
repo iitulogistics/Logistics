@@ -16,35 +16,35 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/customer")
 public class CustomerController {
 
-    private CustomerService customerService;
+  private CustomerService customerService;
 
-    @Qualifier("defaultCustomerService")
-    @Autowired(required = false)
-    public void setCustomerService(CustomerService customerService) {
-        this.customerService = customerService;
-    }
+  @Qualifier("defaultCustomerService")
+  @Autowired(required = false)
+  public void setCustomerService(CustomerService customerService) {
+    this.customerService = customerService;
+  }
 
 
-    @ApiOperation(value = "Показывает весь список клиентов")
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public ResponseEntity<?> all() {
-        return ResponseEntity.ok(this.customerService.showAllCustomers());
-    }
+  @ApiOperation(value = "Показывает весь список клиентов")
+  @RequestMapping(value = "/all", method = RequestMethod.GET)
+  public ResponseEntity<?> all() {
+    return ResponseEntity.ok(this.customerService.showAllCustomers());
+  }
 
-    @ApiOperation(value = "Добавляет клиента")
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<?> add(
-            @RequestParam String username,
-            @RequestParam String password) {
-        return ResponseEntity.ok(this.customerService.addCustomer(username, password));
-    }
+  @ApiOperation(value = "Добавляет клиента")
+  @RequestMapping(value = "/add", method = RequestMethod.POST)
+  public ResponseEntity<?> add(
+    @RequestParam String username,
+    @RequestParam String password) {
+    return ResponseEntity.ok(this.customerService.addCustomer(username, password));
+  }
 
-    @ApiOperation(value = "Добавляет клиента посредством JSON")
-    @RequestMapping(value = "/addJson", method = RequestMethod.PATCH)
-    public ResponseEntity<?> addJson(
-            @RequestBody CustomerJson customerJson
-    ) {
-        return ResponseEntity.ok(this.customerService.addCustomerJson(customerJson));
-    }
+  @ApiOperation(value = "Добавляет клиента посредством JSON")
+  @RequestMapping(value = "/addJson", method = RequestMethod.PATCH)
+  public ResponseEntity<?> addJson(
+    @RequestBody CustomerJson customerJson
+  ) {
+    return ResponseEntity.ok(this.customerService.addCustomerJson(customerJson));
+  }
 
 }

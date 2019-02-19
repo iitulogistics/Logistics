@@ -4,8 +4,8 @@ import kz.logistic.pl.models.entities.LoginEntity;
 
 public interface SessionService {
 
-    public Long getLoginEntityIdByUsernameAndPassword(String username, String password);
+  public Long getLoginEntityIdByUsernameAndPassword(String username, String password);
 
-    public LoginEntity getLoginEntityByLoginId(Long loginId);
+  public LoginEntity getLoginEntityByLoginId(Long loginId);
 
 }

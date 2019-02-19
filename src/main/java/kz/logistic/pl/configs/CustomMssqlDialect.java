@@ -1,9 +1,9 @@
 package kz.logistic.pl.configs;
 
+import java.sql.Types;
 
 import org.hibernate.dialect.SQLServer2012Dialect;
 
-import java.sql.Types;
 
 public class CustomMssqlDialect extends SQLServer2012Dialect {
   public CustomMssqlDialect() {

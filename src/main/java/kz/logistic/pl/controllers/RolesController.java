@@ -15,36 +15,36 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/seller/company/role")
 public class RolesController {
 
-    private RoleService roleService;
+  private RoleService roleService;
 
-    @Qualifier("defaultRoleService")
-    @Autowired(required = false)
-    public void setRoleService(RoleService roleService) {
-        this.roleService = roleService;
-    }
+  @Qualifier("defaultRoleService")
+  @Autowired(required = false)
+  public void setRoleService(RoleService roleService) {
+    this.roleService = roleService;
+  }
 
-    @ApiOperation(value = "Показывает все списки ролей компаний продавцов")
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public ResponseEntity<?> all() {
-        return ResponseEntity.ok(this.roleService.showAllRoles());
-    }
+  @ApiOperation(value = "Показывает все списки ролей компаний продавцов")
+  @RequestMapping(value = "/all", method = RequestMethod.GET)
+  public ResponseEntity<?> all() {
+    return ResponseEntity.ok(this.roleService.showAllRoles());
+  }
 
-    @ApiOperation(value = "Добавляет новые роли для компаний продавцов")
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<?> add(
-            @RequestParam(required = false) String roleName,
-            @RequestParam(required = false) String roleDescription) {
-        this.roleService.addRole(roleName, roleDescription);
-        return ResponseEntity.ok("Новая роль компаний продавцов добавлена");
-    }
+  @ApiOperation(value = "Добавляет новые роли для компаний продавцов")
+  @RequestMapping(value = "/add", method = RequestMethod.POST)
+  public ResponseEntity<?> add(
+    @RequestParam(required = false) String roleName,
+    @RequestParam(required = false) String roleDescription) {
+    this.roleService.addRole(roleName, roleDescription);
+    return ResponseEntity.ok("Новая роль компаний продавцов добавлена");
+  }
 
-    @ApiOperation(value = "Добавляет новые роли для компаний продавцов с помощью JSON формата")
-    @RequestMapping(value = "/addJson", method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> addJson(@RequestBody RolesJson roles) {
-        this.roleService.addRoleJson(roles);
-        return ResponseEntity.ok("Новая роль компаний продавцов добавлена с помощью JSON формата");
-    }
+  @ApiOperation(value = "Добавляет новые роли для компаний продавцов с помощью JSON формата")
+  @RequestMapping(value = "/addJson", method = RequestMethod.POST,
+    consumes = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<?> addJson(@RequestBody RolesJson roles) {
+    this.roleService.addRoleJson(roles);
+    return ResponseEntity.ok("Новая роль компаний продавцов добавлена с помощью JSON формата");
+  }
 
 
 

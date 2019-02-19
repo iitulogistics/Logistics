@@ -2,9 +2,9 @@ package kz.logistic.pl.models.pojos;
 
 public interface ProductCategory {
 
-    long getProductCategoryId();
+  long getProductCategoryId();
 
-    LocalizedMessage getCategoryName();
+  LocalizedMessage getCategoryName();
 
-    String getAddInfo();
+  String getAddInfo();
 }

@@ -1,11 +1,11 @@
 package kz.logistic.pl.models.pojos;
 
 public interface City {
-    Long getCityId();
+  Long getCityId();
 
-    LocalizedMessage getCityName();
+  LocalizedMessage getCityName();
 
-    Long getRegionId();
+  Long getRegionId();
 
-    Long getCountryId();
+  Long getCountryId();
 }

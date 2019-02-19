@@ -2,10 +2,10 @@ package kz.logistic.pl.models.pojos;
 
 public interface Region {
 
-    Long getRegionId();
+  Long getRegionId();
 
-    LocalizedMessage getRegionName();
+  LocalizedMessage getRegionName();
 
-    Long getCountryId();
+  Long getCountryId();
 
 }

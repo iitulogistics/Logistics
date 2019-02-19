@@ -2,15 +2,15 @@ package kz.logistic.pl.models.pojos;
 
 public interface Customer {
 
-    long getCustomerId();
+  long getCustomerId();
 
-    long getLoginId();
+  long getLoginId();
 
-    String getLoginName();
+  String getLoginName();
 
-    String getLoginPassword();
+  String getLoginPassword();
 
-    LocalizedMessage getCustomerName();
+  LocalizedMessage getCustomerName();
 
-    String getCustomerMobilePhone();
+  String getCustomerMobilePhone();
 }

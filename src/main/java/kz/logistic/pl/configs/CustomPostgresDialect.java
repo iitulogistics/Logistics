@@ -1,9 +1,8 @@
 package kz.logistic.pl.configs;
 
+import java.sql.Types;
 
 import org.hibernate.dialect.PostgreSQL95Dialect;
-
-import java.sql.Types;
 
 public class CustomPostgresDialect extends PostgreSQL95Dialect {
   public CustomPostgresDialect() {

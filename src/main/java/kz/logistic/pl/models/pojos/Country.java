@@ -2,8 +2,8 @@ package kz.logistic.pl.models.pojos;
 
 public interface Country {
 
-    Long getCountryId();
+  Long getCountryId();
 
-    LocalizedMessage getCountryName();
+  LocalizedMessage getCountryName();
 
 }
