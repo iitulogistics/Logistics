@@ -38,4 +38,7 @@ public class CustomerJson implements Serializable {
   @JsonProperty
   private String addInfo;
 
+  @JsonProperty
+  private String iinOrBin;
+
 }
