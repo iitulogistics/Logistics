@@ -1,8 +1,8 @@
 package kz.logistic.pl.configs;
 
-import org.hibernate.dialect.MySQL57Dialect;
-
 import java.sql.Types;
+
+import org.hibernate.dialect.MySQL57Dialect;
 
 public class CustomMysqlDialect extends MySQL57Dialect {
   public CustomMysqlDialect() {
