@@ -44,6 +44,7 @@ public class DefaultCityService implements CityService {
           .kk(cityEntity.getCityNameKk())
           .ru(cityEntity.getCityNameRu()).build())
       .regionId(cityEntity.getRegionId())
+      .countryId(cityEntity.getCountryId())
       .build()).collect(Collectors.toList());
   }
 
@@ -115,13 +116,13 @@ public class DefaultCityService implements CityService {
       if (cityJson.getCityNameRu() != null) {
         cityEntity.setCityNameRu(cityJson.getCityNameRu());
       }
-      if (cityJson.getCityNameRu() != null) {
+      if (cityJson.getCityNameEn() != null) {
         cityEntity.setCityNameEn(cityJson.getCityNameEn());
       }
-      if (cityJson.getCityNameRu() != null) {
+      if (cityJson.getRegionId() != null) {
         cityEntity.setRegionId(cityJson.getRegionId());
       }
-      if (cityJson.getCityNameRu() != null) {
+      if (cityJson.getCountryId() != null) {
         cityEntity.setCountryId(cityJson.getCountryId());
       }
       this.cityRepository.save(cityEntity);
