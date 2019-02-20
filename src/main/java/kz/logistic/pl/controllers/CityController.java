@@ -70,4 +70,5 @@ public class CityController {
   public ResponseEntity<?> delete(@PathVariable(value = "id") Long cityId) {
     return ResponseEntity.ok(this.cityService.deleteCity(cityId));
   }
+
 }
