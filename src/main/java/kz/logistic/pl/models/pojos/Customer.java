@@ -12,5 +12,15 @@ public interface Customer {
 
   LocalizedMessage getCustomerName();
 
+  String getIinOrBin();
+
+  String getPhoneNumber();
+
   String getCustomerMobilePhone();
+
+  String getEmail();
+
+  String getAddInfo();
+
+  long getAddressId();
 }

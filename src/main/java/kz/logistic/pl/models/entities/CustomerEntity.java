@@ -23,8 +23,9 @@ public class CustomerEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long customerId;
-  @Column(name = "login_entity_id")
-  private Long loginEntityId;
+
+  //@Column(name = "login_entity_id")
+  //private Long loginEntityId;
   @Column(name = "customer_name_kk")
   private String customerNameKk;
   @Column(name = "customer_name_ru")
