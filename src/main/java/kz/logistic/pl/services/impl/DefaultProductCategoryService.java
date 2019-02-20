@@ -46,8 +46,20 @@ public class DefaultProductCategoryService implements ProductCategoryService {
       .build()).collect(Collectors.toList());
   }
 
+
   @Override
-  public void addCategory(
+  public DefaultProductCategory showProductCategory(Long productCategoryId) {
+   ProductsCategoryEntity productsCategoryEntity = this.productsCategoryRepository.findById(productCategoryId).orElse(null);
+    return DefaultProductCategory.builder()
+      .categoryName(localizedMessageBuilderFactory.builder()
+        .en(productsCategoryEntity.getCategoryNameEn())
+        .kk(productsCategoryEntity.getCategoryNameKk())
+        .ru(productsCategoryEntity.getCategoryNameRu()).build())
+      .addInfo(productsCategoryEntity.getAddInfo()).build();
+  }
+
+  @Override
+  public String addCategory(
     String categoryNameKk, String categoryNameRu, String categoryNameEn, String addInfo) {
     ProductsCategoryEntity categoryEntity = new ProductsCategoryEntity();
     categoryEntity.setCategoryNameKk(categoryNameKk);
@@ -57,10 +69,11 @@ public class DefaultProductCategoryService implements ProductCategoryService {
 
     this.productsCategoryRepository.save(categoryEntity);
     log.info("Added new ProductCategory " + categoryNameRu + " " + new Date());
+    return "Новая категория продуктов добавлена";
   }
 
   @Override
-  public void addCategoryJson(ProductCategoryJson productCategoryJson) {
+  public String addCategoryJson(ProductCategoryJson productCategoryJson) {
     ProductsCategoryEntity categoryEntity = new ProductsCategoryEntity();
     categoryEntity.setCategoryNameKk(productCategoryJson.getCategoryNameKk());
     categoryEntity.setCategoryNameRu(productCategoryJson.getCategoryNameRu());
@@ -70,5 +83,6 @@ public class DefaultProductCategoryService implements ProductCategoryService {
     this.productsCategoryRepository.save(categoryEntity);
     log.info("Added new ProductCategory "
       + productCategoryJson.getCategoryNameRu() + " via JSON " + new Date());
+    return "Новая категория продуктов добавлена посредством JSON";
   }
 }
