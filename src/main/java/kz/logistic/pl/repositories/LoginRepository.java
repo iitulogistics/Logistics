@@ -11,7 +11,7 @@ import java.util.List;
 public interface LoginRepository extends JpaRepository<LoginEntity, Long> {
     List<LoginEntity> findByCustomerEntityCustomerIdIsNotNull();
 
-    ArrayList<LoginEntity> findByUsernameAndPassword(String username, String password);
+    LoginEntity findByUsernameAndPassword(String username, String password);
 
     ArrayList<LoginEntity> findByUsername(String username);
 }
