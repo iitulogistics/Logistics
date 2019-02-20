@@ -23,13 +23,19 @@ public class CountryController {
   }
 
   @ApiOperation(value = "Показывает весь список стран")
-  @RequestMapping(value = "/all", method = RequestMethod.GET)
+  @GetMapping("/all")
   public ResponseEntity<?> all() {
     return ResponseEntity.ok(this.countryService.showAllCountries());
   }
 
+  @ApiOperation(value = "Показывает страну по ID")
+  @GetMapping("{id}")
+  public ResponseEntity<?> getId(@PathVariable(value = "id") Long countryId){
+    return ResponseEntity.ok(this.countryService.showCountry(countryId));
+  }
+
   @ApiOperation(value = "Добавляет страну")
-  @RequestMapping(value = "/add", method = RequestMethod.POST)
+  @PostMapping("/add")
   public ResponseEntity<?> add(
     @RequestParam(required = false) String countryNameKk,
     @RequestParam String countryNameRu,
@@ -41,15 +47,15 @@ public class CountryController {
   }
 
   @ApiOperation(value = "Добавляет страну посредством JSON")
-  @RequestMapping(value = "/addJson", method = RequestMethod.POST)
+  @PostMapping("/addJson")
   public ResponseEntity<?> addJson(
-    @RequestParam CountryJson countryJson
+    @RequestBody CountryJson countryJson
   ) {
     return ResponseEntity.ok(this.countryService.addCountryJson(countryJson));
   }
 
   @ApiOperation(value = "Обновляет страну")
-  @RequestMapping(value = "/update/{id}", method = RequestMethod.PATCH)
+  @PatchMapping("{id}")
   public ResponseEntity<?> update(
     @PathVariable(value = "id") Long countryId,
     @RequestBody CountryJson countryJson
@@ -58,7 +64,7 @@ public class CountryController {
   }
 
   @ApiOperation(value = "Удаляет страну")
-  @DeleteMapping("/delete/{id}")
+  @DeleteMapping("{id}")
   public ResponseEntity<?> delete(@PathVariable(value = "id") Long countryId) {
     return ResponseEntity.ok(this.countryService.deleteCountry(countryId));
   }
