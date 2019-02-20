@@ -59,7 +59,7 @@ public class ProductCategoryController {
   @ApiOperation(value = "Обновляет категорию продуктов")
   @PatchMapping("{id}")
   public ResponseEntity<?> update(@PathVariable(value = "id") Long productCategoryId,
-                                  ProductCategoryJson productCategoryJson) {
+                                  @RequestBody ProductCategoryJson productCategoryJson) {
     return ResponseEntity.ok(
       this.productCategoryService.updateProductCategory(productCategoryId,productCategoryJson));
   }

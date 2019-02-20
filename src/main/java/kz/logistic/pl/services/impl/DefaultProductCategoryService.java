@@ -52,12 +52,13 @@ public class DefaultProductCategoryService implements ProductCategoryService {
   public DefaultProductCategory showProductCategory(Long productCategoryId) {
     ProductsCategoryEntity productsCategoryEntity =
         this.productsCategoryRepository.findById(productCategoryId).orElse(null);
-    return DefaultProductCategory.builder()
-      .categoryName(localizedMessageBuilderFactory.builder()
-        .en(productsCategoryEntity.getCategoryNameEn())
-        .kk(productsCategoryEntity.getCategoryNameKk())
-        .ru(productsCategoryEntity.getCategoryNameRu()).build())
-      .addInfo(productsCategoryEntity.getAddInfo()).build();
+      return DefaultProductCategory.builder()
+        .id(productsCategoryEntity.getProductCategoryId())
+        .categoryName(localizedMessageBuilderFactory.builder()
+          .en(productsCategoryEntity.getCategoryNameEn())
+          .kk(productsCategoryEntity.getCategoryNameKk())
+          .ru(productsCategoryEntity.getCategoryNameRu()).build())
+        .addInfo(productsCategoryEntity.getAddInfo()).build();
   }
 
   @Override
