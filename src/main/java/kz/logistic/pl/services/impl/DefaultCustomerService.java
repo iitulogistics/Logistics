@@ -140,6 +140,27 @@ public class DefaultCustomerService implements CustomerService {
       if (customerJson.getEmail() != null) {
         customerEntity.setEmail(customerJson.getEmail());
       }
+      if (customerJson.getCustomerNameKk() != null) {
+        customerEntity.setCustomerNameKk(customerJson.getCustomerNameKk());
+      }
+      if (customerJson.getCustomerNameRu() != null) {
+        customerEntity.setCustomerNameRu(customerJson.getCustomerNameRu());
+      }
+      if (customerJson.getCustomerNameEn() != null) {
+        customerEntity.setCustomerNameEn(customerJson.getCustomerNameEn());
+      }
+      if (customerJson.getIinOrBin() != null) {
+        customerEntity.setIinOrBin(customerJson.getIinOrBin());
+      }
+      if (customerJson.getPhoneNumber() != null) {
+        customerEntity.setPhoneNumber(customerJson.getPhoneNumber());
+      }
+      if (customerJson.getEmail() != null) {
+        customerEntity.setEmail(customerJson.getEmail());
+      }
+      if (customerJson.getAddInfo() != null) {
+        customerEntity.setAddInfo(customerJson.getAddInfo());
+      }
 
       this.loginRepository.save(loginEntity);
       this.customerRepository.save(customerEntity);
@@ -151,7 +172,11 @@ public class DefaultCustomerService implements CustomerService {
   }
 
   @Override
-  public String deleteCustomer(Long countryId) {
-    return null;
+  public String deleteCustomer(Long customerId) {
+    CustomerEntity customerEntity = this.customerRepository.findById(customerId).orElse(null);
+    LoginEntity loginEntity = this.loginRepository.findById(customerEntity.getLoginEntity().getLoginId()).orElse(null);
+    this.loginRepository.deleteById(loginEntity.getLoginId());
+    this.customerRepository.deleteById(customerEntity.getCustomerId());
+    return "Данные клиента удалены";
   }
 }
