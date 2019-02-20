@@ -19,7 +19,7 @@ public class CityController {
 
   @Qualifier("defaultCityService")
   @Autowired(required = false)
-  private void setCityService(CityService cityService) {
+  private void setcityService(CityService cityService) {
     this.cityService = cityService;
   }
 
@@ -60,7 +60,7 @@ public class CityController {
   }
 
   @ApiOperation(value = "Удаляет город")
-  @DeleteMapping("/delete/{id}")
+  @RequestMapping("/delete/{id}")
   public ResponseEntity<?> delete(@PathVariable(value = "id") Long cityId) {
     return ResponseEntity.ok(this.cityService.deleteCity(cityId));
   }
