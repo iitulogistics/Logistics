@@ -49,7 +49,7 @@ public class CityController {
   }
 
   @ApiOperation(value = "Добавляет город посредством JSON")
-  @RequestMapping(value = "/addJson", method = RequestMethod.POST)
+  @PostMapping("/addJson")
   public ResponseEntity<?> addJson(
       @RequestBody CityJson cityJson
   ) {
