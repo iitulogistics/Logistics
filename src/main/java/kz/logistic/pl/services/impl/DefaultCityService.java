@@ -139,7 +139,7 @@ public class DefaultCityService implements CityService {
     if (Objects.nonNull(cityEntity)) {
       log.info("Updated " + cityEntity.getCityNameRu() + " city" + new Date());
       this.cityRepository.delete(cityEntity);
-      return "Город обновлен";
+      return "Город удален";
     } else {
       return "Город с таким id не существует";
     }
