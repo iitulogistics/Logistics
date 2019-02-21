@@ -79,11 +79,11 @@ public class DefaultShipperService implements ShipperService {
         .en(shipperEntity.getShipperNameEn()).build())
       .username(shipperEntity.getLoginEntity().getUsername())
       .password(shipperEntity.getLoginEntity().getPassword())
-//      .bin(shipperEntity.getBin())
-//      .email(shipperEntity.getEmail())
-//      .address(shipperEntity.getAddress())
-//      .phoneNumber(shipperEntity.getPhoneNumber())
-//      .mobilePhone(shipperEntity.getMobilePhone())
+      .bin(shipperEntity.getBin())
+      .email(shipperEntity.getEmail())
+      .address(shipperEntity.getAddress())
+      .phoneNumber(shipperEntity.getPhoneNumber())
+      .mobilePhone(shipperEntity.getMobilePhone())
       .build()).collect(Collectors.toList());
   }
 
@@ -96,7 +96,14 @@ public class DefaultShipperService implements ShipperService {
       .shipperName(localizedMessageBuilderFactory.builder()
       .en(shipperEntity.getShipperNameEn())
       .kk(shipperEntity.getShipperNameKk())
-      .ru(shipperEntity.getShipperNameRu()).build()).build();
+        .ru(shipperEntity.getShipperNameRu()).build())
+      .bin(shipperEntity.getBin())
+      .email(shipperEntity.getEmail())
+      .address(shipperEntity.getAddress())
+      .phoneNumber(shipperEntity.getPhoneNumber())
+      .mobilePhone(shipperEntity.getMobilePhone())
+      .password(shipperEntity.getLoginEntity().getPassword())
+      .build();
   }
 
   @Override
@@ -104,39 +111,39 @@ public class DefaultShipperService implements ShipperService {
     ShipperEntity shipperEntity = this.shipperRepository.findById(shipperId).orElse(null);
     LoginEntity loginEntity = this.loginRepository.findById(shipperEntity.getLoginEntity().getLoginId()).orElse(null);
 
-    if(Objects.nonNull(shipperEntity)){
-      if (shipperJson.getAddress() != null){
+    if (Objects.nonNull(shipperEntity)) {
+      if (shipperJson.getAddress() != null) {
         shipperEntity.setAddress(shipperJson.getAddress());
       }
-      if(shipperJson.getBin() != null){
+      if (shipperJson.getBin() != null) {
         shipperEntity.setBin(shipperJson.getBin());
       }
-      if(shipperJson.getPassword() != null){
+      if (shipperJson.getPassword() != null) {
         loginEntity.setPassword(shipperJson.getPassword());
       }
-      if(shipperJson.getEmail() != null){
+      if (shipperJson.getEmail() != null) {
         shipperEntity.setEmail(shipperJson.getEmail());
       }
-      if(shipperJson.getMobilePhone() != null){
+      if (shipperJson.getMobilePhone() != null) {
         shipperEntity.setMobilePhone(shipperJson.getMobilePhone());
       }
-      if(shipperJson.getPhoneNumber() != null){
+      if (shipperJson.getPhoneNumber() != null) {
         shipperEntity.setPhoneNumber(shipperJson.getPhoneNumber());
       }
-      if(shipperJson.getShipperNameEn() != null){
+      if (shipperJson.getShipperNameEn() != null) {
         shipperEntity.setShipperNameEn(shipperJson.getShipperNameEn());
       }
-      if(shipperJson.getShipperNameKk() != null){
+      if (shipperJson.getShipperNameKk() != null) {
         shipperEntity.setShipperNameKk(shipperJson.getShipperNameKk());
       }
-      if(shipperJson.getShipperNameRu() != null){
+      if (shipperJson.getShipperNameRu() != null) {
         shipperEntity.setShipperNameRu(shipperJson.getShipperNameRu());
       }
       this.loginRepository.save(loginEntity);
       this.shipperRepository.save(shipperEntity);
       log.info("Updated " + shipperId + " shipper " + new Date());
       return "Доставщик обнавлен";
-    }else{
+    } else {
       return "Доставщика с таким ID не существует";
     }
   }
