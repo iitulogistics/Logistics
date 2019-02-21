@@ -16,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-
 @Slf4j
 public class DefaultCityService implements CityService {
 
@@ -30,7 +29,7 @@ public class DefaultCityService implements CityService {
 
   @Autowired(required = false)
   public void setLocalizedMessageBuilderFactory(
-    LocalizedMessageBuilderFactory localizedMessageBuilderFactory) {
+      LocalizedMessageBuilderFactory localizedMessageBuilderFactory) {
     this.localizedMessageBuilderFactory = localizedMessageBuilderFactory;
   }
 
@@ -45,12 +44,28 @@ public class DefaultCityService implements CityService {
           .kk(cityEntity.getCityNameKk())
           .ru(cityEntity.getCityNameRu()).build())
       .regionId(cityEntity.getRegionId())
+      .countryId(cityEntity.getCountryId())
       .build()).collect(Collectors.toList());
+  }
+
+  @Override
+  public DefaultCity showCity(Long cityId) {
+    CityEntity cityEntity = this.cityRepository.findById(cityId).orElse(null);
+
+    return DefaultCity.builder()
+      .cityId(cityEntity.getCityId())
+      .cityName(
+        localizedMessageBuilderFactory.builder()
+        .en(cityEntity.getCityNameEn())
+        .kk(cityEntity.getCityNameKk())
+        .ru(cityEntity.getCityNameRu()).build())
+      .regionId(cityEntity.getRegionId())
+      .countryId(cityEntity.getCountryId()).build();
   }
 
   public boolean exists(Long countryId, String cityNameEn) {
     ArrayList<CityEntity> cityEntity =
-      this.cityRepository.findByCountryIdAndCityNameEn(countryId, cityNameEn);
+        this.cityRepository.findByCountryIdAndCityNameEn(countryId, cityNameEn);
     return cityEntity.size() > 0;
   }
 
@@ -95,11 +110,21 @@ public class DefaultCityService implements CityService {
   public String updateCity(Long cityId, CityJson cityJson) {
     CityEntity cityEntity = cityRepository.findById(cityId).orElse(null);
     if (Objects.nonNull(cityEntity)) {
-      cityEntity.setCityNameKk(cityJson.getCityNameKk());
-      cityEntity.setCityNameRu(cityJson.getCityNameRu());
-      cityEntity.setCityNameEn(cityJson.getCityNameEn());
-      cityEntity.setRegionId(cityJson.getRegionId());
-      cityEntity.setCountryId(cityJson.getCountryId());
+      if (cityJson.getCityNameKk() != null) {
+        cityEntity.setCityNameKk(cityJson.getCityNameKk());
+      }
+      if (cityJson.getCityNameRu() != null) {
+        cityEntity.setCityNameRu(cityJson.getCityNameRu());
+      }
+      if (cityJson.getCityNameEn() != null) {
+        cityEntity.setCityNameEn(cityJson.getCityNameEn());
+      }
+      if (cityJson.getRegionId() != null) {
+        cityEntity.setRegionId(cityJson.getRegionId());
+      }
+      if (cityJson.getCountryId() != null) {
+        cityEntity.setCountryId(cityJson.getCountryId());
+      }
       this.cityRepository.save(cityEntity);
       log.info("Updated " + cityJson.getCityNameRu() + " city" + new Date());
       return "Город обновлен";
@@ -114,7 +139,7 @@ public class DefaultCityService implements CityService {
     if (Objects.nonNull(cityEntity)) {
       log.info("Updated " + cityEntity.getCityNameRu() + " city" + new Date());
       this.cityRepository.delete(cityEntity);
-      return "Город обновлен";
+      return "Город удален";
     } else {
       return "Город с таким id не существует";
     }

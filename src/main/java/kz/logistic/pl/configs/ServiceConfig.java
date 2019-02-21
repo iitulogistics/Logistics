@@ -19,6 +19,12 @@ public class ServiceConfig {
   }
 
   @Bean
+  @Qualifier("defaultGosZakupService")
+  public DefaultGosZakupService defaultGosZakupService() {
+    return new DefaultGosZakupService();
+  }
+
+  @Bean
   @Qualifier("defaultSessionService")
   public DefaultSessionService defaultSessionService() {
     return new DefaultSessionService();

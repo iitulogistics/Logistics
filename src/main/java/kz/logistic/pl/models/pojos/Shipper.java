@@ -4,10 +4,22 @@ public interface Shipper {
 
   Long getShipperId();
 
-  String getShipperUsername();
+  Long getLoginId();
 
-  String getShipperPassword();
+  String getLoginName();
+
+  String getLoginPassword();
 
   LocalizedMessage getShipperName();
+
+  String getBin();
+
+  String getMobilePhone();
+
+  String getPhoneNumber();
+
+  String getEmail();
+
+  String getAddress();
 
 }

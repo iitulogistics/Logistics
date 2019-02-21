@@ -46,6 +46,18 @@ public class DefaultCountryService implements CountryService {
       .build()).collect(Collectors.toList());
   }
 
+  @Override
+  public DefaultCountry showCountry(Long countryId) {
+    CountryEntity countryEntity =  this.countryRepository.findById(countryId).orElse(null);
+    return DefaultCountry.builder()
+      .countryId(countryEntity.getCountryId())
+      .countryName(localizedMessageBuilderFactory.builder()
+      .en(countryEntity.getCountryNameEn())
+      .kk(countryEntity.getCountryNameKk())
+      .ru(countryEntity.getCountryNameRu()).build())
+      .build();
+  }
+
   public boolean exists(String countryNameEn) {
     ArrayList<CountryEntity> entities = countryRepository.findByCountryNameEn(countryNameEn);
     return entities.size() > 0;
@@ -96,7 +108,7 @@ public class DefaultCountryService implements CountryService {
         countryEntity.setCountryNameEn(countryJson.getCountryNameEn());
       }
       this.countryRepository.save(countryEntity);
-      log.info("Updated " + countryJson.getCountryNameEn() + "country " + new Date());
+      log.info("Updated " + countryJson.getCountryNameEn() + " country " + new Date());
       return "Страна обновлена";
     } else {
       return "Страны с таким id не существует";

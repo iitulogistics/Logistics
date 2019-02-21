@@ -16,4 +16,29 @@ public class ShipperJson implements Serializable {
 
   @JsonProperty
   private String password;
+
+  @JsonProperty
+  private String shipperNameKk;
+
+  @JsonProperty
+  private String shipperNameRu;
+
+  @JsonProperty
+  private String shipperNameEn;
+
+  @JsonProperty
+  private String mobilePhone;
+
+  @JsonProperty
+  private String phoneNumber;
+
+  @JsonProperty
+  private String bin;
+
+  @JsonProperty
+  private String email;
+
+  @JsonProperty
+  private String address;
+
 }

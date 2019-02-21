@@ -2,6 +2,7 @@ package kz.logistic.pl.services.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import kz.logistic.pl.models.entities.LoginEntity;
@@ -78,7 +79,74 @@ public class DefaultShipperService implements ShipperService {
         .en(shipperEntity.getShipperNameEn()).build())
       .username(shipperEntity.getLoginEntity().getUsername())
       .password(shipperEntity.getLoginEntity().getPassword())
+//      .bin(shipperEntity.getBin())
+//      .email(shipperEntity.getEmail())
+//      .address(shipperEntity.getAddress())
+//      .phoneNumber(shipperEntity.getPhoneNumber())
+//      .mobilePhone(shipperEntity.getMobilePhone())
       .build()).collect(Collectors.toList());
   }
 
+  @Override
+  public DefaultShipper showShipper(Long shipperId) {
+    ShipperEntity shipperEntity = this.shipperRepository.findById(shipperId).orElse(null);
+    return DefaultShipper.builder()
+      .shipperId(shipperEntity.getShipperId())
+      .username(shipperEntity.getLoginEntity().getUsername())
+      .shipperName(localizedMessageBuilderFactory.builder()
+      .en(shipperEntity.getShipperNameEn())
+      .kk(shipperEntity.getShipperNameKk())
+      .ru(shipperEntity.getShipperNameRu()).build()).build();
+  }
+
+  @Override
+  public String updateShipper(Long shipperId, ShipperJson shipperJson) {
+    ShipperEntity shipperEntity = this.shipperRepository.findById(shipperId).orElse(null);
+    LoginEntity loginEntity = this.loginRepository.findById(shipperEntity.getLoginEntity().getLoginId()).orElse(null);
+
+    if(Objects.nonNull(shipperEntity)){
+      if (shipperJson.getAddress() != null){
+        shipperEntity.setAddress(shipperJson.getAddress());
+      }
+      if(shipperJson.getBin() != null){
+        shipperEntity.setBin(shipperJson.getBin());
+      }
+      if(shipperJson.getPassword() != null){
+        loginEntity.setPassword(shipperJson.getPassword());
+      }
+      if(shipperJson.getEmail() != null){
+        shipperEntity.setEmail(shipperJson.getEmail());
+      }
+      if(shipperJson.getMobilePhone() != null){
+        shipperEntity.setMobilePhone(shipperJson.getMobilePhone());
+      }
+      if(shipperJson.getPhoneNumber() != null){
+        shipperEntity.setPhoneNumber(shipperJson.getPhoneNumber());
+      }
+      if(shipperJson.getShipperNameEn() != null){
+        shipperEntity.setShipperNameEn(shipperJson.getShipperNameEn());
+      }
+      if(shipperJson.getShipperNameKk() != null){
+        shipperEntity.setShipperNameKk(shipperJson.getShipperNameKk());
+      }
+      if(shipperJson.getShipperNameRu() != null){
+        shipperEntity.setShipperNameRu(shipperJson.getShipperNameRu());
+      }
+      this.loginRepository.save(loginEntity);
+      this.shipperRepository.save(shipperEntity);
+      log.info("Updated " + shipperId + " shipper " + new Date());
+      return "Доставщик обнавлен";
+    }else{
+      return "Доставщика с таким ID не существует";
+    }
+  }
+
+  @Override
+  public String deleteShipper(Long shipperId) {
+    ShipperEntity shipperEntity = this.shipperRepository.findById(shipperId).orElse(null);
+    LoginEntity loginEntity = this.loginRepository.findById(shipperEntity.getLoginEntity().getLoginId()).orElse(null);
+    this.loginRepository.deleteById(loginEntity.getLoginId());
+    this.shipperRepository.deleteById(shipperEntity.getShipperId());
+    return "Данные доставщика удалены";
+  }
 }

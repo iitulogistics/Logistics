@@ -26,13 +26,19 @@ public class CustomerController {
 
 
   @ApiOperation(value = "Показывает весь список клиентов")
-  @RequestMapping(value = "/all", method = RequestMethod.GET)
+  @GetMapping("/all")
   public ResponseEntity<?> all() {
     return ResponseEntity.ok(this.customerService.showAllCustomers());
   }
 
+  @ApiOperation(value = "Показывает клиента по ID")
+  @GetMapping("{id}")
+  public ResponseEntity<?> getId(@PathVariable(value = "id") Long customerId) {
+    return ResponseEntity.ok(this.customerService.showCustomer(customerId));
+  }
+
   @ApiOperation(value = "Добавляет клиента")
-  @RequestMapping(value = "/add", method = RequestMethod.POST)
+  @PostMapping("/add")
   public ResponseEntity<?> add(
     @RequestParam String username,
     @RequestParam String password) {
@@ -40,11 +46,26 @@ public class CustomerController {
   }
 
   @ApiOperation(value = "Добавляет клиента посредством JSON")
-  @RequestMapping(value = "/addJson", method = RequestMethod.PATCH)
+  @PostMapping("/addJson")
   public ResponseEntity<?> addJson(
     @RequestBody CustomerJson customerJson
   ) {
     return ResponseEntity.ok(this.customerService.addCustomerJson(customerJson));
+  }
+
+  @ApiOperation(value = "Обновляет клиента")
+  @PatchMapping("{id}")
+  public ResponseEntity<?> update(
+    @PathVariable(value = "id") Long customerId,
+    @RequestBody CustomerJson customerJson
+  ) {
+    return ResponseEntity.ok(this.customerService.updateCustomer(customerId, customerJson));
+  }
+
+  @ApiOperation(value = "Удаляет клиента")
+  @DeleteMapping("{id}")
+  public ResponseEntity<?> delete(@PathVariable(value = "id") Long customerId) {
+    return ResponseEntity.ok(this.customerService.deleteCustomer(customerId));
   }
 
 }
