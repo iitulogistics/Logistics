@@ -6,22 +6,22 @@ import lombok.Builder;
 
 @Builder
 public class DefaultProductCategory implements ProductCategory {
-    private Long id;
-    private LocalizedMessage categoryName;
-    private String addInfo;
+  private Long id;
+  private LocalizedMessage categoryName;
+  private String addInfo;
 
-    @Override
-    public long getProductCategoryId() {
-        return id;
-    }
+  @Override
+  public long getProductCategoryId() {
+    return id;
+  }
 
-    @Override
-    public LocalizedMessage getCategoryName() {
-        return categoryName;
-    }
+  @Override
+  public LocalizedMessage getCategoryName() {
+    return categoryName;
+  }
 
-    @Override
-    public String getAddInfo() {
-        return addInfo;
-    }
+  @Override
+  public String getAddInfo() {
+    return addInfo;
+  }
 }

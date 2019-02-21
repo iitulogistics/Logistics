@@ -1,19 +1,19 @@
 package kz.logistic.pl.services;
 
+import java.util.List;
 import kz.logistic.pl.models.pojos.ProductSubCategory;
 import kz.logistic.pl.models.pojos.json.ProductSubCategoryJson;
 
-import java.util.List;
 
 public interface ProductSubCategoryService {
 
-    //Показать  все подкатеогрии
-    List<ProductSubCategory> showAllProductSubCategory();
+  //Показать  все подкатеогрии
+  List<ProductSubCategory> showAllProductSubCategory();
 
-    //Добавить новую подкатегорию
-    void addProductSubCategory(String subCategoryNameKk, String subCategoryNameRu,
-                               String subCategoryNameEn, Long productCategoryId,
-                               String subCategoryAddInfo);
+  //Добавить новую подкатегорию
+  void addProductSubCategory(String subCategoryNameKk, String subCategoryNameRu,
+                             String subCategoryNameEn, Long productCategoryId,
+                             String subCategoryAddInfo);
 
-    void addProductSubCategoryJson(ProductSubCategoryJson productSubCategoryJson);
+  void addProductSubCategoryJson(ProductSubCategoryJson productSubCategoryJson);
 }

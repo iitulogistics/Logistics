@@ -7,28 +7,28 @@ import lombok.Builder;
 @Builder
 public class DefaulProductSubCategory implements ProductSubCategory {
 
-    private Long id;
-    private LocalizedMessage subCategoryName;
-    private Long productCategoryId;
-    private String subCategoryAddInfo;
+  private Long id;
+  private LocalizedMessage subCategoryName;
+  private Long productCategoryId;
+  private String subCategoryAddInfo;
 
-    @Override
-    public long getProductSubcategoryId() {
-        return id;
-    }
+  @Override
+  public long getProductSubcategoryId() {
+    return id;
+  }
 
-    @Override
-    public LocalizedMessage getSubcategoryName() {
-        return subCategoryName;
-    }
+  @Override
+  public LocalizedMessage getSubcategoryName() {
+    return subCategoryName;
+  }
 
-    @Override
-    public Long getProductCategoryId() {
-        return productCategoryId;
-    }
+  @Override
+  public Long getProductCategoryId() {
+    return productCategoryId;
+  }
 
-    @Override
-    public String getSubCategoryAddInfo() {
-        return subCategoryAddInfo;
-    }
+  @Override
+  public String getSubCategoryAddInfo() {
+    return subCategoryAddInfo;
+  }
 }

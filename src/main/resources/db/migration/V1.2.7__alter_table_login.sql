@@ -1,0 +1,1 @@
+ALTER TABLE public.login ALTER COLUMN roles_id DROP NOT NULL;

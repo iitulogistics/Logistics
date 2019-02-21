@@ -32,37 +32,36 @@ public class SellerCompanyController {
   @ApiOperation(value = "Добавляет новую компанию продавца")
   @RequestMapping(value = "/add", method = RequestMethod.POST)
   public ResponseEntity<?> add(
-          @RequestParam String sellerCompanyNameRu,
-          @RequestParam(required = false) String sellerCompanyNameKk,
-          @RequestParam(required = false) String sellerCompanyNameEn,
-          @RequestParam String sellerCompanyPhone,
-          @RequestParam String sellerCompanyMobilePhone,
-          @RequestParam String sellerCompanyBin,
-          @RequestParam String sellerCompanyEmail,
-          @RequestParam String username,
-          @RequestParam String password) {
+    @RequestParam String sellerCompanyNameRu,
+    @RequestParam(required = false) String sellerCompanyNameKk,
+    @RequestParam(required = false) String sellerCompanyNameEn,
+    @RequestParam String sellerCompanyPhone,
+    @RequestParam String sellerCompanyMobilePhone,
+    @RequestParam String sellerCompanyBin,
+    @RequestParam String sellerCompanyEmail,
+    @RequestParam String username,
+    @RequestParam String password) {
     this.sellerCompanyService.addSellerCompany(
-            sellerCompanyNameKk,
-            sellerCompanyNameRu,
-
-            sellerCompanyNameEn,
-            sellerCompanyPhone,
-            sellerCompanyMobilePhone,
-            sellerCompanyBin,
-            sellerCompanyEmail,
-            username,
-            password);
+      sellerCompanyNameKk,
+      sellerCompanyNameRu,
+      sellerCompanyNameEn,
+      sellerCompanyPhone,
+      sellerCompanyMobilePhone,
+      sellerCompanyBin,
+      sellerCompanyEmail,
+      username,
+      password);
     return ResponseEntity.ok(true);
   }
 
 
-    @ApiOperation(value = "Добавляет новую компанию продавца посредством JSON")
-    @RequestMapping(value = "/addJson", method = RequestMethod.POST)
-    public ResponseEntity<?> addJson(
-            @RequestBody SellerCompanyJson sellerCompanyJson
-    ) {
-        this.sellerCompanyService.addSellerCompanyJson(sellerCompanyJson);
-        return ResponseEntity.ok("Новая компания продовца добавлена посредством JSON");
-    }
+  @ApiOperation(value = "Добавляет новую компанию продавца посредством JSON")
+  @RequestMapping(value = "/addJson", method = RequestMethod.POST)
+  public ResponseEntity<?> addJson(
+    @RequestBody SellerCompanyJson sellerCompanyJson
+  ) {
+    this.sellerCompanyService.addSellerCompanyJson(sellerCompanyJson);
+    return ResponseEntity.ok("Новая компания продовца добавлена посредством JSON");
+  }
 
 }

@@ -14,35 +14,58 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/country")
 public class CountryController {
 
-    private CountryService countryService;
+  private CountryService countryService;
 
-    @Autowired(required = false)
-    @Qualifier("defaultCountryService")
-    public void setCountryService(CountryService countryService) {
-        this.countryService = countryService;
-    }
+  @Autowired(required = false)
+  @Qualifier("defaultCountryService")
+  public void setCountryService(CountryService countryService) {
+    this.countryService = countryService;
+  }
 
-    @ApiOperation(value = "Показывает весь список стран")
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public ResponseEntity<?> all() {
-        return ResponseEntity.ok(this.countryService.showAllCountries());
-    }
+  @ApiOperation(value = "Показывает весь список стран")
+  @GetMapping("/all")
+  public ResponseEntity<?> all() {
+    return ResponseEntity.ok(this.countryService.showAllCountries());
+  }
 
-    @ApiOperation(value = "Добавляет страну")
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<?> add(
-            @RequestParam(required = false) String countryNameKk,
-            @RequestParam String countryNameRu,
-            @RequestParam(required = false) String countryNameEn
-    ) {
-        return ResponseEntity.ok(this.countryService.addCountry(countryNameKk, countryNameRu, countryNameEn));
-    }
+  @ApiOperation(value = "Показывает страну по ID")
+  @GetMapping("{id}")
+  public ResponseEntity<?> getId(@PathVariable(value = "id") Long countryId){
+    return ResponseEntity.ok(this.countryService.showCountry(countryId));
+  }
 
-    @ApiOperation(value = "Добавляет страну посредством JSON")
-    @RequestMapping(value = "/addJson", method = RequestMethod.POST)
-    public ResponseEntity<?> addJson(
-            @RequestParam CountryJson countryJson
-    ) {
-        return ResponseEntity.ok(this.countryService.addCountryJson(countryJson));
-    }
+  @ApiOperation(value = "Добавляет страну")
+  @PostMapping("/add")
+  public ResponseEntity<?> add(
+    @RequestParam(required = false) String countryNameKk,
+    @RequestParam String countryNameRu,
+    @RequestParam(required = false) String countryNameEn
+  ) {
+    return ResponseEntity.ok(
+      this.countryService.addCountry(countryNameKk, countryNameRu, countryNameEn)
+    );
+  }
+
+  @ApiOperation(value = "Добавляет страну посредством JSON")
+  @PostMapping("/addJson")
+  public ResponseEntity<?> addJson(
+    @RequestBody CountryJson countryJson
+  ) {
+    return ResponseEntity.ok(this.countryService.addCountryJson(countryJson));
+  }
+
+  @ApiOperation(value = "Обновляет страну")
+  @PatchMapping("{id}")
+  public ResponseEntity<?> update(
+    @PathVariable(value = "id") Long countryId,
+    @RequestBody CountryJson countryJson
+  ) {
+    return ResponseEntity.ok(this.countryService.updateCountry(countryId, countryJson));
+  }
+
+  @ApiOperation(value = "Удаляет страну")
+  @DeleteMapping("{id}")
+  public ResponseEntity<?> delete(@PathVariable(value = "id") Long countryId) {
+    return ResponseEntity.ok(this.countryService.deleteCountry(countryId));
+  }
 }

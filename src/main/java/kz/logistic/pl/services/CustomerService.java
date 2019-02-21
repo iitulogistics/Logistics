@@ -1,20 +1,28 @@
 package kz.logistic.pl.services;
 
+import java.util.List;
 import kz.logistic.pl.models.pojos.Customer;
+import kz.logistic.pl.models.pojos.impl.DefaultCustomer;
 import kz.logistic.pl.models.pojos.json.CustomerJson;
 
-import java.util.List;
 
 public interface CustomerService {
 
-    //Показать  всех клиентов
-    List<Customer> showAllCustomers();
+  //Показать  всех клиентов
+  List<Customer> showAllCustomers();
 
-    //Добавить нового клиента
-    String addCustomer(String username, String password);
+  DefaultCustomer showCustomer(Long customerId);
 
-    //Добавить нового клиента посредством JSON
-    String addCustomerJson(CustomerJson customerJson);
+  //Добавить нового клиента
+  String addCustomer(String username, String password);
 
-    boolean exists(String username);
+  //Добавить нового клиента посредством JSON
+  String addCustomerJson(CustomerJson customerJson);
+
+  boolean exists(String username);
+
+  String updateCustomer(Long customerId, CustomerJson customerJson);
+
+  String deleteCustomer(Long customerId);
+
 }

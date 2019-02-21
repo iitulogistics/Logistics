@@ -1,16 +1,21 @@
 package kz.logistic.pl.services;
 
-import kz.logistic.pl.models.pojos.Country;
-import kz.logistic.pl.models.pojos.json.CountryJson;
-
 import java.util.List;
+import kz.logistic.pl.models.pojos.Country;
+import kz.logistic.pl.models.pojos.impl.DefaultCountry;
+import kz.logistic.pl.models.pojos.json.CountryJson;
 
 public interface CountryService {
 
-    List<Country> showAllCountries();
+  List<Country> showAllCountries();
 
-    String addCountry(String countryNameKk, String countryNameRu, String countryNameEn);
+  DefaultCountry showCountry(Long countryId);
 
-    String addCountryJson(CountryJson countryJson);
+  String addCountry(String countryNameKk, String countryNameRu, String countryNameEn);
 
+  String addCountryJson(CountryJson countryJson);
+
+  String updateCountry(Long countryId, CountryJson countryJson);
+
+  String deleteCountry(Long countryId);
 }

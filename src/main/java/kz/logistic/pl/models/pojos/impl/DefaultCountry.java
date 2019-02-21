@@ -7,17 +7,17 @@ import lombok.Builder;
 @Builder
 public class DefaultCountry implements Country {
 
-    private Long countryId;
-    private LocalizedMessage countryName;
+  private Long countryId;
+  private LocalizedMessage countryName;
 
-    @Override
-    public Long getCountryId() {
-        return countryId;
-    }
+  @Override
+  public Long getCountryId() {
+    return countryId;
+  }
 
-    @Override
-    public LocalizedMessage getCountryName() {
-        return countryName;
-    }
+  @Override
+  public LocalizedMessage getCountryName() {
+    return countryName;
+  }
 
 }

@@ -2,32 +2,32 @@ package kz.logistic.pl.models.pojos;
 
 public interface Product {
 
-    Long getProductId();
+  Long getProductId();
 
-    String getProductNameKk();
+  String getProductNameKk();
 
-    String getProductNameRu();
+  String getProductNameRu();
 
-    String getProductNameEn();
+  String getProductNameEn();
 
-    Long getProductCategoryId();
+  Long getProductCategoryId();
 
-    Long getProductSubcategoryId();
+  Long getProductSubcategoryId();
 
-    String getProductDescription();
+  String getProductDescription();
 
-    Integer getWeight();
+  Integer getWeight();
 
-    Integer getPrice();
+  Integer getPrice();
 
-    Long getSellerCompanyId();
+  Long getSellerCompanyId();
 
-    String getSerialNumber();
+  String getSerialNumber();
 
-    String getUniqueIdNumber();
+  String getUniqueIdNumber();
 
-    String getManufacturer();
+  String getManufacturer();
 
-    Long getSpecialCharacteristicsId();
+  Long getSpecialCharacteristicsId();
 
 }

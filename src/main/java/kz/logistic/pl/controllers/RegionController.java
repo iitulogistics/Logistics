@@ -19,35 +19,37 @@ import java.util.List;
 @RequestMapping(value = "/region")
 public class RegionController {
 
-    private RegionService regionService;
+  private RegionService regionService;
 
-    @Autowired(required = false)
-    @Qualifier("defaultRegionService")
-    public void setRegionService(RegionService regionService) {
-        this.regionService = regionService;
-    }
+  @Autowired(required = false)
+  @Qualifier("defaultRegionService")
+  public void setRegionService(RegionService regionService) {
+    this.regionService = regionService;
+  }
 
-    @ApiOperation(value = "Показывает весь список областей")
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public ResponseEntity<?> all() {
-        return ResponseEntity.ok(this.regionService.showAllRegions());
-    }
+  @ApiOperation(value = "Показывает весь список областей")
+  @RequestMapping(value = "/all", method = RequestMethod.GET)
+  public ResponseEntity<?> all() {
+    return ResponseEntity.ok(this.regionService.showAllRegions());
+  }
 
-    @ApiOperation(value = "Добавляет область")
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<?> add(
-            @RequestParam(required = false) String regionNameKk,
-            @RequestParam String regionNameRu,
-            @RequestParam(required = false) String regionnameEn,
-            @RequestParam Long countryId
-    ) {
-        return ResponseEntity.ok(this.regionService.addRegion(regionnameEn, regionNameKk, regionNameRu, countryId));
-    }
+  @ApiOperation(value = "Добавляет область")
+  @RequestMapping(value = "/add", method = RequestMethod.POST)
+  public ResponseEntity<?> add(
+    @RequestParam(required = false) String regionNameKk,
+    @RequestParam String regionNameRu,
+    @RequestParam(required = false) String regionnameEn,
+    @RequestParam Long countryId
+  ) {
+    return ResponseEntity.ok(
+      this.regionService.addRegion(regionnameEn, regionNameKk, regionNameRu, countryId)
+    );
+  }
 
-    @ApiOperation(value = "Добавляет область посредством JSON")
-    @RequestMapping(value = "/addJson", method = RequestMethod.POST)
-    public ResponseEntity<?> addJson(@RequestParam RegionJson regionJson) {
-        return ResponseEntity.ok(this.regionService.addRegionJson(regionJson));
-    }
+  @ApiOperation(value = "Добавляет область посредством JSON")
+  @RequestMapping(value = "/addJson", method = RequestMethod.POST)
+  public ResponseEntity<?> addJson(@RequestParam RegionJson regionJson) {
+    return ResponseEntity.ok(this.regionService.addRegionJson(regionJson));
+  }
 
 }

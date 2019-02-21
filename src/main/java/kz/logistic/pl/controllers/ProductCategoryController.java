@@ -15,38 +15,59 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/product/category/category")
 public class ProductCategoryController {
 
-    private ProductCategoryService productCategoryService;
+  private ProductCategoryService productCategoryService;
 
-    @Qualifier("defaultProductCategoryService")
-    @Autowired(required = false)
-    public void setProductCategoryService(ProductCategoryService productCategoryService) {
-        this.productCategoryService = productCategoryService;
-    }
+  @Qualifier("defaultProductCategoryService")
+  @Autowired(required = false)
+  public void setProductCategoryService(ProductCategoryService productCategoryService) {
+    this.productCategoryService = productCategoryService;
+  }
 
-    @ApiOperation(value = "Показывает всю категорию продуктов")
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public ResponseEntity<?> all() {
-        return ResponseEntity.ok(this.productCategoryService.showAllProduct());
-    }
+  @ApiOperation(value = "Показывает всю категорию продуктов")
+  @GetMapping("/all")
+  public ResponseEntity<?> all() {
+    return ResponseEntity.ok(this.productCategoryService.showAllProduct());
+  }
 
-    @ApiOperation(value = "Добавляет категорию продуктов")
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<?> add(
-            @RequestParam(required = false) String categoryNameKk,
-            @RequestParam String categoryNameRu,
-            @RequestParam(required = false) String categoryNameEn,
-            @RequestParam(required = false) String addInfo) {
-        this.productCategoryService.addCategory(categoryNameKk, categoryNameRu, categoryNameEn, addInfo);
-        return ResponseEntity.ok("Новая категория продуктов добавлена");
-    }
+  @ApiOperation(value = "Показывает категорию продуктов ID")
+  @GetMapping("{id}")
+  public ResponseEntity<?> getId(@PathVariable(value = "id") Long productCategoryId) {
+    return  ResponseEntity.ok(this.productCategoryService.showProductCategory(productCategoryId));
+  }
 
-    @ApiOperation(value = "Добавляет категорию продуктов посредством JSON")
-    @RequestMapping(value = "/addJson", method = RequestMethod.POST)
-    public ResponseEntity<?> addJson(
-            @RequestBody ProductCategoryJson productCategoryJson
-    ) {
-        this.productCategoryService.addCategoryJson(productCategoryJson);
-        return ResponseEntity.ok("Новая категория продуктов добавлена посредством JSON");
-    }
+  @ApiOperation(value = "Добавляет категорию продуктов")
+  @PostMapping("/add")
+  public ResponseEntity<?> add(
+      @RequestParam(required = false) String categoryNameKk,
+      @RequestParam String categoryNameRu,
+      @RequestParam(required = false) String categoryNameEn,
+      @RequestParam(required = false) String addInfo) {
+
+    return ResponseEntity.ok(
+      this.productCategoryService.addCategory(
+        categoryNameKk, categoryNameRu, categoryNameEn, addInfo));
+  }
+
+  @ApiOperation(value = "Добавляет категорию продуктов посредством JSON")
+  @PostMapping("/addJson")
+  public ResponseEntity<?> addJson(
+      @RequestBody ProductCategoryJson productCategoryJson
+  ) {
+    return ResponseEntity.ok(this.productCategoryService.addCategoryJson(productCategoryJson));
+  }
+
+  @ApiOperation(value = "Обновляет категорию продуктов")
+  @PatchMapping("{id}")
+  public ResponseEntity<?> update(@PathVariable(value = "id") Long productCategoryId,
+                                  @RequestBody ProductCategoryJson productCategoryJson) {
+    return ResponseEntity.ok(
+      this.productCategoryService.updateProductCategory(productCategoryId,productCategoryJson));
+  }
+
+  @ApiOperation(value = "Удаляет категогию продуктов")
+  @DeleteMapping("{id}")
+  public ResponseEntity<?> delete(@PathVariable(value = "id") Long productCategoryId) {
+    return ResponseEntity.ok(this.productCategoryService.deleteProductCategory(productCategoryId));
+  }
 
 }

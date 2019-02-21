@@ -8,43 +8,72 @@ import lombok.Builder;
 @Builder
 public class DefaultCustomer implements Customer {
 
-    private Long customerId;
-    private Long loginId;
-    private String username;
-    private String password;
-    private LocalizedMessage customerName;
-    private String mobilePhone;
+  private Long customerId;
+  private Long loginId;
+  private String username;
+  private String password;
+  private LocalizedMessage customerName;
+  private String mobilePhone;
+  private String iinOrBin;
+  private String phoneNumber;
+  private String email;
+  private String addInfo;
+  private Long addressId;
 
+  @Override
+  public String getIinOrBin() {
+    return iinOrBin;
+  }
 
-    @Override
-    public long getLoginId() {
-        return loginId;
-    }
+  @Override
+  public String getPhoneNumber() {
+    return phoneNumber;
+  }
 
-    @Override
-    public String getLoginName() {
-        return username;
-    }
+  @Override
+  public String getEmail() {
+    return email;
+  }
 
-    @Override
-    public String getLoginPassword() {
-        return password;
-    }
+  @Override
+  public String getAddInfo() {
+    return addInfo;
+  }
 
-    @Override
-    public long getCustomerId() {
-        return customerId;
-    }
+  @Override
+  public long getAddressId() {
+    return addressId;
+  }
 
-    @Override
-    public LocalizedMessage getCustomerName() {
-        return customerName;
-    }
+  @Override
+  public long getLoginId() {
+    return loginId;
+  }
 
-    @Override
-    public String getCustomerMobilePhone() {
-        return mobilePhone;
-    }
+  @Override
+  public String getLoginName() {
+    return username;
+  }
+
+  @Override
+  public String getLoginPassword() {
+    return password;
+  }
+
+  @Override
+  public long getCustomerId() {
+    return customerId;
+  }
+
+  @Override
+  public LocalizedMessage getCustomerName() {
+    return customerName;
+  }
+
+  @Override
+  public String getCustomerMobilePhone() {
+    return mobilePhone;
+  }
 
 
 }

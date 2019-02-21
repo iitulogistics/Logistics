@@ -2,9 +2,9 @@ package kz.logistic.pl.models.pojos;
 
 public interface Roles {
 
-    long getRoleId();
+  long getRoleId();
 
-    String getRoleName();
+  String getRoleName();
 
-    String getRoleDescription();
+  String getRoleDescription();
 }

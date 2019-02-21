@@ -15,36 +15,60 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/city")
 public class CityController {
 
-    private CityService cityService;
+  private CityService cityService;
 
-    @Qualifier("defaultCityService")
-    @Autowired(required = false)
-    private void setCityService(CityService cityService) {
-        this.cityService = cityService;
-    }
+  @Qualifier("defaultCityService")
+  @Autowired(required = false)
+  private void setCityService(CityService cityService) {
+    this.cityService = cityService;
+  }
 
-    @ApiOperation(value = "Показывает весь список городов")
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public ResponseEntity<?> all() {
-        return ResponseEntity.ok(this.cityService.showAllCities());
-    }
+  @ApiOperation(value = "Показывает весь список городов")
+  @GetMapping("/all")
+  public ResponseEntity<?> all() {
+    return ResponseEntity.ok(this.cityService.showAllCities());
+  }
 
-    @ApiOperation(value = "Добавляет город")
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<?> add(
-            @RequestParam(required = false) String cityNamekk,
-            @RequestParam String cityNameRu,
-            @RequestParam(required = false) String cityNameEn,
-            @RequestParam Long regionId,
-            @RequestParam Long countryId) {
-        return ResponseEntity.ok(this.cityService.addCity(cityNamekk, cityNameRu, cityNameEn, regionId, countryId));
-    }
+  @ApiOperation(value = "Показывает город по ID")
+  @GetMapping("/{id}")
+  public ResponseEntity<?> getId(@PathVariable(value = "id") Long cityId) {
+    return ResponseEntity.ok(this.cityService.showCity(cityId));
+  }
 
-    @ApiOperation(value = "Добавляет город посредством JSON")
-    @RequestMapping(value = "/addJson", method = RequestMethod.POST)
-    public ResponseEntity<?> addJson(
-            @RequestBody CityJson cityJson
-    ) {
-        return ResponseEntity.ok(this.cityService.addCityJson(cityJson));
-    }
+  @ApiOperation(value = "Добавляет город")
+  @PostMapping("/add")
+  public ResponseEntity<?> add(
+      @RequestParam(required = false) String cityNamekk,
+      @RequestParam String cityNameRu,
+      @RequestParam(required = false) String cityNameEn,
+      @RequestParam Long regionId,
+      @RequestParam Long countryId) {
+    return ResponseEntity.ok(
+      this.cityService.addCity(cityNamekk, cityNameRu, cityNameEn, regionId, countryId)
+    );
+  }
+
+  @ApiOperation(value = "Добавляет город посредством JSON")
+  @PostMapping("/addJson")
+  public ResponseEntity<?> addJson(
+      @RequestBody CityJson cityJson
+  ) {
+    return ResponseEntity.ok(this.cityService.addCityJson(cityJson));
+  }
+
+  @ApiOperation(value = "Обновляет город")
+  @PatchMapping("{id}")
+  public ResponseEntity<?> update(
+      @PathVariable(value = "id") Long cityId,
+      @RequestBody CityJson cityJson
+  ) {
+    return ResponseEntity.ok(this.cityService.updateCity(cityId, cityJson));
+  }
+
+  @ApiOperation(value = "Удаляет город")
+  @DeleteMapping("{id}")
+  public ResponseEntity<?> delete(@PathVariable(value = "id") Long cityId) {
+    return ResponseEntity.ok(this.cityService.deleteCity(cityId));
+  }
+
 }

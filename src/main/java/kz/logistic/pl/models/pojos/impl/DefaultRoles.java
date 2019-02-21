@@ -5,23 +5,23 @@ import lombok.Builder;
 
 @Builder
 public class DefaultRoles implements Roles {
-    private Long roleId;
-    private String roleName;
-    private String roleDescription;
+  private Long roleId;
+  private String roleName;
+  private String roleDescription;
 
-    @Override
-    public long getRoleId() {
-        return roleId;
-    }
+  @Override
+  public long getRoleId() {
+    return roleId;
+  }
 
-    @Override
-    public String getRoleName() {
-        return roleName;
-    }
+  @Override
+  public String getRoleName() {
+    return roleName;
+  }
 
-    @Override
-    public String getRoleDescription() {
-        return roleDescription;
-    }
+  @Override
+  public String getRoleDescription() {
+    return roleDescription;
+  }
 
 }
