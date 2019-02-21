@@ -42,6 +42,8 @@ public class CustomerEntity {
   private String email;
   @Column(name = "add_info")
   private String addInfo;
+  @Column(name = "address_id")
+  private Long addressId;
 
   @OneToOne(mappedBy = "customerEntity", cascade = CascadeType.ALL,
     fetch = FetchType.LAZY, optional = false)

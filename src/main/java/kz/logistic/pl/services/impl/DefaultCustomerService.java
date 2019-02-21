@@ -52,15 +52,15 @@ public class DefaultCustomerService implements CustomerService {
       .password(customerEntity.getPassword())
       .customerId(customerEntity.getCustomerEntity().getCustomerId())
       .mobilePhone(customerEntity.getCustomerEntity().getMobilePhone())
-//      .customerName(localizedMessageBuilderFactory.builder()
-//        .en(customerEntity.getCustomerEntity().getCustomerNameEn())
-//        .kk(customerEntity.getCustomerEntity().getCustomerNameKk())
-//        .ru(customerEntity.getCustomerEntity().getCustomerNameRu()).build())
-//      .iinOrBin(customerEntity.getCustomerEntity().getIinOrBin())
-//      .phoneNumber(customerEntity.getCustomerEntity().getPhoneNumber())
-//      .email(customerEntity.getCustomerEntity().getEmail())
-//      .addInfo(customerEntity.getCustomerEntity().getAddInfo())
-//      .addressId(customerEntity.getCustomerEntity().getCustomerId())
+      .customerName(localizedMessageBuilderFactory.builder()
+        .en(customerEntity.getCustomerEntity().getCustomerNameEn())
+        .kk(customerEntity.getCustomerEntity().getCustomerNameKk())
+        .ru(customerEntity.getCustomerEntity().getCustomerNameRu()).build())
+      .iinOrBin(customerEntity.getCustomerEntity().getIinOrBin())
+      .phoneNumber(customerEntity.getCustomerEntity().getPhoneNumber())
+      .email(customerEntity.getCustomerEntity().getEmail())
+      .addInfo(customerEntity.getCustomerEntity().getAddInfo())
+      .addressId(customerEntity.getCustomerEntity().getAddressId())
       .build()).collect(Collectors.toList());
   }
 
@@ -72,6 +72,7 @@ public class DefaultCustomerService implements CustomerService {
       .loginId(customerEntity.getLoginEntity().getLoginId())
       .mobilePhone(customerEntity.getMobilePhone())
       .username(customerEntity.getLoginEntity().getUsername())
+      .password(customerEntity.getLoginEntity().getPassword())
       .customerName(localizedMessageBuilderFactory.builder()
       .en(customerEntity.getCustomerNameEn())
       .kk(customerEntity.getCustomerNameKk())
@@ -80,7 +81,7 @@ public class DefaultCustomerService implements CustomerService {
       .phoneNumber(customerEntity.getPhoneNumber())
       .email(customerEntity.getEmail())
       .addInfo(customerEntity.getAddInfo())
-      .addressId(customerEntity.getCustomerId())
+      .addressId(customerEntity.getAddressId())
       .build();
   }
 

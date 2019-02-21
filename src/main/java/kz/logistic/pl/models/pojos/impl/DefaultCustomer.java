@@ -41,12 +41,12 @@ public class DefaultCustomer implements Customer {
   }
 
   @Override
-  public long getAddressId() {
+  public Long getAddressId() {
     return addressId;
   }
 
   @Override
-  public long getLoginId() {
+  public Long getLoginId() {
     return loginId;
   }
 
@@ -61,7 +61,7 @@ public class DefaultCustomer implements Customer {
   }
 
   @Override
-  public long getCustomerId() {
+  public Long getCustomerId() {
     return customerId;
   }
 
