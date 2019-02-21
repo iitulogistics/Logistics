@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Api(tags = {"Аутентификация"}, description = "API для создания и валидации токенов")
 @RestController
+@RequestMapping(value = "/authentication")
 public class AuthenticationController {
 
     private AuthenticationService authenticationService;
@@ -19,7 +20,7 @@ public class AuthenticationController {
         this.authenticationService = authenticationService;
     }
 
-    @RequestMapping(value = "login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ApiOperation(value = "Производит вход в систему. Возвращает токен если логин и пароль верны, " +
             "либо сообщение об ошибке в противном случае")
     public String login(
@@ -29,6 +30,17 @@ public class AuthenticationController {
         if (!this.authenticationService.isCorrect(username, password))
             return "Incorrect username or password";
         return this.authenticationService.generateToken(username);
+    }
+
+    @RequestMapping(value = "/validate", method = RequestMethod.GET)
+    @ApiOperation(value = "")
+    public String validate(String token){
+        return Boolean.toString(this.authenticationService.validateToken(token));
+    }
+
+    @RequestMapping(value = "/logout")
+    public String logout(){
+        return "logged out";
     }
 
 }
