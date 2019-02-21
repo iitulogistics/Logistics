@@ -36,7 +36,7 @@ public class DefaultAuthenticationService implements AuthenticationService {
     }
 
     @Override
-    public boolean validateToken(String token) {
+    public String validateToken(String token) {
         try{
             Jwts
                     .parser()
@@ -44,11 +44,11 @@ public class DefaultAuthenticationService implements AuthenticationService {
                     .parseClaimsJws(token);
         }
         catch (ExpiredJwtException e){
-            return false;
+            return "expired";
         }
         catch (MalformedJwtException e){
-            return false;
+            return "malformed";
         }
-        return true;
+        return "OK";
     }
 }

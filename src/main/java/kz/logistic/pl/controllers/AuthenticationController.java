@@ -33,14 +33,9 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "/validate", method = RequestMethod.GET)
-    @ApiOperation(value = "")
+    @ApiOperation(value = "Проверяет токен на достоверность")
     public String validate(String token){
-        return Boolean.toString(this.authenticationService.validateToken(token));
-    }
-
-    @RequestMapping(value = "/logout")
-    public String logout(){
-        return "logged out";
+        return this.authenticationService.validateToken(token);
     }
 
 }
