@@ -12,4 +12,11 @@ public interface RoleService {
   void addRole(String name, String description);
 
   void addRoleJson(RolesJson roles);
+
+  Roles showRole(Long rolesId);
+
+  String updateRole(Long cityId, RolesJson cityJson);
+
+  String deleteRole(Long rolesId);
+
 }

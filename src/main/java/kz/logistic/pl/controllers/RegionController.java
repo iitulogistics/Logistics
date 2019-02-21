@@ -7,10 +7,7 @@ import kz.logistic.pl.services.RegionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,13 +25,13 @@ public class RegionController {
   }
 
   @ApiOperation(value = "Показывает весь список областей")
-  @RequestMapping(value = "/all", method = RequestMethod.GET)
+  @GetMapping(value = "/all")
   public ResponseEntity<?> all() {
     return ResponseEntity.ok(this.regionService.showAllRegions());
   }
 
   @ApiOperation(value = "Добавляет область")
-  @RequestMapping(value = "/add", method = RequestMethod.POST)
+  @PostMapping(value = "/add")
   public ResponseEntity<?> add(
     @RequestParam(required = false) String regionNameKk,
     @RequestParam String regionNameRu,
@@ -47,9 +44,30 @@ public class RegionController {
   }
 
   @ApiOperation(value = "Добавляет область посредством JSON")
-  @RequestMapping(value = "/addJson", method = RequestMethod.POST)
-  public ResponseEntity<?> addJson(@RequestParam RegionJson regionJson) {
+  @PostMapping(value = "/addJson")
+  public ResponseEntity<?> addJson(@RequestBody RegionJson regionJson) {
     return ResponseEntity.ok(this.regionService.addRegionJson(regionJson));
+  }
+
+  @ApiOperation(value = "Показывает регион по ID")
+  @GetMapping("/{id}")
+  public ResponseEntity<?> getId(@PathVariable(value = "id") Long regionId) {
+    return ResponseEntity.ok(this.regionService.showRegion(regionId));
+  }
+
+  @ApiOperation(value = "Обновляет регион")
+  @PatchMapping("{id}")
+  public ResponseEntity<?> update(
+    @PathVariable(value = "id") Long regionId,
+    @RequestBody RegionJson regionJson
+  ) {
+    return ResponseEntity.ok(this.regionService.updateRegion(regionId, regionJson));
+  }
+
+  @ApiOperation(value = "Удаляет регион")
+  @DeleteMapping("{id}")
+  public ResponseEntity<?> delete(@PathVariable(value = "id") Long regionId) {
+    return ResponseEntity.ok(this.regionService.deleteRegion(regionId));
   }
 
 }

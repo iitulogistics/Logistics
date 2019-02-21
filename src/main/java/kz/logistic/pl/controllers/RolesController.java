@@ -24,13 +24,19 @@ public class RolesController {
   }
 
   @ApiOperation(value = "Показывает все списки ролей компаний продавцов")
-  @RequestMapping(value = "/all", method = RequestMethod.GET)
+  @GetMapping(value = "/all")
   public ResponseEntity<?> all() {
     return ResponseEntity.ok(this.roleService.showAllRoles());
   }
 
+  @ApiOperation(value = "Показывает роль по ID")
+  @GetMapping(value = "/{id}")
+  public ResponseEntity<?> getId(@PathVariable(value = "id") Long rolesId){
+    return ResponseEntity.ok(this.roleService.showRole(rolesId));
+  }
+
   @ApiOperation(value = "Добавляет новые роли для компаний продавцов")
-  @RequestMapping(value = "/add", method = RequestMethod.POST)
+  @PostMapping(value = "/add")
   public ResponseEntity<?> add(
     @RequestParam(required = false) String roleName,
     @RequestParam(required = false) String roleDescription) {
@@ -39,13 +45,26 @@ public class RolesController {
   }
 
   @ApiOperation(value = "Добавляет новые роли для компаний продавцов с помощью JSON формата")
-  @RequestMapping(value = "/addJson", method = RequestMethod.POST,
+  @PostMapping(value = "/addJson",
     consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> addJson(@RequestBody RolesJson roles) {
     this.roleService.addRoleJson(roles);
     return ResponseEntity.ok("Новая роль компаний продавцов добавлена с помощью JSON формата");
   }
 
+  @ApiOperation(value = "Обновляет роль")
+  @PatchMapping("{id}")
+  public ResponseEntity<?> update(
+    @PathVariable(value = "id") Long rolesId,
+    @RequestBody RolesJson rolesJson
+  ) {
+    return ResponseEntity.ok(this.roleService.updateRole(rolesId, rolesJson));
+  }
 
+  @ApiOperation(value = "Удаляет роль")
+  @DeleteMapping("{id}")
+  public ResponseEntity<?> delete(@PathVariable(value = "id") Long rolesId) {
+    return ResponseEntity.ok(this.roleService.deleteRole(rolesId));
+  }
 
 }

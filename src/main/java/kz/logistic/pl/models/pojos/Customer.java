@@ -2,9 +2,9 @@ package kz.logistic.pl.models.pojos;
 
 public interface Customer {
 
-  long getCustomerId();
+  Long getCustomerId();
 
-  long getLoginId();
+  Long getLoginId();
 
   String getLoginName();
 
@@ -22,5 +22,5 @@ public interface Customer {
 
   String getAddInfo();
 
-  long getAddressId();
+  Long getAddressId();
 }

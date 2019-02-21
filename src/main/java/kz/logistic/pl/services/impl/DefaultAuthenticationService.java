@@ -1,18 +1,17 @@
 package kz.logistic.pl.services.impl;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.SignatureException;
 import kz.logistic.pl.models.entities.LoginEntity;
 import kz.logistic.pl.repositories.LoginRepository;
 import kz.logistic.pl.services.AuthenticationService;
 
-import java.io.UnsupportedEncodingException;
 
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
-import java.util.List;
 
 @Service
 public class DefaultAuthenticationService implements AuthenticationService {
@@ -47,7 +46,10 @@ public class DefaultAuthenticationService implements AuthenticationService {
             return "expired";
         }
         catch (MalformedJwtException e){
-            return "malformed";
+            return "invalid token";
+        }
+        catch (SignatureException e){
+            return "invalid token";
         }
         return "OK";
     }

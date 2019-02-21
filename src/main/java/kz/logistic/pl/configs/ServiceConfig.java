@@ -26,8 +26,8 @@ public class ServiceConfig {
 
   @Bean
   @Qualifier("defaultSessionService")
-  public DefaultSessionService defaultSessionService() {
-    return new DefaultSessionService();
+  public DefaultAuthenticationService defaultAuthenticationService() {
+    return new DefaultAuthenticationService();
   }
 
   @Bean

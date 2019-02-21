@@ -3,6 +3,7 @@ package kz.logistic.pl.services.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import kz.logistic.pl.models.entities.RegionEntity;
@@ -84,4 +85,55 @@ public class DefaultRegionService implements RegionService {
     log.info("Added new region " + regionJson.getRegionNameEn() + " " + new Date());
     return "Область добавлена посредством JSON";
   }
+
+  @Override
+  public DefaultRegion showRegion(Long regionId) {
+    RegionEntity regionEntity = this.regionRepository.findById(regionId).orElse(null);
+
+    return DefaultRegion.builder()
+      .regionName(
+        localizedMessageBuilderFactory.builder()
+          .en(regionEntity.getRegionNameEn())
+          .kk(regionEntity.getRegionNameKk())
+          .ru(regionEntity.getRegionNameRu()).build())
+      .regionId(regionEntity.getRegionId())
+      .countryId(regionEntity.getCountryId()).build();
+  }
+
+  @Override
+  public String updateRegion(Long regionId, RegionJson regionJson) {
+    RegionEntity regionEntity = regionRepository.findById(regionId).orElse(null);
+    if (Objects.nonNull(regionEntity)) {
+      if (regionJson.getRegionNameKk() != null) {
+        regionEntity.setRegionNameKk(regionJson.getRegionNameKk());
+      }
+      if (regionJson.getRegionNameRu() != null) {
+        regionEntity.setRegionNameRu(regionJson.getRegionNameRu());
+      }
+      if (regionJson.getRegionNameEn() != null) {
+        regionEntity.setRegionNameEn(regionJson.getRegionNameEn());
+      }
+      if (regionJson.getCountryId() != null) {
+        regionEntity.setCountryId(regionJson.getCountryId());
+      }
+      this.regionRepository.save(regionEntity);
+      log.info("Updated " + regionJson.getRegionNameRu() + " region" + new Date());
+      return "Регион обновлен";
+    } else {
+      return "Региона с таким id не существует";
+    }
+  }
+
+  @Override
+  public String deleteRegion(Long regionId) {
+    RegionEntity regionEntity = this.regionRepository.findById(regionId).orElse(null);
+    if (Objects.nonNull(regionEntity)) {
+      log.info("Updated " + regionEntity.getRegionNameRu() + " region" + new Date());
+      this.regionRepository.delete(regionEntity);
+      return "Регион удален";
+    } else {
+      return "Региона с таким id не существует";
+    }
+  }
+
 }

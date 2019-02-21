@@ -79,11 +79,11 @@ public class DefaultShipperService implements ShipperService {
         .en(shipperEntity.getShipperNameEn()).build())
       .username(shipperEntity.getLoginEntity().getUsername())
       .password(shipperEntity.getLoginEntity().getPassword())
-//      .bin(shipperEntity.getBin())
-//      .email(shipperEntity.getEmail())
-//      .address(shipperEntity.getAddress())
-//      .phoneNumber(shipperEntity.getPhoneNumber())
-//      .mobilePhone(shipperEntity.getMobilePhone())
+      .bin(shipperEntity.getBin())
+      .email(shipperEntity.getEmail())
+      .address(shipperEntity.getAddress())
+      .phoneNumber(shipperEntity.getPhoneNumber())
+      .mobilePhone(shipperEntity.getMobilePhone())
       .build()).collect(Collectors.toList());
   }
 
@@ -96,7 +96,14 @@ public class DefaultShipperService implements ShipperService {
       .shipperName(localizedMessageBuilderFactory.builder()
       .en(shipperEntity.getShipperNameEn())
       .kk(shipperEntity.getShipperNameKk())
-      .ru(shipperEntity.getShipperNameRu()).build()).build();
+      .ru(shipperEntity.getShipperNameRu()).build())
+      .bin(shipperEntity.getBin())
+      .email(shipperEntity.getEmail())
+      .address(shipperEntity.getAddress())
+      .phoneNumber(shipperEntity.getPhoneNumber())
+      .mobilePhone(shipperEntity.getMobilePhone())
+      .password(shipperEntity.getLoginEntity().getPassword())
+      .build();
   }
 
   @Override
