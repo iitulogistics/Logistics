@@ -10,17 +10,20 @@ import lombok.Builder;
 @Builder
 public class DefaultSellerCompany implements SellerCompany {
 
-  private Long id;
+  private Long sellerCompanyId;
   private LocalizedMessage sellerCompanyName;
   private String sellerCompanyPhone;
   private String sellerCompanyMobilePhone;
   private String sellerCompanyBin;
   private String sellerCompanyEmail;
   private Long sellerCategoryId;
+  private String username;
+  private String password;
+  private Long loginId;
 
   @Override
-  public long getSellerCompanyId() {
-    return id;
+  public Long getSellerCompanyId() {
+    return sellerCompanyId;
   }
 
   @Override
@@ -46,6 +49,21 @@ public class DefaultSellerCompany implements SellerCompany {
   @Override
   public String getSellerCompanyEmail() {
     return sellerCompanyEmail;
+  }
+
+  @Override
+  public Long getLoginId() {
+    return loginId;
+  }
+
+  @Override
+  public String getLoginName() {
+    return username;
+  }
+
+  @Override
+  public String getLoginPassword() {
+    return password;
   }
 
   @Override

@@ -24,13 +24,19 @@ public class SellerCompanyController {
   }
 
   @ApiOperation(value = "Показывает всю компанию продавцов")
-  @RequestMapping(value = "/all", method = RequestMethod.GET)
+  @GetMapping("/all")
   public ResponseEntity<?> all() {
     return ResponseEntity.ok(this.sellerCompanyService.showAllSellerCompanies());
   }
 
+  @ApiOperation(value = "Показывает компанию продавцов ID")
+  @GetMapping("{id}")
+  public ResponseEntity<?> getId(@PathVariable(value = "id") Long sellerCompanyId) {
+    return ResponseEntity.ok(this.sellerCompanyService.showSellerCompany(sellerCompanyId));
+  }
+
   @ApiOperation(value = "Добавляет новую компанию продавца")
-  @RequestMapping(value = "/add", method = RequestMethod.POST)
+  @PostMapping("/add")
   public ResponseEntity<?> add(
     @RequestParam String sellerCompanyNameRu,
     @RequestParam(required = false) String sellerCompanyNameKk,
@@ -51,7 +57,7 @@ public class SellerCompanyController {
       sellerCompanyEmail,
       username,
       password);
-    return ResponseEntity.ok(true);
+    return ResponseEntity.ok("Новая компания продовца добавлена");
   }
 
 
@@ -62,6 +68,21 @@ public class SellerCompanyController {
   ) {
     this.sellerCompanyService.addSellerCompanyJson(sellerCompanyJson);
     return ResponseEntity.ok("Новая компания продовца добавлена посредством JSON");
+  }
+
+  @ApiOperation(value = "Обновляет компанию продавца")
+  @PatchMapping("{id}")
+  public ResponseEntity<?> update(
+    @PathVariable(value = "id") Long sellerCompanyid,
+    @RequestBody SellerCompanyJson sellerCompanyJson) {
+    return ResponseEntity.ok(this.sellerCompanyService.updateSellerCompany(sellerCompanyid, sellerCompanyJson));
+  }
+
+
+  @ApiOperation(value = "Удаляет компанию продавца")
+  @DeleteMapping("{id}")
+  public ResponseEntity<?> delete(@PathVariable(value = "id") Long sellerCompanyId) {
+    return ResponseEntity.ok(this.sellerCompanyService.deleteSellerCompany(sellerCompanyId));
   }
 
 }
