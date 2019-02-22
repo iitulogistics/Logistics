@@ -5,7 +5,7 @@ import kz.logistic.pl.models.pojos.ProductSubCategory;
 import lombok.Builder;
 
 @Builder
-public class DefaulProductSubCategory implements ProductSubCategory {
+public class DefaultProductSubCategory implements ProductSubCategory {
 
   private Long id;
   private LocalizedMessage subCategoryName;

@@ -16,4 +16,12 @@ public interface ProductSubCategoryService {
                              String subCategoryAddInfo);
 
   void addProductSubCategoryJson(ProductSubCategoryJson productSubCategoryJson);
+
+  String updateProductSubCategory(
+    Long productSubCategoryId, ProductSubCategoryJson productSubCategoryJson);
+
+  String deleteProductSubCategory(Long productCategoryId);
+
+  ProductSubCategory showProductSubCategory(Long productSubCategoryId);
+
 }
