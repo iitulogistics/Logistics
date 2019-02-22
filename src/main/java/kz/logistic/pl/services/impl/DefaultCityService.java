@@ -137,7 +137,7 @@ public class DefaultCityService implements CityService {
   public String deleteCity(Long cityId) {
     CityEntity cityEntity = this.cityRepository.findById(cityId).orElse(null);
     if (Objects.nonNull(cityEntity)) {
-      log.info("Updated " + cityEntity.getCityNameRu() + " city" + new Date());
+      log.info("Deleted " + cityEntity.getCityNameRu() + " city" + new Date());
       this.cityRepository.delete(cityEntity);
       return "Город удален";
     } else {
