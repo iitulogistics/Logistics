@@ -33,7 +33,7 @@ public class CustomerController {
 
   @ApiOperation(value = "Показывает клиента по ID")
   @GetMapping("{id}")
-  public ResponseEntity<?> getId(@PathVariable(value = "id") Long customerId) {
+  public ResponseEntity<?> getId(@PathVariable(value = "id") Long customerId) throws Exception {
     return ResponseEntity.ok(this.customerService.showCustomer(customerId));
   }
 

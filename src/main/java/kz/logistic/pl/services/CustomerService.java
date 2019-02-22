@@ -11,7 +11,7 @@ public interface CustomerService {
   //Показать  всех клиентов
   List<Customer> showAllCustomers();
 
-  DefaultCustomer showCustomer(Long customerId);
+  DefaultCustomer showCustomer(Long customerId) throws Exception;
 
   //Добавить нового клиента
   String addCustomer(String username, String password);

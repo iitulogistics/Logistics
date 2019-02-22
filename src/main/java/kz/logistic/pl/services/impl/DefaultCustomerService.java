@@ -65,8 +65,13 @@ public class DefaultCustomerService implements CustomerService {
   }
 
   @Override
-  public DefaultCustomer showCustomer(Long customerId) {
+  public DefaultCustomer showCustomer(Long customerId) throws Exception {
     CustomerEntity customerEntity = this.customerRepository.findById(customerId).orElse(null);
+
+    if(customerEntity == null){
+      throw new Exception("Customer id not found");
+    }
+
     return DefaultCustomer.builder()
       .customerId(customerEntity.getCustomerId())
       .loginId(customerEntity.getLoginEntity().getLoginId())
