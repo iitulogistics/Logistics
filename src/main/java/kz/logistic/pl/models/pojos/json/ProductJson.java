@@ -31,4 +31,13 @@ public class ProductJson implements Serializable {
 
   @JsonProperty
   private Long sellerCategoryId;
+
+  @JsonProperty
+  private Long specialCharacteristicsId;
+
+  @JsonProperty
+  private Long subCategoryId;
+
+  @JsonProperty
+  private Long categoryId;
 }
