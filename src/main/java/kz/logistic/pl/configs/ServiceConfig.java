@@ -60,6 +60,10 @@ public class ServiceConfig {
     return new DefaultProductService();
   }
 
+    @Bean
+    @Qualifier("defaultSessionService")
+    public DefaultSessionService sessionService() { return new DefaultSessionService(); }
+
   @Bean
   @Qualifier("defaultSellerCompanyService")
   public DefaultSellerCompanyService sellerCompanyService() {
