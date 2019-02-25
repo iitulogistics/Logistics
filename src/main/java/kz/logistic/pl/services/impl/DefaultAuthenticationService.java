@@ -20,16 +20,29 @@ public class DefaultAuthenticationService implements AuthenticationService {
     private LoginRepository loginRepository;
     private Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
-    @Override
+  @Override
+  public String getRoleByUsername(String username) {
+    LoginEntity loginEntity = this.loginRepository.findByUsername(username);
+    if (loginEntity.getCustomerEntity() != null)
+      return "customer";
+    if (loginEntity.getSellerCompanyEntity() != null)
+      return "sellerCompany";
+    if (loginEntity.getShipperEntity() != null)
+      return "shipper";
+    return null;
+  }
+
+  @Override
     public boolean isCorrect(String username, String password) {
         LoginEntity loginEntity = this.loginRepository.findByUsernameAndPassword(username, password);
         return loginEntity != null;
     }
 
     @Override
-    public String generateToken(String username) {
+    public String generateToken(String username, String role) {
         String jwt = Jwts.builder()
                 .setSubject(username)
+                .claim("role", role)
                 .signWith(key).compact();
         return jwt;
     }
