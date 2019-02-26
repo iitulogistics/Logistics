@@ -92,8 +92,8 @@ public class DefaultCustomerService implements CustomerService {
 
   @Override
   public boolean exists(String username) {
-    ArrayList<LoginEntity> loginEntities = this.loginRepository.findByUsername(username);
-    return loginEntities.size() > 0;
+    LoginEntity loginEntity = this.loginRepository.findByUsername(username);
+    return loginEntity != null;
   }
 
   @Override
