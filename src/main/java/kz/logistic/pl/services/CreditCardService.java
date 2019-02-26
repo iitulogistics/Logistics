@@ -4,7 +4,8 @@ import kz.logistic.pl.models.pojos.CreditCard;
 import kz.logistic.pl.models.pojos.impl.DefaultCreditCard;
 import kz.logistic.pl.models.pojos.json.CreditCardJson;
 
-import java.sql.Date;
+import java.util.Date;
+
 import java.util.List;
 
 public interface CreditCardService {

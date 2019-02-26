@@ -9,7 +9,10 @@ import kz.logistic.pl.services.CreditCardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -56,7 +59,8 @@ public class DefaultCreditcardService implements CreditCardService {
     if (exists(creditCardNumber, holderName)) {
       return "Эта кредитная карта уже зарегистрирована";
     }
-
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    Timestamp expDate;
     CreditCardEntity creditCardEntity = new CreditCardEntity();
     creditCardEntity.setCreditCardNumber(creditCardNumber);
     creditCardEntity.setHolderName(holderName);
