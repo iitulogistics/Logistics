@@ -33,7 +33,7 @@ public class DefaultAddressService implements AddressService {
   }
 
   @Override
-  public List<Address> showAllAddesses() {
+  public List<Address> showAllAddresses() {
     List<AddressesEntity> addressesEntities = this.addressRepository.findAll();
     return addressesEntities.stream().map(addressesEntity ->
       DefaultAddress.builder()

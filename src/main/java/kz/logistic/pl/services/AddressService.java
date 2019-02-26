@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface AddressService {
 
-  List<Address> showAllAddesses();
+  List<Address> showAllAddresses();
 
   DefaultAddress showAddress(Long addressId);
 

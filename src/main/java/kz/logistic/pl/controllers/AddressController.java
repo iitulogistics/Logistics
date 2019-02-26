@@ -25,7 +25,7 @@ public class AddressController {
   @ApiOperation(value = "Показывает весь список адресов")
   @GetMapping("/all")
   public ResponseEntity<?> all() {
-    return ResponseEntity.ok(this.addressService.showAllAddesses());
+    return ResponseEntity.ok(this.addressService.showAllAddresses());
   }
 
   @ApiOperation(value = "Показывает адрес по ID")
