@@ -5,6 +5,7 @@ import kz.logistic.pl.models.builders.impl.MessageSourceLocalizedMessageModelBui
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
 import kz.logistic.pl.models.factories.impl.MessageSourceBuilderFactory;
 import kz.logistic.pl.models.pojos.impl.DefaultAddress;
+import kz.logistic.pl.models.pojos.impl.DefaultCreditCard;
 import kz.logistic.pl.services.impl.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +18,12 @@ public class ServiceConfig {
   @Qualifier("defaultAddressService")
   public DefaultAddressService addressService() {
     return new DefaultAddressService();
+  }
+
+  @Bean
+  @Qualifier("defaultCreditCardService")
+  public DefaultCreditcardService creditCardService() {
+    return new DefaultCreditcardService();
   }
 
   @Bean
