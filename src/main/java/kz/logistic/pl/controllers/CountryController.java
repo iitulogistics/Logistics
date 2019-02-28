@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Api(tags = "Список стран", description = "API для списка стран")
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/country")
 public class CountryController {
 

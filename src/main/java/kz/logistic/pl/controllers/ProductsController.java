@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Api(tags = {"Продукты"}, description = "API для продуктов")
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/product")
 public class ProductsController {
 

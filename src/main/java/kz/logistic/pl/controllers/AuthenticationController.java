@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Api(tags = {"Аутентификация"}, description = "API для создания и валидации токенов")
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/authentication")
 public class AuthenticationController {
 

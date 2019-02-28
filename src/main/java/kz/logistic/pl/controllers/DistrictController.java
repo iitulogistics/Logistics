@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Api(tags = "Список районов", description = "API для списка районов")
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/district")
 public class DistrictController {
 

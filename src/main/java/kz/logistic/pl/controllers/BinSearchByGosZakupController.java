@@ -6,15 +6,13 @@ import kz.logistic.pl.services.GosZakupBinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
 @Api(tags = {"Поиск по БИН или ИИН через goszakup.egov.kz"}, description = "API по информации по БИН или ИИН")
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/goszakup")
 public class BinSearchByGosZakupController {
 

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Api(tags = {"Список доставщиков"}, description = "API для списка доставщиков")
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/shipper")
 public class ShipperController {
 
