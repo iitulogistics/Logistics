@@ -4,9 +4,6 @@ import kz.logistic.pl.models.builders.LocalizedMessageModelBuilder;
 import kz.logistic.pl.models.builders.impl.MessageSourceLocalizedMessageModelBuilder;
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
 import kz.logistic.pl.models.factories.impl.MessageSourceBuilderFactory;
-import kz.logistic.pl.models.pojos.impl.DefaultAddress;
-import kz.logistic.pl.models.pojos.impl.DefaultCreditCard;
-import kz.logistic.pl.models.pojos.impl.DefaultDistrict;
 import kz.logistic.pl.services.impl.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +11,12 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class ServiceConfig {
+
+  @Bean
+  @Qualifier("defaultSelleCategoryService")
+  public DefaultSellerCategoryService categoryService() {
+    return new DefaultSellerCategoryService();
+  }
 
   @Bean
   @Qualifier("defaultDistrictService")
@@ -81,9 +84,11 @@ public class ServiceConfig {
     return new DefaultProductService();
   }
 
-    @Bean
-    @Qualifier("defaultAuthenticationService")
-    public DefaultAuthenticationService authenticationService() { return new DefaultAuthenticationService(); }
+  @Bean
+  @Qualifier("defaultAuthenticationService")
+  public DefaultAuthenticationService authenticationService() {
+    return new DefaultAuthenticationService();
+  }
 
   @Bean
   @Qualifier("defaultSellerCompanyService")
