@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 @Api(tags = {"Подкатегория продуктов"}, description = "API для подкатегории  продуктов")
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/product/category/subcategory")
 public class ProductsSubCategoryController {
 

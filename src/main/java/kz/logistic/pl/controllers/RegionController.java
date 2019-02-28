@@ -13,7 +13,6 @@ import java.util.List;
 
 @Api(tags = "Список областей", description = "API для списка областей")
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/region")
 public class RegionController {
 

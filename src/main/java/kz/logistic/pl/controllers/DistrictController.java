@@ -4,7 +4,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import kz.logistic.pl.models.pojos.json.DistrictJson;
 import kz.logistic.pl.services.DistrictService;
-import org.hibernate.criterion.Disjunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 @Api(tags = "Список районов", description = "API для списка районов")
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/district")
 public class DistrictController {
 

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 @Api(tags = {"Компании продавцы"}, description = "API для компании продавцов")
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/seller/company")
 public class SellerCompanyController {
   private SellerCompanyService sellerCompanyService;

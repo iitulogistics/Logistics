@@ -2,7 +2,6 @@ package kz.logistic.pl.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import kz.logistic.pl.models.pojos.json.CustomerJson;
 import kz.logistic.pl.models.pojos.json.ProductCategoryJson;
 import kz.logistic.pl.services.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 @Api(tags = {"Категория продуктов"}, description = "API для категории продуктов")
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/product/category")
 public class ProductCategoryController {
 
