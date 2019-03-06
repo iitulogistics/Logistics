@@ -122,7 +122,18 @@ public class DefaultCustomerService implements CustomerService {
     loginEntity.setUsername(customerJson.getUsername());
     loginEntity.setPassword(customerJson.getPassword());
 
+
     CustomerEntity customerEntity = new CustomerEntity();
+
+    customerEntity.setEmail(customerJson.getEmail());
+    customerEntity.setAddInfo(customerJson.getAddInfo());
+    customerEntity.setCustomerNameEn(customerJson.getCustomerNameEn());
+    customerEntity.setCustomerNameKk(customerJson.getCustomerNameKk());
+    customerEntity.setCustomerNameRu(customerJson.getCustomerNameRu());
+    customerEntity.setIinOrBin(customerJson.getIinOrBin());
+    customerEntity.setMobilePhone(customerJson.getMobilePhone());
+    customerEntity.setPhoneNumber(customerJson.getPhoneNumber());
+
     this.customerRepository.save(customerEntity);
     loginEntity.setCustomerEntity(customerEntity);
     this.loginRepository.save(loginEntity);
