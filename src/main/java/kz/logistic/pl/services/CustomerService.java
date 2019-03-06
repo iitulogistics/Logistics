@@ -1,5 +1,6 @@
 package kz.logistic.pl.services;
 
+import java.io.IOException;
 import java.util.List;
 import kz.logistic.pl.models.pojos.Customer;
 import kz.logistic.pl.models.pojos.impl.DefaultCustomer;
@@ -14,7 +15,7 @@ public interface CustomerService {
   DefaultCustomer showCustomer(Long customerId) throws Exception;
 
   //Добавить нового клиента
-  String addCustomer(String username, String password);
+  String addCustomer(String username, String password) throws IOException;
 
   //Добавить нового клиента посредством JSON
   String addCustomerJson(CustomerJson customerJson);

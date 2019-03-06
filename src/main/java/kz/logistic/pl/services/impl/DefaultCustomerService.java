@@ -1,11 +1,10 @@
 package kz.logistic.pl.services.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.io.IOException;
+import java.util.*;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import kz.logistic.pl.models.entities.CustomerEntity;
 import kz.logistic.pl.models.entities.LoginEntity;
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
@@ -17,6 +16,14 @@ import kz.logistic.pl.repositories.LoginRepository;
 import kz.logistic.pl.services.CustomerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 
 @Slf4j
@@ -25,6 +32,12 @@ public class DefaultCustomerService implements CustomerService {
   private CustomerRepository customerRepository;
   private LoginRepository loginRepository;
   private LocalizedMessageBuilderFactory localizedMessageBuilderFactory;
+
+  @Value("${sms.api.key}")
+  private String smsApiKey;
+
+  @Value("${sms.api.url}")
+  private String smsApiUrl;
 
   @Autowired
   public void setCustomerRepository(CustomerRepository customerRepository) {
@@ -96,14 +109,45 @@ public class DefaultCustomerService implements CustomerService {
     return loginEntity != null;
   }
 
+  public int sendSms(String mobilePhone)  throws IOException {
+
+
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+    MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
+    map.add("apiKey", smsApiKey);
+    map.add("recipient", mobilePhone);
+    Random random = new Random();
+    String id = String.format("%04d", random.nextInt(10000));
+    map.add("text", id+" Ваш код подтверждения для регистрации");
+
+    HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
+
+    RestTemplate restTemplate = new RestTemplate();
+    ResponseEntity<String> response = restTemplate.postForEntity( smsApiUrl, request , String.class );
+
+    String result = response.getBody().toString();
+    ObjectMapper objectMapper = new ObjectMapper();
+    Map<String, Object> objectMap = objectMapper.readValue(result, Map.class);
+
+    return (int) objectMap.get("code");
+  }
+
   @Override
-  public String addCustomer(String username, String password) {
+  public String addCustomer(String username, String password) throws IOException {
     if (exists(username)) {
       return "Данный логин уже занят";
     }
     LoginEntity loginEntity = new LoginEntity();
     loginEntity.setUsername(username);
     loginEntity.setPassword(password);
+
+    if (sendSms(username) == 0){
+      log.info("OTP sent");
+    } else {
+      log.info("OTP did not send");
+    }
 
     CustomerEntity customerEntity = new CustomerEntity();
     this.customerRepository.save(customerEntity);

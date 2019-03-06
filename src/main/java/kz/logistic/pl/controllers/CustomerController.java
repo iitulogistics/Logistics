@@ -2,14 +2,13 @@ package kz.logistic.pl.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import kz.logistic.pl.models.pojos.Customer;
 import kz.logistic.pl.models.pojos.json.CustomerJson;
 import kz.logistic.pl.services.CustomerService;
-import kz.logistic.pl.services.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.io.IOException;
 
 @Api(tags = {"Список клиентов"}, description = "API для списка клиентов")
 @RestController
@@ -41,7 +40,7 @@ public class CustomerController {
   @PostMapping("/add")
   public ResponseEntity<?> add(
     @RequestParam String username,
-    @RequestParam String password) {
+    @RequestParam String password) throws IOException {
     return ResponseEntity.ok(this.customerService.addCustomer(username, password));
   }
 
