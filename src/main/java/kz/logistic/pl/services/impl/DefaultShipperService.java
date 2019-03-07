@@ -43,6 +43,12 @@ public class DefaultShipperService implements ShipperService {
   }
 
   @Override
+  public boolean exists(String username) {
+    LoginEntity loginEntity = this.loginRepository.findByUsername(username);
+    return loginEntity != null;
+  }
+
+  @Override
   public void addShipperJson(ShipperJson shipperJson) {
     LoginEntity loginEntity = new LoginEntity();
     loginEntity.setUsername(shipperJson.getUsername());

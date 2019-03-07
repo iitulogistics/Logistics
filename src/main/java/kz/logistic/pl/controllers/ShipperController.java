@@ -8,6 +8,7 @@ import kz.logistic.pl.models.pojos.impl.DefaultShipper;
 import kz.logistic.pl.models.pojos.json.CustomerJson;
 import kz.logistic.pl.models.pojos.json.ShipperJson;
 import kz.logistic.pl.services.CustomerService;
+import kz.logistic.pl.services.OtpService;
 import kz.logistic.pl.services.ProductCategoryService;
 import kz.logistic.pl.services.ShipperService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +16,26 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @Api(tags = {"Список доставщиков"}, description = "API для списка доставщиков")
 @RestController
 @RequestMapping("/shipper")
 public class ShipperController {
 
   private ShipperService shipperService;
+  private OtpService otpService;
 
   @Qualifier("defaultShipperService")
   @Autowired(required = false)
   public void setShipperService(ShipperService shipperService) {
     this.shipperService = shipperService;
+  }
+
+  @Qualifier("defaultTokenService")
+  @Autowired(required = false)
+  public void setOtpService(OtpService otpService) {
+    this.otpService = otpService;
   }
 
   @ApiOperation(value = "Показывает весь список доставщиков")
@@ -38,6 +48,24 @@ public class ShipperController {
   @GetMapping("{id}")
   public ResponseEntity<?> getId(@PathVariable(value = "id") Long shipperId){
     return ResponseEntity.ok(this.shipperService.showShipper(shipperId));
+  }
+
+  @ApiOperation(value = "Проверка существующего логина (мобильный номер)")
+  @PostMapping("/exists")
+  public ResponseEntity<?> exists(@RequestParam String mobilePhone) {
+    return ResponseEntity.ok(this.shipperService.exists(mobilePhone));
+  }
+
+  @ApiOperation(value = "Генерация OTP для мобильного номера")
+  @PostMapping("/generateOtp")
+  public ResponseEntity<?> generateOtp(@RequestParam String mobilePhone) throws IOException {
+    return ResponseEntity.ok(this.otpService.generateOtp(mobilePhone));
+  }
+
+  @ApiOperation(value = "Валидация OTP и номер мобильного телефона")
+  @PostMapping("/validateOtp")
+  public ResponseEntity<?> validateOtp(@RequestParam String mobilePhone, @RequestParam String otp) {
+    return ResponseEntity.ok(this.otpService.validateOtp(mobilePhone, otp));
   }
 
   @ApiOperation(value = "Добавляет доставщика")
