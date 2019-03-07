@@ -4,10 +4,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import kz.logistic.pl.models.pojos.json.CustomerJson;
 import kz.logistic.pl.services.CustomerService;
+import kz.logistic.pl.services.OtpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.io.IOException;
 
 @Api(tags = {"Список клиентов"}, description = "API для списка клиентов")
@@ -16,6 +18,7 @@ import java.io.IOException;
 public class CustomerController {
 
   private CustomerService customerService;
+  private OtpService otpService;
 
   @Qualifier("defaultCustomerService")
   @Autowired(required = false)
@@ -23,6 +26,11 @@ public class CustomerController {
     this.customerService = customerService;
   }
 
+  @Qualifier("defaultTokenService")
+  @Autowired(required = false)
+  public void setOtpService(OtpService otpService) {
+    this.otpService = otpService;
+  }
 
   @ApiOperation(value = "Показывает весь список клиентов")
   @GetMapping("/all")
@@ -36,6 +44,24 @@ public class CustomerController {
     return ResponseEntity.ok(this.customerService.showCustomer(customerId));
   }
 
+  @ApiOperation(value = "Проверка существующего логина (мобильный номер)")
+  @PostMapping("/exists")
+  public ResponseEntity<?> exists(@RequestParam String mobilePhone) {
+    return ResponseEntity.ok(this.customerService.exists(mobilePhone));
+  }
+
+  @ApiOperation(value = "Генерация OTP для мобильного номера")
+  @PostMapping("/generateOtp")
+  public ResponseEntity<?> generateOtp(@RequestParam String mobilePhone) throws IOException {
+    return ResponseEntity.ok(this.otpService.generateOtp(mobilePhone));
+  }
+
+  @ApiOperation(value = "Валидация OTP и номер мобильного телефона")
+  @PostMapping("/validateOtp")
+  public ResponseEntity<?> validateOtp(@RequestParam String mobilePhone, @RequestParam String otp) {
+    return ResponseEntity.ok(this.otpService.validateOtp(mobilePhone, otp));
+  }
+
   @ApiOperation(value = "Добавляет клиента")
   @PostMapping("/add")
   public ResponseEntity<?> add(
@@ -43,13 +69,6 @@ public class CustomerController {
     @RequestParam String password) throws IOException {
     return ResponseEntity.ok(this.customerService.addCustomer(username, password));
   }
-
-  @ApiOperation(value = "Проверка существующего логина (мобильный номер)")
-  @PostMapping("/exists")
-  public ResponseEntity<?> exists(@RequestParam String mobilePhone) {
-    return ResponseEntity.ok(this.customerService.exists(mobilePhone));
-  }
-
 
   @ApiOperation(value = "Добавляет клиента посредством JSON")
   @PostMapping("/addJson")

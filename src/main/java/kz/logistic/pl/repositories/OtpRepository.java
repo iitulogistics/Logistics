@@ -9,5 +9,7 @@ import java.util.List;
 
 @Repository
 public interface OtpRepository extends JpaRepository<OtpEntity, Long> {
-  List<OtpEntity> findByMobilePhoneAndOtp(String mobileNumber, String otp);
+  OtpEntity findByMobilePhoneAndOtp(String mobileNumber, String otp);
+
+  List<OtpEntity> findByMobilePhone(String mobileNumber);
 }
