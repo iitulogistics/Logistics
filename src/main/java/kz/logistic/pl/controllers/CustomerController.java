@@ -44,6 +44,13 @@ public class CustomerController {
     return ResponseEntity.ok(this.customerService.addCustomer(username, password));
   }
 
+  @ApiOperation(value = "Проверка существующего логина (мобильный номер)")
+  @PostMapping("/exists")
+  public ResponseEntity<?> exists(@RequestParam String mobilePhone) {
+    return ResponseEntity.ok(this.customerService.exists(mobilePhone));
+  }
+
+
   @ApiOperation(value = "Добавляет клиента посредством JSON")
   @PostMapping("/addJson")
   public ResponseEntity<?> addJson(
