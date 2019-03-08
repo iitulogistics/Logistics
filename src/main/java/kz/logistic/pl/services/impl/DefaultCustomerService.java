@@ -1,5 +1,6 @@
 package kz.logistic.pl.services.impl;
 
+import kz.logistic.pl.MobilePhone;
 import kz.logistic.pl.models.entities.CustomerEntity;
 import kz.logistic.pl.models.entities.LoginEntity;
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
@@ -99,16 +100,16 @@ public class DefaultCustomerService implements CustomerService {
   }
 
   @Override
-  public boolean exists(String username) {
-    LoginEntity loginEntity = this.loginRepository.findByUsername(username);
+  public boolean exists(MobilePhone username) {
+    LoginEntity loginEntity = this.loginRepository.findByUsername(username.getMobilePhone());
     return loginEntity != null;
   }
 
   @Override
   public String addCustomer(String username, String password) throws IOException {
-    if (exists(username)) {
-      return "Данный логин уже занят";
-    }
+//    if (exists(username)) {
+//      return "Данный логин уже занят";
+//    }
     LoginEntity loginEntity = new LoginEntity();
     loginEntity.setUsername(username);
     loginEntity.setPassword(password);
@@ -123,9 +124,9 @@ public class DefaultCustomerService implements CustomerService {
 
   @Override
   public String addCustomerJson(CustomerJson customerJson) {
-    if (exists(customerJson.getUsername())) {
-      return "Данный логин уже занят";
-    }
+//    if (exists(customerJson.getUsername())) {
+//      return "Данный логин уже занят";
+//    }
     LoginEntity loginEntity = new LoginEntity();
     loginEntity.setUsername(customerJson.getUsername());
     loginEntity.setPassword(customerJson.getPassword());

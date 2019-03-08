@@ -2,18 +2,22 @@ package kz.logistic.pl.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import kz.logistic.pl.MobilePhone;
 import kz.logistic.pl.models.pojos.json.CustomerJson;
 import kz.logistic.pl.services.CustomerService;
 import kz.logistic.pl.services.OtpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.io.IOException;
 
 @Api(tags = {"Список клиентов"}, description = "API для списка клиентов")
 @RestController
+@Validated
 @RequestMapping("/customer")
 public class CustomerController {
 
@@ -46,7 +50,7 @@ public class CustomerController {
 
   @ApiOperation(value = "Проверка существующего логина (мобильный номер)")
   @PostMapping("/exists")
-  public ResponseEntity<?> exists(@RequestParam String mobilePhone) {
+  public ResponseEntity<?> exists(@Valid @RequestBody MobilePhone mobilePhone) {
     return ResponseEntity.ok(this.customerService.exists(mobilePhone));
   }
 
