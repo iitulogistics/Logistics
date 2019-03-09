@@ -56,8 +56,14 @@ public class CustomerController {
 
   @ApiOperation(value = "Генерация OTP для мобильного номера")
   @PostMapping("/generateOtp")
-  public ResponseEntity<?> generateOtp(@RequestParam String mobilePhone) throws IOException {
-    return ResponseEntity.ok(this.otpService.generateOtp(mobilePhone));
+  public ResponseEntity<?> generateOtp(@Valid @RequestBody MobilePhone mobilePhone) throws IOException {
+    if (mobilePhone.getMobilePhone().length() == 10){
+      mobilePhone.setMobilePhone("7"+mobilePhone.getMobilePhone());
+    }
+    if (mobilePhone.getMobilePhone().substring(0,1).equals("8") && mobilePhone.getMobilePhone().length() == 11){
+      mobilePhone.setMobilePhone("7"+mobilePhone.getMobilePhone().substring(1,11));
+    }
+    return ResponseEntity.ok(this.otpService.generateOtp(mobilePhone.getMobilePhone()));
   }
 
   @ApiOperation(value = "Валидация OTP и номер мобильного телефона")
@@ -65,7 +71,6 @@ public class CustomerController {
   public ResponseEntity<?> validateOtp(@RequestParam String mobilePhone, @RequestParam String otp) {
     return ResponseEntity.ok(this.otpService.validateOtp(mobilePhone, otp));
   }
-
   @ApiOperation(value = "Добавляет клиента")
   @PostMapping("/add")
   public ResponseEntity<?> add(
