@@ -49,7 +49,7 @@ public class ServiceConfig {
   }
 
   @Bean
-  @Qualifier("defaultSessionService")
+  @Qualifier("defaultAuthenticationService")
   public DefaultAuthenticationService defaultAuthenticationService() {
     return new DefaultAuthenticationService();
   }
@@ -112,6 +112,12 @@ public class ServiceConfig {
   @Qualifier("defaultCustomerService")
   public DefaultCustomerService customerService() {
     return new DefaultCustomerService();
+  }
+
+  @Bean
+  @Qualifier("defaultSpecialCharacteristicService")
+  public DefaultSpecialCharacteristicService specialCharacteristicService() {
+    return new DefaultSpecialCharacteristicService();
   }
 
   @Bean

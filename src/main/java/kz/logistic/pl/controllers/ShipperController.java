@@ -46,8 +46,7 @@ public class ShipperController {
   public ResponseEntity<?> add(
     @RequestParam String username,
     @RequestParam String password) {
-    this.shipperService.addShipper(username, password);
-    return ResponseEntity.ok("Новый доставщик добавлен");
+    return ResponseEntity.ok(this.shipperService.addShipper(username, password));
   }
 
   @ApiOperation(value = "Добавляет доставщика посредством JSON")
@@ -55,8 +54,7 @@ public class ShipperController {
   public ResponseEntity<?> addJson(
     @RequestBody ShipperJson shipperJson
   ) {
-    this.shipperService.addShipperJson(shipperJson);
-    return ResponseEntity.ok("Новый доставщик добавлен посредством JSON");
+    return ResponseEntity.ok(this.shipperService.addShipperJson(shipperJson));
   }
 
   @ApiOperation(value = "Обновляет доставщика")

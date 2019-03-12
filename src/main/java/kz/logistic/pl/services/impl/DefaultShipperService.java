@@ -43,7 +43,16 @@ public class DefaultShipperService implements ShipperService {
   }
 
   @Override
-  public void addShipperJson(ShipperJson shipperJson) {
+  public boolean exists(String username) {
+    LoginEntity loginEntity = this.loginRepository.findByUsername(username);
+    return loginEntity != null;
+  }
+
+  @Override
+  public String addShipperJson(ShipperJson shipperJson) {
+    if (exists(shipperJson.getUsername())) {
+      return "Данный логин уже занят";
+    }
     LoginEntity loginEntity = new LoginEntity();
     loginEntity.setUsername(shipperJson.getUsername());
     loginEntity.setPassword(shipperJson.getPassword());
@@ -53,10 +62,14 @@ public class DefaultShipperService implements ShipperService {
     loginEntity.setShipperEntity(shipperEntity);
     loginRepository.save(loginEntity);
     log.info("New shipper added, username: " + shipperJson.getUsername() + ". Time: " + new Date());
+    return "OK";
   }
 
   @Override
-  public void addShipper(String username, String password) {
+  public String addShipper(String username, String password) {
+    if (exists(username)) {
+      return "Данный логин уже занят";
+    }
     LoginEntity loginEntity = new LoginEntity();
     loginEntity.setUsername(username);
     loginEntity.setPassword(password);
@@ -66,6 +79,7 @@ public class DefaultShipperService implements ShipperService {
     loginEntity.setShipperEntity(shipperEntity);
     loginRepository.save(loginEntity);
     log.info("New shipper added, username: " + username + ". Time: " + new Date());
+    return "OK";
   }
 
   @Override

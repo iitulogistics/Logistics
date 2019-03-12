@@ -12,9 +12,11 @@ public interface ShipperService {
 
   DefaultShipper showShipper(Long shipperId);
 
-  void addShipper(String username, String password);
+  String addShipper(String username, String password);
 
-  void addShipperJson(ShipperJson shipperJson);
+  String addShipperJson(ShipperJson shipperJson);
+
+  boolean exists(String username);
 
   String updateShipper(Long shipperId, ShipperJson shipperJson);
 

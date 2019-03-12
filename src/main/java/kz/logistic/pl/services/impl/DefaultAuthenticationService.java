@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
+import java.util.Base64;
 
 @Service
 public class DefaultAuthenticationService implements AuthenticationService {
@@ -43,7 +44,9 @@ public class DefaultAuthenticationService implements AuthenticationService {
         String jwt = Jwts.builder()
                 .setSubject(username)
                 .claim("role", role)
-                .signWith(key).compact();
+                .signWith(
+                  key
+                ).compact();
         return jwt;
     }
 
