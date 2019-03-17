@@ -91,6 +91,11 @@
         </dependency>
 
         <dependency>
+            <groupId>wsdl4j</groupId>
+            <artifactId>wsdl4j</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
         </dependency>
@@ -147,6 +152,24 @@
                     <configLocation>google_checks.xml</configLocation>
                 </configuration>
             </plugin>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>jaxb2-maven-plugin</artifactId>
+            <version>1.6</version>
+            <executions>
+              <execution>
+                <id>xjc</id>
+                <goals>
+                  <goal>xjc</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <schemaDirectory>${project.basedir}/src/main/resources/soap/</schemaDirectory>
+              <outputDirectory>${project.basedir}/src/main/java/kz/logistic/pl/soap</outputDirectory>
+              <clearOutputDir>false</clearOutputDir>
+            </configuration>
+          </plugin>
         </plugins>
     </build>
 

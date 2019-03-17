@@ -1,0 +1,29 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://logistic.kz/logistics"
+           targetNamespace = "http://logistic.kz/logistics"
+           elementFormDefault="qualified">
+   <xs:element name="getCountryIdRequest">
+     <xs:complexType>
+       <xs:sequence>
+         <xs:element name="id" type="xs:long" />
+       </xs:sequence>
+     </xs:complexType>
+   </xs:element>
+
+  <xs:element name="getCountryIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="country" type="tns:country" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="country">
+    <xs:sequence>
+      <xs:element name = "id" type="xs:long"/>
+      <xs:element name = "countryNameKk" type="xs:string"/>
+      <xs:element name = "countryNameRu" type="xs:string"/>
+      <xs:element name = "countryNameEn" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
