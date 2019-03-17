@@ -93,6 +93,7 @@
         <dependency>
             <groupId>wsdl4j</groupId>
             <artifactId>wsdl4j</artifactId>
+            <version>1.6.3</version>
         </dependency>
 
         <dependency>
@@ -165,8 +166,8 @@
               </execution>
             </executions>
             <configuration>
-              <schemaDirectory>${project.basedir}/src/main/resources/soap/</schemaDirectory>
-              <outputDirectory>${project.basedir}/src/main/java/kz/logistic/pl/soap</outputDirectory>
+              <schemaDirectory>${project.basedir}/src/main/resources/</schemaDirectory>
+              <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
               <clearOutputDir>false</clearOutputDir>
             </configuration>
           </plugin>
