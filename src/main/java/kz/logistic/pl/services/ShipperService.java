@@ -22,6 +22,4 @@ public interface ShipperService {
 
   String deleteShipper(Long shipperId);
 
-  boolean exists(String username);
-
 }

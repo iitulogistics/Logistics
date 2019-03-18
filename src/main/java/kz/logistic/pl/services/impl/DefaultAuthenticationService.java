@@ -9,8 +9,10 @@ import kz.logistic.pl.services.AuthenticationService;
 
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import java.util.Base64;
 
@@ -19,7 +21,9 @@ public class DefaultAuthenticationService implements AuthenticationService {
 
     @Autowired
     private LoginRepository loginRepository;
-    private Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+
+    @Value("${jwtKey}")
+    private String jwtKeyString;
 
   @Override
   public String getRoleByUsername(String username) {
@@ -44,9 +48,10 @@ public class DefaultAuthenticationService implements AuthenticationService {
         String jwt = Jwts.builder()
                 .setSubject(username)
                 .claim("role", role)
-                .signWith(
-                  key
-                ).compact();
+                .signWith(new SecretKeySpec(
+                  jwtKeyString.getBytes(),
+                  SignatureAlgorithm.HS256.getJcaName()
+                )).compact();
         return jwt;
     }
 
@@ -55,7 +60,10 @@ public class DefaultAuthenticationService implements AuthenticationService {
         try{
             Jwts
                     .parser()
-                    .setSigningKey(key)
+                    .setSigningKey(new SecretKeySpec(
+                      jwtKeyString.getBytes(),
+                      SignatureAlgorithm.HS256.getJcaName()
+                    ))
                     .parseClaimsJws(token);
         }
         catch (ExpiredJwtException e){

@@ -18,4 +18,6 @@ public interface CountryService {
   String updateCountry(Long countryId, CountryJson countryJson);
 
   String deleteCountry(Long countryId);
+
+  List<Country> search(String value);
 }

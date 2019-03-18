@@ -68,4 +68,10 @@ public class CountryController {
   public ResponseEntity<?> delete(@PathVariable(value = "id") Long countryId) {
     return ResponseEntity.ok(this.countryService.deleteCountry(countryId));
   }
+
+  @ApiOperation(value = "Ищет страны по заданной подстроке")
+  @GetMapping("/search/{value}")
+  public ResponseEntity<?> search(@PathVariable(value = "value") String value){
+    return ResponseEntity.ok(this.countryService.search(value));
+  }
 }

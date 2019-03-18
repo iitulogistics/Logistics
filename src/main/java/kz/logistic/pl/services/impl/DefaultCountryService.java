@@ -126,4 +126,24 @@ public class DefaultCountryService implements CountryService {
       return "Страны с таким id не существует";
     }
   }
+
+  @Override
+  public List<Country> search(String value){
+    Long countryId = null;
+    try{
+      countryId = Long.parseLong(value);
+    }
+    catch (Exception e){}
+    List<CountryEntity> countryList = countryRepository.
+      findByCountryNameEnContainsOrCountryNameKkContainsOrCountryNameRuContainsOrCountryIdEquals
+        (value, value, value, countryId);
+    return countryList.stream().map(countryEntity -> DefaultCountry.builder()
+      .countryId(countryEntity.getCountryId())
+      .countryName(localizedMessageBuilderFactory.builder()
+        .en(countryEntity.getCountryNameEn())
+        .kk(countryEntity.getCountryNameKk())
+        .ru(countryEntity.getCountryNameRu()).build())
+      .build()).collect(Collectors.toList());
+  }
+
 }
