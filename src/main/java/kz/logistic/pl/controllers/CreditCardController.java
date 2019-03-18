@@ -14,7 +14,6 @@ import java.util.Date;
 
 @Api(tags = {"Список кредитных карт клиентов не использовать"}, description = "API для списка кредитных карт")
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/credit/card")
 public class CreditCardController {
   private CreditCardService creditCardService;

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 @Api(tags = {"Компании продавцы"}, description = "API для компании продавцов")
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/seller/company")
 public class SellerCompanyController {
   private SellerCompanyService sellerCompanyService;
@@ -47,7 +46,7 @@ public class SellerCompanyController {
     @RequestParam String sellerCompanyEmail,
     @RequestParam String username,
     @RequestParam String password) {
-    this.sellerCompanyService.addSellerCompany(
+    return ResponseEntity.ok(this.sellerCompanyService.addSellerCompany(
       sellerCompanyNameKk,
       sellerCompanyNameRu,
       sellerCompanyNameEn,
@@ -56,8 +55,7 @@ public class SellerCompanyController {
       sellerCompanyBin,
       sellerCompanyEmail,
       username,
-      password);
-    return ResponseEntity.ok("Новая компания продовца добавлена");
+      password));
   }
 
 
@@ -66,8 +64,7 @@ public class SellerCompanyController {
   public ResponseEntity<?> addJson(
     @RequestBody SellerCompanyJson sellerCompanyJson
   ) {
-    this.sellerCompanyService.addSellerCompanyJson(sellerCompanyJson);
-    return ResponseEntity.ok("Новая компания продовца добавлена посредством JSON");
+    return ResponseEntity.ok(this.sellerCompanyService.addSellerCompanyJson(sellerCompanyJson));
   }
 
   @ApiOperation(value = "Обновляет компанию продавца")

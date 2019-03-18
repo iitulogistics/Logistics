@@ -1,0 +1,1 @@
+ALTER TABLE public.otp ALTER COLUMN id TYPE bigint USING id::bigint;

@@ -42,6 +42,12 @@ public class DefaultSellerCompanyService implements SellerCompanyService {
   }
 
   @Override
+  public boolean exists(String username){
+    LoginEntity loginEntity = this.loginRepository.findByUsername(username);
+    return loginEntity != null;
+  }
+
+  @Override
   public List<SellerCompany> showAllSellerCompanies() {
     List<SellerCompanyEntity> entities = this.sellerCompanyRepository.findAll();
 
@@ -84,12 +90,13 @@ public class DefaultSellerCompanyService implements SellerCompanyService {
   }
 
   @Override
-  public void addSellerCompany(String sellerCompanyNameKk, String sellerCompanyNameRu,
+  public String addSellerCompany(String sellerCompanyNameKk, String sellerCompanyNameRu,
                                String sellerCompanyNameEn, String sellerCompanyPhone,
                                String sellerCompanyMobilePhone, String sellerCompanyBin,
                                String sellerCompanyEmail, String username, String password) {
 
-
+    if (exists(username))
+      return "This username is already taken";
     SellerCompanyEntity sellerCompanyEntity = new SellerCompanyEntity();
     sellerCompanyEntity.setCompanyNameKk(sellerCompanyNameKk);
     sellerCompanyEntity.setCompanyNameRu(sellerCompanyNameRu);
@@ -108,12 +115,14 @@ public class DefaultSellerCompanyService implements SellerCompanyService {
     loginEntity.setSellerCompanyEntity(sellerCompanyEntity);
     this.loginRepository.save(loginEntity);
     log.info("Added new seller company: " + sellerCompanyNameRu + " " + new Date());
-
+    return "Seller company added";
 
   }
 
   @Override
-  public void addSellerCompanyJson(SellerCompanyJson sellerCompanyJson) {
+  public String addSellerCompanyJson(SellerCompanyJson sellerCompanyJson) {
+    if (exists(sellerCompanyJson.getUsername()))
+      return "This username is already taken";
     SellerCompanyEntity sellerCompanyEntity = new SellerCompanyEntity();
     sellerCompanyEntity.setCompanyNameKk(sellerCompanyJson.getSellerCompanyNameKk());
     sellerCompanyEntity.setCompanyNameRu(sellerCompanyJson.getSellerCompanyNameRu());
@@ -135,6 +144,8 @@ public class DefaultSellerCompanyService implements SellerCompanyService {
 
     log.info("Added new seller company: "
       + sellerCompanyJson.getSellerCompanyNameRu() + " via Json" + new Date());
+
+    return "Seller company added";
   }
 
   @Override

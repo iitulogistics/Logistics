@@ -12,7 +12,6 @@ import java.io.IOException;
 
 @Api(tags = {"Поиск по БИН или ИИН через goszakup.egov.kz"}, description = "API по информации по БИН или ИИН")
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/goszakup")
 public class BinSearchByGosZakupController {
 

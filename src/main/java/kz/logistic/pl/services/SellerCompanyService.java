@@ -11,15 +11,17 @@ public interface SellerCompanyService {
   //Показать всех продавцов
   List<SellerCompany> showAllSellerCompanies();
 
+  boolean exists(String username);
+
   DefaultSellerCompany showSellerCompany(Long sellerCompanyId);
 
   //Добавить нового продавца
-  void addSellerCompany(String sellerCompanyNameKk, String sellerCompanyNameRu,
+  String addSellerCompany(String sellerCompanyNameKk, String sellerCompanyNameRu,
                         String sellerCompanyNameEn, String sellerCompanyPhone,
                         String sellerCompanyMobilePhone, String sellerCompanyBin,
                         String sellerCompanyEmail, String username, String password);
 
-  void addSellerCompanyJson(SellerCompanyJson sellerCompanyJson);
+  String addSellerCompanyJson(SellerCompanyJson sellerCompanyJson);
 
   //Изменить данные продавца
   String updateSellerCompany(Long sellerCompanyId, SellerCompanyJson sellerCompanyJson);

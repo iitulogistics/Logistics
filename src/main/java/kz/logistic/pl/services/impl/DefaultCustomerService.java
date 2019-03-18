@@ -1,11 +1,6 @@
 package kz.logistic.pl.services.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
+import kz.logistic.pl.MobilePhone;
 import kz.logistic.pl.models.entities.CustomerEntity;
 import kz.logistic.pl.models.entities.LoginEntity;
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
@@ -15,8 +10,16 @@ import kz.logistic.pl.models.pojos.json.CustomerJson;
 import kz.logistic.pl.repositories.CustomerRepository;
 import kz.logistic.pl.repositories.LoginRepository;
 import kz.logistic.pl.services.CustomerService;
+import kz.logistic.pl.services.OtpService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+
+import java.io.IOException;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -24,11 +27,17 @@ public class DefaultCustomerService implements CustomerService {
 
   private CustomerRepository customerRepository;
   private LoginRepository loginRepository;
+  private OtpService otpService;
   private LocalizedMessageBuilderFactory localizedMessageBuilderFactory;
 
   @Autowired
   public void setCustomerRepository(CustomerRepository customerRepository) {
     this.customerRepository = customerRepository;
+  }
+
+  @Autowired
+  public void setOtpService(OtpService otpService) {
+    this.otpService = otpService;
   }
 
   @Autowired
@@ -91,16 +100,16 @@ public class DefaultCustomerService implements CustomerService {
   }
 
   @Override
-  public boolean exists(String username) {
-    LoginEntity loginEntity = this.loginRepository.findByUsername(username);
+  public boolean exists(MobilePhone username) {
+    LoginEntity loginEntity = this.loginRepository.findByUsername(username.getMobilePhone());
     return loginEntity != null;
   }
 
   @Override
-  public String addCustomer(String username, String password) {
-    if (exists(username)) {
-      return "Данный логин уже занят";
-    }
+  public String addCustomer(String username, String password) throws IOException {
+//    if (exists(username)) {
+//      return "Данный логин уже занят";
+//    }
     LoginEntity loginEntity = new LoginEntity();
     loginEntity.setUsername(username);
     loginEntity.setPassword(password);
@@ -115,14 +124,25 @@ public class DefaultCustomerService implements CustomerService {
 
   @Override
   public String addCustomerJson(CustomerJson customerJson) {
-    if (exists(customerJson.getUsername())) {
-      return "Данный логин уже занят";
-    }
+//    if (exists(customerJson.getUsername())) {
+//      return "Данный логин уже занят";
+//    }
     LoginEntity loginEntity = new LoginEntity();
     loginEntity.setUsername(customerJson.getUsername());
     loginEntity.setPassword(customerJson.getPassword());
 
+
     CustomerEntity customerEntity = new CustomerEntity();
+
+    customerEntity.setEmail(customerJson.getEmail());
+    customerEntity.setAddInfo(customerJson.getAddInfo());
+    customerEntity.setCustomerNameEn(customerJson.getCustomerNameEn());
+    customerEntity.setCustomerNameKk(customerJson.getCustomerNameKk());
+    customerEntity.setCustomerNameRu(customerJson.getCustomerNameRu());
+    customerEntity.setIinOrBin(customerJson.getIinOrBin());
+    customerEntity.setMobilePhone(customerJson.getMobilePhone());
+    customerEntity.setPhoneNumber(customerJson.getPhoneNumber());
+
     this.customerRepository.save(customerEntity);
     loginEntity.setCustomerEntity(customerEntity);
     this.loginRepository.save(loginEntity);

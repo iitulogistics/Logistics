@@ -13,6 +13,12 @@ import org.springframework.context.annotation.Configuration;
 public class ServiceConfig {
 
   @Bean
+  @Qualifier("defaultTokenService")
+  public DefaultOtpService otpService() {
+    return new DefaultOtpService();
+  }
+
+  @Bean
   @Qualifier("defaultSelleCategoryService")
   public DefaultSellerCategoryService categoryService() {
     return new DefaultSellerCategoryService();
