@@ -27,9 +27,6 @@ public class ShipperJson implements Serializable {
   private String shipperNameEn;
 
   @JsonProperty
-  private String mobilePhone;
-
-  @JsonProperty
   private String phoneNumber;
 
   @JsonProperty

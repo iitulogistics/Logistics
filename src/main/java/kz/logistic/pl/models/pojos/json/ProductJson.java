@@ -12,9 +12,6 @@ import lombok.Setter;
 public class ProductJson implements Serializable {
 
   @JsonProperty
-  private Long productId;
-
-  @JsonProperty
   private String productNameKk;
 
   @JsonProperty
@@ -24,20 +21,36 @@ public class ProductJson implements Serializable {
   private String productNameEn;
 
   @JsonProperty
-  private String description;
+  private Long productSubcategoryId;
+
+  @JsonProperty
+  private Long productCategoryId;
+
+  @JsonProperty
+  private String uniqueIdNumber;
+
+  @JsonProperty
+  private String serialNumber;
+
+  @JsonProperty
+  private String manufacturer;
+
+  @JsonProperty
+  private String size;
+
+  @JsonProperty
+  private Integer weight;
+
+  @JsonProperty
+  private Integer price;
+
+  @JsonProperty
+  private String productDescription;
 
   @JsonProperty
   private Long sellerCompanyId;
 
   @JsonProperty
-  private Long sellerCategoryId;
+  private Long specialCharacteristicId;
 
-  @JsonProperty
-  private Long specialCharacteristicsId;
-
-  @JsonProperty
-  private Long subCategoryId;
-
-  @JsonProperty
-  private Long categoryId;
 }

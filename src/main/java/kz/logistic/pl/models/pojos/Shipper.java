@@ -6,9 +6,9 @@ public interface Shipper {
 
   Long getLoginId();
 
-  String getLoginName();
+  String getUsername();
 
-  String getLoginPassword();
+  String getPassword();
 
   LocalizedMessage getShipperName();
 

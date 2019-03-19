@@ -29,14 +29,21 @@ public class ProductsController {
     @RequestParam String productNameKk,
     @RequestParam String productNameRu,
     @RequestParam String productNameEn,
-    @RequestParam String description,
+    @RequestParam Long productCategoryId,
+    @RequestParam Long productSubcategoryId,
+    @RequestParam String uniqueIdNumber,
+    @RequestParam String serialNumber,
+    @RequestParam String manufacturer,
+    @RequestParam String size,
+    @RequestParam Integer weight,
+    @RequestParam Integer price,
+    @RequestParam String productDescription,
     @RequestParam Long sellerCompanyId,
-    @RequestParam Long productSubCategoryId,
-    @RequestParam Long specialCharacteristicsId,
-    @RequestParam Long productCategoryId) {
+    @RequestParam Long specialCharacteristicsId) {
     this.productService.addProduct(
-      productNameKk, productNameRu, productNameEn, description,
-      sellerCompanyId, productSubCategoryId, specialCharacteristicsId, productCategoryId);
+      productNameKk, productNameRu, productNameEn, productCategoryId, productSubcategoryId,
+      uniqueIdNumber, serialNumber, manufacturer, size, weight, price, productDescription,
+      sellerCompanyId, specialCharacteristicsId);
     return ResponseEntity.ok("Новый продукт добавлен");
   }
 

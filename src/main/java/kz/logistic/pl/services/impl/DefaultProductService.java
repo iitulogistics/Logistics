@@ -29,17 +29,25 @@ public class DefaultProductService implements ProductService {
 
   @Override
   public void addProduct(
-    String productNameKk, String productNameRu, String productNameEn, String description,
-    Long sellerCompanyId, Long productSubCategoryId, Long specialCharacteristicsId, Long productCategoryId) {
+    String productNameKk, String productNameRu, String productNameEn, Long productCategoryId,
+    Long productSubcategoryId, String uniqueIdNumber, String serialNumber, String manufacturer,
+    String size, Integer weight, Integer price, String productDescription, Long sellerCompanyId,
+    Long specialCharacteristicsId) {
     ProductsEntity productsEntity = new ProductsEntity();
-    productsEntity.setProductNameEn(productNameEn);
     productsEntity.setProductNameKk(productNameKk);
     productsEntity.setProductNameRu(productNameRu);
-    productsEntity.setProductDescription(description);
+    productsEntity.setProductNameEn(productNameEn);
+    productsEntity.setProductDescription(productDescription);
     productsEntity.setSellerCompanyId(sellerCompanyId);
-    productsEntity.setProductSubcategoryId(productSubCategoryId);
     productsEntity.setSpecialCharacteristicId(specialCharacteristicsId);
+    productsEntity.setProductSubcategoryId(productSubcategoryId);
     productsEntity.setProductCategoryId(productCategoryId);
+    productsEntity.setManufacturer(manufacturer);
+    productsEntity.setPrice(price);
+    productsEntity.setSerialNumber(serialNumber);
+    productsEntity.setSize(size);
+    productsEntity.setUniqueIdNumber(uniqueIdNumber);
+    productsEntity.setWeight(weight);
     productRepository.save(productsEntity);
     log.info("New product added:\nName: "
       + productNameEn + "\nseller company id: " + sellerCompanyId);
@@ -51,11 +59,17 @@ public class DefaultProductService implements ProductService {
     productsEntity.setProductNameKk(productJson.getProductNameKk());
     productsEntity.setProductNameRu(productJson.getProductNameRu());
     productsEntity.setProductNameEn(productJson.getProductNameEn());
-    productsEntity.setProductDescription(productJson.getDescription());
+    productsEntity.setProductDescription(productJson.getProductDescription());
     productsEntity.setSellerCompanyId(productJson.getSellerCompanyId());
-    productsEntity.setSpecialCharacteristicId(productJson.getSpecialCharacteristicsId());
-    productsEntity.setProductSubcategoryId(productJson.getSubCategoryId());
-    productsEntity.setProductCategoryId(productJson.getCategoryId());
+    productsEntity.setSpecialCharacteristicId(productJson.getSpecialCharacteristicId());
+    productsEntity.setProductSubcategoryId(productJson.getProductSubcategoryId());
+    productsEntity.setProductCategoryId(productJson.getProductCategoryId());
+    productsEntity.setManufacturer(productJson.getManufacturer());
+    productsEntity.setPrice(productJson.getPrice());
+    productsEntity.setSerialNumber(productJson.getSerialNumber());
+    productsEntity.setSize(productJson.getSize());
+    productsEntity.setUniqueIdNumber(productJson.getUniqueIdNumber());
+    productsEntity.setWeight(productJson.getWeight());
     productRepository.save(productsEntity);
     log.info("New product added:\nName: "
       + productJson.getProductNameEn() + "\nseller company id: "
@@ -72,6 +86,15 @@ public class DefaultProductService implements ProductService {
       .productNameEn(productsEntity.getProductNameEn())
       .productDescription(productsEntity.getProductDescription())
       .sellerCompanyId(productsEntity.getSellerCompanyId())
+      .manufacturer(productsEntity.getManufacturer())
+      .price(productsEntity.getPrice())
+      .productCategoryId(productsEntity.getProductCategoryId())
+      .productSubcategoryId(productsEntity.getProductSubcategoryId())
+      .size(productsEntity.getSize())
+      .weight(productsEntity.getWeight())
+      .specialCharacteristicsId(productsEntity.getSpecialCharacteristicId())
+      .serialNumber(productsEntity.getSerialNumber())
+      .uniqueIdNumber(productsEntity.getUniqueIdNumber())
       .build()).collect(Collectors.toList());
   }
 
@@ -80,11 +103,20 @@ public class DefaultProductService implements ProductService {
     ProductsEntity productsEntity = this.productRepository.findById(productId).orElse(null);
     return DefaultProduct.builder()
       .productId(productsEntity.getProductId())
-      .productNameEn(productsEntity.getProductNameEn())
       .productNameKk(productsEntity.getProductNameKk())
       .productNameRu(productsEntity.getProductNameRu())
+      .productNameEn(productsEntity.getProductNameEn())
       .productDescription(productsEntity.getProductDescription())
-      .sellerCompanyId(productsEntity.getSellerCompanyId()).build();
+      .sellerCompanyId(productsEntity.getSellerCompanyId())
+      .manufacturer(productsEntity.getManufacturer())
+      .price(productsEntity.getPrice())
+      .productCategoryId(productsEntity.getProductCategoryId())
+      .productSubcategoryId(productsEntity.getProductSubcategoryId())
+      .size(productsEntity.getSize())
+      .weight(productsEntity.getWeight())
+      .specialCharacteristicsId(productsEntity.getSpecialCharacteristicId())
+      .serialNumber(productsEntity.getSerialNumber())
+      .uniqueIdNumber(productsEntity.getUniqueIdNumber()).build();
   }
 
   @Override
@@ -100,12 +132,40 @@ public class DefaultProductService implements ProductService {
       if (productJson.getProductNameRu() != null) {
         productsEntity.setProductNameRu(productJson.getProductNameRu());
       }
-      if (productJson.getDescription() != null) {
-        productsEntity.setProductDescription(productJson.getDescription());
+      if (productJson.getProductDescription() != null) {
+        productsEntity.setProductDescription(productJson.getProductDescription());
       }
       if (productJson.getSellerCompanyId() != null) {
         productsEntity.setSellerCompanyId(productJson.getSellerCompanyId());
       }
+      if (productJson.getManufacturer() != null) {
+        productsEntity.setManufacturer(productJson.getManufacturer());
+      }
+      if (productJson.getPrice() != null) {
+        productsEntity.setPrice(productJson.getPrice());
+      }
+      if (productJson.getProductCategoryId() != null) {
+        productsEntity.setProductCategoryId(productJson.getProductCategoryId());
+      }
+      if (productJson.getProductSubcategoryId() != null) {
+        productsEntity.setProductSubcategoryId(productJson.getProductSubcategoryId());
+      }
+      if (productJson.getSerialNumber() != null) {
+        productsEntity.setSerialNumber(productJson.getSerialNumber());
+      }
+      if (productJson.getSize() != null) {
+        productsEntity.setSize(productJson.getSize());
+      }
+      if (productJson.getWeight() != null) {
+        productsEntity.setWeight(productJson.getWeight());
+      }
+      if (productJson.getUniqueIdNumber() != null) {
+        productsEntity.setUniqueIdNumber(productJson.getUniqueIdNumber());
+      }
+      if (productJson.getSpecialCharacteristicId() != null) {
+        productsEntity.setSpecialCharacteristicId(productJson.getSpecialCharacteristicId());
+      }
+
       this.productRepository.save(productsEntity);
       log.info("Updated " + productsEntity.getProductNameEn() + " product" + new Date());
       return "Продукт обновлен";

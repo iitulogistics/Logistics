@@ -58,6 +58,13 @@ public class DefaultShipperService implements ShipperService {
     loginEntity.setPassword(shipperJson.getPassword());
 
     ShipperEntity shipperEntity = new ShipperEntity();
+    shipperEntity.setBin(shipperJson.getBin());
+    shipperEntity.setAddress(shipperJson.getAddress());
+    shipperEntity.setEmail(shipperJson.getEmail());
+    shipperEntity.setPhoneNumber(shipperJson.getPhoneNumber());
+    shipperEntity.setShipperNameKk(shipperJson.getShipperNameKk());
+    shipperEntity.setShipperNameRu(shipperJson.getShipperNameRu());
+    shipperEntity.setShipperNameEn(shipperJson.getShipperNameEn());
     shipperRepository.save(shipperEntity);
     loginEntity.setShipperEntity(shipperEntity);
     loginRepository.save(loginEntity);
@@ -66,7 +73,15 @@ public class DefaultShipperService implements ShipperService {
   }
 
   @Override
-  public String addShipper(String username, String password) {
+  public String addShipper(String username,
+                           String password,
+                           String shipperNameKk,
+                           String shipperNameRu,
+                           String shipperNameEn,
+                           String phoneNumber,
+                           String bin,
+                           String email,
+                           String address) {
     if (exists(username)) {
       return "Данный логин уже занят";
     }
@@ -75,6 +90,13 @@ public class DefaultShipperService implements ShipperService {
     loginEntity.setPassword(password);
 
     ShipperEntity shipperEntity = new ShipperEntity();
+    shipperEntity.setShipperNameKk(shipperNameKk);
+    shipperEntity.setShipperNameRu(shipperNameRu);
+    shipperEntity.setShipperNameEn(shipperNameEn);
+    shipperEntity.setAddress(address);
+    shipperEntity.setBin(bin);
+    shipperEntity.setEmail(email);
+    shipperEntity.setPhoneNumber(phoneNumber);
     shipperRepository.save(shipperEntity);
     loginEntity.setShipperEntity(shipperEntity);
     loginRepository.save(loginEntity);
@@ -108,9 +130,9 @@ public class DefaultShipperService implements ShipperService {
       .shipperId(shipperEntity.getShipperId())
       .username(shipperEntity.getLoginEntity().getUsername())
       .shipperName(localizedMessageBuilderFactory.builder()
-      .en(shipperEntity.getShipperNameEn())
-      .kk(shipperEntity.getShipperNameKk())
-      .ru(shipperEntity.getShipperNameRu()).build())
+        .en(shipperEntity.getShipperNameEn())
+        .kk(shipperEntity.getShipperNameKk())
+        .ru(shipperEntity.getShipperNameRu()).build())
       .bin(shipperEntity.getBin())
       .email(shipperEntity.getEmail())
       .address(shipperEntity.getAddress())
@@ -137,9 +159,6 @@ public class DefaultShipperService implements ShipperService {
       }
       if(shipperJson.getEmail() != null){
         shipperEntity.setEmail(shipperJson.getEmail());
-      }
-      if(shipperJson.getMobilePhone() != null){
-        shipperEntity.setMobilePhone(shipperJson.getMobilePhone());
       }
       if(shipperJson.getPhoneNumber() != null){
         shipperEntity.setPhoneNumber(shipperJson.getPhoneNumber());

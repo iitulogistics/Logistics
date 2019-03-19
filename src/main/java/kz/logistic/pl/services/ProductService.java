@@ -10,9 +10,20 @@ import org.springframework.stereotype.Service;
 @Service
 public interface ProductService {
 
-  void addProduct(String productNameKk, String productNameRu, String productNameEn,
-                  String description, Long sellerCompanyId,
-                  Long productSubCategoryId, Long specialCharacteristicsId, Long productCategoryId);
+  void addProduct(String productNameKk,
+                  String productNameRu,
+                  String productNameEn,
+                  Long productCategoryId,
+                  Long productSubcategoryId,
+                  String uniqueIdNumber,
+                  String serialNumber,
+                  String manufacturer,
+                  String size,
+                  Integer weight,
+                  Integer price,
+                  String productDescription,
+                  Long sellerCompanyId,
+                  Long specialCharacteristicsId);
 
   void addProductJson(ProductJson productJson);
 

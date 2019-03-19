@@ -72,8 +72,17 @@ public class ShipperController {
   @PostMapping("/add")
   public ResponseEntity<?> add(
     @RequestParam String username,
-    @RequestParam String password) {
-    return ResponseEntity.ok(this.shipperService.addShipper(username, password));
+    @RequestParam String password,
+    @RequestParam String shipperNameKk,
+    @RequestParam String shipperNameRu,
+    @RequestParam String shipperNameEn,
+    @RequestParam String phoneNumber,
+    @RequestParam String bin,
+    @RequestParam String email,
+    @RequestParam String address
+    ) {
+    return ResponseEntity.ok(this.shipperService.addShipper(username, password, shipperNameKk,
+      shipperNameRu, shipperNameEn, phoneNumber, bin, email, address));
   }
 
   @ApiOperation(value = "Добавляет доставщика посредством JSON")
@@ -91,7 +100,6 @@ public class ShipperController {
     @RequestBody ShipperJson shipperJson){
     return ResponseEntity.ok(this.shipperService.updateShipper(shipperId, shipperJson));
   }
-
 
   @ApiOperation(value = "Удаляет доставщика")
   @DeleteMapping("{id}")

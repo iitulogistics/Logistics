@@ -12,7 +12,15 @@ public interface ShipperService {
 
   DefaultShipper showShipper(Long shipperId);
 
-  String addShipper(String username, String password);
+  String addShipper(String username,
+                    String password,
+                    String shipperNameKk,
+                    String shipperNameRu,
+                    String shipperNameEn,
+                    String phoneNumber,
+                    String bin,
+                    String email,
+                    String address);
 
   String addShipperJson(ShipperJson shipperJson);
 
