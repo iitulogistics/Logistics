@@ -1,10 +1,10 @@
 package kz.logistic.pl.services.impl;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.time.Period;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import kz.logistic.pl.models.entities.ProductsEntity;
@@ -15,11 +15,15 @@ import kz.logistic.pl.repositories.ProductRepository;
 import kz.logistic.pl.services.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Slf4j
 public class DefaultProductService implements ProductService {
 
+  @Value("${upload.path}")
+  private String uploadPath;
   private ProductRepository productRepository;
 
   @Autowired
@@ -54,7 +58,14 @@ public class DefaultProductService implements ProductService {
   }
 
   @Override
-  public void addProductJson(ProductJson productJson) {
+  public void addProductJson(ProductJson productJson, MultipartFile file) throws IOException {
+    String fileName = UUID.randomUUID().toString();
+    File convertFile = new File(uploadPath + fileName + "." + file.getOriginalFilename());
+    convertFile.createNewFile();
+    FileOutputStream fout = new FileOutputStream(convertFile);
+    fout.write(file.getBytes());
+    fout.close();
+
     ProductsEntity productsEntity = new ProductsEntity();
     productsEntity.setProductNameKk(productJson.getProductNameKk());
     productsEntity.setProductNameRu(productJson.getProductNameRu());

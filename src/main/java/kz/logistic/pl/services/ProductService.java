@@ -1,10 +1,12 @@
 package kz.logistic.pl.services;
 
+import java.io.IOException;
 import java.util.List;
 import kz.logistic.pl.models.pojos.Product;
 import kz.logistic.pl.models.pojos.impl.DefaultProduct;
 import kz.logistic.pl.models.pojos.json.ProductJson;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Service
@@ -25,7 +27,7 @@ public interface ProductService {
                   Long sellerCompanyId,
                   Long specialCharacteristicsId);
 
-  void addProductJson(ProductJson productJson);
+  void addProductJson(ProductJson productJson, MultipartFile file) throws IOException;
 
   List<Product> showAllProducts();
 

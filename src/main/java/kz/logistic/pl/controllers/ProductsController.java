@@ -7,8 +7,12 @@ import kz.logistic.pl.models.pojos.json.ProductJson;
 import kz.logistic.pl.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Api(tags = {"Продукты"}, description = "API для продуктов")
 @RestController
@@ -48,10 +52,10 @@ public class ProductsController {
   }
 
   @ApiOperation(value = "Добавляет продукты посредством JSON")
-  @PostMapping("/addJson")
+  @PostMapping(value = "/addJson", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
   public ResponseEntity<?> addJson(
-    @RequestBody ProductJson productJson) {
-    this.productService.addProductJson(productJson);
+    @RequestBody ProductJson productJson, @RequestParam MultipartFile file) throws IOException {
+    this.productService.addProductJson(productJson, file);
     return ResponseEntity.ok("Новой продукт добавлен посредством JSON");
   }
 
