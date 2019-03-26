@@ -27,8 +27,7 @@ public class ShippingEntity {
   private Long orderId;
   @Column(name = "order_number")
   private Integer orderNumber;
-  @Column(name = "shipping_address")
-  private String shippingAddress;
+
   @Column(name = "accept_date")
   private Date acceptDate;
   @Column(name = "shipping_date")
