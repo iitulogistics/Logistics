@@ -48,4 +48,6 @@ public class ProductsEntity {
   private Long sellerCompanyId;
   @Column(name = "special_characteristic_id")
   private Long specialCharacteristicId;
+  @Column(name = "products_img")
+  private String productsImg;
 }

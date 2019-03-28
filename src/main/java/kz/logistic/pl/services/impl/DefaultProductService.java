@@ -14,16 +14,18 @@ import kz.logistic.pl.models.pojos.json.ProductJson;
 import kz.logistic.pl.repositories.ProductRepository;
 import kz.logistic.pl.services.ProductService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
 @Slf4j
 public class DefaultProductService implements ProductService {
 
   @Value("${upload.path}")
-  private String uploadPath;
+  private String uploadDir;
   private ProductRepository productRepository;
 
   @Autowired
@@ -58,14 +60,7 @@ public class DefaultProductService implements ProductService {
   }
 
   @Override
-  public void addProductJson(ProductJson productJson, MultipartFile file) throws IOException {
-    String fileName = UUID.randomUUID().toString();
-    File convertFile = new File(uploadPath + fileName + "." + file.getOriginalFilename());
-    convertFile.createNewFile();
-    FileOutputStream fout = new FileOutputStream(convertFile);
-    fout.write(file.getBytes());
-    fout.close();
-
+  public void addProductJson(ProductJson productJson) {
     ProductsEntity productsEntity = new ProductsEntity();
     productsEntity.setProductNameKk(productJson.getProductNameKk());
     productsEntity.setProductNameRu(productJson.getProductNameRu());
@@ -182,6 +177,34 @@ public class DefaultProductService implements ProductService {
       return "Продукт обновлен";
     } else {
       return "Продукт с таким id не существует";
+    }
+  }
+
+  @Override
+  public String addPhoto(Long id, MultipartFile file) {
+    ProductsEntity productsEntity = this.productRepository.getOne(id);
+    if (productsEntity == null)
+      return "Продукта с таким ID не существует";
+    try {
+      String filename = UUID.randomUUID() + "." + FilenameUtils.getExtension(file.getOriginalFilename());
+      File transferFile = new File(uploadDir + "\\" + filename);
+      file.transferTo(transferFile);
+
+      String photosUrlList = productsEntity.getProductsImg();
+      if (photosUrlList == null)
+        photosUrlList = "";
+      if (photosUrlList.equals(""))
+        productsEntity.setProductsImg(filename);
+      else
+        productsEntity.setProductsImg(photosUrlList + "," + filename);
+      this.productRepository.save(productsEntity);
+      return ServletUriComponentsBuilder.fromCurrentContextPath()
+        .path("/products/uploads/")
+        .path(filename)
+        .toUriString();
+    }
+    catch (IOException e){
+      return "Ошибка";
     }
   }
 

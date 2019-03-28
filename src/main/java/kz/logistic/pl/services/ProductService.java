@@ -27,7 +27,7 @@ public interface ProductService {
                   Long sellerCompanyId,
                   Long specialCharacteristicsId);
 
-  void addProductJson(ProductJson productJson, MultipartFile file) throws IOException;
+  void addProductJson(ProductJson productJson);
 
   List<Product> showAllProducts();
 
@@ -36,4 +36,7 @@ public interface ProductService {
   String updateProduct(Long productId, ProductJson productJson);
 
   String deleteProduct(Long productId);
+
+  String addPhoto(Long id, MultipartFile file);
+
 }
