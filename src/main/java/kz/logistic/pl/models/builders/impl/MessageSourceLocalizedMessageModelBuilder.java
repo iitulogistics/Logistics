@@ -1,6 +1,6 @@
 package kz.logistic.pl.models.builders.impl;
 
-
+import java.util.Locale;
 import kz.logistic.pl.models.builders.LocalizedMessageModelBuilder;
 import kz.logistic.pl.models.pojos.LocalizedMessage;
 import kz.logistic.pl.models.pojos.impl.DefaultLocalizedMessage;
@@ -9,7 +9,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.NoSuchMessageException;
 import org.springframework.context.annotation.Scope;
 
-import java.util.Locale;
 
 @Scope("prototype")
 public class MessageSourceLocalizedMessageModelBuilder implements

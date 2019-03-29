@@ -5,7 +5,7 @@ CREATE TABLE Products(
 	product_name_kk varchar(256),
 	product_name_ru varchar(256),
 	product_name_en varchar(256),
-	product_subcategory_id integer,
+	product_subcategory_id bigserial,
 	unique_id_number varchar(50),
 	serial_number varchar(50),
 	manufacturer varchar(256),

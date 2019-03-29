@@ -5,6 +5,6 @@ CREATE TABLE Products_subcategory(
 	subcategory_name_kk varchar(256),
 	subcategory_name_ru varchar(256),
 	subcategory_name_en varchar(256),
-	product_category_id integer,
+	product_category_id bigserial,
   subcategory_add_info varchar(500)
 );

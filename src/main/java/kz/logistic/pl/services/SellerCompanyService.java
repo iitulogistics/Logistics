@@ -1,25 +1,32 @@
 package kz.logistic.pl.services;
 
+import java.util.List;
 
 import kz.logistic.pl.models.pojos.SellerCompany;
-
-import java.util.List;
+import kz.logistic.pl.models.pojos.impl.DefaultSellerCompany;
+import kz.logistic.pl.models.pojos.json.SellerCompanyJson;
 
 public interface SellerCompanyService {
 
-    //Показать всех продавцов
-    List<SellerCompany> showAllSellerCompanies();
+  //Показать всех продавцов
+  List<SellerCompany> showAllSellerCompanies();
 
-    //Добавить нового продавца
-    void addSellerCompany(String sellerCompanyNameKk, String sellerCompanyNameRu,
-                          String sellerCompanyNameEn, String sellerCompanyPhone,
-                          String sellerCompanyMobilePhone, String sellerCompanyBin,
-                          String sellerCompanyEmail, String username, String password);
+  boolean exists(String username);
 
-    //Изменить данные продавца
-    void updateSellerCompany(String sellerCompanyNameKk, String sellerCompanyNameRu,
-                             String sellerCompanyNameEn, String sellerCompanyPhone,
-                             String sellerCompanyMobilePhone, String sellerCompanyBin,
-                             String sellerCompanyEmail, long sellerCategoryId);
+  DefaultSellerCompany showSellerCompany(Long sellerCompanyId);
+
+  //Добавить нового продавца
+  String addSellerCompany(String sellerCompanyNameKk, String sellerCompanyNameRu,
+                        String sellerCompanyNameEn, String sellerCompanyPhone,
+                        String sellerCompanyMobilePhone, String sellerCompanyBin,
+                        String sellerCompanyEmail, String username, String password);
+
+  String addSellerCompanyJson(SellerCompanyJson sellerCompanyJson);
+
+  //Изменить данные продавца
+  String updateSellerCompany(Long sellerCompanyId, SellerCompanyJson sellerCompanyJson);
+
+  String deleteSellerCompany(Long sellerCompanyId);
+
 
 }

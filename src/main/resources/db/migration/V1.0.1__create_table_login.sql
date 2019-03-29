@@ -4,8 +4,8 @@ CREATE TABLE Login(
 			primary key,
 	username varchar(256),
 	password varchar(256),
-	roles_id integer,
-	customer_id integer,
+	roles_id bigserial,
+	customer_id bigserial,
 	seller_company_id bigserial,
-	shipper_id integer
+	shipper_id bigserial
 );

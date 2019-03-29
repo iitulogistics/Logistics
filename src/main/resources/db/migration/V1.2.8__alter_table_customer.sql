@@ -1,0 +1,1 @@
+ALTER TABLE public.customer ALTER COLUMN address_id DROP NOT NULL;
