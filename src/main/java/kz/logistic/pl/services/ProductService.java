@@ -39,4 +39,6 @@ public interface ProductService {
 
   String addPhoto(Long id, MultipartFile file);
 
+  byte[] getPhoto(String name) throws IOException;
+
 }

@@ -1,6 +1,7 @@
 package kz.logistic.pl.services.impl;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.Period;
@@ -15,6 +16,7 @@ import kz.logistic.pl.repositories.ProductRepository;
 import kz.logistic.pl.services.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
@@ -178,6 +180,13 @@ public class DefaultProductService implements ProductService {
     } else {
       return "Продукт с таким id не существует";
     }
+  }
+
+  @Override
+  public byte[] getPhoto(String name) throws IOException {
+    File file = new File(uploadDir + "\\" + name);
+    FileInputStream fileInputStream = new FileInputStream(file);
+    return IOUtils.toByteArray(fileInputStream);
   }
 
   @Override

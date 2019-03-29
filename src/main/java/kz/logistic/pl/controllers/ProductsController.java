@@ -5,11 +5,20 @@ import io.swagger.annotations.ApiOperation;
 import kz.logistic.pl.models.pojos.impl.DefaultProduct;
 import kz.logistic.pl.models.pojos.json.ProductJson;
 import kz.logistic.pl.services.ProductService;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 @Api(tags = {"Продукты"}, description = "API для продуктов")
 @RestController
@@ -89,6 +98,14 @@ public class ProductsController {
     return ResponseEntity.ok(this.productService.addPhoto(id, file));
   }
 
-
+  @ApiOperation("Возвращает фотографию по названию на сервере")
+  @GetMapping("/uploads/{name}")
+  public ResponseEntity<?> getPhoto(@PathVariable("name") String name) {
+    try {
+      return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(this.productService.getPhoto(name));
+    } catch (IOException e){
+      return ResponseEntity.ok("Данной фотографий не существует");
+    }
+  }
 
 }
