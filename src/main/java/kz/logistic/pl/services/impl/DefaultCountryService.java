@@ -48,13 +48,13 @@ public class DefaultCountryService implements CountryService {
 
   @Override
   public DefaultCountry showCountry(Long countryId) {
-    CountryEntity countryEntity =  this.countryRepository.findById(countryId).orElse(null);
+    CountryEntity countryEntity = this.countryRepository.findById(countryId).orElse(null);
     return DefaultCountry.builder()
       .countryId(countryEntity.getCountryId())
       .countryName(localizedMessageBuilderFactory.builder()
-      .en(countryEntity.getCountryNameEn())
-      .kk(countryEntity.getCountryNameKk())
-      .ru(countryEntity.getCountryNameRu()).build())
+        .en(countryEntity.getCountryNameEn())
+        .kk(countryEntity.getCountryNameKk())
+        .ru(countryEntity.getCountryNameRu()).build())
       .build();
   }
 
@@ -128,12 +128,12 @@ public class DefaultCountryService implements CountryService {
   }
 
   @Override
-  public List<Country> search(String value){
+  public List<Country> search(String value) {
     Long countryId = null;
-    try{
+    try {
       countryId = Long.parseLong(value);
+    } catch (Exception e) {
     }
-    catch (Exception e){}
     List<CountryEntity> countryList = countryRepository.
       findByCountryNameEnContainsOrCountryNameKkContainsOrCountryNameRuContainsOrCountryIdEquals
         (value, value, value, countryId);

@@ -38,11 +38,11 @@ public class CityController {
   @ApiOperation(value = "Добавляет город")
   @PostMapping("/add")
   public ResponseEntity<?> add(
-      @RequestParam(required = false) String cityNamekk,
-      @RequestParam String cityNameRu,
-      @RequestParam(required = false) String cityNameEn,
-      @RequestParam Long regionId,
-      @RequestParam Long countryId) {
+    @RequestParam(required = false) String cityNamekk,
+    @RequestParam String cityNameRu,
+    @RequestParam(required = false) String cityNameEn,
+    @RequestParam Long regionId,
+    @RequestParam Long countryId) {
     return ResponseEntity.ok(
       this.cityService.addCity(cityNamekk, cityNameRu, cityNameEn, regionId, countryId)
     );
@@ -51,7 +51,7 @@ public class CityController {
   @ApiOperation(value = "Добавляет город посредством JSON")
   @PostMapping("/addJson")
   public ResponseEntity<?> addJson(
-      @RequestBody CityJson cityJson
+    @RequestBody CityJson cityJson
   ) {
     return ResponseEntity.ok(this.cityService.addCityJson(cityJson));
   }
@@ -59,8 +59,8 @@ public class CityController {
   @ApiOperation(value = "Обновляет город")
   @PatchMapping("{id}")
   public ResponseEntity<?> update(
-      @PathVariable(value = "id") Long cityId,
-      @RequestBody CityJson cityJson
+    @PathVariable(value = "id") Long cityId,
+    @RequestBody CityJson cityJson
   ) {
     return ResponseEntity.ok(this.cityService.updateCity(cityId, cityJson));
   }

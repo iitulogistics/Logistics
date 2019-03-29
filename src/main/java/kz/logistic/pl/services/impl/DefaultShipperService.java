@@ -18,7 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-
 @Slf4j
 public class DefaultShipperService implements ShipperService {
 
@@ -147,36 +146,36 @@ public class DefaultShipperService implements ShipperService {
     ShipperEntity shipperEntity = this.shipperRepository.findById(shipperId).orElse(null);
     LoginEntity loginEntity = this.loginRepository.findById(shipperEntity.getLoginEntity().getLoginId()).orElse(null);
 
-    if(Objects.nonNull(shipperEntity)){
-      if (shipperJson.getAddress() != null){
+    if (Objects.nonNull(shipperEntity)) {
+      if (shipperJson.getAddress() != null) {
         shipperEntity.setAddress(shipperJson.getAddress());
       }
-      if(shipperJson.getBin() != null){
+      if (shipperJson.getBin() != null) {
         shipperEntity.setBin(shipperJson.getBin());
       }
-      if(shipperJson.getPassword() != null){
+      if (shipperJson.getPassword() != null) {
         loginEntity.setPassword(shipperJson.getPassword());
       }
-      if(shipperJson.getEmail() != null){
+      if (shipperJson.getEmail() != null) {
         shipperEntity.setEmail(shipperJson.getEmail());
       }
-      if(shipperJson.getPhoneNumber() != null){
+      if (shipperJson.getPhoneNumber() != null) {
         shipperEntity.setPhoneNumber(shipperJson.getPhoneNumber());
       }
-      if(shipperJson.getShipperNameEn() != null){
+      if (shipperJson.getShipperNameEn() != null) {
         shipperEntity.setShipperNameEn(shipperJson.getShipperNameEn());
       }
-      if(shipperJson.getShipperNameKk() != null){
+      if (shipperJson.getShipperNameKk() != null) {
         shipperEntity.setShipperNameKk(shipperJson.getShipperNameKk());
       }
-      if(shipperJson.getShipperNameRu() != null){
+      if (shipperJson.getShipperNameRu() != null) {
         shipperEntity.setShipperNameRu(shipperJson.getShipperNameRu());
       }
       this.loginRepository.save(loginEntity);
       this.shipperRepository.save(shipperEntity);
       log.info("Updated " + shipperId + " shipper " + new Date());
       return "Доставщик обнавлен";
-    }else{
+    } else {
       return "Доставщика с таким ID не существует";
     }
   }

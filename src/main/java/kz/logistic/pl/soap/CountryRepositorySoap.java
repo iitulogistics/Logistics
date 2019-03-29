@@ -13,32 +13,32 @@ import java.util.Map;
 
 @Component
 public class CountryRepositorySoap {
-    private static final Map<Long, Country> countryMap = new HashMap<>();
+  private static final Map<Long, Country> countryMap = new HashMap<>();
 
-    private CountryRepository repository;
+  private CountryRepository repository;
 
-    @Autowired(required = false)
-    public void setRepository(CountryRepository repository) {
-      this.repository = repository;
-    }
+  @Autowired(required = false)
+  public void setRepository(CountryRepository repository) {
+    this.repository = repository;
+  }
 
-    @PostConstruct
-    public void initData() {
-       List<CountryEntity> entities = this.repository.findAll();
-       entities.forEach(countryEntity -> {
-         Country country = new Country();
+  @PostConstruct
+  public void initData() {
+    List<CountryEntity> entities = this.repository.findAll();
+    entities.forEach(countryEntity -> {
+      Country country = new Country();
 
-         country.setId(countryEntity.getCountryId());
-         country.setCountryNameKk(countryEntity.getCountryNameKk());
-         country.setCountryNameRu(countryEntity.getCountryNameRu());
-         country.setCountryNameEn(countryEntity.getCountryNameEn());
+      country.setId(countryEntity.getCountryId());
+      country.setCountryNameKk(countryEntity.getCountryNameKk());
+      country.setCountryNameRu(countryEntity.getCountryNameRu());
+      country.setCountryNameEn(countryEntity.getCountryNameEn());
 
-         countryMap.put(country.getId(), country);
+      countryMap.put(country.getId(), country);
 
-       });
-    }
+    });
+  }
 
-    public Country findCountryId(Long id) {
-        return countryMap.get(id);
-    }
+  public Country findCountryId(Long id) {
+    return countryMap.get(id);
+  }
 }

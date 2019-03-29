@@ -30,7 +30,7 @@ public class CountryController {
 
   @ApiOperation(value = "Показывает страну по ID")
   @GetMapping("{id}")
-  public ResponseEntity<?> getId(@PathVariable(value = "id") Long countryId){
+  public ResponseEntity<?> getId(@PathVariable(value = "id") Long countryId) {
     return ResponseEntity.ok(this.countryService.showCountry(countryId));
   }
 
@@ -71,7 +71,7 @@ public class CountryController {
 
   @ApiOperation(value = "Ищет страны по заданной подстроке")
   @GetMapping("/search/{value}")
-  public ResponseEntity<?> search(@PathVariable(value = "value") String value){
+  public ResponseEntity<?> search(@PathVariable(value = "value") String value) {
     return ResponseEntity.ok(this.countryService.search(value));
   }
 }

@@ -11,20 +11,20 @@ import soap.logistic.logistics.GetCountryIdResponse;
 
 @Endpoint
 public class CountryEndpoint {
-    private static final String NAMESPACE_URI = "http://logistic.soap/logistics";
+  private static final String NAMESPACE_URI = "http://logistic.soap/logistics";
 
-    private CountryRepositorySoap countryRepositorySoap;
+  private CountryRepositorySoap countryRepositorySoap;
 
-    @Autowired
-    public CountryEndpoint(CountryRepositorySoap countryRepositorySoap) {
-        this.countryRepositorySoap = countryRepositorySoap;
-    }
+  @Autowired
+  public CountryEndpoint(CountryRepositorySoap countryRepositorySoap) {
+    this.countryRepositorySoap = countryRepositorySoap;
+  }
 
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getCountryIdRequest")
-    @ResponsePayload
-    public GetCountryIdResponse getCountry(@RequestPayload GetCountryIdRequest request) {
-        GetCountryIdResponse response = new GetCountryIdResponse();
-        response.setCountry(countryRepositorySoap.findCountryId(request.getId()));
-        return response;
-    }
+  @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getCountryIdRequest")
+  @ResponsePayload
+  public GetCountryIdResponse getCountry(@RequestPayload GetCountryIdRequest request) {
+    GetCountryIdResponse response = new GetCountryIdResponse();
+    response.setCountry(countryRepositorySoap.findCountryId(request.getId()));
+    return response;
+  }
 }

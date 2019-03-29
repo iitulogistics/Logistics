@@ -202,8 +202,7 @@ public class DefaultProductService implements ProductService {
         .path("/products/uploads/")
         .path(filename)
         .toUriString();
-    }
-    catch (IOException e){
+    } catch (IOException e) {
       return "Ошибка";
     }
   }

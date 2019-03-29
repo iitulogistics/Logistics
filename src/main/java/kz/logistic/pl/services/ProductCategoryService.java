@@ -14,9 +14,9 @@ public interface ProductCategoryService {
   DefaultProductCategory showProductCategory(Long productCategoryId);
 
   String addCategory(String categoryNameKk, String categoryNameRu,
-                   String categoryNameEn, String addInfo);
+                     String categoryNameEn, String addInfo);
 
-  String  addCategoryJson(ProductCategoryJson productCategoryJson);
+  String addCategoryJson(ProductCategoryJson productCategoryJson);
 
   String updateProductCategory(Long productCategoryId, ProductCategoryJson productCategoryJson);
 

@@ -85,10 +85,9 @@ public class ProductsController {
 
   @ApiOperation("Добавляет фото")
   @PostMapping("/addPhoto")
-  public ResponseEntity<?> addPhoto(Long id, MultipartFile file){
+  public ResponseEntity<?> addPhoto(Long id, MultipartFile file) {
     return ResponseEntity.ok(this.productService.addPhoto(id, file));
   }
-
 
 
 }

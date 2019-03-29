@@ -19,7 +19,7 @@ public class SpecialCharacteristicController {
 
   @Autowired(required = false)
   @Qualifier("defaultSpecialCharacteristicService")
-  public void setSpecialCharacteristicService(SpecialCharacteristicService specialCharacteristicService){
+  public void setSpecialCharacteristicService(SpecialCharacteristicService specialCharacteristicService) {
     this.specialCharacteristicService = specialCharacteristicService;
   }
 
@@ -31,7 +31,7 @@ public class SpecialCharacteristicController {
 
   @ApiOperation(value = "Показывает характеристику ID")
   @GetMapping("{id}")
-  public ResponseEntity<?> getId(@PathVariable(value = "id") Long characteristicId){
+  public ResponseEntity<?> getId(@PathVariable(value = "id") Long characteristicId) {
     return ResponseEntity.ok(this.specialCharacteristicService.getCharacteristicById(characteristicId));
   }
 
@@ -63,8 +63,8 @@ public class SpecialCharacteristicController {
   @ApiOperation(value = "Обновляет характеристику")
   @PatchMapping("{id}")
   public ResponseEntity<?> update(
-    @PathVariable(value = "id")Long characteristicId,
-    @RequestBody SpecialCharacteristicJson specialCharacteristicJson){
+    @PathVariable(value = "id") Long characteristicId,
+    @RequestBody SpecialCharacteristicJson specialCharacteristicJson) {
     return ResponseEntity.ok(this.specialCharacteristicService.
       updateCharacteristic(characteristicId, specialCharacteristicJson));
   }
@@ -72,7 +72,7 @@ public class SpecialCharacteristicController {
 
   @ApiOperation(value = "Удаляет характеристику")
   @DeleteMapping("{id}")
-  public ResponseEntity<?> delete(@PathVariable(value = "id")Long characteristicId){
+  public ResponseEntity<?> delete(@PathVariable(value = "id") Long characteristicId) {
     return ResponseEntity.ok(this.specialCharacteristicService.deleteCharacteristic(characteristicId));
   }
 

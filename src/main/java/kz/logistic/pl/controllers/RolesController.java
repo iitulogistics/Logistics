@@ -31,7 +31,7 @@ public class RolesController {
 
   @ApiOperation(value = "Показывает роль по ID")
   @GetMapping(value = "/{id}")
-  public ResponseEntity<?> getId(@PathVariable(value = "id") Long rolesId){
+  public ResponseEntity<?> getId(@PathVariable(value = "id") Long rolesId) {
     return ResponseEntity.ok(this.roleService.showRole(rolesId));
   }
 

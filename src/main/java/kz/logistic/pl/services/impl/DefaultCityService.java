@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
 import kz.logistic.pl.models.entities.CityEntity;
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
 import kz.logistic.pl.models.pojos.City;
@@ -29,7 +30,7 @@ public class DefaultCityService implements CityService {
 
   @Autowired(required = false)
   public void setLocalizedMessageBuilderFactory(
-      LocalizedMessageBuilderFactory localizedMessageBuilderFactory) {
+    LocalizedMessageBuilderFactory localizedMessageBuilderFactory) {
     this.localizedMessageBuilderFactory = localizedMessageBuilderFactory;
   }
 
@@ -56,16 +57,16 @@ public class DefaultCityService implements CityService {
       .cityId(cityEntity.getCityId())
       .cityName(
         localizedMessageBuilderFactory.builder()
-        .en(cityEntity.getCityNameEn())
-        .kk(cityEntity.getCityNameKk())
-        .ru(cityEntity.getCityNameRu()).build())
+          .en(cityEntity.getCityNameEn())
+          .kk(cityEntity.getCityNameKk())
+          .ru(cityEntity.getCityNameRu()).build())
       .regionId(cityEntity.getRegionId())
       .countryId(cityEntity.getCountryId()).build();
   }
 
   public boolean exists(Long countryId, String cityNameEn) {
     ArrayList<CityEntity> cityEntity =
-        this.cityRepository.findByCountryIdAndCityNameEn(countryId, cityNameEn);
+      this.cityRepository.findByCountryIdAndCityNameEn(countryId, cityNameEn);
     return cityEntity.size() > 0;
   }
 
