@@ -42,7 +42,7 @@ public class DefaultCustomerService implements CustomerService {
 
   @Autowired
   public void setLocalizedMessageBuilderFactory(
-      LocalizedMessageBuilderFactory localizedMessageBuilderFactory) {
+    LocalizedMessageBuilderFactory localizedMessageBuilderFactory) {
     this.localizedMessageBuilderFactory = localizedMessageBuilderFactory;
   }
 
@@ -77,7 +77,7 @@ public class DefaultCustomerService implements CustomerService {
   public DefaultCustomer showCustomer(Long customerId) throws Exception {
     CustomerEntity customerEntity = this.customerRepository.findById(customerId).orElse(null);
 
-    if(customerEntity == null){
+    if (customerEntity == null) {
       throw new Exception("Customer id not found");
     }
 
@@ -88,9 +88,9 @@ public class DefaultCustomerService implements CustomerService {
       .username(customerEntity.getLoginEntity().getUsername())
       .password(customerEntity.getLoginEntity().getPassword())
       .customerName(localizedMessageBuilderFactory.builder()
-      .en(customerEntity.getCustomerNameEn())
-      .kk(customerEntity.getCustomerNameKk())
-      .ru(customerEntity.getCustomerNameRu()).build())
+        .en(customerEntity.getCustomerNameEn())
+        .kk(customerEntity.getCustomerNameKk())
+        .ru(customerEntity.getCustomerNameRu()).build())
       .iinOrBin(customerEntity.getIinOrBin())
       .phoneNumber(customerEntity.getPhoneNumber())
       .email(customerEntity.getEmail())
@@ -153,8 +153,8 @@ public class DefaultCustomerService implements CustomerService {
 
   @Override
   public String updateCustomer(Long customerId, CustomerJson customerJson) {
-       CustomerEntity customerEntity = this.customerRepository.findById(customerId).orElse(null);
-       LoginEntity loginEntity = this.loginRepository.findById(customerEntity.getLoginEntity().getLoginId()).orElse(null);
+    CustomerEntity customerEntity = this.customerRepository.findById(customerId).orElse(null);
+    LoginEntity loginEntity = this.loginRepository.findById(customerEntity.getLoginEntity().getLoginId()).orElse(null);
 
     if (Objects.nonNull(customerEntity)) {
       if (customerJson.getMobilePhone() != null) {

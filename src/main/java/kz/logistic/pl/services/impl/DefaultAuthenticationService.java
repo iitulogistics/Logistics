@@ -19,11 +19,11 @@ import java.util.Base64;
 @Service
 public class DefaultAuthenticationService implements AuthenticationService {
 
-    @Autowired
-    private LoginRepository loginRepository;
+  @Autowired
+  private LoginRepository loginRepository;
 
-    @Value("${jwtKey}")
-    private String jwtKeyString;
+  @Value("${jwtKey}")
+  private String jwtKeyString;
 
   @Override
   public String getRoleByUsername(String username) {
@@ -38,43 +38,40 @@ public class DefaultAuthenticationService implements AuthenticationService {
   }
 
   @Override
-    public boolean isCorrect(String username, String password) {
-        LoginEntity loginEntity = this.loginRepository.findByUsernameAndPassword(username, password);
-        return loginEntity != null;
-    }
+  public boolean isCorrect(String username, String password) {
+    LoginEntity loginEntity = this.loginRepository.findByUsernameAndPassword(username, password);
+    return loginEntity != null;
+  }
 
-    @Override
-    public String generateToken(String username, String role) {
-        String jwt = Jwts.builder()
-                .setSubject(username)
-                .claim("role", role)
-                .signWith(new SecretKeySpec(
-                  jwtKeyString.getBytes(),
-                  SignatureAlgorithm.HS256.getJcaName()
-                )).compact();
-        return jwt;
-    }
+  @Override
+  public String generateToken(String username, String role) {
+    String jwt = Jwts.builder()
+      .setSubject(username)
+      .claim("role", role)
+      .signWith(new SecretKeySpec(
+        jwtKeyString.getBytes(),
+        SignatureAlgorithm.HS256.getJcaName()
+      )).compact();
+    return jwt;
+  }
 
-    @Override
-    public String validateToken(String token) {
-        try{
-            Jwts
-                    .parser()
-                    .setSigningKey(new SecretKeySpec(
-                      jwtKeyString.getBytes(),
-                      SignatureAlgorithm.HS256.getJcaName()
-                    ))
-                    .parseClaimsJws(token);
-        }
-        catch (ExpiredJwtException e){
-            return "expired";
-        }
-        catch (MalformedJwtException e){
-            return "invalid token";
-        }
-        catch (SignatureException e){
-            return "invalid token";
-        }
-        return "OK";
+  @Override
+  public String validateToken(String token) {
+    try {
+      Jwts
+        .parser()
+        .setSigningKey(new SecretKeySpec(
+          jwtKeyString.getBytes(),
+          SignatureAlgorithm.HS256.getJcaName()
+        ))
+        .parseClaimsJws(token);
+    } catch (ExpiredJwtException e) {
+      return "expired";
+    } catch (MalformedJwtException e) {
+      return "invalid token";
+    } catch (SignatureException e) {
+      return "invalid token";
     }
+    return "OK";
+  }
 }

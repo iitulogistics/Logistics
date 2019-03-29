@@ -29,7 +29,7 @@ public class DefaultProductCategoryService implements ProductCategoryService {
 
   @Autowired(required = false)
   public void setLocalizedMessageBuilderFactory(
-      LocalizedMessageBuilderFactory localizedMessageBuilderFactory) {
+    LocalizedMessageBuilderFactory localizedMessageBuilderFactory) {
     this.localizedMessageBuilderFactory = localizedMessageBuilderFactory;
   }
 
@@ -51,19 +51,19 @@ public class DefaultProductCategoryService implements ProductCategoryService {
   @Override
   public DefaultProductCategory showProductCategory(Long productCategoryId) {
     ProductsCategoryEntity productsCategoryEntity =
-        this.productsCategoryRepository.findById(productCategoryId).orElse(null);
-      return DefaultProductCategory.builder()
-        .id(productsCategoryEntity.getProductCategoryId())
-        .categoryName(localizedMessageBuilderFactory.builder()
-          .en(productsCategoryEntity.getCategoryNameEn())
-          .kk(productsCategoryEntity.getCategoryNameKk())
-          .ru(productsCategoryEntity.getCategoryNameRu()).build())
-        .addInfo(productsCategoryEntity.getAddInfo()).build();
+      this.productsCategoryRepository.findById(productCategoryId).orElse(null);
+    return DefaultProductCategory.builder()
+      .id(productsCategoryEntity.getProductCategoryId())
+      .categoryName(localizedMessageBuilderFactory.builder()
+        .en(productsCategoryEntity.getCategoryNameEn())
+        .kk(productsCategoryEntity.getCategoryNameKk())
+        .ru(productsCategoryEntity.getCategoryNameRu()).build())
+      .addInfo(productsCategoryEntity.getAddInfo()).build();
   }
 
   @Override
   public String addCategory(
-      String categoryNameKk, String categoryNameRu, String categoryNameEn, String addInfo) {
+    String categoryNameKk, String categoryNameRu, String categoryNameEn, String addInfo) {
     ProductsCategoryEntity categoryEntity = new ProductsCategoryEntity();
     categoryEntity.setCategoryNameKk(categoryNameKk);
     categoryEntity.setCategoryNameRu(categoryNameRu);
@@ -85,16 +85,16 @@ public class DefaultProductCategoryService implements ProductCategoryService {
 
     this.productsCategoryRepository.save(categoryEntity);
     log.info("Added new ProductCategory "
-        + productCategoryJson.getCategoryNameRu() + " via JSON " + new Date());
+      + productCategoryJson.getCategoryNameRu() + " via JSON " + new Date());
     return "Новая категория продуктов добавлена посредством JSON";
   }
 
 
   @Override
   public String updateProductCategory(
-      Long productCategoryId, ProductCategoryJson productCategoryJson) {
+    Long productCategoryId, ProductCategoryJson productCategoryJson) {
     ProductsCategoryEntity productsCategoryEntity =
-        this.productsCategoryRepository.findById(productCategoryId).orElse(null);
+      this.productsCategoryRepository.findById(productCategoryId).orElse(null);
 
     if (Objects.nonNull(productsCategoryEntity)) {
       if (productCategoryJson.getCategoryNameKk() != null) {
@@ -120,7 +120,7 @@ public class DefaultProductCategoryService implements ProductCategoryService {
   @Override
   public String deleteProductCategory(Long productCategoryId) {
     ProductsCategoryEntity productsCategoryEntity =
-        this.productsCategoryRepository.findById(productCategoryId).orElse(null);
+      this.productsCategoryRepository.findById(productCategoryId).orElse(null);
 
     if (Objects.nonNull(productsCategoryEntity)) {
       log.info("Deleted " + productsCategoryEntity.getCategoryNameRu() + " category " + new Date());

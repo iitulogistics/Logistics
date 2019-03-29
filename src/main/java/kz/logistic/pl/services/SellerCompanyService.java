@@ -17,9 +17,9 @@ public interface SellerCompanyService {
 
   //Добавить нового продавца
   String addSellerCompany(String sellerCompanyNameKk, String sellerCompanyNameRu,
-                        String sellerCompanyNameEn, String sellerCompanyPhone,
-                        String sellerCompanyMobilePhone, String sellerCompanyBin,
-                        String sellerCompanyEmail, String username, String password);
+                          String sellerCompanyNameEn, String sellerCompanyPhone,
+                          String sellerCompanyMobilePhone, String sellerCompanyBin,
+                          String sellerCompanyEmail, String username, String password);
 
   String addSellerCompanyJson(SellerCompanyJson sellerCompanyJson);
 

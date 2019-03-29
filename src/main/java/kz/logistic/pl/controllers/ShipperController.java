@@ -46,7 +46,7 @@ public class ShipperController {
 
   @ApiOperation(value = "Показывает доставщика ID")
   @GetMapping("{id}")
-  public ResponseEntity<?> getId(@PathVariable(value = "id") Long shipperId){
+  public ResponseEntity<?> getId(@PathVariable(value = "id") Long shipperId) {
     return ResponseEntity.ok(this.shipperService.showShipper(shipperId));
   }
 
@@ -80,7 +80,7 @@ public class ShipperController {
     @RequestParam String bin,
     @RequestParam String email,
     @RequestParam String address
-    ) {
+  ) {
     return ResponseEntity.ok(this.shipperService.addShipper(username, password, shipperNameKk,
       shipperNameRu, shipperNameEn, phoneNumber, bin, email, address));
   }
@@ -96,14 +96,14 @@ public class ShipperController {
   @ApiOperation(value = "Обновляет доставщика")
   @PatchMapping("{id}")
   public ResponseEntity<?> update(
-    @PathVariable(value = "id")Long shipperId,
-    @RequestBody ShipperJson shipperJson){
+    @PathVariable(value = "id") Long shipperId,
+    @RequestBody ShipperJson shipperJson) {
     return ResponseEntity.ok(this.shipperService.updateShipper(shipperId, shipperJson));
   }
 
   @ApiOperation(value = "Удаляет доставщика")
   @DeleteMapping("{id}")
-  public ResponseEntity<?> delete(@PathVariable(value = "id")Long shipperId){
+  public ResponseEntity<?> delete(@PathVariable(value = "id") Long shipperId) {
     return ResponseEntity.ok(this.shipperService.deleteShipper(shipperId));
   }
 

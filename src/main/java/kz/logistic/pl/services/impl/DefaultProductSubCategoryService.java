@@ -99,7 +99,7 @@ public class DefaultProductSubCategoryService implements ProductSubCategoryServi
       if (productSubCategoryJson.getSubCategoryAddInfo() != null) {
         productsSubCategoryEntity.setSubCategoryAddInfo(productSubCategoryJson.getSubCategoryAddInfo());
       }
-      if (productSubCategoryJson.getProductCategoryId() != null){
+      if (productSubCategoryJson.getProductCategoryId() != null) {
         productsSubCategoryEntity.setProductCategoryId(productSubCategoryJson.getProductCategoryId());
       }
       this.productSubCategoryRepository.save(productsSubCategoryEntity);
@@ -124,19 +124,19 @@ public class DefaultProductSubCategoryService implements ProductSubCategoryServi
     }
   }
 
-    @Override
-    public ProductSubCategory showProductSubCategory(Long productSubCategoryId) {
-      ProductsSubCategoryEntity productsSubCategoryEntity =
-        this.productSubCategoryRepository.findById(productSubCategoryId).orElse(null);
-      return DefaultProductSubCategory.builder()
-        .id(productSubCategoryId)
-        .subCategoryName(localizedMessageBuilderFactory.builder()
-          .en(productsSubCategoryEntity.getSubCategoryNameEn())
-          .kk(productsSubCategoryEntity.getSubCategoryNameKk())
-          .ru(productsSubCategoryEntity.getSubCategoryNameRu()).build())
-        .productCategoryId(productsSubCategoryEntity.getProductCategoryId())
-        .subCategoryAddInfo(productsSubCategoryEntity.getSubCategoryAddInfo()).build();
-    }
+  @Override
+  public ProductSubCategory showProductSubCategory(Long productSubCategoryId) {
+    ProductsSubCategoryEntity productsSubCategoryEntity =
+      this.productSubCategoryRepository.findById(productSubCategoryId).orElse(null);
+    return DefaultProductSubCategory.builder()
+      .id(productSubCategoryId)
+      .subCategoryName(localizedMessageBuilderFactory.builder()
+        .en(productsSubCategoryEntity.getSubCategoryNameEn())
+        .kk(productsSubCategoryEntity.getSubCategoryNameKk())
+        .ru(productsSubCategoryEntity.getSubCategoryNameRu()).build())
+      .productCategoryId(productsSubCategoryEntity.getProductCategoryId())
+      .subCategoryAddInfo(productsSubCategoryEntity.getSubCategoryAddInfo()).build();
+  }
 
 
 }

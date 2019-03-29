@@ -90,13 +90,13 @@
             <artifactId>spring-boot-starter-web-services</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>wsdl4j</groupId>
-            <artifactId>wsdl4j</artifactId>
-            <version>1.6.2</version>
-        </dependency>
+      <dependency>
+        <groupId>wsdl4j</groupId>
+        <artifactId>wsdl4j</artifactId>
+        <version>1.6.2</version>
+      </dependency>
 
-        <dependency>
+      <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
         </dependency>
@@ -120,42 +120,8 @@
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-api</artifactId>
-            <version>0.10.5</version>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-impl</artifactId>
-            <version>0.10.5</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-jackson</artifactId>
-            <version>0.10.5</version>
-            <scope>runtime</scope>
-        </dependency>
-      <dependency>
-        <groupId>kz.logistic</groupId>
-        <artifactId>pl</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework.security</groupId>
-        <artifactId>spring-security-config</artifactId>
-        <version>5.0.6.RELEASE</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework.security</groupId>
-        <artifactId>spring-security-web</artifactId>
-        <version>5.0.6.RELEASE</version>
-      </dependency>
+
+
     </dependencies>
 
     <build>
@@ -164,32 +130,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.17</version>
-                <configuration>
-                    <configLocation>google_checks.xml</configLocation>
-                </configuration>
-            </plugin>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>jaxb2-maven-plugin</artifactId>
-            <version>1.6</version>
-            <executions>
-              <execution>
-                <id>xjc</id>
-                <goals>
-                  <goal>xjc</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <schemaDirectory>${project.basedir}/src/main/resources/</schemaDirectory>
-              <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
-              <clearOutputDir>false</clearOutputDir>
-            </configuration>
-          </plugin>
         </plugins>
     </build>
 

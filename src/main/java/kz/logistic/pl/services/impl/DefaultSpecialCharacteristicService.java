@@ -22,7 +22,7 @@ public class DefaultSpecialCharacteristicService implements SpecialCharacteristi
   private SpecialCharacteristicRepository specialCharacteristicRepository;
 
   @Autowired
-  public void setSpecialCharacteristicRepository(SpecialCharacteristicRepository specialCharacteristicRepository){
+  public void setSpecialCharacteristicRepository(SpecialCharacteristicRepository specialCharacteristicRepository) {
     this.specialCharacteristicRepository = specialCharacteristicRepository;
   }
 
@@ -48,7 +48,7 @@ public class DefaultSpecialCharacteristicService implements SpecialCharacteristi
       .characteristicNameRu(specialCharacteristicEntity.getCharacteristicNameRu())
       .characteristicNameEn(specialCharacteristicEntity.getCharacteristicNameEn())
       .addInfo(specialCharacteristicEntity.getAddInfo())
-    .build()).collect(Collectors.toList());
+      .build()).collect(Collectors.toList());
   }
 
   @Override
@@ -85,7 +85,7 @@ public class DefaultSpecialCharacteristicService implements SpecialCharacteristi
     SpecialCharacteristicEntity specialCharacteristicEntity = this.specialCharacteristicRepository.findById
       (characteristicId).orElse(null);
 
-    if (Objects.nonNull(specialCharacteristicEntity)){
+    if (Objects.nonNull(specialCharacteristicEntity)) {
       if (specialCharacteristicJson.getCharacteristicNameKk() != null)
         specialCharacteristicEntity.setCharacteristicNameKk(specialCharacteristicJson.getCharacteristicNameKk());
       if (specialCharacteristicJson.getCharacteristicNameRu() != null)
@@ -104,7 +104,7 @@ public class DefaultSpecialCharacteristicService implements SpecialCharacteristi
   public String deleteCharacteristic(Long characteristicId) {
     SpecialCharacteristicEntity specialCharacteristicEntity = this.specialCharacteristicRepository.findById
       (characteristicId).orElse(null);
-    if (Objects.nonNull(specialCharacteristicEntity)){
+    if (Objects.nonNull(specialCharacteristicEntity)) {
       this.specialCharacteristicRepository.delete(specialCharacteristicEntity);
       return "Характеристика удалена";
     }

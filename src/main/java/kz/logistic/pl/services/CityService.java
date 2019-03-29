@@ -1,6 +1,7 @@
 package kz.logistic.pl.services;
 
 import java.util.List;
+
 import kz.logistic.pl.models.pojos.City;
 import kz.logistic.pl.models.pojos.impl.DefaultCity;
 import kz.logistic.pl.models.pojos.json.CityJson;

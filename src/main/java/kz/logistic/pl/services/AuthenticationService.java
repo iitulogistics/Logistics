@@ -3,12 +3,12 @@ package kz.logistic.pl.services;
 
 public interface AuthenticationService {
 
-    String generateToken(String username, String role);
+  String generateToken(String username, String role);
 
-    String validateToken(String token);
+  String validateToken(String token);
 
-    boolean isCorrect(String username, String password);
+  boolean isCorrect(String username, String password);
 
-    String getRoleByUsername(String username);
+  String getRoleByUsername(String username);
 
 }

@@ -42,7 +42,7 @@ public class DefaultSellerCompanyService implements SellerCompanyService {
   }
 
   @Override
-  public boolean exists(String username){
+  public boolean exists(String username) {
     LoginEntity loginEntity = this.loginRepository.findByUsername(username);
     return loginEntity != null;
   }
@@ -91,9 +91,9 @@ public class DefaultSellerCompanyService implements SellerCompanyService {
 
   @Override
   public String addSellerCompany(String sellerCompanyNameKk, String sellerCompanyNameRu,
-                               String sellerCompanyNameEn, String sellerCompanyPhone,
-                               String sellerCompanyMobilePhone, String sellerCompanyBin,
-                               String sellerCompanyEmail, String username, String password) {
+                                 String sellerCompanyNameEn, String sellerCompanyPhone,
+                                 String sellerCompanyMobilePhone, String sellerCompanyBin,
+                                 String sellerCompanyEmail, String username, String password) {
 
     if (exists(username))
       return "This username is already taken";

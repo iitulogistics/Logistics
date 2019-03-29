@@ -31,16 +31,16 @@ public class ProductCategoryController {
   @ApiOperation(value = "Показывает категорию продуктов ID")
   @GetMapping("{id}")
   public ResponseEntity<?> getId(@PathVariable(value = "id") Long productCategoryId) {
-    return  ResponseEntity.ok(this.productCategoryService.showProductCategory(productCategoryId));
+    return ResponseEntity.ok(this.productCategoryService.showProductCategory(productCategoryId));
   }
 
   @ApiOperation(value = "Добавляет категорию продуктов")
   @PostMapping("/add")
   public ResponseEntity<?> add(
-      @RequestParam(required = false) String categoryNameKk,
-      @RequestParam String categoryNameRu,
-      @RequestParam(required = false) String categoryNameEn,
-      @RequestParam(required = false) String addInfo) {
+    @RequestParam(required = false) String categoryNameKk,
+    @RequestParam String categoryNameRu,
+    @RequestParam(required = false) String categoryNameEn,
+    @RequestParam(required = false) String addInfo) {
 
     return ResponseEntity.ok(
       this.productCategoryService.addCategory(
@@ -50,7 +50,7 @@ public class ProductCategoryController {
   @ApiOperation(value = "Добавляет категорию продуктов посредством JSON")
   @PostMapping("/addJson")
   public ResponseEntity<?> addJson(
-      @RequestBody ProductCategoryJson productCategoryJson
+    @RequestBody ProductCategoryJson productCategoryJson
   ) {
     return ResponseEntity.ok(this.productCategoryService.addCategoryJson(productCategoryJson));
   }
@@ -60,7 +60,7 @@ public class ProductCategoryController {
   public ResponseEntity<?> update(@PathVariable(value = "id") Long productCategoryId,
                                   @RequestBody ProductCategoryJson productCategoryJson) {
     return ResponseEntity.ok(
-      this.productCategoryService.updateProductCategory(productCategoryId,productCategoryJson));
+      this.productCategoryService.updateProductCategory(productCategoryId, productCategoryJson));
   }
 
   @ApiOperation(value = "Удаляет категогию продуктов")
