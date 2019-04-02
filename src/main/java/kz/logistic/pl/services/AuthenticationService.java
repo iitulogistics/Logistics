@@ -11,4 +11,6 @@ public interface AuthenticationService {
 
   String getRoleByUsername(String username);
 
+  String getRoleByToken(String token);
+
 }

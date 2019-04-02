@@ -26,6 +26,22 @@ public class DefaultAuthenticationService implements AuthenticationService {
   private String jwtKeyString;
 
   @Override
+  public String getRoleByToken(String token) {
+    try {
+      Claims claims = Jwts
+        .parser()
+        .setSigningKey(new SecretKeySpec(
+          jwtKeyString.getBytes(),
+          SignatureAlgorithm.HS256.getJcaName()
+        ))
+        .parseClaimsJws(token).getBody();
+      return (String)claims.get("role");
+    } catch (Exception e) {
+      return "error";
+    }
+  }
+
+  @Override
   public String getRoleByUsername(String username) {
     LoginEntity loginEntity = this.loginRepository.findByUsername(username);
     if (loginEntity.getCustomerEntity() != null)
