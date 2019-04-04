@@ -2,24 +2,24 @@ package kz.logistic.pl.models.pojos;
 
 public interface Shipper {
 
-  Long getShipperId();
+    Long getShipperId();
 
-  Long getLoginId();
+    Long getLoginId();
 
-  String getUsername();
+    String getUsername();
 
-  String getPassword();
+    String getPassword();
 
-  LocalizedMessage getShipperName();
+    LocalizedMessage getShipperName();
 
-  String getBin();
+    String getBin();
 
-  String getMobilePhone();
+    String getMobilePhone();
 
-  String getPhoneNumber();
+    String getPhoneNumber();
 
-  String getEmail();
+    String getEmail();
 
-  String getAddress();
+    String getAddress();
 
 }

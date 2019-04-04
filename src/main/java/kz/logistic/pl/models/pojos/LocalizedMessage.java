@@ -2,9 +2,9 @@ package kz.logistic.pl.models.pojos;
 
 public interface LocalizedMessage {
 
-  String getRu();
+    String getRu();
 
-  String getKk();
+    String getKk();
 
-  String getEn();
+    String getEn();
 }

@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Import;
 @SpringBootApplication
 public class PlApplication {
 
-  public static void main(String[] args) {
-    SpringApplication.run(PlApplication.class, args);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(PlApplication.class, args);
+    }
 }

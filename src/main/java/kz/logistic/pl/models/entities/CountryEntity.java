@@ -17,17 +17,17 @@ import lombok.Setter;
 @Table(name = "country")
 public class CountryEntity {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long countryId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long countryId;
 
-  @Column(name = "country_name_kk")
-  private String countryNameKk;
+    @Column(name = "country_name_kk")
+    private String countryNameKk;
 
-  @Column(name = "country_name_ru")
-  private String countryNameRu;
+    @Column(name = "country_name_ru")
+    private String countryNameRu;
 
-  @Column(name = "country_name_en")
-  private String countryNameEn;
+    @Column(name = "country_name_en")
+    private String countryNameEn;
 
 }

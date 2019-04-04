@@ -17,20 +17,20 @@ import lombok.Setter;
 @Table(name = "special_characteristic")
 public class SpecialCharacteristicEntity {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long specialCharacteristicId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long specialCharacteristicId;
 
-  @Column(name = "characteristic_name_kk")
-  private String characteristicNameKk;
+    @Column(name = "characteristic_name_kk")
+    private String characteristicNameKk;
 
-  @Column(name = "characteristic_name_ru")
-  private String characteristicNameRu;
+    @Column(name = "characteristic_name_ru")
+    private String characteristicNameRu;
 
-  @Column(name = "characteristic_name_en")
-  private String characteristicNameEn;
+    @Column(name = "characteristic_name_en")
+    private String characteristicNameEn;
 
-  @Column(name = "add_info")
-  private String addInfo;
+    @Column(name = "add_info")
+    private String addInfo;
 
 }

@@ -8,16 +8,16 @@ import kz.logistic.pl.models.pojos.json.RolesJson;
 
 public interface RoleService {
 
-  List<Roles> showAllRoles();
+    List<Roles> showAllRoles();
 
-  void addRole(String name, String description);
+    void addRole(String name, String description);
 
-  void addRoleJson(RolesJson roles);
+    void addRoleJson(RolesJson roles);
 
-  Roles showRole(Long rolesId);
+    Roles showRole(Long rolesId);
 
-  String updateRole(Long cityId, RolesJson cityJson);
+    String updateRole(Long cityId, RolesJson cityJson);
 
-  String deleteRole(Long rolesId);
+    String deleteRole(Long rolesId);
 
 }

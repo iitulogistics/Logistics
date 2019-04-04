@@ -10,31 +10,31 @@ import java.io.Serializable;
 @Setter
 public class AddressJson implements Serializable {
 
-  @JsonProperty
-  private String streetNameKk;
+    @JsonProperty
+    private String streetNameKk;
 
-  @JsonProperty
-  private String streetNameRu;
+    @JsonProperty
+    private String streetNameRu;
 
-  @JsonProperty
-  private String streetNameEn;
+    @JsonProperty
+    private String streetNameEn;
 
-  @JsonProperty
-  private Long inhLocalityId;
+    @JsonProperty
+    private Long inhLocalityId;
 
-  @JsonProperty
-  private Long districtId;
+    @JsonProperty
+    private Long districtId;
 
-  @JsonProperty
-  private String buildingNumber;
+    @JsonProperty
+    private String buildingNumber;
 
-  @JsonProperty
-  private String flatNumber;
+    @JsonProperty
+    private String flatNumber;
 
-  @JsonProperty
-  private String zipCode;
+    @JsonProperty
+    private String zipCode;
 
-  @JsonProperty
-  private Integer addressAssign;
+    @JsonProperty
+    private Integer addressAssign;
 
 }

@@ -12,13 +12,13 @@ import lombok.Setter;
 @Setter
 public class CountryJson implements Serializable {
 
-  @JsonProperty
-  private String countryNameKk;
+    @JsonProperty
+    private String countryNameKk;
 
-  @JsonProperty
-  private String countryNameRu;
+    @JsonProperty
+    private String countryNameRu;
 
-  @JsonProperty
-  private String countryNameEn;
+    @JsonProperty
+    private String countryNameEn;
 
 }

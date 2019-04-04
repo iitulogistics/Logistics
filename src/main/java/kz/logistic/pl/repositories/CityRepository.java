@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CityRepository extends JpaRepository<CityEntity, Long> {
 
-  ArrayList<CityEntity> findByCountryIdAndCityNameEn(Long countryId, String cityNameEn);
+    ArrayList<CityEntity> findByCountryIdAndCityNameEn(Long countryId, String cityNameEn);
 
 }

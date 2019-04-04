@@ -1,9 +1,9 @@
 package kz.logistic.pl.models.pojos;
 
 public interface SellerCategory {
-  Long getSellerCategoryId();
+    Long getSellerCategoryId();
 
-  LocalizedMessage getSellerCategoryName();
+    LocalizedMessage getSellerCategoryName();
 
-  String getSellerCategoryAddInfo();
+    String getSellerCategoryAddInfo();
 }

@@ -16,15 +16,15 @@ import lombok.Setter;
 @Entity
 @Table(name = "seller_category")
 public class SellerCategoryEntity {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long sellerCategoryId;
-  @Column(name = "category_name_kk")
-  private String categoryNameKk;
-  @Column(name = "category_name_ru")
-  private String categoryNameRu;
-  @Column(name = "category_name_en")
-  private String categoryNameEn;
-  @Column(name = "add_info")
-  private String addInfo;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long sellerCategoryId;
+    @Column(name = "category_name_kk")
+    private String categoryNameKk;
+    @Column(name = "category_name_ru")
+    private String categoryNameRu;
+    @Column(name = "category_name_en")
+    private String categoryNameEn;
+    @Column(name = "add_info")
+    private String addInfo;
 }

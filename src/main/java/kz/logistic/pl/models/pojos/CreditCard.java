@@ -3,12 +3,12 @@ package kz.logistic.pl.models.pojos;
 import java.util.Date;
 
 public interface CreditCard {
-  Long getCreditCardId();
+    Long getCreditCardId();
 
-  Integer getCreditCardNumber();
+    Integer getCreditCardNumber();
 
-  String getHolderName();
+    String getHolderName();
 
-  Date getExpireDate();
+    Date getExpireDate();
 
 }

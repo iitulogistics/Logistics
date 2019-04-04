@@ -14,18 +14,18 @@ import java.util.Date;
 @Table(name = "credit_card")
 public class CreditCardEntity {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long ccId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long ccId;
 
-  @Column(name = "cc_number")
-  private Integer creditCardNumber;
+    @Column(name = "cc_number")
+    private Integer creditCardNumber;
 
-  @Column(name = "holder_name")
-  private String holderName;
+    @Column(name = "holder_name")
+    private String holderName;
 
-  @Column(name = "expire_date")
-  @Temporal(TemporalType.DATE)
-  private Date expireDate;
+    @Column(name = "expire_date")
+    @Temporal(TemporalType.DATE)
+    private Date expireDate;
 
 }

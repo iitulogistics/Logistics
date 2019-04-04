@@ -11,19 +11,19 @@ import java.io.Serializable;
 @Setter
 public class DistrictJson implements Serializable {
 
-  @JsonProperty
-  private String districtNameKk;
+    @JsonProperty
+    private String districtNameKk;
 
-  @JsonProperty
-  private String districtNameRu;
+    @JsonProperty
+    private String districtNameRu;
 
-  @JsonProperty
-  private String districtNameEn;
+    @JsonProperty
+    private String districtNameEn;
 
-  @JsonProperty
-  private Long regionId;
+    @JsonProperty
+    private Long regionId;
 
-  @JsonProperty
-  private Long cityId;
+    @JsonProperty
+    private Long cityId;
 
 }

@@ -9,17 +9,17 @@ import kz.logistic.pl.models.pojos.json.CityJson;
 
 public interface CityService {
 
-  List<City> showAllCities();
+    List<City> showAllCities();
 
-  DefaultCity showCity(Long cityId);
+    DefaultCity showCity(Long cityId);
 
-  String addCity(String cityNameKk, String cityNameRu,
-                 String cityNameEn, Long regionId, Long countryId);
+    String addCity(String cityNameKk, String cityNameRu,
+                   String cityNameEn, Long regionId, Long countryId);
 
-  String addCityJson(CityJson cityJson);
+    String addCityJson(CityJson cityJson);
 
-  String updateCity(Long cityId, CityJson cityJson);
+    String updateCity(Long cityId, CityJson cityJson);
 
-  String deleteCity(Long cityId);
+    String deleteCity(Long cityId);
 
 }

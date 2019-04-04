@@ -6,6 +6,6 @@ import java.util.Map;
 
 public interface GosZakupBinService {
 
-  Map<String, Object> showCompanyInformation(String bin) throws IOException;
+    Map<String, Object> showCompanyInformation(String bin) throws IOException;
 
 }

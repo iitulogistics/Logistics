@@ -12,19 +12,19 @@ import lombok.Setter;
 @Setter
 public class CityJson implements Serializable {
 
-  @JsonProperty
-  private String cityNameKk;
+    @JsonProperty
+    private String cityNameKk;
 
-  @JsonProperty
-  private String cityNameRu;
+    @JsonProperty
+    private String cityNameRu;
 
-  @JsonProperty
-  private String cityNameEn;
+    @JsonProperty
+    private String cityNameEn;
 
-  @JsonProperty
-  private Long regionId;
+    @JsonProperty
+    private Long regionId;
 
-  @JsonProperty
-  private Long countryId;
+    @JsonProperty
+    private Long countryId;
 
 }

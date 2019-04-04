@@ -7,21 +7,21 @@ import java.util.List;
 
 public interface SpecialCharacteristicService {
 
-  SpecialCharacteristic getCharacteristicById(Long id);
+    SpecialCharacteristic getCharacteristicById(Long id);
 
-  List<SpecialCharacteristic> showAllCharacteristic();
+    List<SpecialCharacteristic> showAllCharacteristic();
 
-  void addSpecialCharacteristic(
-    String characteristicNameKk,
-    String characteristicNameRu,
-    String characteristicNameEn,
-    String addInfo
-  );
+    void addSpecialCharacteristic(
+        String characteristicNameKk,
+        String characteristicNameRu,
+        String characteristicNameEn,
+        String addInfo
+    );
 
-  void addSpecialCharacteristicJson(SpecialCharacteristicJson specialCharacteristicJson);
+    void addSpecialCharacteristicJson(SpecialCharacteristicJson specialCharacteristicJson);
 
-  String updateCharacteristic(Long characteristicId, SpecialCharacteristicJson specialCharacteristicJson);
+    String updateCharacteristic(Long characteristicId, SpecialCharacteristicJson specialCharacteristicJson);
 
-  String deleteCharacteristic(Long characteristicId);
+    String deleteCharacteristic(Long characteristicId);
 
 }

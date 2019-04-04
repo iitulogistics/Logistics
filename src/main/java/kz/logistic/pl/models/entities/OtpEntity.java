@@ -10,14 +10,14 @@ import javax.persistence.*;
 @Entity
 @Table(name = "otp")
 public class OtpEntity {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Column(name = "mobile_phone")
-  private String mobilePhone;
+    @Column(name = "mobile_phone")
+    private String mobilePhone;
 
-  @Column(name = "otp")
-  private String otp;
+    @Column(name = "otp")
+    private String otp;
 
 }

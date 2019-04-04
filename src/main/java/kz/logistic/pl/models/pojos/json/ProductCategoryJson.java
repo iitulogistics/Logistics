@@ -12,16 +12,16 @@ import lombok.Setter;
 @Setter
 public class ProductCategoryJson implements Serializable {
 
-  @JsonProperty
-  private String categoryNameKk;
+    @JsonProperty
+    private String categoryNameKk;
 
-  @JsonProperty
-  private String categoryNameRu;
+    @JsonProperty
+    private String categoryNameRu;
 
-  @JsonProperty
-  private String categoryNameEn;
+    @JsonProperty
+    private String categoryNameEn;
 
-  @JsonProperty
-  private String addInfo;
+    @JsonProperty
+    private String addInfo;
 
 }

@@ -15,11 +15,11 @@ import lombok.Setter;
 @Entity
 @Table(name = "roles")
 public class RolesEntity {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long roleId;
-  @Column(name = "role_name")
-  private String roleName;
-  @Column(name = "description")
-  private String description;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long roleId;
+    @Column(name = "role_name")
+    private String roleName;
+    @Column(name = "description")
+    private String description;
 }

@@ -11,16 +11,16 @@ import java.util.List;
 public interface DistrictService {
 
 
-  List<District> showAllDistricts();
+    List<District> showAllDistricts();
 
-  DefaultDistrict showDistrict(Long districtId);
+    DefaultDistrict showDistrict(Long districtId);
 
-  String addDistrict(String districtNameKk, String districtNameEn, String districtNameRu, Long regionId, Long cityid);
+    String addDistrict(String districtNameKk, String districtNameEn, String districtNameRu, Long regionId, Long cityid);
 
-  String addDistrictJson(DistrictJson districtJson);
+    String addDistrictJson(DistrictJson districtJson);
 
-  String updateDistrict(Long districtId, DistrictJson districtJson);
+    String updateDistrict(Long districtId, DistrictJson districtJson);
 
-  String deleteDistrict(Long districtId);
+    String deleteDistrict(Long districtId);
 
 }

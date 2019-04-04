@@ -15,56 +15,56 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/seller/company/role")
 public class RolesController {
 
-  private RoleService roleService;
+    private RoleService roleService;
 
-  @Qualifier("defaultRoleService")
-  @Autowired(required = false)
-  public void setRoleService(RoleService roleService) {
-    this.roleService = roleService;
-  }
+    @Qualifier("defaultRoleService")
+    @Autowired(required = false)
+    public void setRoleService(RoleService roleService) {
+        this.roleService = roleService;
+    }
 
-  @ApiOperation(value = "Показывает все списки ролей компаний продавцов")
-  @GetMapping(value = "/all")
-  public ResponseEntity<?> all() {
-    return ResponseEntity.ok(this.roleService.showAllRoles());
-  }
+    @ApiOperation(value = "Показывает все списки ролей компаний продавцов")
+    @GetMapping(value = "/all")
+    public ResponseEntity<?> all() {
+        return ResponseEntity.ok(this.roleService.showAllRoles());
+    }
 
-  @ApiOperation(value = "Показывает роль по ID")
-  @GetMapping(value = "/{id}")
-  public ResponseEntity<?> getId(@PathVariable(value = "id") Long rolesId) {
-    return ResponseEntity.ok(this.roleService.showRole(rolesId));
-  }
+    @ApiOperation(value = "Показывает роль по ID")
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> getId(@PathVariable(value = "id") Long rolesId) {
+        return ResponseEntity.ok(this.roleService.showRole(rolesId));
+    }
 
-  @ApiOperation(value = "Добавляет новые роли для компаний продавцов")
-  @PostMapping(value = "/add")
-  public ResponseEntity<?> add(
-    @RequestParam(required = false) String roleName,
-    @RequestParam(required = false) String roleDescription) {
-    this.roleService.addRole(roleName, roleDescription);
-    return ResponseEntity.ok("Новая роль компаний продавцов добавлена");
-  }
+    @ApiOperation(value = "Добавляет новые роли для компаний продавцов")
+    @PostMapping(value = "/add")
+    public ResponseEntity<?> add(
+        @RequestParam(required = false) String roleName,
+        @RequestParam(required = false) String roleDescription) {
+        this.roleService.addRole(roleName, roleDescription);
+        return ResponseEntity.ok("Новая роль компаний продавцов добавлена");
+    }
 
-  @ApiOperation(value = "Добавляет новые роли для компаний продавцов с помощью JSON формата")
-  @PostMapping(value = "/addJson",
-    consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<?> addJson(@RequestBody RolesJson roles) {
-    this.roleService.addRoleJson(roles);
-    return ResponseEntity.ok("Новая роль компаний продавцов добавлена с помощью JSON формата");
-  }
+    @ApiOperation(value = "Добавляет новые роли для компаний продавцов с помощью JSON формата")
+    @PostMapping(value = "/addJson",
+        consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> addJson(@RequestBody RolesJson roles) {
+        this.roleService.addRoleJson(roles);
+        return ResponseEntity.ok("Новая роль компаний продавцов добавлена с помощью JSON формата");
+    }
 
-  @ApiOperation(value = "Обновляет роль")
-  @PatchMapping("{id}")
-  public ResponseEntity<?> update(
-    @PathVariable(value = "id") Long rolesId,
-    @RequestBody RolesJson rolesJson
-  ) {
-    return ResponseEntity.ok(this.roleService.updateRole(rolesId, rolesJson));
-  }
+    @ApiOperation(value = "Обновляет роль")
+    @PatchMapping("{id}")
+    public ResponseEntity<?> update(
+        @PathVariable(value = "id") Long rolesId,
+        @RequestBody RolesJson rolesJson
+    ) {
+        return ResponseEntity.ok(this.roleService.updateRole(rolesId, rolesJson));
+    }
 
-  @ApiOperation(value = "Удаляет роль")
-  @DeleteMapping("{id}")
-  public ResponseEntity<?> delete(@PathVariable(value = "id") Long rolesId) {
-    return ResponseEntity.ok(this.roleService.deleteRole(rolesId));
-  }
+    @ApiOperation(value = "Удаляет роль")
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long rolesId) {
+        return ResponseEntity.ok(this.roleService.deleteRole(rolesId));
+    }
 
 }

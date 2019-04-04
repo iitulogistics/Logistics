@@ -1,14 +1,18 @@
 package kz.logistic.pl.security;
 
 import kz.logistic.pl.services.AuthenticationService;
+import org.apache.catalina.core.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticatedPrincipal;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -20,31 +24,33 @@ import java.util.ArrayList;
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-  @Value("${jwt.url-param}")
-  String jwtParam;
+    String jwtParam;
 
-  @Autowired(required = false)
-  @Qualifier("defaultAuthenticationService")
-  AuthenticationService authenticationService;
+    @Autowired
+    private AuthenticationService authenticationService;
 
-  @Override
-  protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
-                                  FilterChain filterChain) throws ServletException, IOException {
-    if (httpServletRequest.getParameter(jwtParam) == null){
-      filterChain.doFilter(httpServletRequest, httpServletResponse);
-      return;
+    public JwtAuthenticationFilter(String jwtParam){
+        this.jwtParam = jwtParam;
     }
-    String jwtToken = httpServletRequest.getParameter(jwtParam);
-    if (this.authenticationService.validateToken(jwtToken) == "OK"){
-      ArrayList<GrantedAuthority> authorities = new ArrayList<>();
-      String role = this.authenticationService.getRoleByToken(jwtToken);
-      authorities.add(new SimpleGrantedAuthority(role));
-      Authentication authentication = new UsernamePasswordAuthenticationToken(null, null,
-        authorities);
-      SecurityContextHolder.getContext().setAuthentication(authentication);
-      filterChain.doFilter(httpServletRequest, httpServletResponse);
-      return;
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+                                    FilterChain filterChain) throws ServletException, IOException {
+        if (httpServletRequest.getParameter(jwtParam) == null) {
+            filterChain.doFilter(httpServletRequest, httpServletResponse);
+            return;
+        }
+        String jwtToken = httpServletRequest.getParameter(jwtParam);
+        if (this.authenticationService.validateToken(jwtToken) == "OK") {
+            ArrayList<GrantedAuthority> authorities = new ArrayList<>();
+            String role = this.authenticationService.getRoleByToken(jwtToken);
+            authorities.add(new SimpleGrantedAuthority(role));
+            Authentication authentication = new UsernamePasswordAuthenticationToken(jwtToken, null,
+                authorities);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            filterChain.doFilter(httpServletRequest, httpServletResponse);
+            return;
+        }
+        filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
-    filterChain.doFilter(httpServletRequest, httpServletResponse);
-  }
 }

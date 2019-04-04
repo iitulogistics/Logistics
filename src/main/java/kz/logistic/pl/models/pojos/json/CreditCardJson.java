@@ -10,12 +10,12 @@ import java.util.Date;
 @Setter
 @Getter
 public class CreditCardJson implements Serializable {
-  @JsonProperty
-  private Integer creditCardNumber;
+    @JsonProperty
+    private Integer creditCardNumber;
 
-  @JsonProperty
-  private String holderName;
+    @JsonProperty
+    private String holderName;
 
-  @JsonProperty
-  private Date expireDate;
+    @JsonProperty
+    private Date expireDate;
 }

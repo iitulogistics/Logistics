@@ -6,38 +6,38 @@ import lombok.Builder;
 @Builder
 public class DefaultSpecialCharacteristic implements SpecialCharacteristic {
 
-  private Long characteristicId;
+    private Long characteristicId;
 
-  private String characteristicNameKk;
+    private String characteristicNameKk;
 
-  private String characteristicNameRu;
+    private String characteristicNameRu;
 
-  private String characteristicNameEn;
+    private String characteristicNameEn;
 
-  private String addInfo;
+    private String addInfo;
 
-  @Override
-  public Long getCharacteristicId() {
-    return characteristicId;
-  }
+    @Override
+    public Long getCharacteristicId() {
+        return characteristicId;
+    }
 
-  @Override
-  public String getCharacteristicNameKk() {
-    return characteristicNameKk;
-  }
+    @Override
+    public String getCharacteristicNameKk() {
+        return characteristicNameKk;
+    }
 
-  @Override
-  public String getCharacteristicNameRu() {
-    return characteristicNameRu;
-  }
+    @Override
+    public String getCharacteristicNameRu() {
+        return characteristicNameRu;
+    }
 
-  @Override
-  public String getCharacteristicNameEn() {
-    return characteristicNameEn;
-  }
+    @Override
+    public String getCharacteristicNameEn() {
+        return characteristicNameEn;
+    }
 
-  @Override
-  public String getAddInfo() {
-    return addInfo;
-  }
+    @Override
+    public String getAddInfo() {
+        return addInfo;
+    }
 }

@@ -8,16 +8,16 @@ import lombok.Setter;
 @Setter
 public class SpecialCharacteristicJson {
 
-  @JsonProperty
-  private String characteristicNameKk;
+    @JsonProperty
+    private String characteristicNameKk;
 
-  @JsonProperty
-  private String characteristicNameRu;
+    @JsonProperty
+    private String characteristicNameRu;
 
-  @JsonProperty
-  private String characteristicNameEn;
+    @JsonProperty
+    private String characteristicNameEn;
 
-  @JsonProperty
-  private String addInfo;
+    @JsonProperty
+    private String addInfo;
 
 }

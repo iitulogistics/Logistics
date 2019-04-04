@@ -6,7 +6,7 @@ import org.hibernate.dialect.SQLServer2012Dialect;
 
 
 public class CustomMssqlDialect extends SQLServer2012Dialect {
-  public CustomMssqlDialect() {
-    this.registerColumnType(Types.JAVA_OBJECT, "jsonb");
-  }
+    public CustomMssqlDialect() {
+        this.registerColumnType(Types.JAVA_OBJECT, "jsonb");
+    }
 }

@@ -18,20 +18,20 @@ import lombok.Setter;
 @Entity
 @Table(name = "shipping")
 public class ShippingEntity {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long shippingId;
-  @Column(name = "shipper_id")
-  private Long shipperId;
-  @Column(name = "order_id")
-  private Long orderId;
-  @Column(name = "order_number")
-  private Integer orderNumber;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long shippingId;
+    @Column(name = "shipper_id")
+    private Long shipperId;
+    @Column(name = "order_id")
+    private Long orderId;
+    @Column(name = "order_number")
+    private Integer orderNumber;
 
-  @Column(name = "accept_date")
-  private Date acceptDate;
-  @Column(name = "shipping_date")
-  private Date shippingDate;
-  @Column(name = "add_info")
-  private String addInfo;
+    @Column(name = "accept_date")
+    private Date acceptDate;
+    @Column(name = "shipping_date")
+    private Date shippingDate;
+    @Column(name = "add_info")
+    private String addInfo;
 }
