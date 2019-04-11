@@ -31,7 +31,7 @@
   <xs:element name="deleteCountryIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="country" type="tns:country"/>
+        <xs:element name="country" type="xs:string"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
