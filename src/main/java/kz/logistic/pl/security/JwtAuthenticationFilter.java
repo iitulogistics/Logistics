@@ -24,14 +24,11 @@ import java.util.ArrayList;
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    String jwtParam;
+    @Value("${jwt.url-param}")
+    private String jwtParam;
 
     @Autowired
     private AuthenticationService authenticationService;
-
-    public JwtAuthenticationFilter(String jwtParam){
-        this.jwtParam = jwtParam;
-    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,

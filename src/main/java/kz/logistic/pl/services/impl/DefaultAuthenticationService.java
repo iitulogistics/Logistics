@@ -60,10 +60,10 @@ public class DefaultAuthenticationService implements AuthenticationService {
     }
 
     @Override
-    public String generateToken(String username, String role) {
+    public String generateToken(String username) {
         String jwt = Jwts.builder()
             .setSubject(username)
-            .claim("role", role)
+            .claim("role", getRoleByUsername(username))
             .signWith(new SecretKeySpec(
                 jwtKeyString.getBytes(),
                 SignatureAlgorithm.HS256.getJcaName()

@@ -14,20 +14,17 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Value("${jwt.url-param}")
-    private String jwtParam;
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-            .addFilterAfter(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-        .authorizeRequests()
-            .antMatchers("product/add", "product/addJson").hasAuthority("sellerCompany");
+        http.csrf().disable().authorizeRequests()
+            .antMatchers("/product/add", "/product/addJson").denyAll()
+            .antMatchers("/product/add", "/product/addJson").hasAuthority("sellerCompany").and()
+        .addFilterAfter(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter(){
-        return new JwtAuthenticationFilter(jwtParam);
+        return new JwtAuthenticationFilter();
     }
 
 }

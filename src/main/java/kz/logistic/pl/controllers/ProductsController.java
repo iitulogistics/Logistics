@@ -49,7 +49,8 @@ public class ProductsController {
         @RequestParam Integer price,
         @RequestParam String productDescription,
         @RequestParam Long sellerCompanyId,
-        @RequestParam Long specialCharacteristicsId) {
+        @RequestParam Long specialCharacteristicsId,
+        @RequestParam(value = "jwt_token", required = false) String jwtToken) {
         this.productService.addProduct(
             productNameKk, productNameRu, productNameEn, productCategoryId, productSubcategoryId,
             uniqueIdNumber, serialNumber, manufacturer, size, weight, price, productDescription,

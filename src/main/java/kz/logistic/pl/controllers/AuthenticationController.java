@@ -30,8 +30,7 @@ public class AuthenticationController {
     ) {
         if (!this.authenticationService.isCorrect(username, password))
             return "Incorrect username or password";
-        String role = this.authenticationService.getRoleByUsername(username);
-        return this.authenticationService.generateToken(username, role);
+        return this.authenticationService.generateToken(username);
     }
 
     @GetMapping(value = "/validate")
