@@ -17,6 +17,7 @@ import kz.logistic.pl.services.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
@@ -184,7 +185,7 @@ public class DefaultProductService implements ProductService {
 
     @Override
     public byte[] getPhoto(String name) throws IOException {
-        File file = new File(uploadDir + "\\" + name);
+        File file = new File(uploadDir + name);
         FileInputStream fileInputStream = new FileInputStream(file);
         return IOUtils.toByteArray(fileInputStream);
     }
@@ -196,9 +197,10 @@ public class DefaultProductService implements ProductService {
             return "Продукта с таким ID не существует";
         try {
             String filename = UUID.randomUUID() + "." + FilenameUtils.getExtension(file.getOriginalFilename());
-            File transferFile = new File(uploadDir + "\\" + filename);
+            File transferFile = new File(uploadDir + filename);
             file.transferTo(transferFile);
-
+            FileInputStream fileInputStream = new FileInputStream(transferFile);
+            XSSFWorkbook xssfWorkbook = new XSSFWorkbook(fileInputStream);
             String photosUrlList = productsEntity.getProductsImg();
             if (photosUrlList == null)
                 photosUrlList = "";

@@ -76,6 +76,7 @@ public class ProductsController {
     @GetMapping("{id}")
     public ResponseEntity<?> show(@PathVariable(value = "id") Long productId) {
         return ResponseEntity.ok(this.productService.showProduct(productId));
+
     }
 
     @ApiOperation(value = "Обновляет город")
