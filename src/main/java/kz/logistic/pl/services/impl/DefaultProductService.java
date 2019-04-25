@@ -101,6 +101,7 @@ public class DefaultProductService implements ProductService {
             .productSubcategoryId(productsEntity.getProductSubcategoryId())
             .size(productsEntity.getSize())
             .weight(productsEntity.getWeight())
+            .photoUrlsList(productsEntity.getProductsImg())
             .specialCharacteristicsId(productsEntity.getSpecialCharacteristicId())
             .serialNumber(productsEntity.getSerialNumber())
             .uniqueIdNumber(productsEntity.getUniqueIdNumber())
@@ -125,6 +126,7 @@ public class DefaultProductService implements ProductService {
             .weight(productsEntity.getWeight())
             .specialCharacteristicsId(productsEntity.getSpecialCharacteristicId())
             .serialNumber(productsEntity.getSerialNumber())
+            .photoUrlsList(productsEntity.getProductsImg())
             .uniqueIdNumber(productsEntity.getUniqueIdNumber()).build();
     }
 
@@ -199,8 +201,6 @@ public class DefaultProductService implements ProductService {
             String filename = UUID.randomUUID() + "." + FilenameUtils.getExtension(file.getOriginalFilename());
             File transferFile = new File(uploadDir + filename);
             file.transferTo(transferFile);
-            FileInputStream fileInputStream = new FileInputStream(transferFile);
-            XSSFWorkbook xssfWorkbook = new XSSFWorkbook(fileInputStream);
             String photosUrlList = productsEntity.getProductsImg();
             if (photosUrlList == null)
                 photosUrlList = "";
@@ -209,12 +209,9 @@ public class DefaultProductService implements ProductService {
             else
                 productsEntity.setProductsImg(photosUrlList + "," + filename);
             this.productRepository.save(productsEntity);
-            return ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/products/uploads/")
-                .path(filename)
-                .toUriString();
+            return "/product/uploads/" + filename;
         } catch (IOException e) {
-            return "Ошибка";
+            return e.getMessage();
         }
     }
 

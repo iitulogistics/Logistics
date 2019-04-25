@@ -23,5 +23,6 @@ public class DefaultProduct implements Product {
     private String productDescription;
     private Long sellerCompanyId;
     private Long specialCharacteristicsId;
+    private String photoUrlsList;
 
 }
