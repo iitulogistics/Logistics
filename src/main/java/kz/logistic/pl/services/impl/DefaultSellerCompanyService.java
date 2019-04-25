@@ -131,7 +131,7 @@ public class DefaultSellerCompanyService implements SellerCompanyService {
     sellerCompanyEntity.setMobilePhone(sellerCompanyJson.getSellerCompanyMobilePhone());
     sellerCompanyEntity.setBin(sellerCompanyJson.getSellerCompanyBin());
     sellerCompanyEntity.setEmail(sellerCompanyJson.getSellerCompanyEmail());
-
+    sellerCompanyEntity.setSellerCategoryId(sellerCompanyJson.getSellerCategoryId());
     LoginEntity loginEntity = new LoginEntity();
     loginEntity.setUsername(sellerCompanyJson.getUsername());
     loginEntity.setPassword(sellerCompanyJson.getPassword());

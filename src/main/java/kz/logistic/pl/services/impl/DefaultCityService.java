@@ -67,6 +67,7 @@ public class DefaultCityService implements CityService {
   public boolean exists(Long countryId, String cityNameEn) {
     ArrayList<CityEntity> cityEntity =
       this.cityRepository.findByCountryIdAndCityNameEn(countryId, cityNameEn);
+
     return cityEntity.size() > 0;
   }
 

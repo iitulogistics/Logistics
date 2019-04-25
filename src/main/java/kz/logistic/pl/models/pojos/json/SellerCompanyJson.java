@@ -30,4 +30,6 @@ public class SellerCompanyJson implements Serializable {
   private String sellerCompanyPhone;
   @JsonProperty
   private String username;
+  @JsonProperty
+  private Long sellerCategoryId;
 }

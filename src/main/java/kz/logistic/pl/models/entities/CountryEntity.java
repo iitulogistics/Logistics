@@ -30,4 +30,5 @@ public class CountryEntity {
   @Column(name = "country_name_en")
   private String countryNameEn;
 
+
 }

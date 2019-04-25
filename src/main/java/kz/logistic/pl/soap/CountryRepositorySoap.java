@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Component
 public class CountryRepositorySoap {
@@ -38,7 +39,17 @@ public class CountryRepositorySoap {
     });
   }
 
-  public Country findCountryId(Long id) {
-    return countryMap.get(id);
-  }
+    public Country findCountryId(Long id) {
+        return countryMap.get(id);
+    }
+
+    public String deleteCountryId(Long id){
+      CountryEntity entity = this.repository.findById(id).orElse(null);
+       if (entity !=null){
+         this.repository.delete(entity);
+         return "Country by ID "+id+" deleted";
+       } else {
+         return "Country by ID "+id+" does not found in database";
+       }
+    }
 }

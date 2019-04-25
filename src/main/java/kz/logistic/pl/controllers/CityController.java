@@ -17,6 +17,7 @@ public class CityController {
 
   private CityService cityService;
 
+
   @Qualifier("defaultCityService")
   @Autowired(required = false)
   private void setCityService(CityService cityService) {
