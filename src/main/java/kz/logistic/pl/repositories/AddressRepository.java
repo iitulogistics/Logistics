@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public interface AddressRepository extends JpaRepository<AddressesEntity, Long> {
 
-  ArrayList<AddressesEntity> findByStreetNameEnAndBuildingNumberAndFlatNumberAndZipCode(
-    String streetNameEn, String buildingNumber, String flatNumber, String zipCode);
+    ArrayList<AddressesEntity> findByStreetNameEnAndBuildingNumberAndFlatNumberAndZipCode(
+        String streetNameEn, String buildingNumber, String flatNumber, String zipCode);
 
 }
 

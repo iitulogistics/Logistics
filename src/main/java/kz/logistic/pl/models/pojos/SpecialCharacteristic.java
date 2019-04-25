@@ -2,14 +2,14 @@ package kz.logistic.pl.models.pojos;
 
 public interface SpecialCharacteristic {
 
-  Long getCharacteristicId();
+    Long getCharacteristicId();
 
-  String getCharacteristicNameKk();
+    String getCharacteristicNameKk();
 
-  String getCharacteristicNameRu();
+    String getCharacteristicNameRu();
 
-  String getCharacteristicNameEn();
+    String getCharacteristicNameEn();
 
-  String getAddInfo();
+    String getAddInfo();
 
 }

@@ -9,16 +9,16 @@ import kz.logistic.pl.models.pojos.json.RegionJson;
 
 public interface RegionService {
 
-  List<Region> showAllRegions();
+    List<Region> showAllRegions();
 
-  String addRegion(String regionNameEn, String regionNameKk, String regionNameRu, Long countryId);
+    String addRegion(String regionNameEn, String regionNameKk, String regionNameRu, Long countryId);
 
-  String addRegionJson(RegionJson regionJson);
+    String addRegionJson(RegionJson regionJson);
 
-  DefaultRegion showRegion(Long regionId);
+    DefaultRegion showRegion(Long regionId);
 
-  String updateRegion(Long regionId, RegionJson regionJson);
+    String updateRegion(Long regionId, RegionJson regionJson);
 
-  String deleteRegion(Long regionId);
+    String deleteRegion(Long regionId);
 
 }

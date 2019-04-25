@@ -7,18 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
 public class MessageSourceBuilderFactory implements
-        LocalizedMessageBuilderFactory {
+    LocalizedMessageBuilderFactory {
 
-  private ApplicationContext applicationContext;
+    private ApplicationContext applicationContext;
 
-  @Autowired
-  public void setApplicationContext(ApplicationContext applicationContext) {
-    this.applicationContext = applicationContext;
-  }
+    @Autowired
+    public void setApplicationContext(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+    }
 
-  @Override
-  public LocalizedMessageModelBuilder builder() {
-    return applicationContext.getBean(MessageSourceLocalizedMessageModelBuilder.class);
-  }
+    @Override
+    public LocalizedMessageModelBuilder builder() {
+        return applicationContext.getBean(MessageSourceLocalizedMessageModelBuilder.class);
+    }
 
 }

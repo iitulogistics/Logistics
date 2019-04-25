@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SellerCompanyRepository extends JpaRepository<SellerCompanyEntity, Long> {
-  String findByMobilePhone(String mobilePhone);
+    String findByMobilePhone(String mobilePhone);
 }

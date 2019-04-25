@@ -9,16 +9,16 @@ import kz.logistic.pl.models.pojos.json.ProductCategoryJson;
 
 public interface ProductCategoryService {
 
-  List<ProductCategory> showAllProduct();
+    List<ProductCategory> showAllProduct();
 
-  DefaultProductCategory showProductCategory(Long productCategoryId);
+    DefaultProductCategory showProductCategory(Long productCategoryId);
 
-  String addCategory(String categoryNameKk, String categoryNameRu,
-                     String categoryNameEn, String addInfo);
+    String addCategory(String categoryNameKk, String categoryNameRu,
+                       String categoryNameEn, String addInfo);
 
-  String addCategoryJson(ProductCategoryJson productCategoryJson);
+    String addCategoryJson(ProductCategoryJson productCategoryJson);
 
-  String updateProductCategory(Long productCategoryId, ProductCategoryJson productCategoryJson);
+    String updateProductCategory(Long productCategoryId, ProductCategoryJson productCategoryJson);
 
-  String deleteProductCategory(Long productCategoryId);
+    String deleteProductCategory(Long productCategoryId);
 }

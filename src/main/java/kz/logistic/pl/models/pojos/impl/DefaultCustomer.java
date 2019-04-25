@@ -8,72 +8,72 @@ import lombok.Builder;
 @Builder
 public class DefaultCustomer implements Customer {
 
-  private Long customerId;
-  private Long loginId;
-  private String username;
-  private String password;
-  private LocalizedMessage customerName;
-  private String mobilePhone;
-  private String iinOrBin;
-  private String phoneNumber;
-  private String email;
-  private String addInfo;
-  private Long addressId;
+    private Long customerId;
+    private Long loginId;
+    private String username;
+    private String password;
+    private LocalizedMessage customerName;
+    private String mobilePhone;
+    private String iinOrBin;
+    private String phoneNumber;
+    private String email;
+    private String addInfo;
+    private Long addressId;
 
-  @Override
-  public String getIinOrBin() {
-    return iinOrBin;
-  }
+    @Override
+    public String getIinOrBin() {
+        return iinOrBin;
+    }
 
-  @Override
-  public String getPhoneNumber() {
-    return phoneNumber;
-  }
+    @Override
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
-  @Override
-  public String getEmail() {
-    return email;
-  }
+    @Override
+    public String getEmail() {
+        return email;
+    }
 
-  @Override
-  public String getAddInfo() {
-    return addInfo;
-  }
+    @Override
+    public String getAddInfo() {
+        return addInfo;
+    }
 
-  @Override
-  public Long getAddressId() {
-    return addressId;
-  }
+    @Override
+    public Long getAddressId() {
+        return addressId;
+    }
 
-  @Override
-  public Long getLoginId() {
-    return loginId;
-  }
+    @Override
+    public Long getLoginId() {
+        return loginId;
+    }
 
-  @Override
-  public String getLoginName() {
-    return username;
-  }
+    @Override
+    public String getLoginName() {
+        return username;
+    }
 
-  @Override
-  public String getLoginPassword() {
-    return password;
-  }
+    @Override
+    public String getLoginPassword() {
+        return password;
+    }
 
-  @Override
-  public Long getCustomerId() {
-    return customerId;
-  }
+    @Override
+    public Long getCustomerId() {
+        return customerId;
+    }
 
-  @Override
-  public LocalizedMessage getCustomerName() {
-    return customerName;
-  }
+    @Override
+    public LocalizedMessage getCustomerName() {
+        return customerName;
+    }
 
-  @Override
-  public String getCustomerMobilePhone() {
-    return mobilePhone;
-  }
+    @Override
+    public String getCustomerMobilePhone() {
+        return mobilePhone;
+    }
 
 
 }

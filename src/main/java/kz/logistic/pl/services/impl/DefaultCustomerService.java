@@ -25,184 +25,184 @@ import java.util.stream.Collectors;
 @Slf4j
 public class DefaultCustomerService implements CustomerService {
 
-  private CustomerRepository customerRepository;
-  private LoginRepository loginRepository;
-  private OtpService otpService;
-  private LocalizedMessageBuilderFactory localizedMessageBuilderFactory;
+    private CustomerRepository customerRepository;
+    private LoginRepository loginRepository;
+    private OtpService otpService;
+    private LocalizedMessageBuilderFactory localizedMessageBuilderFactory;
 
-  @Autowired
-  public void setCustomerRepository(CustomerRepository customerRepository) {
-    this.customerRepository = customerRepository;
-  }
-
-  @Autowired
-  public void setOtpService(OtpService otpService) {
-    this.otpService = otpService;
-  }
-
-  @Autowired
-  public void setLocalizedMessageBuilderFactory(
-    LocalizedMessageBuilderFactory localizedMessageBuilderFactory) {
-    this.localizedMessageBuilderFactory = localizedMessageBuilderFactory;
-  }
-
-  @Autowired
-  public void setLoginRepository(LoginRepository loginRepository) {
-    this.loginRepository = loginRepository;
-  }
-
-  @Override
-  public List<Customer> showAllCustomers() {
-    List<LoginEntity> entities = this.loginRepository.findByCustomerEntityCustomerIdIsNotNull();
-
-    return entities.stream().map(customerEntity -> DefaultCustomer.builder()
-      .loginId(customerEntity.getLoginId())
-      .username(customerEntity.getUsername())
-      .password(customerEntity.getPassword())
-      .customerId(customerEntity.getCustomerEntity().getCustomerId())
-      .mobilePhone(customerEntity.getCustomerEntity().getMobilePhone())
-      .customerName(localizedMessageBuilderFactory.builder()
-        .en(customerEntity.getCustomerEntity().getCustomerNameEn())
-        .kk(customerEntity.getCustomerEntity().getCustomerNameKk())
-        .ru(customerEntity.getCustomerEntity().getCustomerNameRu()).build())
-      .iinOrBin(customerEntity.getCustomerEntity().getIinOrBin())
-      .phoneNumber(customerEntity.getCustomerEntity().getPhoneNumber())
-      .email(customerEntity.getCustomerEntity().getEmail())
-      .addInfo(customerEntity.getCustomerEntity().getAddInfo())
-      .addressId(customerEntity.getCustomerEntity().getAddressId())
-      .build()).collect(Collectors.toList());
-  }
-
-  @Override
-  public DefaultCustomer showCustomer(Long customerId) throws Exception {
-    CustomerEntity customerEntity = this.customerRepository.findById(customerId).orElse(null);
-
-    if (customerEntity == null) {
-      throw new Exception("Customer id not found");
+    @Autowired
+    public void setCustomerRepository(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
     }
 
-    return DefaultCustomer.builder()
-      .customerId(customerEntity.getCustomerId())
-      .loginId(customerEntity.getLoginEntity().getLoginId())
-      .mobilePhone(customerEntity.getMobilePhone())
-      .username(customerEntity.getLoginEntity().getUsername())
-      .password(customerEntity.getLoginEntity().getPassword())
-      .customerName(localizedMessageBuilderFactory.builder()
-        .en(customerEntity.getCustomerNameEn())
-        .kk(customerEntity.getCustomerNameKk())
-        .ru(customerEntity.getCustomerNameRu()).build())
-      .iinOrBin(customerEntity.getIinOrBin())
-      .phoneNumber(customerEntity.getPhoneNumber())
-      .email(customerEntity.getEmail())
-      .addInfo(customerEntity.getAddInfo())
-      .addressId(customerEntity.getAddressId())
-      .build();
-  }
+    @Autowired
+    public void setOtpService(OtpService otpService) {
+        this.otpService = otpService;
+    }
 
-  @Override
-  public boolean exists(MobilePhone username) {
-    LoginEntity loginEntity = this.loginRepository.findByUsername(username.getMobilePhone());
-    return loginEntity != null;
-  }
+    @Autowired
+    public void setLocalizedMessageBuilderFactory(
+        LocalizedMessageBuilderFactory localizedMessageBuilderFactory) {
+        this.localizedMessageBuilderFactory = localizedMessageBuilderFactory;
+    }
 
-  @Override
-  public String addCustomer(String username, String password) throws IOException {
+    @Autowired
+    public void setLoginRepository(LoginRepository loginRepository) {
+        this.loginRepository = loginRepository;
+    }
+
+    @Override
+    public List<Customer> showAllCustomers() {
+        List<LoginEntity> entities = this.loginRepository.findByCustomerEntityCustomerIdIsNotNull();
+
+        return entities.stream().map(customerEntity -> DefaultCustomer.builder()
+            .loginId(customerEntity.getLoginId())
+            .username(customerEntity.getUsername())
+            .password(customerEntity.getPassword())
+            .customerId(customerEntity.getCustomerEntity().getCustomerId())
+            .mobilePhone(customerEntity.getCustomerEntity().getMobilePhone())
+            .customerName(localizedMessageBuilderFactory.builder()
+                .en(customerEntity.getCustomerEntity().getCustomerNameEn())
+                .kk(customerEntity.getCustomerEntity().getCustomerNameKk())
+                .ru(customerEntity.getCustomerEntity().getCustomerNameRu()).build())
+            .iinOrBin(customerEntity.getCustomerEntity().getIinOrBin())
+            .phoneNumber(customerEntity.getCustomerEntity().getPhoneNumber())
+            .email(customerEntity.getCustomerEntity().getEmail())
+            .addInfo(customerEntity.getCustomerEntity().getAddInfo())
+            .addressId(customerEntity.getCustomerEntity().getAddressId())
+            .build()).collect(Collectors.toList());
+    }
+
+    @Override
+    public DefaultCustomer showCustomer(Long customerId) throws Exception {
+        CustomerEntity customerEntity = this.customerRepository.findById(customerId).orElse(null);
+
+        if (customerEntity == null) {
+            throw new Exception("Customer id not found");
+        }
+
+        return DefaultCustomer.builder()
+            .customerId(customerEntity.getCustomerId())
+            .loginId(customerEntity.getLoginEntity().getLoginId())
+            .mobilePhone(customerEntity.getMobilePhone())
+            .username(customerEntity.getLoginEntity().getUsername())
+            .password(customerEntity.getLoginEntity().getPassword())
+            .customerName(localizedMessageBuilderFactory.builder()
+                .en(customerEntity.getCustomerNameEn())
+                .kk(customerEntity.getCustomerNameKk())
+                .ru(customerEntity.getCustomerNameRu()).build())
+            .iinOrBin(customerEntity.getIinOrBin())
+            .phoneNumber(customerEntity.getPhoneNumber())
+            .email(customerEntity.getEmail())
+            .addInfo(customerEntity.getAddInfo())
+            .addressId(customerEntity.getAddressId())
+            .build();
+    }
+
+    @Override
+    public boolean exists(MobilePhone username) {
+        LoginEntity loginEntity = this.loginRepository.findByUsername(username.getMobilePhone());
+        return loginEntity != null;
+    }
+
+    @Override
+    public String addCustomer(String username, String password) throws IOException {
 //    if (exists(username)) {
 //      return "Данный логин уже занят";
 //    }
-    LoginEntity loginEntity = new LoginEntity();
-    loginEntity.setUsername(username);
-    loginEntity.setPassword(password);
+        LoginEntity loginEntity = new LoginEntity();
+        loginEntity.setUsername(username);
+        loginEntity.setPassword(password);
 
-    CustomerEntity customerEntity = new CustomerEntity();
-    this.customerRepository.save(customerEntity);
-    loginEntity.setCustomerEntity(customerEntity);
-    this.loginRepository.save(loginEntity);
-    log.info("Added new customer, username: " + username + ". " + new Date());
-    return "Пользователь добавлен";
-  }
+        CustomerEntity customerEntity = new CustomerEntity();
+        this.customerRepository.save(customerEntity);
+        loginEntity.setCustomerEntity(customerEntity);
+        this.loginRepository.save(loginEntity);
+        log.info("Added new customer, username: " + username + ". " + new Date());
+        return "Пользователь добавлен";
+    }
 
-  @Override
-  public String addCustomerJson(CustomerJson customerJson) {
+    @Override
+    public String addCustomerJson(CustomerJson customerJson) {
 //    if (exists(customerJson.getUsername())) {
 //      return "Данный логин уже занят";
 //    }
-    LoginEntity loginEntity = new LoginEntity();
-    loginEntity.setUsername(customerJson.getUsername());
-    loginEntity.setPassword(customerJson.getPassword());
-
-
-    CustomerEntity customerEntity = new CustomerEntity();
-
-    customerEntity.setEmail(customerJson.getEmail());
-    customerEntity.setAddInfo(customerJson.getAddInfo());
-    customerEntity.setCustomerNameEn(customerJson.getCustomerNameEn());
-    customerEntity.setCustomerNameKk(customerJson.getCustomerNameKk());
-    customerEntity.setCustomerNameRu(customerJson.getCustomerNameRu());
-    customerEntity.setIinOrBin(customerJson.getIinOrBin());
-    customerEntity.setMobilePhone(customerJson.getMobilePhone());
-    customerEntity.setPhoneNumber(customerJson.getPhoneNumber());
-
-    this.customerRepository.save(customerEntity);
-    loginEntity.setCustomerEntity(customerEntity);
-    this.loginRepository.save(loginEntity);
-    log.info("Added new customer via JSON, username "
-      + customerJson.getUsername() + ". " + new Date());
-    return "Пользователь добавлен ";
-  }
-
-  @Override
-  public String updateCustomer(Long customerId, CustomerJson customerJson) {
-    CustomerEntity customerEntity = this.customerRepository.findById(customerId).orElse(null);
-    LoginEntity loginEntity = this.loginRepository.findById(customerEntity.getLoginEntity().getLoginId()).orElse(null);
-
-    if (Objects.nonNull(customerEntity)) {
-      if (customerJson.getMobilePhone() != null) {
-        customerEntity.setMobilePhone(customerJson.getMobilePhone());
-      }
-      if (customerJson.getPassword() != null) {
+        LoginEntity loginEntity = new LoginEntity();
+        loginEntity.setUsername(customerJson.getUsername());
         loginEntity.setPassword(customerJson.getPassword());
-      }
-      if (customerJson.getEmail() != null) {
+
+
+        CustomerEntity customerEntity = new CustomerEntity();
+
         customerEntity.setEmail(customerJson.getEmail());
-      }
-      if (customerJson.getCustomerNameKk() != null) {
-        customerEntity.setCustomerNameKk(customerJson.getCustomerNameKk());
-      }
-      if (customerJson.getCustomerNameRu() != null) {
-        customerEntity.setCustomerNameRu(customerJson.getCustomerNameRu());
-      }
-      if (customerJson.getCustomerNameEn() != null) {
-        customerEntity.setCustomerNameEn(customerJson.getCustomerNameEn());
-      }
-      if (customerJson.getIinOrBin() != null) {
-        customerEntity.setIinOrBin(customerJson.getIinOrBin());
-      }
-      if (customerJson.getPhoneNumber() != null) {
-        customerEntity.setPhoneNumber(customerJson.getPhoneNumber());
-      }
-      if (customerJson.getEmail() != null) {
-        customerEntity.setEmail(customerJson.getEmail());
-      }
-      if (customerJson.getAddInfo() != null) {
         customerEntity.setAddInfo(customerJson.getAddInfo());
-      }
+        customerEntity.setCustomerNameEn(customerJson.getCustomerNameEn());
+        customerEntity.setCustomerNameKk(customerJson.getCustomerNameKk());
+        customerEntity.setCustomerNameRu(customerJson.getCustomerNameRu());
+        customerEntity.setIinOrBin(customerJson.getIinOrBin());
+        customerEntity.setMobilePhone(customerJson.getMobilePhone());
+        customerEntity.setPhoneNumber(customerJson.getPhoneNumber());
 
-      this.loginRepository.save(loginEntity);
-      this.customerRepository.save(customerEntity);
-      log.info("Updated " + customerId + " customer " + new Date());
-      return "Клиент обновлен";
-    } else {
-      return "Клиент с таким id не существует";
+        this.customerRepository.save(customerEntity);
+        loginEntity.setCustomerEntity(customerEntity);
+        this.loginRepository.save(loginEntity);
+        log.info("Added new customer via JSON, username "
+            + customerJson.getUsername() + ". " + new Date());
+        return "Пользователь добавлен ";
     }
-  }
 
-  @Override
-  public String deleteCustomer(Long customerId) {
-    CustomerEntity customerEntity = this.customerRepository.findById(customerId).orElse(null);
-    LoginEntity loginEntity = this.loginRepository.findById(customerEntity.getLoginEntity().getLoginId()).orElse(null);
-    this.loginRepository.deleteById(loginEntity.getLoginId());
-    this.customerRepository.deleteById(customerEntity.getCustomerId());
-    return "Данные клиента удалены";
-  }
+    @Override
+    public String updateCustomer(Long customerId, CustomerJson customerJson) {
+        CustomerEntity customerEntity = this.customerRepository.findById(customerId).orElse(null);
+        LoginEntity loginEntity = this.loginRepository.findById(customerEntity.getLoginEntity().getLoginId()).orElse(null);
+
+        if (Objects.nonNull(customerEntity)) {
+            if (customerJson.getMobilePhone() != null) {
+                customerEntity.setMobilePhone(customerJson.getMobilePhone());
+            }
+            if (customerJson.getPassword() != null) {
+                loginEntity.setPassword(customerJson.getPassword());
+            }
+            if (customerJson.getEmail() != null) {
+                customerEntity.setEmail(customerJson.getEmail());
+            }
+            if (customerJson.getCustomerNameKk() != null) {
+                customerEntity.setCustomerNameKk(customerJson.getCustomerNameKk());
+            }
+            if (customerJson.getCustomerNameRu() != null) {
+                customerEntity.setCustomerNameRu(customerJson.getCustomerNameRu());
+            }
+            if (customerJson.getCustomerNameEn() != null) {
+                customerEntity.setCustomerNameEn(customerJson.getCustomerNameEn());
+            }
+            if (customerJson.getIinOrBin() != null) {
+                customerEntity.setIinOrBin(customerJson.getIinOrBin());
+            }
+            if (customerJson.getPhoneNumber() != null) {
+                customerEntity.setPhoneNumber(customerJson.getPhoneNumber());
+            }
+            if (customerJson.getEmail() != null) {
+                customerEntity.setEmail(customerJson.getEmail());
+            }
+            if (customerJson.getAddInfo() != null) {
+                customerEntity.setAddInfo(customerJson.getAddInfo());
+            }
+
+            this.loginRepository.save(loginEntity);
+            this.customerRepository.save(customerEntity);
+            log.info("Updated " + customerId + " customer " + new Date());
+            return "Клиент обновлен";
+        } else {
+            return "Клиент с таким id не существует";
+        }
+    }
+
+    @Override
+    public String deleteCustomer(Long customerId) {
+        CustomerEntity customerEntity = this.customerRepository.findById(customerId).orElse(null);
+        LoginEntity loginEntity = this.loginRepository.findById(customerEntity.getLoginEntity().getLoginId()).orElse(null);
+        this.loginRepository.deleteById(loginEntity.getLoginId());
+        this.customerRepository.deleteById(customerEntity.getCustomerId());
+        return "Данные клиента удалены";
+    }
 }

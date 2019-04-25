@@ -15,65 +15,65 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/specialCharacteristic")
 public class SpecialCharacteristicController {
 
-  private SpecialCharacteristicService specialCharacteristicService;
+    private SpecialCharacteristicService specialCharacteristicService;
 
-  @Autowired(required = false)
-  @Qualifier("defaultSpecialCharacteristicService")
-  public void setSpecialCharacteristicService(SpecialCharacteristicService specialCharacteristicService) {
-    this.specialCharacteristicService = specialCharacteristicService;
-  }
+    @Autowired(required = false)
+    @Qualifier("defaultSpecialCharacteristicService")
+    public void setSpecialCharacteristicService(SpecialCharacteristicService specialCharacteristicService) {
+        this.specialCharacteristicService = specialCharacteristicService;
+    }
 
-  @ApiOperation(value = "Показывает весь список характеристик")
-  @GetMapping("/all")
-  public ResponseEntity<?> all() {
-    return ResponseEntity.ok(this.specialCharacteristicService.showAllCharacteristic());
-  }
+    @ApiOperation(value = "Показывает весь список характеристик")
+    @GetMapping("/all")
+    public ResponseEntity<?> all() {
+        return ResponseEntity.ok(this.specialCharacteristicService.showAllCharacteristic());
+    }
 
-  @ApiOperation(value = "Показывает характеристику ID")
-  @GetMapping("{id}")
-  public ResponseEntity<?> getId(@PathVariable(value = "id") Long characteristicId) {
-    return ResponseEntity.ok(this.specialCharacteristicService.getCharacteristicById(characteristicId));
-  }
+    @ApiOperation(value = "Показывает характеристику ID")
+    @GetMapping("{id}")
+    public ResponseEntity<?> getId(@PathVariable(value = "id") Long characteristicId) {
+        return ResponseEntity.ok(this.specialCharacteristicService.getCharacteristicById(characteristicId));
+    }
 
-  @ApiOperation(value = "Добавляет характеристику")
-  @PostMapping("/add")
-  public ResponseEntity<?> add(
-    @RequestParam String characteristicNameKk,
-    @RequestParam String characteristicNameRu,
-    @RequestParam String characteristicNameEn,
-    @RequestParam String addInfo) {
-    this.specialCharacteristicService.addSpecialCharacteristic(
-      characteristicNameKk,
-      characteristicNameRu,
-      characteristicNameEn,
-      addInfo
-    );
-    return ResponseEntity.ok("Новая характеристика добавлена");
-  }
+    @ApiOperation(value = "Добавляет характеристику")
+    @PostMapping("/add")
+    public ResponseEntity<?> add(
+        @RequestParam String characteristicNameKk,
+        @RequestParam String characteristicNameRu,
+        @RequestParam String characteristicNameEn,
+        @RequestParam String addInfo) {
+        this.specialCharacteristicService.addSpecialCharacteristic(
+            characteristicNameKk,
+            characteristicNameRu,
+            characteristicNameEn,
+            addInfo
+        );
+        return ResponseEntity.ok("Новая характеристика добавлена");
+    }
 
-  @ApiOperation(value = "Добавляет характеристику посредством JSON")
-  @PostMapping("/addJson")
-  public ResponseEntity<?> addJson(
-    @RequestBody SpecialCharacteristicJson specialCharacteristicJson
-  ) {
-    this.specialCharacteristicService.addSpecialCharacteristicJson(specialCharacteristicJson);
-    return ResponseEntity.ok("Новая характеристика добавлена посредством JSON");
-  }
+    @ApiOperation(value = "Добавляет характеристику посредством JSON")
+    @PostMapping("/addJson")
+    public ResponseEntity<?> addJson(
+        @RequestBody SpecialCharacteristicJson specialCharacteristicJson
+    ) {
+        this.specialCharacteristicService.addSpecialCharacteristicJson(specialCharacteristicJson);
+        return ResponseEntity.ok("Новая характеристика добавлена посредством JSON");
+    }
 
-  @ApiOperation(value = "Обновляет характеристику")
-  @PatchMapping("{id}")
-  public ResponseEntity<?> update(
-    @PathVariable(value = "id") Long characteristicId,
-    @RequestBody SpecialCharacteristicJson specialCharacteristicJson) {
-    return ResponseEntity.ok(this.specialCharacteristicService.
-      updateCharacteristic(characteristicId, specialCharacteristicJson));
-  }
+    @ApiOperation(value = "Обновляет характеристику")
+    @PatchMapping("{id}")
+    public ResponseEntity<?> update(
+        @PathVariable(value = "id") Long characteristicId,
+        @RequestBody SpecialCharacteristicJson specialCharacteristicJson) {
+        return ResponseEntity.ok(this.specialCharacteristicService.
+            updateCharacteristic(characteristicId, specialCharacteristicJson));
+    }
 
 
-  @ApiOperation(value = "Удаляет характеристику")
-  @DeleteMapping("{id}")
-  public ResponseEntity<?> delete(@PathVariable(value = "id") Long characteristicId) {
-    return ResponseEntity.ok(this.specialCharacteristicService.deleteCharacteristic(characteristicId));
-  }
+    @ApiOperation(value = "Удаляет характеристику")
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long characteristicId) {
+        return ResponseEntity.ok(this.specialCharacteristicService.deleteCharacteristic(characteristicId));
+    }
 
 }

@@ -4,6 +4,6 @@ import kz.logistic.pl.models.builders.LocalizedMessageModelBuilder;
 
 public interface LocalizedMessageBuilderFactory {
 
-  LocalizedMessageModelBuilder builder();
+    LocalizedMessageModelBuilder builder();
 
 }

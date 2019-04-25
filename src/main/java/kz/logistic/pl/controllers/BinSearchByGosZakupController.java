@@ -15,17 +15,17 @@ import java.io.IOException;
 @RequestMapping(value = "/goszakup")
 public class BinSearchByGosZakupController {
 
-  private GosZakupBinService gosZakupBinService;
+    private GosZakupBinService gosZakupBinService;
 
-  @Qualifier("defaultGosZakupService")
-  @Autowired(required = false)
-  public void setGosZakupBinService(GosZakupBinService gosZakupBinService) {
-    this.gosZakupBinService = gosZakupBinService;
-  }
+    @Qualifier("defaultGosZakupService")
+    @Autowired(required = false)
+    public void setGosZakupBinService(GosZakupBinService gosZakupBinService) {
+        this.gosZakupBinService = gosZakupBinService;
+    }
 
-  @ApiOperation(value = "Поиск по БИН или ИИН")
-  @GetMapping("{bin}")
-  public ResponseEntity<?> showInformation(@PathVariable(value = "bin") String bin) throws IOException {
-    return ResponseEntity.ok(this.gosZakupBinService.showCompanyInformation(bin));
-  }
+    @ApiOperation(value = "Поиск по БИН или ИИН")
+    @GetMapping("{bin}")
+    public ResponseEntity<?> showInformation(@PathVariable(value = "bin") String bin) throws IOException {
+        return ResponseEntity.ok(this.gosZakupBinService.showCompanyInformation(bin));
+    }
 }

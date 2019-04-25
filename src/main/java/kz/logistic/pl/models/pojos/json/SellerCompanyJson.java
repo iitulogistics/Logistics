@@ -12,24 +12,22 @@ import lombok.Setter;
 @Setter
 public class SellerCompanyJson implements Serializable {
 
-  @JsonProperty
-  private String password;
-  @JsonProperty
-  private String sellerCompanyBin;
-  @JsonProperty
-  private String sellerCompanyEmail;
-  @JsonProperty
-  private String sellerCompanyMobilePhone;
-  @JsonProperty
-  private String sellerCompanyNameEn;
-  @JsonProperty
-  private String sellerCompanyNameKk;
-  @JsonProperty
-  private String sellerCompanyNameRu;
-  @JsonProperty
-  private String sellerCompanyPhone;
-  @JsonProperty
-  private String username;
-  @JsonProperty
-  private Long sellerCategoryId;
+    @JsonProperty
+    private String password;
+    @JsonProperty
+    private String sellerCompanyBin;
+    @JsonProperty
+    private String sellerCompanyEmail;
+    @JsonProperty
+    private String sellerCompanyMobilePhone;
+    @JsonProperty
+    private String sellerCompanyNameEn;
+    @JsonProperty
+    private String sellerCompanyNameKk;
+    @JsonProperty
+    private String sellerCompanyNameRu;
+    @JsonProperty
+    private String sellerCompanyPhone;
+    @JsonProperty
+    private String username;
 }

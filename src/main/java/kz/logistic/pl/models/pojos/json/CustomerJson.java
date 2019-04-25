@@ -12,34 +12,34 @@ import lombok.Setter;
 @Setter
 public class CustomerJson implements Serializable {
 
-  @JsonProperty
-  private String username;
+    @JsonProperty
+    private String username;
 
-  @JsonProperty
-  private String password;
+    @JsonProperty
+    private String password;
 
-  @JsonProperty
-  private String customerNameKk;
+    @JsonProperty
+    private String customerNameKk;
 
-  @JsonProperty
-  private String customerNameRu;
+    @JsonProperty
+    private String customerNameRu;
 
-  @JsonProperty
-  private String customerNameEn;
+    @JsonProperty
+    private String customerNameEn;
 
-  @JsonProperty
-  private String mobilePhone;
+    @JsonProperty
+    private String mobilePhone;
 
-  @JsonProperty
-  private String email;
+    @JsonProperty
+    private String email;
 
-  @JsonProperty
-  private String phoneNumber;
+    @JsonProperty
+    private String phoneNumber;
 
-  @JsonProperty
-  private String addInfo;
+    @JsonProperty
+    private String addInfo;
 
-  @JsonProperty
-  private String iinOrBin;
+    @JsonProperty
+    private String iinOrBin;
 
 }

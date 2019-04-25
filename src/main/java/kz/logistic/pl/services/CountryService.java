@@ -8,17 +8,17 @@ import kz.logistic.pl.models.pojos.json.CountryJson;
 
 public interface CountryService {
 
-  List<Country> showAllCountries();
+    List<Country> showAllCountries();
 
-  DefaultCountry showCountry(Long countryId);
+    DefaultCountry showCountry(Long countryId);
 
-  String addCountry(String countryNameKk, String countryNameRu, String countryNameEn);
+    String addCountry(String countryNameKk, String countryNameRu, String countryNameEn);
 
-  String addCountryJson(CountryJson countryJson);
+    String addCountryJson(CountryJson countryJson);
 
-  String updateCountry(Long countryId, CountryJson countryJson);
+    String updateCountry(Long countryId, CountryJson countryJson);
 
-  String deleteCountry(Long countryId);
+    String deleteCountry(Long countryId);
 
-  List<Country> search(String value);
+    List<Country> search(String value);
 }

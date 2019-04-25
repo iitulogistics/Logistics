@@ -2,20 +2,20 @@ package kz.logistic.pl.models.pojos;
 
 public interface Address {
 
-  Long getAddressId();
+    Long getAddressId();
 
-  LocalizedMessage getStreetName();
+    LocalizedMessage getStreetName();
 
-  Long getDistrictId();
+    Long getDistrictId();
 
-  Long getInhLocalityId();
+    Long getInhLocalityId();
 
-  String getBuildingNumber();
+    String getBuildingNumber();
 
-  String getFlatNumber();
+    String getFlatNumber();
 
-  String getZipCode();
+    String getZipCode();
 
-  Integer getAddressAssign();
+    Integer getAddressAssign();
 
 }

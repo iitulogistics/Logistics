@@ -2,12 +2,12 @@ package kz.logistic.pl.models.pojos;
 
 public interface District {
 
-  Long getDistrictId();
+    Long getDistrictId();
 
-  LocalizedMessage getDistrictName();
+    LocalizedMessage getDistrictName();
 
-  Long getRegionId();
+    Long getRegionId();
 
-  Long getCityId();
+    Long getCityId();
 
 }

@@ -8,19 +8,19 @@ import java.util.List;
 
 public interface SellerCategoryService {
 
-  List<SellerCategory> showAllSellerCategories();
+    List<SellerCategory> showAllSellerCategories();
 
-  DefaultSellerCategory showSellerCategory(Long sellerCategoryId);
+    DefaultSellerCategory showSellerCategory(Long sellerCategoryId);
 
 
-  String addSellerCategory(
-    String sellerCategoryNameKk, String sellerCategoryNameRu,
-    String sellerCategoryNameEn, String addInfo);
+    String addSellerCategory(
+        String sellerCategoryNameKk, String sellerCategoryNameRu,
+        String sellerCategoryNameEn, String addInfo);
 
-  String addSellerCategoryJson(SellerCategoryJson sellerCategoryJson);
+    String addSellerCategoryJson(SellerCategoryJson sellerCategoryJson);
 
-  String updateSellerCategory(Long sellerCategoryId, SellerCategoryJson sellerCategoryJson);
+    String updateSellerCategory(Long sellerCategoryId, SellerCategoryJson sellerCategoryJson);
 
-  String deleteSellerCategory(Long sellerCategoryId);
+    String deleteSellerCategory(Long sellerCategoryId);
 
 }

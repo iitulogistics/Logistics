@@ -4,8 +4,8 @@ import java.io.IOException;
 
 public interface OtpService {
 
-  public boolean generateOtp(String mobilePhone) throws IOException;
+    public boolean generateOtp(String mobilePhone) throws IOException;
 
-  public boolean validateOtp(String mobilePhone, String otp);
+    public boolean validateOtp(String mobilePhone, String otp);
 
 }

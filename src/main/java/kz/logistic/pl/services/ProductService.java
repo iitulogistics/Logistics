@@ -13,31 +13,33 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public interface ProductService {
 
-  void addProduct(String productNameKk,
-                  String productNameRu,
-                  String productNameEn,
-                  Long productCategoryId,
-                  Long productSubcategoryId,
-                  String uniqueIdNumber,
-                  String serialNumber,
-                  String manufacturer,
-                  String size,
-                  Integer weight,
-                  Integer price,
-                  String productDescription,
-                  Long sellerCompanyId,
-                  Long specialCharacteristicsId);
+    void addProduct(String productNameKk,
+                    String productNameRu,
+                    String productNameEn,
+                    Long productCategoryId,
+                    Long productSubcategoryId,
+                    String uniqueIdNumber,
+                    String serialNumber,
+                    String manufacturer,
+                    String size,
+                    Integer weight,
+                    Integer price,
+                    String productDescription,
+                    Long sellerCompanyId,
+                    Long specialCharacteristicsId);
 
-  void addProductJson(ProductJson productJson);
+    void addProductJson(ProductJson productJson);
 
-  List<Product> showAllProducts();
+    List<Product> showAllProducts();
 
-  DefaultProduct showProduct(Long productId);
+    DefaultProduct showProduct(Long productId);
 
-  String updateProduct(Long productId, ProductJson productJson);
+    String updateProduct(Long productId, ProductJson productJson);
 
-  String deleteProduct(Long productId);
+    String deleteProduct(Long productId);
 
-  String addPhoto(Long id, MultipartFile file);
+    String addPhoto(Long id, MultipartFile file);
+
+    byte[] getPhoto(String name) throws IOException;
 
 }

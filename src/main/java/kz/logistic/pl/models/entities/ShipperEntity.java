@@ -39,7 +39,7 @@ public class ShipperEntity {
     @Column(name = "address")
     private String address;
 
-  @OneToOne(mappedBy = "shipperEntity", cascade = CascadeType.ALL,
-    fetch = FetchType.LAZY, optional = false)
-  private LoginEntity loginEntity;
+    @OneToOne(mappedBy = "shipperEntity", cascade = CascadeType.ALL,
+        fetch = FetchType.LAZY, optional = false)
+    private LoginEntity loginEntity;
 }

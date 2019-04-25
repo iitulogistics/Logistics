@@ -9,12 +9,12 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class SellerCategoryJson implements Serializable {
-  @JsonProperty
-  private String sellerCategoryNameKk;
-  @JsonProperty
-  private String sellerCategoryNameRu;
-  @JsonProperty
-  private String sellerCategoryNameEn;
-  @JsonProperty
-  private String addInfo;
+    @JsonProperty
+    private String sellerCategoryNameKk;
+    @JsonProperty
+    private String sellerCategoryNameRu;
+    @JsonProperty
+    private String sellerCategoryNameEn;
+    @JsonProperty
+    private String addInfo;
 }

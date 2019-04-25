@@ -11,8 +11,8 @@ import lombok.Setter;
 @Setter
 @Getter
 public class RolesJson implements Serializable {
-  @JsonProperty
-  private String roleName;
-  @JsonProperty
-  private String roleDescription;
+    @JsonProperty
+    private String roleName;
+    @JsonProperty
+    private String roleDescription;
 }

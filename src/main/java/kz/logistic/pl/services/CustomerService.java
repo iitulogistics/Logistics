@@ -11,21 +11,21 @@ import kz.logistic.pl.models.pojos.json.CustomerJson;
 
 public interface CustomerService {
 
-  //Показать  всех клиентов
-  List<Customer> showAllCustomers();
+    //Показать  всех клиентов
+    List<Customer> showAllCustomers();
 
-  DefaultCustomer showCustomer(Long customerId) throws Exception;
+    DefaultCustomer showCustomer(Long customerId) throws Exception;
 
-  //Добавить нового клиента
-  String addCustomer(String username, String password) throws IOException;
+    //Добавить нового клиента
+    String addCustomer(String username, String password) throws IOException;
 
-  //Добавить нового клиента посредством JSON
-  String addCustomerJson(CustomerJson customerJson);
+    //Добавить нового клиента посредством JSON
+    String addCustomerJson(CustomerJson customerJson);
 
-  boolean exists(MobilePhone username);
+    boolean exists(MobilePhone username);
 
-  String updateCustomer(Long customerId, CustomerJson customerJson);
+    String updateCustomer(Long customerId, CustomerJson customerJson);
 
-  String deleteCustomer(Long customerId);
+    String deleteCustomer(Long customerId);
 
 }

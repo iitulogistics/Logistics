@@ -9,26 +9,26 @@ import kz.logistic.pl.models.pojos.json.ShipperJson;
 
 public interface ShipperService {
 
-  List<Shipper> showAllShippers();
+    List<Shipper> showAllShippers();
 
-  DefaultShipper showShipper(Long shipperId);
+    DefaultShipper showShipper(Long shipperId);
 
-  String addShipper(String username,
-                    String password,
-                    String shipperNameKk,
-                    String shipperNameRu,
-                    String shipperNameEn,
-                    String phoneNumber,
-                    String bin,
-                    String email,
-                    String address);
+    String addShipper(String username,
+                      String password,
+                      String shipperNameKk,
+                      String shipperNameRu,
+                      String shipperNameEn,
+                      String phoneNumber,
+                      String bin,
+                      String email,
+                      String address);
 
-  String addShipperJson(ShipperJson shipperJson);
+    String addShipperJson(ShipperJson shipperJson);
 
-  boolean exists(String username);
+    boolean exists(String username);
 
-  String updateShipper(Long shipperId, ShipperJson shipperJson);
+    String updateShipper(Long shipperId, ShipperJson shipperJson);
 
-  String deleteShipper(Long shipperId);
+    String deleteShipper(Long shipperId);
 
 }

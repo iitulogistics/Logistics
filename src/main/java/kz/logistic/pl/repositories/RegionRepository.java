@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RegionRepository extends JpaRepository<RegionEntity, Long> {
 
-  ArrayList<RegionEntity> findByRegionNameEnAndCountryId(String regionNameEn, Long countryId);
+    ArrayList<RegionEntity> findByRegionNameEnAndCountryId(String regionNameEn, Long countryId);
 
 }
