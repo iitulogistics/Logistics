@@ -1,6 +1,6 @@
 package kz.logistic.pl.models.entities;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +24,7 @@ public class OrdersEntity {
 
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "order_number")
-    private Integer orderNumber;
+    private Long orderNumber;
     @Column(name = "product_id")
     private Long productId;
     @Column(name = "seller_company_id")
