@@ -39,7 +39,7 @@ public class DefaultCreditcardService implements CreditCardService {
   }
 
   public boolean exists(Integer creditCardNumber, String holderName) {
-    List<CreditCardEntity> creditCardEntities = this.creditCardRepository.findByCreditCardNumberAndHolderName(
+    List<CreditCardEntity> creditCardEntities = this.creditCardRepository.findCreditCardByNumberAndHolderName(
       creditCardNumber, holderName);
     return creditCardEntities.size() > 0;
   }

@@ -41,25 +41,6 @@ public class CountryRepositorySoap {
     return countryMap.get(id);
   }
 
-  public Country findByNameOrId(String s, long id){
-    List<CountryEntity> countryEntity = repository.
-      findByCountryNameEnContainsOrCountryNameKkContainsOrCountryNameRuContainsOrCountryIdEquals(s,s,s,id);
-
-    Country c = null;
-
-    if (!countryEntity.isEmpty()){
-      CountryEntity country = countryEntity.get(0);
-
-      c.setId(country.getCountryId());
-      c.setCountryNameKk(country.getCountryNameKk());
-      c.setCountryNameRu(country.getCountryNameRu());
-      c.setCountryNameEn(country.getCountryNameEn());
-      return c;
-    }
-
-    return null;
-  }
-
   public Country add(String nameKk, String nameRu, String nameEn){
     for(Long key : countryMap.keySet()){
       Country country = countryMap.get(key);

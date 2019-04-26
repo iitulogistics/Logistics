@@ -59,7 +59,7 @@ public class DefaultCountryService implements CountryService {
   }
 
   public boolean exists(String countryNameEn) {
-    ArrayList<CountryEntity> entities = countryRepository.findByCountryNameEn(countryNameEn);
+    ArrayList<CountryEntity> entities = countryRepository.existCountry(countryNameEn);
     return entities.size() > 0;
   }
 
@@ -134,9 +134,7 @@ public class DefaultCountryService implements CountryService {
       countryId = Long.parseLong(value);
     } catch (Exception e) {
     }
-    List<CountryEntity> countryList = countryRepository.
-      findByCountryNameEnContainsOrCountryNameKkContainsOrCountryNameRuContainsOrCountryIdEquals
-        (value, value, value, countryId);
+    List<CountryEntity> countryList = countryRepository.findCountryByNameContainsOrIdEquals(value, value, value, countryId);
     return countryList.stream().map(countryEntity -> DefaultCountry.builder()
       .countryId(countryEntity.getCountryId())
       .countryName(localizedMessageBuilderFactory.builder()
