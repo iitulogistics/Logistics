@@ -6,10 +6,7 @@ import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
-import soap.logistic.logistics.DeleteCountryIdRequest;
-import soap.logistic.logistics.DeleteCountryIdResponse;
-import soap.logistic.logistics.GetCountryIdRequest;
-import soap.logistic.logistics.GetCountryIdResponse;
+import soap.logistic.logistics.*;
 
 @Endpoint
 public class CountryEndpoint {
@@ -39,4 +36,12 @@ public class CountryEndpoint {
     return response;
   }
 
+  @PayloadRoot(namespace = NAMESPACE_URI, localPart = "addCountryRequest")
+  @ResponsePayload
+  public AddCountryResponse addCountry(@RequestPayload AddCountryRequest request) {
+    AddCountryResponse response = new AddCountryResponse();
+    response.setCountry(countryRepositorySoap.add(request.getCountryNameKk(), request.getCountryNameRu(), request.getCountryNameEn()));
+
+    return response;
+  }
 }
