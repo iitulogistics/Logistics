@@ -1,13 +1,5 @@
 package kz.logistic.pl.services.impl;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.time.Period;
-import java.util.*;
-import java.util.stream.Collectors;
-
 import kz.logistic.pl.models.entities.ProductsEntity;
 import kz.logistic.pl.models.pojos.Product;
 import kz.logistic.pl.models.pojos.impl.DefaultProduct;
@@ -17,11 +9,19 @@ import kz.logistic.pl.services.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -200,7 +200,7 @@ public class DefaultProductService implements ProductService {
             File transferFile = new File(uploadDir + filename);
             file.transferTo(transferFile);
             FileInputStream fileInputStream = new FileInputStream(transferFile);
-            XSSFWorkbook xssfWorkbook = new XSSFWorkbook(fileInputStream);
+            //XSSFWorkbook xssfWorkbook = new XSSFWorkbook(fileInputStream);
             String photosUrlList = productsEntity.getProductsImg();
             if (photosUrlList == null)
                 photosUrlList = "";
@@ -210,7 +210,7 @@ public class DefaultProductService implements ProductService {
                 productsEntity.setProductsImg(photosUrlList + "," + filename);
             this.productRepository.save(productsEntity);
             return ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/products/uploads/")
+                .path("/product/uploads/")
                 .path(filename)
                 .toUriString();
         } catch (IOException e) {
