@@ -79,7 +79,7 @@ public class ProductsController {
 
     }
 
-    @ApiOperation(value = "Обновляет город")
+    @ApiOperation(value = "Обновляет продукт")
     @PatchMapping("{id}")
     public ResponseEntity<?> update(
         @PathVariable(value = "id") Long productId,
@@ -88,7 +88,7 @@ public class ProductsController {
         return ResponseEntity.ok(this.productService.updateProduct(productId, productJson));
     }
 
-    @ApiOperation(value = "Удаляет город")
+    @ApiOperation(value = "Удаляет продукт")
     @DeleteMapping("{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long productId) {
         return ResponseEntity.ok(this.productService.deleteProduct(productId));

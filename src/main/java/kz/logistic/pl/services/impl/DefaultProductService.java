@@ -1,5 +1,13 @@
 package kz.logistic.pl.services.impl;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.time.Period;
+import java.util.*;
+import java.util.stream.Collectors;
+
 import kz.logistic.pl.models.entities.ProductsEntity;
 import kz.logistic.pl.models.pojos.Product;
 import kz.logistic.pl.models.pojos.impl.DefaultProduct;
@@ -101,6 +109,7 @@ public class DefaultProductService implements ProductService {
             .productSubcategoryId(productsEntity.getProductSubcategoryId())
             .size(productsEntity.getSize())
             .weight(productsEntity.getWeight())
+            .photoUrlsList(productsEntity.getProductsImg())
             .specialCharacteristicsId(productsEntity.getSpecialCharacteristicId())
             .serialNumber(productsEntity.getSerialNumber())
             .uniqueIdNumber(productsEntity.getUniqueIdNumber())
@@ -125,6 +134,7 @@ public class DefaultProductService implements ProductService {
             .weight(productsEntity.getWeight())
             .specialCharacteristicsId(productsEntity.getSpecialCharacteristicId())
             .serialNumber(productsEntity.getSerialNumber())
+            .photoUrlsList(productsEntity.getProductsImg())
             .uniqueIdNumber(productsEntity.getUniqueIdNumber()).build();
     }
 
@@ -209,12 +219,9 @@ public class DefaultProductService implements ProductService {
             else
                 productsEntity.setProductsImg(photosUrlList + "," + filename);
             this.productRepository.save(productsEntity);
-            return ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/product/uploads/")
-                .path(filename)
-                .toUriString();
+            return "/product/uploads/" + filename;
         } catch (IOException e) {
-            return "Ошибка";
+            return e.getMessage();
         }
     }
 
