@@ -51,10 +51,10 @@ public class DefaultAddressService implements AddressService {
 
     }
 
-    public boolean exists(String streetNameEn, String buildingNumber, String flatNumber, String zipCode) {
-        ArrayList<AddressesEntity> addressesEntities = this.addressRepository.findByStreetNameEnAndBuildingNumberAndFlatNumberAndZipCode(streetNameEn, buildingNumber, flatNumber, zipCode);
-        return addressesEntities.size() > 0;
-    }
+  public boolean exists(String streetNameEn, String buildingNumber, String flatNumber, String zipCode) {
+    ArrayList<AddressesEntity> addressesEntities = this.addressRepository.findLocation(streetNameEn, buildingNumber, flatNumber, zipCode);
+    return addressesEntities.size() > 0;
+  }
 
     @Override
     public DefaultAddress showAddress(Long addressId) {

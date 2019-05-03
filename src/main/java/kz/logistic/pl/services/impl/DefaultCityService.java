@@ -64,11 +64,11 @@ public class DefaultCityService implements CityService {
             .countryId(cityEntity.getCountryId()).build();
     }
 
-    public boolean exists(Long countryId, String cityNameEn) {
-        ArrayList<CityEntity> cityEntity =
-            this.cityRepository.findByCountryIdAndCityNameEn(countryId, cityNameEn);
-        return cityEntity.size() > 0;
-    }
+  public boolean exists(Long countryId, String cityNameEn) {
+    ArrayList<CityEntity> cityEntity =
+      this.cityRepository.checkCityInCountry(countryId, cityNameEn);
+    return cityEntity.size() > 0;
+  }
 
     @Override
     public String addCity(String cityNameKk, String cityNameRu,

@@ -2,47 +2,66 @@
            xmlns:tns="http://logistic.soap/logistics"
            targetNamespace="http://logistic.soap/logistics"
            elementFormDefault="qualified">
-    <!--Get Country by ID-->
-    <xs:element name="getCountryIdRequest">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="id" type="xs:long"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-
-    <xs:element name="getCountryIdResponse">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="country" type="tns:country"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-
-    <!--Delete Country by ID-->
-    <xs:element name="deleteCountryIdRequest">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="id" type="xs:long"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-
-    <xs:element name="deleteCountryIdResponse">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="country" type="tns:country"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-    <!---->
-
-    <xs:complexType name="country">
-        <xs:sequence>
-            <xs:element name="id" type="xs:long"/>
-            <xs:element name="countryNameKk" type="xs:string"/>
-            <xs:element name="countryNameRu" type="xs:string"/>
-            <xs:element name="countryNameEn" type="xs:string"/>
-        </xs:sequence>
+  <!--Get Country by ID-->
+  <xs:element name="getCountryIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
     </xs:complexType>
+  </xs:element>
+
+  <xs:element name="getCountryIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="country" type="tns:country"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!--add Country by ID-->
+  <xs:element name="addCountryRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="countryNameKk" type="xs:string"/>
+        <xs:element name="countryNameRu" type="xs:string"/>
+        <xs:element name="countryNameEn" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="addCountryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="country" type="tns:country"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!--Delete Country by ID-->
+  <xs:element name="deleteCountryIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="deleteCountryIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="country" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <!---->
+
+  <xs:complexType name="country">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element name="countryNameKk" type="xs:string"/>
+      <xs:element name="countryNameRu" type="xs:string"/>
+      <xs:element name="countryNameEn" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
 </xs:schema>

@@ -58,10 +58,10 @@ public class DefaultCountryService implements CountryService {
             .build();
     }
 
-    public boolean exists(String countryNameEn) {
-        ArrayList<CountryEntity> entities = countryRepository.findByCountryNameEn(countryNameEn);
-        return entities.size() > 0;
-    }
+  public boolean exists(String countryNameEn) {
+    ArrayList<CountryEntity> entities = countryRepository.existCountry(countryNameEn);
+    return entities.size() > 0;
+  }
 
     @Override
     public String addCountry(String countryNameKk, String countryNameRu, String countryNameEn) {
@@ -127,23 +127,21 @@ public class DefaultCountryService implements CountryService {
         }
     }
 
-    @Override
-    public List<Country> search(String value) {
-        Long countryId = null;
-        try {
-            countryId = Long.parseLong(value);
-        } catch (Exception e) {
-        }
-        List<CountryEntity> countryList = countryRepository.
-            findByCountryNameEnContainsOrCountryNameKkContainsOrCountryNameRuContainsOrCountryIdEquals
-                (value, value, value, countryId);
-        return countryList.stream().map(countryEntity -> DefaultCountry.builder()
-            .countryId(countryEntity.getCountryId())
-            .countryName(localizedMessageBuilderFactory.builder()
-                .en(countryEntity.getCountryNameEn())
-                .kk(countryEntity.getCountryNameKk())
-                .ru(countryEntity.getCountryNameRu()).build())
-            .build()).collect(Collectors.toList());
+  @Override
+  public List<Country> search(String value) {
+    Long countryId = null;
+    try {
+      countryId = Long.parseLong(value);
+    } catch (Exception e) {
     }
+    List<CountryEntity> countryList = countryRepository.findCountryByNameContainsOrIdEquals(value, value, value, countryId);
+    return countryList.stream().map(countryEntity -> DefaultCountry.builder()
+      .countryId(countryEntity.getCountryId())
+      .countryName(localizedMessageBuilderFactory.builder()
+        .en(countryEntity.getCountryNameEn())
+        .kk(countryEntity.getCountryNameKk())
+        .ru(countryEntity.getCountryNameRu()).build())
+      .build()).collect(Collectors.toList());
+  }
 
 }

@@ -38,11 +38,11 @@ public class DefaultCreditcardService implements CreditCardService {
                 .holderName(creditCardEntity.getHolderName()).build()).collect(Collectors.toList());
     }
 
-    public boolean exists(Integer creditCardNumber, String holderName) {
-        List<CreditCardEntity> creditCardEntities = this.creditCardRepository.findByCreditCardNumberAndHolderName(
-            creditCardNumber, holderName);
-        return creditCardEntities.size() > 0;
-    }
+  public boolean exists(Integer creditCardNumber, String holderName) {
+    List<CreditCardEntity> creditCardEntities = this.creditCardRepository.findCreditCardByNumberAndHolderName(
+      creditCardNumber, holderName);
+    return creditCardEntities.size() > 0;
+  }
 
     @Override
     public DefaultCreditCard showCreditCard(Long creditCardId) {
