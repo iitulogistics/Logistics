@@ -65,6 +65,21 @@ public class CountryRepositorySoap {
     return country;
   }
 
+  public Country updateCountry(Long id, String nameKk, String nameRu, String nameEn) {
+    Country c = countryMap.get(id);
+    c.setCountryNameEn(nameEn);
+    c.setCountryNameRu(nameRu);
+    c.setCountryNameKk(nameKk);
+
+    repository.updateCountryById(id, nameEn, nameRu, nameKk);
+
+    return c;
+  }
+
+  public Map<Long, Country> getAllCountry(){
+    return countryMap;
+  }
+
   public String deleteCountryId(Long id) {
     CountryEntity countryEntity = this.repository.findById(id).orElse(null);
     if (countryEntity != null) {

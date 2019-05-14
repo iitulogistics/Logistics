@@ -1,6 +1,7 @@
 package kz.logistic.pl.soap;
 
 
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -8,6 +9,7 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import soap.logistic.logistics.*;
 
+@Log
 @Endpoint
 public class CountryEndpoint {
   private static final String NAMESPACE_URI = "http://logistic.soap/logistics";
@@ -44,4 +46,21 @@ public class CountryEndpoint {
 
     return response;
   }
+
+  @PayloadRoot(namespace = NAMESPACE_URI, localPart = "updateCountryRequest")
+  @ResponsePayload
+  public UpdateCountryResponse updateCountry(@RequestPayload UpdateCountryRequest request) {
+    UpdateCountryResponse response = new UpdateCountryResponse();
+    response.setCountry(countryRepositorySoap.updateCountry(
+      request.getId(), request.getCountryNameKk(), request.getCountryNameRu(), request.getCountryNameEn()));
+    return response;
+  }
+
+  //@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getAllCountryRequest")
+  //@ResponsePayload
+  //public GetAllCountryResponse getAllCountry(@RequestPayload GetAllCountryRequest request) {
+  //  GetAllCountryResponse response = new GetAllCountryResponse();
+  //  response.setCountry(countryRepositorySoap.getAllCountry().get(1));
+  //  return response;
+  //}
 }
