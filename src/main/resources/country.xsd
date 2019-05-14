@@ -19,7 +19,7 @@
     </xs:complexType>
   </xs:element>
 
-  <!--add Country by ID-->
+  <!--add Country-->
   <xs:element name="addCountryRequest">
     <xs:complexType>
       <xs:sequence>
@@ -37,6 +37,42 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+
+  <!--update Country-->
+  <xs:element name="updateCountryRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+        <xs:element name="countryNameKk" type="xs:string"/>
+        <xs:element name="countryNameRu" type="xs:string"/>
+        <xs:element name="countryNameEn" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="updateCountryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="country" type="tns:country"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+<!--  &lt;!&ndash;get all Countries&ndash;&gt;-->
+<!--  <xs:element name="getAllCountryRequest">-->
+<!--    <xs:complexType>-->
+<!--    <xs:sequence>-->
+<!--    </xs:sequence>-->
+<!--  </xs:complexType>-->
+<!--  </xs:element>-->
+
+<!--  <xs:element name="getAllCountryResponse" >-->
+<!--    <xs:complexType >-->
+<!--      <xs:sequence>-->
+<!--        <xs:element name="country" type="tns:country"/>-->
+<!--      </xs:sequence>-->
+<!--    </xs:complexType>-->
+<!--  </xs:element>-->
 
   <!--Delete Country by ID-->
   <xs:element name="deleteCountryIdRequest">
