@@ -61,7 +61,7 @@ public class CountryRepositorySoap {
     country.setCountryNameKk(countryEntity.getCountryNameKk());
     country.setId(countryEntity.getCountryId());
 
-    countryMap.put(country.getId(), country);
+        countryMap.put(country.getId(), country);
     return country;
   }
 

@@ -32,9 +32,23 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         wsdl11Definition.setSchema(countrySchema);
         return wsdl11Definition;
     }
+    @Bean(name = "city")
+    public DefaultWsdl11Definition defaultWsdl11Definitioncity(XsdSchema citySchema) {
+        DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+        wsdl11Definition.setPortTypeName("CitiesPort");
+        wsdl11Definition.setLocationUri("/ws");
+        wsdl11Definition.setTargetNamespace("http://logistic.soap/citySoap");
+        wsdl11Definition.setSchema(citySchema);
+        return wsdl11Definition;
+    }
 
     @Bean
     public XsdSchema countrySchema() {
         return new SimpleXsdSchema(new ClassPathResource("country.xsd"));
+    }
+
+    @Bean
+    public XsdSchema citySchema() {
+        return new SimpleXsdSchema(new ClassPathResource("city.xsd"));
     }
 }
