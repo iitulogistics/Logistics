@@ -11,6 +11,7 @@ import kz.logistic.pl.models.entities.ProductsEntity;
 import kz.logistic.pl.models.pojos.Product;
 import kz.logistic.pl.models.pojos.impl.DefaultProduct;
 import kz.logistic.pl.models.pojos.json.ProductJson;
+import kz.logistic.pl.poi.ReadExcelFile;
 import kz.logistic.pl.repositories.ProductRepository;
 import kz.logistic.pl.services.ProductService;
 import lombok.extern.slf4j.Slf4j;
@@ -83,8 +84,25 @@ public class DefaultProductService implements ProductService {
   }
 
   @Override
+  public void addProductExcel(MultipartFile multipartFile) {
+    ReadExcelFile readExcelFile = new ReadExcelFile();
+    try {
+      List<ProductsEntity> list = readExcelFile.readProductFromExcelFile(multipartFile);
+      for(ProductsEntity productsEntity : list){
+        productRepository.save(productsEntity);
+        log.info("New product added: " + productsEntity.getProductNameEn());
+      }
+    } catch (IOException e) {
+      log.info("Error");
+      e.printStackTrace();
+    }
+  }
+
+  @Override
   public List<Product> showAllProducts() {
-    List<ProductsEntity> productsEntityList = this.productRepository.findAll();
+    List<ProductsEntity> productsEntityList = new ArrayList<>();
+    Iterable<ProductsEntity> iterable = this.productRepository.findAll();
+    iterable.forEach(productsEntityList::add);
     return productsEntityList.stream().map(productsEntity -> DefaultProduct.builder()
       .productId(productsEntity.getProductId())
       .productNameKk(productsEntity.getProductNameKk())
@@ -205,6 +223,52 @@ public class DefaultProductService implements ProductService {
     } catch (IOException e) {
       return "Ошибка";
     }
+  }
+
+  @Override
+  public List<Product> getProductsByName(String name) {
+    List<ProductsEntity> productsEntityList = productRepository.getProductsByName(name);
+
+    return productsEntityList.stream().map(productsEntity -> DefaultProduct.builder()
+      .productId(productsEntity.getProductId())
+      .productNameKk(productsEntity.getProductNameKk())
+      .productNameRu(productsEntity.getProductNameRu())
+      .productNameEn(productsEntity.getProductNameEn())
+      .productDescription(productsEntity.getProductDescription())
+      .sellerCompanyId(productsEntity.getSellerCompanyId())
+      .manufacturer(productsEntity.getManufacturer())
+      .price(productsEntity.getPrice())
+      .productCategoryId(productsEntity.getProductCategoryId())
+      .productSubcategoryId(productsEntity.getProductSubcategoryId())
+      .size(productsEntity.getSize())
+      .weight(productsEntity.getWeight())
+      .specialCharacteristicsId(productsEntity.getSpecialCharacteristicId())
+      .serialNumber(productsEntity.getSerialNumber())
+      .uniqueIdNumber(productsEntity.getUniqueIdNumber())
+      .build()).collect(Collectors.toList());
+  }
+
+  @Override
+  public List<Product> getProductsByCategoryId(Long id) {
+    List<ProductsEntity> productsEntityList = productRepository.getProductsByCategoryId(id);
+
+    return productsEntityList.stream().map(productsEntity -> DefaultProduct.builder()
+      .productId(productsEntity.getProductId())
+      .productNameKk(productsEntity.getProductNameKk())
+      .productNameRu(productsEntity.getProductNameRu())
+      .productNameEn(productsEntity.getProductNameEn())
+      .productDescription(productsEntity.getProductDescription())
+      .sellerCompanyId(productsEntity.getSellerCompanyId())
+      .manufacturer(productsEntity.getManufacturer())
+      .price(productsEntity.getPrice())
+      .productCategoryId(productsEntity.getProductCategoryId())
+      .productSubcategoryId(productsEntity.getProductSubcategoryId())
+      .size(productsEntity.getSize())
+      .weight(productsEntity.getWeight())
+      .specialCharacteristicsId(productsEntity.getSpecialCharacteristicId())
+      .serialNumber(productsEntity.getSerialNumber())
+      .uniqueIdNumber(productsEntity.getUniqueIdNumber())
+      .build()).collect(Collectors.toList());
   }
 
   @Override

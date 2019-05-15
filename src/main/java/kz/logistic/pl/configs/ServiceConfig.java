@@ -1,5 +1,7 @@
 package kz.logistic.pl.configs;
 
+import kz.logistic.pl.dao.ProductDAO;
+import kz.logistic.pl.dao.impl.ProductDAOImpl;
 import kz.logistic.pl.models.builders.LocalizedMessageModelBuilder;
 import kz.logistic.pl.models.builders.impl.MessageSourceLocalizedMessageModelBuilder;
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
@@ -95,7 +97,11 @@ public class ServiceConfig {
   public DefaultProductService productService() {
     return new DefaultProductService();
   }
-
+  @Bean
+  @Qualifier("defaultProductDAO")
+  public ProductDAO productServiceDAO() {
+    return new ProductDAOImpl();
+  }
   @Bean
   @Qualifier("defaultAuthenticationService")
   public DefaultAuthenticationService authenticationService() {

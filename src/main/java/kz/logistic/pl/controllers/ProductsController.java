@@ -2,6 +2,8 @@ package kz.logistic.pl.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import kz.logistic.pl.dao.ProductDAO;
+import kz.logistic.pl.models.entities.ProductsEntity;
 import kz.logistic.pl.models.pojos.impl.DefaultProduct;
 import kz.logistic.pl.models.pojos.json.ProductJson;
 import kz.logistic.pl.services.ProductService;
@@ -17,11 +19,18 @@ import org.springframework.web.multipart.MultipartFile;
 public class ProductsController {
 
   private ProductService productService;
+  private ProductDAO productDAO;
 
   @Qualifier("defaultProductService")
   @Autowired(required = false)
   public void setProductService(ProductService productService) {
     this.productService = productService;
+  }
+
+  @Qualifier("defaultProductDAO")
+  @Autowired(required = false)
+  public void setProductServiceDao(ProductDAO productDAO) {
+    this.productDAO = productDAO;
   }
 
   @ApiOperation(value = "Добавляет продукт")
@@ -45,6 +54,10 @@ public class ProductsController {
       productNameKk, productNameRu, productNameEn, productCategoryId, productSubcategoryId,
       uniqueIdNumber, serialNumber, manufacturer, size, weight, price, productDescription,
       sellerCompanyId, specialCharacteristicsId);
+    productDAO.addProduct(
+        productNameKk, productNameRu, productNameEn, productCategoryId, productSubcategoryId,
+      uniqueIdNumber, serialNumber, manufacturer, size, weight, price, productDescription,
+      sellerCompanyId, specialCharacteristicsId);
     return ResponseEntity.ok("Новый продукт добавлен");
   }
 
@@ -53,13 +66,24 @@ public class ProductsController {
   public ResponseEntity<?> addJson(
     @RequestBody ProductJson productJson) {
     this.productService.addProductJson(productJson);
+    productDAO.addProductJson(productJson);
     return ResponseEntity.ok("Новой продукт добавлен посредством JSON");
+  }
+
+  @ApiOperation(value = "Добавляет продукты из Excel файла")
+  @PostMapping("/addExcel")
+  public ResponseEntity<?> addExcel(
+    @RequestParam MultipartFile file) {
+    productService.addProductExcel(file);
+    productDAO.addProductExcel(file);
+    return ResponseEntity.ok("Новой продукт добавлен посредством Excel");
   }
 
   @ApiOperation(value = "Показывает список продуктов")
   @GetMapping("/all")
   public ResponseEntity<?> all() {
     return ResponseEntity.ok(this.productService.showAllProducts());
+    //return ResponseEntity.ok(productDAO.getAllProduct());
   }
 
   @ApiOperation(value = "Показывает продукт")
@@ -89,5 +113,15 @@ public class ProductsController {
     return ResponseEntity.ok(this.productService.addPhoto(id, file));
   }
 
+  @ApiOperation("Искать продукт по имени")
+  @PostMapping("/getProductsByName")
+  public ResponseEntity<?> getProductsByName(String name) {
+    return ResponseEntity.ok(this.productDAO.getProductByName(name));
+  }
 
+//  @ApiOperation("Искать продукт по Id категории")
+//  @PostMapping("/getProductsByName")
+//  public ResponseEntity<?> getProductsByCategoryId(Long id) {
+//    return ResponseEntity.ok(this.productService.getProductsByCategoryId(id));
+//  }
 }

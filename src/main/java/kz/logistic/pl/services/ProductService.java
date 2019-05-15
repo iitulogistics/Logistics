@@ -9,7 +9,6 @@ import kz.logistic.pl.models.pojos.json.ProductJson;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-
 @Service
 public interface ProductService {
 
@@ -30,6 +29,8 @@ public interface ProductService {
 
   void addProductJson(ProductJson productJson);
 
+  void addProductExcel(MultipartFile multipartFile);
+
   List<Product> showAllProducts();
 
   DefaultProduct showProduct(Long productId);
@@ -40,4 +41,7 @@ public interface ProductService {
 
   String addPhoto(Long id, MultipartFile file);
 
+  List<Product> getProductsByName(String name);
+
+  List<Product> getProductsByCategoryId(Long id);
 }
