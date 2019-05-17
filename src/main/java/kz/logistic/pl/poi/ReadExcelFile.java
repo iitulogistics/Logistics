@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ReadExcelFile {
 
-  public List<ProductsEntity> readProductFromExcelFile(MultipartFile multipartFile, Long seller_company_id) throws IOException {
+  public List<ProductsEntity> readProductFromExcelFile(MultipartFile multipartFile) throws IOException {
 
     FileInputStream fileInputStream = (FileInputStream) multipartFile.getInputStream();
 
@@ -63,7 +63,7 @@ public class ReadExcelFile {
 //        productsEntity.setProductSubcategoryId(product_subcategory_id);
         productsEntity.setWeight(weight);
         productsEntity.setPrice(price);
-        productsEntity.setSellerCompanyId(seller_company_id);
+        //productsEntity.setSellerCompanyId(seller_company_id);
 //        productsEntity.setSpecialCharacteristicId(special_characteristic_id);
 //        productsEntity.setProductCategoryId(product_category_id);
 
