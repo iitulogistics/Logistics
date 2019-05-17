@@ -64,9 +64,11 @@ public class DefaultCountryService implements CountryService {
   }
 
     @Override
-    public String addCountry(String countryNameKk, String countryNameRu, String countryNameEn) {
+    public CountryEntity addCountry(String countryNameKk, String countryNameRu, String countryNameEn) {
         if (exists(countryNameEn)) {
-            return "Страна с таким названием уже существует";
+            CountryEntity nullCountryEntity = new CountryEntity();
+            nullCountryEntity.setCountryNameRu("Страна с таким названием уже существует");
+            return nullCountryEntity;
         }
         CountryEntity countryEntity = new CountryEntity();
         countryEntity.setCountryNameEn(countryNameEn);
@@ -75,7 +77,7 @@ public class DefaultCountryService implements CountryService {
 
         this.countryRepository.save(countryEntity);
         log.info("Added new country " + countryNameEn + " " + new Date());
-        return "Страна добавлена";
+        return countryEntity;
     }
 
     @Override

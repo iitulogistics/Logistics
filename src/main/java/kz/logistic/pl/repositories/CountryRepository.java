@@ -24,9 +24,9 @@ public interface CountryRepository extends JpaRepository<CountryEntity, Long> {
      String pattern3,
      Long countryId);
 
-  @Modifying(clearAutomatically = true)
-  @Transactional
-  @Query("update CountryEntity c set c.countryNameEn = ?2 , " +
-    "c.countryNameRu = ?3 , c.countryNameKk = ?4 where c.countryId = ?1")
-  void updateCountryById(Long id, String countryNameEn, String countryNameRu, String countryNameKk);
+    @Modifying(clearAutomatically = true)
+    @Transactional
+    @Query("update CountryEntity c set c.countryNameEn = ?2 , " +
+        "c.countryNameRu = ?3 , c.countryNameKk = ?4 where c.countryId = ?1")
+    void updateCountryById(Long id, String countryNameEn, String countryNameRu, String countryNameKk);
 }
