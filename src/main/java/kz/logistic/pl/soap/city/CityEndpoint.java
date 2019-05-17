@@ -1,4 +1,4 @@
-package kz.logistic.pl.citySoap;
+package kz.logistic.pl.soap.city;
 
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;

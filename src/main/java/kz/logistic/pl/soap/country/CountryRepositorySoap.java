@@ -1,10 +1,10 @@
-package kz.logistic.pl.soap;
+package kz.logistic.pl.soap.country;
 
 import kz.logistic.pl.models.entities.CountryEntity;
 import kz.logistic.pl.repositories.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import soap.logistic.logistics.Country;
+import soap.logistic.country.Country;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;

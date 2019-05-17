@@ -1,4 +1,4 @@
-package kz.logistic.pl.citySoap;
+package kz.logistic.pl.soap.city;
 
 import kz.logistic.pl.models.entities.CityEntity;
 import kz.logistic.pl.repositories.CityRepository;

@@ -1,4 +1,4 @@
-package kz.logistic.pl.regionSoap;
+package kz.logistic.pl.soap.region;
 
 import kz.logistic.pl.models.entities.RegionEntity;
 import kz.logistic.pl.repositories.RegionRepository;

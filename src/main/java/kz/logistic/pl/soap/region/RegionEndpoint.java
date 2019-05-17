@@ -1,4 +1,4 @@
-package kz.logistic.pl.regionSoap;
+package kz.logistic.pl.soap.region;
 
 import lombok.extern.java.Log;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;

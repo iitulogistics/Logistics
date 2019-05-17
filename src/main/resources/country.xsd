@@ -1,6 +1,6 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:tns="http://logistic.soap/logistics"
-           targetNamespace="http://logistic.soap/logistics"
+           xmlns:tns="http://logistic.soap/country"
+           targetNamespace="http://logistic.soap/country"
            elementFormDefault="qualified">
   <!--Get Country by ID-->
   <xs:element name="getCountryIdRequest">
