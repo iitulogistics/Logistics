@@ -1,11 +1,12 @@
 package kz.logistic.pl.services;
 
 
+import kz.logistic.pl.models.pojos.json.InfoBinJson;
+
 import java.io.IOException;
-import java.util.Map;
 
 public interface GosZakupBinService {
 
-    Map<String, Object> showCompanyInformation(String bin) throws IOException;
+    InfoBinJson showCompanyInformation(String bin) throws IOException;
 
 }
