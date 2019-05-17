@@ -8,4 +8,5 @@ public interface City {
     Long getRegionId();
 
     Long getCountryId();
+
 }

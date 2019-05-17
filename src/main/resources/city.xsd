@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://logistic.soap/city"
+           targetNamespace="http://logistic.soap/city"
+           elementFormDefault="qualified">
+    <!-- get city by id -->
+    <xs:element name="getCityIdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getCityIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="city" type="tns:city"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- add city by id -->
+
+    <xs:element name="addCityRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="regionId" type="xs:long"/>
+                <xs:element name="countryId" type="xs:long"/>
+                <xs:element name="cityNameKk" type="xs:string"/>
+                <xs:element name="cityNameRu" type="xs:string"/>
+                <xs:element name="cityNameEn" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="addCityResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="city" type="tns:city"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- delete city by id -->
+
+    <xs:element name="deleteCityIdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteCityIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="city" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- update City -->
+    <xs:element name="updateCityRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+                <xs:element name="cityNameKk" type="xs:string"/>
+                <xs:element name="cityNameRu" type="xs:string"/>
+                <xs:element name="cityNameEn" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateCityResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="city" type="tns:city"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- -->
+
+    <xs:complexType name="city">
+        <xs:sequence>
+            <xs:element name="regionId" type="xs:long"/>
+            <xs:element name="countryId" type="xs:long"/>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="cityNameKk" type="xs:string"/>
+            <xs:element name="cityNameRu" type="xs:string"/>
+            <xs:element name="cityNameEn" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
