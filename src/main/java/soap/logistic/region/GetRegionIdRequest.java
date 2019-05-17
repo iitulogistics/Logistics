@@ -6,7 +6,7 @@
 //
 
 
-package soap.logistic.city;
+package soap.logistic.region;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -37,8 +37,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "id"
 })
-@XmlRootElement(name = "getCityIdRequest")
-public class GetCityIdRequest {
+@XmlRootElement(name = "getRegionIdRequest")
+public class GetRegionIdRequest {
 
     protected long id;
 

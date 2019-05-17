@@ -5,5 +5,5 @@
 // Generated on: 2019.05.17 at 04:56:20 PM ALMT 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://logistic.soap/city", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package soap.logistic.city;
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://logistic.soap/region", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+package soap.logistic.region;

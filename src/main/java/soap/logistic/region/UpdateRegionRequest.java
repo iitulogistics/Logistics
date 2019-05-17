@@ -6,7 +6,7 @@
 //
 
 
-package soap.logistic.logistics;
+package soap.logistic.region;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -26,9 +26,10 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/>
- *         &lt;element name="countryNameKk" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="countryNameRu" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="countryNameEn" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="regionNameKk" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="regionNameRu" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="regionNameEn" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="countryId" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -40,20 +41,22 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "id",
-    "countryNameKk",
-    "countryNameRu",
-    "countryNameEn"
+    "regionNameKk",
+    "regionNameRu",
+    "regionNameEn",
+    "countryId"
 })
-@XmlRootElement(name = "updateCountryRequest")
-public class UpdateCountryRequest {
+@XmlRootElement(name = "updateRegionRequest")
+public class UpdateRegionRequest {
 
     protected long id;
     @XmlElement(required = true)
-    protected String countryNameKk;
+    protected String regionNameKk;
     @XmlElement(required = true)
-    protected String countryNameRu;
+    protected String regionNameRu;
     @XmlElement(required = true)
-    protected String countryNameEn;
+    protected String regionNameEn;
+    protected long countryId;
 
     /**
      * Gets the value of the id property.
@@ -72,75 +75,91 @@ public class UpdateCountryRequest {
     }
 
     /**
-     * Gets the value of the countryNameKk property.
+     * Gets the value of the regionNameKk property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getCountryNameKk() {
-        return countryNameKk;
+    public String getRegionNameKk() {
+        return regionNameKk;
     }
 
     /**
-     * Sets the value of the countryNameKk property.
+     * Sets the value of the regionNameKk property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setCountryNameKk(String value) {
-        this.countryNameKk = value;
+    public void setRegionNameKk(String value) {
+        this.regionNameKk = value;
     }
 
     /**
-     * Gets the value of the countryNameRu property.
+     * Gets the value of the regionNameRu property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getCountryNameRu() {
-        return countryNameRu;
+    public String getRegionNameRu() {
+        return regionNameRu;
     }
 
     /**
-     * Sets the value of the countryNameRu property.
+     * Sets the value of the regionNameRu property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setCountryNameRu(String value) {
-        this.countryNameRu = value;
+    public void setRegionNameRu(String value) {
+        this.regionNameRu = value;
     }
 
     /**
-     * Gets the value of the countryNameEn property.
+     * Gets the value of the regionNameEn property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getCountryNameEn() {
-        return countryNameEn;
+    public String getRegionNameEn() {
+        return regionNameEn;
     }
 
     /**
-     * Sets the value of the countryNameEn property.
+     * Sets the value of the regionNameEn property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setCountryNameEn(String value) {
-        this.countryNameEn = value;
+    public void setRegionNameEn(String value) {
+        this.regionNameEn = value;
+    }
+
+    /**
+     * Gets the value of the countryId property.
+     * 
+     */
+    public long getCountryId() {
+        return countryId;
+    }
+
+    /**
+     * Sets the value of the countryId property.
+     * 
+     */
+    public void setCountryId(long value) {
+        this.countryId = value;
     }
 
 }

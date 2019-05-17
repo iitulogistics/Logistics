@@ -26,6 +26,8 @@ public class CityRepositorySoap {
         entities.forEach(cityEntity -> {
             City city = new City();
             city.setId(cityEntity.getCityId());
+            city.setCountryId(cityEntity.getCountryId());
+            city.setRegionId(cityEntity.getRegionId());
             city.setCityNameEn(cityEntity.getCityNameEn());
             city.setCityNameRu(cityEntity.getCityNameRu());
             city.setCityNameKk(cityEntity.getCityNameKk());
@@ -38,10 +40,12 @@ public class CityRepositorySoap {
 
     public City findCityId(Long id){return cityMap.get(id);}
 
-    public City addCity(String nameKk, String nameRu, String nameEn){
+    public City addCity(Long countryId, Long regionId, String nameKk, String nameRu, String nameEn){
         for(Long key : cityMap.keySet()){
             City city = cityMap.get(key);
-            if(city.getCityNameEn().equals(nameKk)
+            if(city.getCountryId() == countryId
+                && city.getRegionId() == regionId
+                && city.getCityNameEn().equals(nameKk)
                 && city.getCityNameRu().equals(nameRu)
                 && city.getCityNameKk().equals(nameEn))
                 return null;
@@ -49,14 +53,16 @@ public class CityRepositorySoap {
 
         CityEntity cityEntity = new CityEntity();
 
-        cityEntity.setRegionId((long) 0);
-        cityEntity.setCountryId((long) 0);
+        cityEntity.setCountryId(countryId);
+        cityEntity.setRegionId(regionId);
         cityEntity.setCityNameEn(nameKk);
         cityEntity.setCityNameRu(nameRu);
         cityEntity.setCityNameKk(nameEn);
         cityRepo.save(cityEntity);
 
         City city = new City();
+        city.setCountryId(countryId);
+        city.setRegionId(regionId);
         city.setCityNameEn(nameKk);
         city.setCityNameRu(nameRu);
         city.setCityNameKk(nameEn);

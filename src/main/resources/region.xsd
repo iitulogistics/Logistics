@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://logistic.soap/region"
+           targetNamespace="http://logistic.soap/region"
+           elementFormDefault="qualified">
+    <!-- get region by id -->
+    <xs:element name="getRegionIdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getRegionIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="region" type="tns:region"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- add region by id -->
+
+    <xs:element name="addRegionRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="regionNameKk" type="xs:string"/>
+                <xs:element name="regionNameRu" type="xs:string"/>
+                <xs:element name="regionNameEn" type="xs:string"/>
+                <xs:element name="countryId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="addRegionResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="region" type="tns:region"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- delete region by id -->
+
+    <xs:element name="deleteRegionIdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteRegionIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="region" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- update Region -->
+    <xs:element name="updateRegionRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+                <xs:element name="regionNameKk" type="xs:string"/>
+                <xs:element name="regionNameRu" type="xs:string"/>
+                <xs:element name="regionNameEn" type="xs:string"/>
+                <xs:element name="countryId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateRegionResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="region" type="tns:region"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- -->
+
+    <xs:complexType name="region">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="regionNameKk" type="xs:string"/>
+            <xs:element name="regionNameRu" type="xs:string"/>
+            <xs:element name="regionNameEn" type="xs:string"/>
+            <xs:element name="countryId" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

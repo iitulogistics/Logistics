@@ -6,10 +6,11 @@
 //
 
 
-package soap.logistic.city;
+package soap.logistic.region;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -24,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/>
+ *         &lt;element name="region" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,27 +36,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "id"
+    "region"
 })
-@XmlRootElement(name = "getCityIdRequest")
-public class GetCityIdRequest {
+@XmlRootElement(name = "deleteRegionIdResponse")
+public class DeleteRegionIdResponse {
 
-    protected long id;
+    @XmlElement(required = true)
+    protected String region;
 
     /**
-     * Gets the value of the id property.
+     * Gets the value of the region property.
      * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public long getId() {
-        return id;
+    public String getRegion() {
+        return region;
     }
 
     /**
-     * Sets the value of the id property.
+     * Sets the value of the region property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public void setId(long value) {
-        this.id = value;
+    public void setRegion(String value) {
+        this.region = value;
     }
 
 }

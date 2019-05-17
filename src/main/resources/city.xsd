@@ -25,6 +25,8 @@
     <xs:element name="addCityRequest">
         <xs:complexType>
             <xs:sequence>
+                <xs:element name="regionId" type="xs:long"/>
+                <xs:element name="countryId" type="xs:long"/>
                 <xs:element name="cityNameKk" type="xs:string"/>
                 <xs:element name="cityNameRu" type="xs:string"/>
                 <xs:element name="cityNameEn" type="xs:string"/>
