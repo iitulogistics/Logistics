@@ -17,9 +17,9 @@ public interface CityRepository extends JpaRepository<CityEntity, Long> {
 
 
 
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Transactional
-    @Query("update CityEntity c set c.cityNameEn = ?2, c.cityNameRu = ?3, c.cityNameKk = ?4, c.cityId = ?1")
+    @Query("update CityEntity c set c.cityNameEn = ?2, " + "c.cityNameRu = ?3, c.cityNameKk = ?4 where c.cityId = ?1")
     void updateCityById(Long id, String nameKk, String nameRu, String nameEn);
 
 

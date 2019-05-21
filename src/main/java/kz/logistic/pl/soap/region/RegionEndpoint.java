@@ -53,8 +53,7 @@ public class RegionEndpoint {
         @ResponsePayload
         public UpdateRegionResponse updateRegion(@RequestPayload UpdateRegionRequest request) {
             UpdateRegionResponse response = new UpdateRegionResponse();
-            response.setRegion(regionRepositorySoap.updateRegion(
-                request.getId(), request.getRegionNameKk(), request.getRegionNameRu(), request.getRegionNameEn(), request.getCountryId()));
+            response.setRegion(regionRepositorySoap.updateRegion(request.getId(), request.getRegionNameKk(), request.getRegionNameRu(), request.getRegionNameEn(), request.getCountryId()));
             return response;
         }
 

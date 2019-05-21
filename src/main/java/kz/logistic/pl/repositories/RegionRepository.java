@@ -17,9 +17,10 @@ public interface RegionRepository extends JpaRepository<RegionEntity, Long> {
   ArrayList<RegionEntity> findByRegionNameEnAndCountryId(String regionNameEn, Long countryId);
 
 
-  @Modifying
+
+  @Modifying(clearAutomatically = true)
   @Transactional
-  @Query("update RegionEntity reg set reg.regionId=?1, reg.regionNameKk=?2, reg.regionNameRu=?3, reg.regionNameEn=?4, reg.countryId=?5")
+  @Query("update RegionEntity reg set reg.regionNameEn=?2, " + " reg.regionNameRu=?3, reg.regionNameKk=?4, reg.countryId=?5 where reg.regionId = ?1")
     void updateRegionById(Long id, String regionNameKk, String regionNameRu, String regionNameEn, Long countryId);
 
 

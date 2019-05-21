@@ -42,7 +42,7 @@ public class CityEndpoint {
     @ResponsePayload
     public AddCityResponse addCity(@RequestPayload AddCityRequest request) {
         AddCityResponse response = new AddCityResponse();
-        response.setCity(cityRepositorySoap.addCity(request.getCountryId(), request.getRegionId(), request.getCityNameEn(), request.getCityNameRu(), request.getCityNameKk()));
+        response.setCity(cityRepositorySoap.addCity(request.getCityNameKk(), request.getCityNameRu(), request.getCityNameEn(), request.getRegionId(), request.getCountryId()));
 
         return response;
     }
@@ -52,7 +52,7 @@ public class CityEndpoint {
     public UpdateCityResponse updateCity(@RequestPayload UpdateCityRequest request) {
         UpdateCityResponse response = new UpdateCityResponse();
         response.setCity(cityRepositorySoap.updateCity(
-            request.getId(), request.getCityNameEn(), request.getCityNameRu(), request.getCityNameKk()));
+            request.getCityNameKk(), request.getCityNameRu(), request.getCityNameEn(), request.getId()));
         return response;
     }
 
