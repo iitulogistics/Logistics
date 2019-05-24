@@ -1,0 +1,1 @@
+ALTER sequence special_characteristic_special_characterisric_id_seq rename TO special_characteristic_special_characteristic_id_seq;
