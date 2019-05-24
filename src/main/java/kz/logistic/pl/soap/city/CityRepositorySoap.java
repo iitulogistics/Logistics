@@ -40,7 +40,7 @@ public class CityRepositorySoap {
 
     public City findCityId(Long id){return cityMap.get(id);}
 
-    public City addCity(Long countryId, Long regionId, String nameKk, String nameRu, String nameEn){
+    public City addCity(String nameKk, String nameRu, String nameEn, Long regionId, Long countryId){
         for(Long key : cityMap.keySet()){
             City city = cityMap.get(key);
             if(city.getCountryId() == countryId
@@ -72,7 +72,7 @@ public class CityRepositorySoap {
         return city;
     }
 
-    public City updateCity(Long id, String nameKk, String nameRu, String nameEn){
+    public City updateCity(String nameKk, String nameRu, String nameEn, Long id){
         City city = cityMap.get(id);
         city.setCityNameEn(nameKk);
         city.setCityNameRu(nameRu);
