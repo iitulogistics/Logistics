@@ -59,21 +59,21 @@
     </xs:complexType>
   </xs:element>
 
-<!--  &lt;!&ndash;get all Countries&ndash;&gt;-->
-<!--  <xs:element name="getAllCountryRequest">-->
-<!--    <xs:complexType>-->
-<!--    <xs:sequence>-->
-<!--    </xs:sequence>-->
-<!--  </xs:complexType>-->
-<!--  </xs:element>-->
+    <!--get all Countries-->
+    <xs:element name="getAllCountryRequest">
+        <xs:complexType>
+            <xs:sequence>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
-<!--  <xs:element name="getAllCountryResponse" >-->
-<!--    <xs:complexType >-->
-<!--      <xs:sequence>-->
-<!--        <xs:element name="country" type="tns:country"/>-->
-<!--      </xs:sequence>-->
-<!--    </xs:complexType>-->
-<!--  </xs:element>-->
+    <xs:element name="getAllCountryResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="country" type="tns:country"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
   <!--Delete Country by ID-->
   <xs:element name="deleteCountryIdRequest">
