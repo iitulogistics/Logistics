@@ -64,7 +64,7 @@ public class DefaultOtpService implements OtpService {
             RestTemplate restTemplate = new RestTemplate();
             ResponseEntity<String> response = restTemplate.postForEntity(smsApiUrl, request, String.class);
 
-            String result = response.getBody().toString();
+            String result = response.getBody();
             ObjectMapper objectMapper = new ObjectMapper();
             Map<String, Object> objectMap = objectMapper.readValue(result, Map.class);
 

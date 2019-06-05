@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import kz.logistic.pl.utils.ReturnMessage;
 import kz.logistic.pl.models.entities.RolesEntity;
 import kz.logistic.pl.models.pojos.Roles;
 import kz.logistic.pl.models.pojos.impl.DefaultRoles;
@@ -18,7 +19,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Slf4j
 public class DefaultRoleService implements RoleService {
     private RoleRepository roleRepository;
+    private ReturnMessage returnMessage;
 
+    @Autowired(required = false)
+    public void setReturnMessage(ReturnMessage returnMessage) {
+        this.returnMessage = returnMessage;
+    }
     @Autowired
     public void setRoleRepository(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
@@ -74,9 +80,12 @@ public class DefaultRoleService implements RoleService {
                 rolesEntity.setDescription(rolesJson.getRoleDescription());
             this.roleRepository.save(rolesEntity);
             log.info("Updated " + rolesJson.getRoleName() + " role " + new Date());
-            return "Роль обновлена";
+            return java.text.MessageFormat.format(returnMessage.getRoleUpdateSuccess(), rolesEntity.getRoleName());
+
         } else {
-            return "Роли с таким id не существует";
+
+            return java.text.MessageFormat.format(returnMessage.getRoleUpdateError(), rolesEntity.getRoleName());
+
         }
     }
 
@@ -86,9 +95,11 @@ public class DefaultRoleService implements RoleService {
         if (Objects.nonNull(rolesEntity)) {
             log.info("Updated " + rolesEntity.getRoleName() + " role" + new Date());
             this.roleRepository.delete(rolesEntity);
-            return "Роль удалена";
+            return java.text.MessageFormat.format(returnMessage.getRoleDeleteSuccess(), rolesEntity.getRoleName());
+
         } else {
-            return "Роли с таким id не существует";
+            return java.text.MessageFormat.format(returnMessage.getRoleDeleteError(), rolesEntity.getRoleName());
+
         }
     }
 

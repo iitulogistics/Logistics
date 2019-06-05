@@ -1,6 +1,7 @@
 package kz.logistic.pl.services.impl;
 
 import kz.logistic.pl.MobilePhone;
+import kz.logistic.pl.utils.ReturnMessage;
 import kz.logistic.pl.models.entities.CustomerEntity;
 import kz.logistic.pl.models.entities.LoginEntity;
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
@@ -13,7 +14,6 @@ import kz.logistic.pl.services.CustomerService;
 import kz.logistic.pl.services.OtpService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.io.IOException;
 import java.util.Date;
@@ -29,7 +29,12 @@ public class DefaultCustomerService implements CustomerService {
     private LoginRepository loginRepository;
     private OtpService otpService;
     private LocalizedMessageBuilderFactory localizedMessageBuilderFactory;
+    private ReturnMessage returnMessage;
 
+    @Autowired(required = false)
+    public void setReturnMessage(ReturnMessage returnMessage) {
+        this.returnMessage = returnMessage;
+    }
     @Autowired
     public void setCustomerRepository(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
@@ -119,7 +124,7 @@ public class DefaultCustomerService implements CustomerService {
         loginEntity.setCustomerEntity(customerEntity);
         this.loginRepository.save(loginEntity);
         log.info("Added new customer, username: " + username + ". " + new Date());
-        return "Пользователь добавлен";
+        return java.text.MessageFormat.format(returnMessage.getCustomerAddSuccess(), username);
     }
 
     @Override
@@ -148,7 +153,7 @@ public class DefaultCustomerService implements CustomerService {
         this.loginRepository.save(loginEntity);
         log.info("Added new customer via JSON, username "
             + customerJson.getUsername() + ". " + new Date());
-        return "Пользователь добавлен ";
+        return java.text.MessageFormat.format(returnMessage.getCustomerAddSuccess(), customerJson.getUsername());
     }
 
     @Override
@@ -191,9 +196,10 @@ public class DefaultCustomerService implements CustomerService {
             this.loginRepository.save(loginEntity);
             this.customerRepository.save(customerEntity);
             log.info("Updated " + customerId + " customer " + new Date());
-            return "Клиент обновлен";
+            return java.text.MessageFormat.format(returnMessage.getCustomerUpdateSuccess(), customerJson.getUsername());
         } else {
-            return "Клиент с таким id не существует";
+            return java.text.MessageFormat.format(returnMessage.getCustomerUpdateError(), customerJson.getUsername());
+
         }
     }
 
@@ -203,6 +209,6 @@ public class DefaultCustomerService implements CustomerService {
         LoginEntity loginEntity = this.loginRepository.findById(customerEntity.getLoginEntity().getLoginId()).orElse(null);
         this.loginRepository.deleteById(loginEntity.getLoginId());
         this.customerRepository.deleteById(customerEntity.getCustomerId());
-        return "Данные клиента удалены";
+        return java.text.MessageFormat.format(returnMessage.getCustomerDeleteSuccess(), customerEntity.getLoginEntity().getUsername());
     }
 }
