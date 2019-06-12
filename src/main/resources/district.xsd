@@ -23,11 +23,11 @@
     <xs:element name="addDistrictRequest">
         <xs:complexType>
             <xs:sequence>
+                <xs:element name="regionId" type="xs:long"/>
+                <xs:element name="cityId" type="xs:long"/>
                 <xs:element name="districtNameKk" type="xs:string"/>
                 <xs:element name="districtNameRu" type="xs:string"/>
                 <xs:element name="districtNameEn" type="xs:string"/>
-                <xs:element name="regionId" type="xs:long"/>
-                <xs:element name="cityId" type="xs:long"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

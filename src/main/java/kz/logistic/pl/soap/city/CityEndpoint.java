@@ -31,7 +31,7 @@ public class CityEndpoint {
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "deleteCityIdRequest")
     @ResponsePayload
-    public DeleteCityIdResponse deleteCityIdResponse(@RequestPayload DeleteCityIdRequest request) {
+    public DeleteCityIdResponse deleteCity(@RequestPayload DeleteCityIdRequest request) {
         DeleteCityIdResponse response = new DeleteCityIdResponse();
 
         response.setCity(this.cityRepositorySoap.deleteCityId(request.getId()));

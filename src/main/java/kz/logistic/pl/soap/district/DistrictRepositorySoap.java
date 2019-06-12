@@ -24,7 +24,7 @@ public class DistrictRepositorySoap {
         List<DistrictEntity> entities = this.districtRepository.findAll();
         entities.forEach(districtEntity -> {
             District district = new District();
-            district.setId(districtEntity.getCityId());
+            district.setId(districtEntity.getDistrictId());
             district.setCityId(districtEntity.getCityId());
             district.setRegionId(districtEntity.getRegionId());
             district.setDistrictNameEn(districtEntity.getDistrictNameEn());
@@ -65,7 +65,7 @@ public class DistrictRepositorySoap {
         district.setDistrictNameEn(nameEn);
         district.setDistrictNameRu(nameRu);
         district.setDistrictNameKk(nameKk);
-        district.setId(districtEntity.getCityId());
+        district.setId(districtEntity.getDistrictId());
 
         districtMap.put(district.getId(), district);
         return district;
