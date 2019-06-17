@@ -58,7 +58,7 @@ public class DefaultProductSubCategoryService implements ProductSubCategoryServi
 
 
     @Override
-    public void addProductSubCategory(String subSubCategoryNameKk, String subSubCategoryNameRu,
+    public String addProductSubCategory(String subSubCategoryNameKk, String subSubCategoryNameRu,
                                       String subSubCategoryNameEn, Long productCategoryId,
                                       String subSubCategoryAddInfo) {
         ProductsSubCategoryEntity subCategoryEntity = new ProductsSubCategoryEntity();
@@ -70,10 +70,11 @@ public class DefaultProductSubCategoryService implements ProductSubCategoryServi
 
         this.productSubCategoryRepository.save(subCategoryEntity);
         log.info("Added new ProductSubCategory: " + subSubCategoryNameRu + " " + new Date());
+        return java.text.MessageFormat.format( returnMessage.getProductsubcategoryAddSuccess(), subCategoryEntity.getSubCategoryNameEn());
     }
 
     @Override
-    public void addProductSubCategoryJson(ProductSubCategoryJson productSubCategoryJson) {
+    public String addProductSubCategoryJson(ProductSubCategoryJson productSubCategoryJson) {
         ProductsSubCategoryEntity subCategoryEntity = new ProductsSubCategoryEntity();
         subCategoryEntity.setSubCategoryNameKk(productSubCategoryJson.getSubCategoryNameKk());
         subCategoryEntity.setSubCategoryNameRu(productSubCategoryJson.getSubCategoryNameRu());
@@ -84,6 +85,7 @@ public class DefaultProductSubCategoryService implements ProductSubCategoryServi
         this.productSubCategoryRepository.save(subCategoryEntity);
         log.info("Added new ProductSubCategory: "
             + productSubCategoryJson.getSubCategoryNameRu() + " via Json " + new Date());
+        return java.text.MessageFormat.format( returnMessage.getProductsubcategoryAddSuccess(), subCategoryEntity.getSubCategoryNameEn());
     }
 
     @Override

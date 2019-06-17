@@ -52,22 +52,24 @@ public class DefaultRoleService implements RoleService {
     }
 
     @Override
-    public void addRole(String name, String description) {
+    public String addRole(String name, String description) {
         RolesEntity rolesEntity = new RolesEntity();
         rolesEntity.setRoleName(name);
         rolesEntity.setDescription(description);
 
         this.roleRepository.save(rolesEntity);
         log.info("Added new Role " + name + " " + new Date());
+        return java.text.MessageFormat.format( returnMessage.getRoleAddSuccess(), rolesEntity.getRoleName());
     }
 
     @Override
-    public void addRoleJson(RolesJson roles) {
+    public String addRoleJson(RolesJson roles) {
         RolesEntity rolesEntity = new RolesEntity();
         rolesEntity.setRoleName(roles.getRoleName());
         rolesEntity.setDescription(roles.getRoleDescription());
         this.roleRepository.save(rolesEntity);
         log.info("Added new Role с помощью JSON формата " + roles.getRoleName() + " " + new Date());
+        return java.text.MessageFormat.format( returnMessage.getRoleAddSuccess(), rolesEntity.getRoleName());
     }
 
     @Override

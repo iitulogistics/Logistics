@@ -58,7 +58,7 @@ public class DefaultSpecialCharacteristicService implements SpecialCharacteristi
     }
 
     @Override
-    public void addSpecialCharacteristic(
+    public String addSpecialCharacteristic(
         String characteristicNameKk,
         String characteristicNameRu,
         String characteristicNameEn,
@@ -72,10 +72,11 @@ public class DefaultSpecialCharacteristicService implements SpecialCharacteristi
         this.specialCharacteristicRepository.save(specialCharacteristicEntity);
         log.info("New special characteristic added, name: " + characteristicNameEn
             + ". Time: " + new Date());
+        return java.text.MessageFormat.format( returnMessage.getSpecialcharacteristicAddSuccess(), specialCharacteristicEntity.getCharacteristicNameEn());
     }
 
     @Override
-    public void addSpecialCharacteristicJson(SpecialCharacteristicJson specialCharacteristicJson) {
+    public String addSpecialCharacteristicJson(SpecialCharacteristicJson specialCharacteristicJson) {
         SpecialCharacteristicEntity specialCharacteristicEntity = new SpecialCharacteristicEntity();
         specialCharacteristicEntity.setCharacteristicNameKk(specialCharacteristicJson.getCharacteristicNameKk());
         specialCharacteristicEntity.setCharacteristicNameRu(specialCharacteristicJson.getCharacteristicNameRu());
@@ -84,6 +85,8 @@ public class DefaultSpecialCharacteristicService implements SpecialCharacteristi
         this.specialCharacteristicRepository.save(specialCharacteristicEntity);
         log.info("New special characteristic added via JSON, name: " + specialCharacteristicJson.getCharacteristicNameEn()
             + ". Time: " + new Date());
+        return java.text.MessageFormat.format( returnMessage.getSpecialcharacteristicAddSuccess(), specialCharacteristicEntity.getCharacteristicNameEn());
+
     }
     @Override
     public String updateCharacteristic(Long characteristicId, SpecialCharacteristicJson specialCharacteristicJson) {

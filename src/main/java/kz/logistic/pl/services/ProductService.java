@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public interface ProductService {
 
-    void addProduct(String productNameKk,
+    String addProduct(String productNameKk,
                     String productNameRu,
                     String productNameEn,
                     Long productCategoryId,
@@ -28,7 +28,7 @@ public interface ProductService {
                     Long sellerCompanyId,
                     Long specialCharacteristicsId);
 
-    void addProductJson(ProductJson productJson);
+    String addProductJson(ProductJson productJson);
 
     List<Product> showAllProducts();
 

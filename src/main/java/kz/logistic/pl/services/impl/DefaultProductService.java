@@ -43,7 +43,7 @@ public class DefaultProductService implements ProductService {
     }
 
     @Override
-    public void addProduct(
+    public String addProduct(
         String productNameKk, String productNameRu, String productNameEn, Long productCategoryId,
         Long productSubcategoryId, String uniqueIdNumber, String serialNumber, String manufacturer,
         String size, Integer weight, Integer price, String productDescription, Long sellerCompanyId,
@@ -66,10 +66,11 @@ public class DefaultProductService implements ProductService {
         productRepository.save(productsEntity);
         log.info("New product added:\nName: "
             + productNameEn + "\nseller company id: " + sellerCompanyId);
+        return java.text.MessageFormat.format( returnMessage.getProductAddSuccess(), productsEntity.getProductNameEn());
     }
 
     @Override
-    public void addProductJson(ProductJson productJson) {
+    public String addProductJson(ProductJson productJson) {
         ProductsEntity productsEntity = new ProductsEntity();
         productsEntity.setProductNameKk(productJson.getProductNameKk());
         productsEntity.setProductNameRu(productJson.getProductNameRu());
@@ -89,6 +90,7 @@ public class DefaultProductService implements ProductService {
         log.info("New product added:\nName: "
             + productJson.getProductNameEn() + "\nseller company id: "
             + productJson.getSellerCompanyId());
+        return java.text.MessageFormat.format( returnMessage.getProductAddSuccess(), productsEntity.getProductNameEn());
     }
 
     @Override
