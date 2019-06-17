@@ -1,17 +1,17 @@
-package kz.logistic.pl.services;
+package kz.logistic.pl.dao;
 
-import java.io.IOException;
-import java.util.List;
-
-import kz.logistic.pl.models.pojos.Product;
-import kz.logistic.pl.models.pojos.impl.DefaultProduct;
+import kz.logistic.pl.models.entities.ProductsEntity;
 import kz.logistic.pl.models.pojos.json.ProductJson;
-import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-@Service
-public interface ProductService {
+import java.util.List;
 
+public interface ProductDAO {
+  List<ProductsEntity> getAllProduct();
+  ProductsEntity getProductById(Long id);
+  ProductsEntity addNewProduct(ProductsEntity product);
+  void addProductExcel(MultipartFile multipartFile);
+  List<ProductsEntity> getProductByName(String name);
   void addProduct(String productNameKk,
                   String productNameRu,
                   String productNameEn,
@@ -28,20 +28,4 @@ public interface ProductService {
                   Long specialCharacteristicsId);
 
   void addProductJson(ProductJson productJson);
-
-  void addProductExcel(MultipartFile multipartFile);
-
-  List<Product> showAllProducts();
-
-  DefaultProduct showProduct(Long productId);
-
-  String updateProduct(Long productId, ProductJson productJson);
-
-  String deleteProduct(Long productId);
-
-  String addPhoto(Long id, MultipartFile file);
-
-  List<Product> getProductsByName(String name);
-
-  List<Product> getProductsByCategoryId(Long id);
 }
