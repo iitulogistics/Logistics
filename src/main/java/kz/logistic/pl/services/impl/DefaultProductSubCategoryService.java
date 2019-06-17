@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import kz.logistic.pl.utils.ReturnMessage;
 import kz.logistic.pl.models.entities.ProductsSubCategoryEntity;
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
 import kz.logistic.pl.models.pojos.ProductSubCategory;
@@ -21,7 +22,12 @@ public class DefaultProductSubCategoryService implements ProductSubCategoryServi
 
     private ProductSubCategoryRepository productSubCategoryRepository;
     private LocalizedMessageBuilderFactory localizedMessageBuilderFactory;
+    private ReturnMessage returnMessage;
 
+    @Autowired(required = false)
+    public void setReturnMessage(ReturnMessage returnMessage) {
+        this.returnMessage = returnMessage;
+    }
     @Autowired(required = false)
     public void setProductSubCategoryRepository(
         ProductSubCategoryRepository productSubCategoryRepository) {
@@ -52,7 +58,7 @@ public class DefaultProductSubCategoryService implements ProductSubCategoryServi
 
 
     @Override
-    public void addProductSubCategory(String subSubCategoryNameKk, String subSubCategoryNameRu,
+    public String addProductSubCategory(String subSubCategoryNameKk, String subSubCategoryNameRu,
                                       String subSubCategoryNameEn, Long productCategoryId,
                                       String subSubCategoryAddInfo) {
         ProductsSubCategoryEntity subCategoryEntity = new ProductsSubCategoryEntity();
@@ -64,10 +70,11 @@ public class DefaultProductSubCategoryService implements ProductSubCategoryServi
 
         this.productSubCategoryRepository.save(subCategoryEntity);
         log.info("Added new ProductSubCategory: " + subSubCategoryNameRu + " " + new Date());
+        return java.text.MessageFormat.format( returnMessage.getProductsubcategoryAddSuccess(), subCategoryEntity.getSubCategoryNameEn());
     }
 
     @Override
-    public void addProductSubCategoryJson(ProductSubCategoryJson productSubCategoryJson) {
+    public String addProductSubCategoryJson(ProductSubCategoryJson productSubCategoryJson) {
         ProductsSubCategoryEntity subCategoryEntity = new ProductsSubCategoryEntity();
         subCategoryEntity.setSubCategoryNameKk(productSubCategoryJson.getSubCategoryNameKk());
         subCategoryEntity.setSubCategoryNameRu(productSubCategoryJson.getSubCategoryNameRu());
@@ -78,6 +85,7 @@ public class DefaultProductSubCategoryService implements ProductSubCategoryServi
         this.productSubCategoryRepository.save(subCategoryEntity);
         log.info("Added new ProductSubCategory: "
             + productSubCategoryJson.getSubCategoryNameRu() + " via Json " + new Date());
+        return java.text.MessageFormat.format( returnMessage.getProductsubcategoryAddSuccess(), subCategoryEntity.getSubCategoryNameEn());
     }
 
     @Override
@@ -104,9 +112,9 @@ public class DefaultProductSubCategoryService implements ProductSubCategoryServi
             }
             this.productSubCategoryRepository.save(productsSubCategoryEntity);
             log.info("Updated  product category " + new Date());
-            return "Подкатегория продуктов обновлена";
+            return java.text.MessageFormat.format(returnMessage.getProductsubcategoryUpdateSuccess(), productsSubCategoryEntity.getSubCategoryNameEn());
         } else {
-            return "Подкатегория продуктов с таким id не существует";
+            return java.text.MessageFormat.format(returnMessage.getProductsubcategoryUpdateError(), productsSubCategoryEntity.getSubCategoryNameEn());
         }
     }
 
@@ -118,9 +126,11 @@ public class DefaultProductSubCategoryService implements ProductSubCategoryServi
         if (Objects.nonNull(productsSubCategoryEntity)) {
             log.info("Deleted " + productsSubCategoryEntity.getSubCategoryNameRu() + " category " + new Date());
             this.productSubCategoryRepository.delete(productsSubCategoryEntity);
-            return "Подкатегория продукта удалена";
+            return java.text.MessageFormat.format(returnMessage.getProductsubcategoryDeleteSuccess(), productsSubCategoryEntity.getSubCategoryNameEn());
+
         } else {
-            return "Подкатегория продукта с таким id не существует";
+            return java.text.MessageFormat.format(returnMessage.getProductsubcategoryDeleteError(), productsSubCategoryEntity.getSubCategoryNameEn());
+
         }
     }
 

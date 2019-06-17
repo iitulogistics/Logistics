@@ -11,14 +11,14 @@ public interface SpecialCharacteristicService {
 
     List<SpecialCharacteristic> showAllCharacteristic();
 
-    void addSpecialCharacteristic(
+    String addSpecialCharacteristic(
         String characteristicNameKk,
         String characteristicNameRu,
         String characteristicNameEn,
         String addInfo
     );
 
-    void addSpecialCharacteristicJson(SpecialCharacteristicJson specialCharacteristicJson);
+    String addSpecialCharacteristicJson(SpecialCharacteristicJson specialCharacteristicJson);
 
     String updateCharacteristic(Long characteristicId, SpecialCharacteristicJson specialCharacteristicJson);
 

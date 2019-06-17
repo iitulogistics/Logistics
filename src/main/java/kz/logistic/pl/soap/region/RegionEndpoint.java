@@ -33,7 +33,7 @@ public class RegionEndpoint {
 
         @PayloadRoot(namespace = NAMESPACE_URI, localPart = "deleteRegionIdRequest")
         @ResponsePayload
-        public DeleteRegionIdResponse deleteRegionIdResponse(@RequestPayload DeleteRegionIdRequest request) {
+        public DeleteRegionIdResponse deleteRegion(@RequestPayload DeleteRegionIdRequest request) {
             DeleteRegionIdResponse response = new DeleteRegionIdResponse();
 
             response.setRegion(this.regionRepositorySoap.deleteRegion(request.getId()));

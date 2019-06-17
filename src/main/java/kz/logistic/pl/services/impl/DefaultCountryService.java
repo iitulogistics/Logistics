@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import kz.logistic.pl.utils.ReturnMessage;
 import kz.logistic.pl.models.entities.CountryEntity;
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
 import kz.logistic.pl.models.pojos.Country;
@@ -19,10 +20,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
 public class DefaultCountryService implements CountryService {
-
-    private CountryRepository countryRepository;
     private LocalizedMessageBuilderFactory localizedMessageBuilderFactory;
+    private CountryRepository countryRepository;
+    private ReturnMessage returnMessage;
 
+    @Autowired(required = false)
+    public void setReturnMessage(ReturnMessage returnMessage) {
+        this.returnMessage = returnMessage;
+    }
     @Autowired(required = false)
     public void setCountryRepository(CountryRepository countryRepository) {
         this.countryRepository = countryRepository;
@@ -64,11 +69,9 @@ public class DefaultCountryService implements CountryService {
   }
 
     @Override
-    public CountryEntity addCountry(String countryNameKk, String countryNameRu, String countryNameEn) {
+    public String addCountry(String countryNameKk, String countryNameRu, String countryNameEn) {
         if (exists(countryNameEn)) {
-            CountryEntity nullCountryEntity = new CountryEntity();
-            nullCountryEntity.setCountryNameRu("Страна с таким названием уже существует");
-            return nullCountryEntity;
+           return java.text.MessageFormat.format(returnMessage.getCountryAddError(), countryNameEn);
         }
         CountryEntity countryEntity = new CountryEntity();
         countryEntity.setCountryNameEn(countryNameEn);
@@ -77,14 +80,13 @@ public class DefaultCountryService implements CountryService {
 
         this.countryRepository.save(countryEntity);
         log.info("Added new country " + countryNameEn + " " + new Date());
-        return countryEntity;
+        return java.text.MessageFormat.format(returnMessage.getCountryAddSuccess(), countryNameEn);
     }
 
     @Override
     public String addCountryJson(CountryJson countryJson) {
         if (exists(countryJson.getCountryNameEn())) {
-            return "Страна с таким названием уже существует";
-        }
+            return java.text.MessageFormat.format(returnMessage.getCountryAddError(), countryJson.getCountryNameEn());        }
         CountryEntity countryEntity = new CountryEntity();
         countryEntity.setCountryNameRu(countryJson.getCountryNameRu());
         countryEntity.setCountryNameEn(countryJson.getCountryNameEn());
@@ -92,8 +94,7 @@ public class DefaultCountryService implements CountryService {
 
         this.countryRepository.save(countryEntity);
         log.info("Added new country " + countryJson.getCountryNameEn() + " via JSON " + new Date());
-        return "Страна добавлена посредством JSON";
-    }
+        return java.text.MessageFormat.format(returnMessage.getCountryAddSuccess(), countryEntity.getCountryNameEn());    }
 
     @Override
     public String updateCountry(Long countryId, CountryJson countryJson) {
@@ -111,10 +112,9 @@ public class DefaultCountryService implements CountryService {
             }
             this.countryRepository.save(countryEntity);
             log.info("Updated " + countryJson.getCountryNameEn() + " country " + new Date());
-            return "Страна обновлена";
+            return java.text.MessageFormat.format(returnMessage.getCountryUpdateSuccess(),countryEntity.getCountryNameEn());
         } else {
-            return "Страны с таким id не существует";
-        }
+            return java.text.MessageFormat.format(returnMessage.getCountryUpdateError(), countryEntity.getCountryNameEn());        }
     }
 
     @Override
@@ -123,9 +123,10 @@ public class DefaultCountryService implements CountryService {
         if (Objects.nonNull(countryEntity)) {
             log.info("Deleted " + countryEntity.getCountryNameEn() + "country " + new Date());
             this.countryRepository.delete(countryEntity);
-            return "Страна удалена";
-        } else {
-            return "Страны с таким id не существует";
+            return java.text.MessageFormat.format(returnMessage.getCountryDeleteSuccess(), countryEntity.getCountryNameEn());
+    } else {
+            return java.text.MessageFormat.format(returnMessage.getCountryDeleteError(), countryEntity.getCountryNameEn());
+
         }
     }
 

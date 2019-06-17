@@ -10,9 +10,9 @@ public interface RoleService {
 
     List<Roles> showAllRoles();
 
-    void addRole(String name, String description);
+    String addRole(String name, String description);
 
-    void addRoleJson(RolesJson roles);
+    String addRoleJson(RolesJson roles);
 
     Roles showRole(Long rolesId);
 

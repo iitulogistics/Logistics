@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import kz.logistic.pl.utils.ReturnMessage;
 import kz.logistic.pl.models.entities.RegionEntity;
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
 import kz.logistic.pl.models.pojos.Region;
@@ -22,7 +23,12 @@ public class DefaultRegionService implements RegionService {
 
     private RegionRepository regionRepository;
     private LocalizedMessageBuilderFactory localizedMessageBuilderFactory;
+    private ReturnMessage returnMessage;
 
+    @Autowired(required = false)
+    public void setReturnMessage(ReturnMessage returnMessage) {
+        this.returnMessage = returnMessage;
+    }
     @Autowired(required = false)
     public void setRegionRepository(RegionRepository regionRepository) {
         this.regionRepository = regionRepository;
@@ -56,7 +62,8 @@ public class DefaultRegionService implements RegionService {
     public String addRegion(
         String regionNameEn, String regionNameKk, String regionNameRu, Long countryId) {
         if (exists(regionNameEn, countryId)) {
-            return "В этой стране такая область уже существует";
+            return java.text.MessageFormat.format(returnMessage.getRegionAddError(), regionNameEn);
+
         }
         RegionEntity regionEntity = new RegionEntity();
         regionEntity.setRegionNameEn(regionNameEn);
@@ -66,13 +73,15 @@ public class DefaultRegionService implements RegionService {
 
         this.regionRepository.save(regionEntity);
         log.info("Added new region " + regionNameEn + " " + new Date());
-        return "Область добавлена";
+        return java.text.MessageFormat.format(returnMessage.getRegionAddSuccess(), regionEntity.getRegionNameEn());
+
     }
 
     @Override
     public String addRegionJson(RegionJson regionJson) {
         if (exists(regionJson.getRegionNameEn(), regionJson.getCountryId())) {
-            return "В этой стране такая область уже существует";
+            return java.text.MessageFormat.format(returnMessage.getRegionAddError(), regionJson.getRegionNameEn());
+
         }
         RegionEntity regionEntity = new RegionEntity();
         regionEntity.setRegionNameRu(regionJson.getRegionNameRu());
@@ -82,7 +91,7 @@ public class DefaultRegionService implements RegionService {
 
         this.regionRepository.save(regionEntity);
         log.info("Added new region " + regionJson.getRegionNameEn() + " " + new Date());
-        return "Область добавлена посредством JSON";
+        return java.text.MessageFormat.format(returnMessage.getRegionAddSuccess(), regionEntity.getRegionNameEn());
     }
 
     @Override
@@ -117,9 +126,10 @@ public class DefaultRegionService implements RegionService {
             }
             this.regionRepository.save(regionEntity);
             log.info("Updated " + regionJson.getRegionNameRu() + " region" + new Date());
-            return "Регион обновлен";
+            return java.text.MessageFormat.format(returnMessage.getRegionUpdateSuccess(), regionEntity.getRegionNameEn());
         } else {
-            return "Региона с таким id не существует";
+            return java.text.MessageFormat.format(returnMessage.getRegionUpdateError(), regionEntity.getRegionNameEn());
+
         }
     }
 
@@ -129,9 +139,13 @@ public class DefaultRegionService implements RegionService {
         if (Objects.nonNull(regionEntity)) {
             log.info("Updated " + regionEntity.getRegionNameRu() + " region" + new Date());
             this.regionRepository.delete(regionEntity);
-            return "Регион удален";
+            return java.text.MessageFormat.format(returnMessage.getRegionDeleteSuccess(), regionEntity.getRegionNameEn());
+
+
         } else {
-            return "Региона с таким id не существует";
+
+            return java.text.MessageFormat.format(returnMessage.getRegionDeleteError(), regionEntity.getRegionNameEn());
+
         }
     }
 

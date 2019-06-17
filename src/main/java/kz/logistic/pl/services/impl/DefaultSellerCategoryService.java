@@ -1,5 +1,6 @@
 package kz.logistic.pl.services.impl;
 
+import kz.logistic.pl.utils.ReturnMessage;
 import kz.logistic.pl.models.entities.SellerCategoryEntity;
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
 import kz.logistic.pl.models.pojos.SellerCategory;
@@ -20,7 +21,12 @@ public class DefaultSellerCategoryService implements SellerCategoryService {
 
     private SellerCategoryRepository sellerCategoryRepository;
     private LocalizedMessageBuilderFactory localizedMessageBuilderFactory;
+    private ReturnMessage returnMessage;
 
+    @Autowired(required = false)
+    public void setReturnMessage(ReturnMessage returnMessage) {
+        this.returnMessage = returnMessage;
+    }
     @Autowired(required = false)
     public void setSellerCategoryRepository(SellerCategoryRepository sellerCategoryRepository) {
         this.sellerCategoryRepository = sellerCategoryRepository;
@@ -68,7 +74,8 @@ public class DefaultSellerCategoryService implements SellerCategoryService {
         sellerCategoryEntity.setCategoryNameEn(sellerCategoryNameEn);
         this.sellerCategoryRepository.save(sellerCategoryEntity);
         log.info("Added new seller category " + new Date());
-        return "Категория продавца добавлена";
+        return java.text.MessageFormat.format(returnMessage.getSellercategoryAddSuccess(), sellerCategoryEntity.getCategoryNameEn());
+
     }
 
     @Override
@@ -80,7 +87,8 @@ public class DefaultSellerCategoryService implements SellerCategoryService {
         sellerCategoryEntity.setCategoryNameEn(sellerCategoryJson.getSellerCategoryNameEn());
         this.sellerCategoryRepository.save(sellerCategoryEntity);
         log.info("Added new seller category by JSON " + new Date());
-        return "Категория продавца добавлена JSON";
+        return java.text.MessageFormat.format(returnMessage.getSellercategoryAddSuccess(), sellerCategoryEntity.getCategoryNameEn());
+
     }
 
     @Override
@@ -100,9 +108,11 @@ public class DefaultSellerCategoryService implements SellerCategoryService {
                 sellerCategoryJson.setSellerCategoryNameEn(sellerCategoryJson.getSellerCategoryNameEn());
             }
             this.sellerCategoryRepository.save(sellerCategoryEntity);
-            return "Категория-продавца обновлена";
+
+            return java.text.MessageFormat.format(returnMessage.getSellercategoryUpdateSuccess(), sellerCategoryEntity.getCategoryNameEn());
+
         } else {
-            return "Категория-продавца с таким ID не существует";
+            return java.text.MessageFormat.format(returnMessage.getSellercategoryUpdateError(), sellerCategoryEntity.getCategoryNameEn());
         }
     }
 
@@ -110,6 +120,7 @@ public class DefaultSellerCategoryService implements SellerCategoryService {
     public String deleteSellerCategory(Long sellerCategoryId) {
         SellerCategoryEntity sellerCategoryEntity = this.sellerCategoryRepository.findById(sellerCategoryId).orElse(null);
         this.sellerCategoryRepository.deleteById(sellerCategoryEntity.getSellerCategoryId());
-        return "Данные категории-продавца удалены";
+        return java.text.MessageFormat.format(returnMessage.getSellercategoryDeleteSuccess(), sellerCategoryEntity.getCategoryNameEn());
+
     }
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import kz.logistic.pl.utils.ReturnMessage;
 import kz.logistic.pl.models.entities.ProductsCategoryEntity;
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
 import kz.logistic.pl.models.pojos.ProductCategory;
@@ -21,7 +22,12 @@ public class DefaultProductCategoryService implements ProductCategoryService {
 
     private ProductsCategoryRepository productsCategoryRepository;
     private LocalizedMessageBuilderFactory localizedMessageBuilderFactory;
+    private ReturnMessage returnMessage;
 
+    @Autowired(required = false)
+    public void setReturnMessage(ReturnMessage returnMessage) {
+        this.returnMessage = returnMessage;
+    }
     @Autowired(required = false)
     public void setProductsCategoryRepository(ProductsCategoryRepository productsCategoryRepository) {
         this.productsCategoryRepository = productsCategoryRepository;
@@ -72,7 +78,7 @@ public class DefaultProductCategoryService implements ProductCategoryService {
 
         this.productsCategoryRepository.save(categoryEntity);
         log.info("Added new ProductCategory " + categoryNameRu + " " + new Date());
-        return "Новая категория продуктов добавлена";
+        return java.text.MessageFormat.format(returnMessage.getProductcategoryAddSuccess(), categoryEntity.getCategoryNameEn());
     }
 
     @Override
@@ -86,7 +92,8 @@ public class DefaultProductCategoryService implements ProductCategoryService {
         this.productsCategoryRepository.save(categoryEntity);
         log.info("Added new ProductCategory "
             + productCategoryJson.getCategoryNameRu() + " via JSON " + new Date());
-        return "Новая категория продуктов добавлена посредством JSON";
+        return java.text.MessageFormat.format(returnMessage.getProductcategoryAddSuccess(), categoryEntity.getCategoryNameEn());
+
     }
 
 
@@ -111,9 +118,10 @@ public class DefaultProductCategoryService implements ProductCategoryService {
             }
             this.productsCategoryRepository.save(productsCategoryEntity);
             log.info("Updated  product category " + new Date());
-            return "Категория продуктов обновлена";
+            return java.text.MessageFormat.format(returnMessage.getProductcategoryUpdateSuccess(), productCategoryJson.getCategoryNameEn());
+
         } else {
-            return "Категория продуктов с таким id не существует";
+            return java.text.MessageFormat.format(returnMessage.getProductcategoryUpdateError(), productCategoryJson.getCategoryNameEn());
         }
     }
 
@@ -125,9 +133,10 @@ public class DefaultProductCategoryService implements ProductCategoryService {
         if (Objects.nonNull(productsCategoryEntity)) {
             log.info("Deleted " + productsCategoryEntity.getCategoryNameRu() + " category " + new Date());
             this.productsCategoryRepository.delete(productsCategoryEntity);
-            return "Категория продукта удалена";
+            return java.text.MessageFormat.format(returnMessage.getProductcategoryDeleteSuccess(), productsCategoryEntity.getCategoryNameEn());
         } else {
-            return "Категория продукта с таким id не существует";
+            return java.text.MessageFormat.format(returnMessage.getProductcategoryDeleteError(), productsCategoryEntity.getCategoryNameEn());
+
         }
 
     }

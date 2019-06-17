@@ -1,5 +1,6 @@
 package kz.logistic.pl.services.impl;
 
+import kz.logistic.pl.utils.ReturnMessage;
 import kz.logistic.pl.models.entities.DistrictEntity;
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
 import kz.logistic.pl.models.pojos.District;
@@ -20,7 +21,12 @@ public class DefaultDistrictService implements DistrictService {
 
     private DistrictRepository districtRepository;
     private LocalizedMessageBuilderFactory localizedMessageBuilderFactory;
+    private ReturnMessage returnMessage;
 
+    @Autowired(required = false)
+    public void setReturnMessage(ReturnMessage returnMessage) {
+        this.returnMessage = returnMessage;
+    }
     @Autowired(required = false)
     public void setDistrictRepository(DistrictRepository districtRepository) {
         this.districtRepository = districtRepository;
@@ -68,7 +74,7 @@ public class DefaultDistrictService implements DistrictService {
 
         this.districtRepository.save(districtEntity);
         log.info("Added new district " + districtNameEn + " " + new Date());
-        return "Новый район добавлен";
+        return returnMessage.getDistrictAddSuccess();
     }
 
     @Override
@@ -82,7 +88,7 @@ public class DefaultDistrictService implements DistrictService {
 
         this.districtRepository.save(districtEntity);
         log.info("Added new district " + districtJson.getDistrictNameRu() + " via JSON" + new Date());
-        return "Новый район добавлен посредством JSON";
+        return returnMessage.getDistrictAddSuccess();
     }
 
     @Override
@@ -107,7 +113,7 @@ public class DefaultDistrictService implements DistrictService {
         }
         this.districtRepository.save(districtEntity);
         log.info("Updated district " + districtJson.getDistrictNameRu() + " " + new Date());
-        return "Район обнавлен";
+        return returnMessage.getDistrictUpdateSuccess();
     }
 
     @Override
@@ -115,6 +121,6 @@ public class DefaultDistrictService implements DistrictService {
         DistrictEntity districtEntity = this.districtRepository.findById(districtId).orElse(null);
         this.districtRepository.deleteById(districtEntity.getDistrictId());
         log.info("Deleted district " + districtEntity.getDistrictNameEn() + " " + new Date());
-        return "Район удален";
+        return returnMessage.getDistrictDeleteSuccess();
     }
 }

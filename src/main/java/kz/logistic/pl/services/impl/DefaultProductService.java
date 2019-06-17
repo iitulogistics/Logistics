@@ -2,12 +2,10 @@ package kz.logistic.pl.services.impl;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.time.Period;
-import java.util.*;
 import java.util.stream.Collectors;
 
+import kz.logistic.pl.utils.ReturnMessage;
 import kz.logistic.pl.models.entities.ProductsEntity;
 import kz.logistic.pl.models.pojos.Product;
 import kz.logistic.pl.models.pojos.impl.DefaultProduct;
@@ -20,16 +18,11 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -38,14 +31,19 @@ public class DefaultProductService implements ProductService {
     @Value("${upload.path}")
     private String uploadDir;
     private ProductRepository productRepository;
+    private ReturnMessage returnMessage;
 
+    @Autowired(required = false)
+    public void setReturnMessage(ReturnMessage returnMessage) {
+        this.returnMessage = returnMessage;
+    }
     @Autowired
     public void setProductRepository(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
     @Override
-    public void addProduct(
+    public String addProduct(
         String productNameKk, String productNameRu, String productNameEn, Long productCategoryId,
         Long productSubcategoryId, String uniqueIdNumber, String serialNumber, String manufacturer,
         String size, Integer weight, Integer price, String productDescription, Long sellerCompanyId,
@@ -68,10 +66,11 @@ public class DefaultProductService implements ProductService {
         productRepository.save(productsEntity);
         log.info("New product added:\nName: "
             + productNameEn + "\nseller company id: " + sellerCompanyId);
+        return java.text.MessageFormat.format( returnMessage.getProductAddSuccess(), productsEntity.getProductNameEn());
     }
 
     @Override
-    public void addProductJson(ProductJson productJson) {
+    public String addProductJson(ProductJson productJson) {
         ProductsEntity productsEntity = new ProductsEntity();
         productsEntity.setProductNameKk(productJson.getProductNameKk());
         productsEntity.setProductNameRu(productJson.getProductNameRu());
@@ -91,6 +90,7 @@ public class DefaultProductService implements ProductService {
         log.info("New product added:\nName: "
             + productJson.getProductNameEn() + "\nseller company id: "
             + productJson.getSellerCompanyId());
+        return java.text.MessageFormat.format( returnMessage.getProductAddSuccess(), productsEntity.getProductNameEn());
     }
 
     @Override
@@ -187,9 +187,11 @@ public class DefaultProductService implements ProductService {
 
             this.productRepository.save(productsEntity);
             log.info("Updated " + productsEntity.getProductNameEn() + " product" + new Date());
-            return "Продукт обновлен";
+            return java.text.MessageFormat.format(returnMessage.getProductUpdateSuccess(), productsEntity.getProductNameEn());
+
+
         } else {
-            return "Продукт с таким id не существует";
+            return java.text.MessageFormat.format(returnMessage.getProductUpdateError(), productsEntity.getProductNameEn());
         }
     }
 
@@ -204,7 +206,7 @@ public class DefaultProductService implements ProductService {
     public String addPhoto(Long id, MultipartFile file) {
         ProductsEntity productsEntity = this.productRepository.getOne(id);
         if (productsEntity == null)
-            return "Продукта с таким ID не существует";
+            return returnMessage.getProductUpdateError();
         try {
             String filename = UUID.randomUUID() + "." + FilenameUtils.getExtension(file.getOriginalFilename());
             File transferFile = new File(uploadDir + filename);
@@ -231,10 +233,11 @@ public class DefaultProductService implements ProductService {
         if (Objects.nonNull(productsEntity)) {
             log.info("Deleted " + productsEntity.getProductNameEn() + " city" + new Date());
             this.productRepository.deleteById(productsEntity.getProductId());
-            return "Продукт удален";
+            return java.text.MessageFormat.format(returnMessage.getProductDeleteSuccess(), productsEntity.getProductNameEn());
+
         } else {
-            return "Продукт с таким id не существует";
+            return java.text.MessageFormat.format(returnMessage.getProductDeleteError(), productsEntity.getProductNameEn());
+
         }
     }
-
 }

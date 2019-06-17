@@ -1,0 +1,91 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://logistic.soap/district"
+           targetNamespace="http://logistic.soap/district"
+           elementFormDefault="qualified">
+    <!--Get District by ID-->
+    <xs:element name="getDistrictIdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getDistrictIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="district" type="tns:district"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!--add District-->
+    <xs:element name="addDistrictRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="regionId" type="xs:long"/>
+                <xs:element name="cityId" type="xs:long"/>
+                <xs:element name="districtNameKk" type="xs:string"/>
+                <xs:element name="districtNameRu" type="xs:string"/>
+                <xs:element name="districtNameEn" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="addDistrictResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="district" type="tns:district"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!--update District-->
+    <xs:element name="updateDistrictRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+                <xs:element name="districtNameKk" type="xs:string"/>
+                <xs:element name="districtNameRu" type="xs:string"/>
+                <xs:element name="districtNameEn" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateDistrictResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="district" type="tns:district"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!--Delete District by ID-->
+    <xs:element name="deleteDistrictIdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteDistrictIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="district" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!---->
+
+    <xs:complexType name="district">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="districtNameKk" type="xs:string"/>
+            <xs:element name="districtNameRu" type="xs:string"/>
+            <xs:element name="districtNameEn" type="xs:string"/>
+            <xs:element name="regionId" type="xs:long"/>
+            <xs:element name="cityId" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

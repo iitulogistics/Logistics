@@ -59,7 +59,6 @@ public class RegionRepositorySoap {
         region.setRegionNameEn(RegionNameEn);
         region.setCountryId(countryId);
         region.setId(regionEntity.getRegionId());
-
         regMap.put(region.getId(), region);
         return region;
     }

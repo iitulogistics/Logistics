@@ -1,5 +1,6 @@
 package kz.logistic.pl.services.impl;
 
+import kz.logistic.pl.utils.ReturnMessage;
 import kz.logistic.pl.models.entities.SpecialCharacteristicEntity;
 import kz.logistic.pl.models.pojos.SpecialCharacteristic;
 import kz.logistic.pl.models.pojos.impl.DefaultSpecialCharacteristic;
@@ -20,7 +21,12 @@ import java.util.stream.Collectors;
 public class DefaultSpecialCharacteristicService implements SpecialCharacteristicService {
 
     private SpecialCharacteristicRepository specialCharacteristicRepository;
+    private ReturnMessage returnMessage;
 
+    @Autowired(required = false)
+    public void setReturnMessage(ReturnMessage returnMessage) {
+        this.returnMessage = returnMessage;
+    }
     @Autowired
     public void setSpecialCharacteristicRepository(SpecialCharacteristicRepository specialCharacteristicRepository) {
         this.specialCharacteristicRepository = specialCharacteristicRepository;
@@ -52,7 +58,7 @@ public class DefaultSpecialCharacteristicService implements SpecialCharacteristi
     }
 
     @Override
-    public void addSpecialCharacteristic(
+    public String addSpecialCharacteristic(
         String characteristicNameKk,
         String characteristicNameRu,
         String characteristicNameEn,
@@ -66,10 +72,11 @@ public class DefaultSpecialCharacteristicService implements SpecialCharacteristi
         this.specialCharacteristicRepository.save(specialCharacteristicEntity);
         log.info("New special characteristic added, name: " + characteristicNameEn
             + ". Time: " + new Date());
+        return java.text.MessageFormat.format( returnMessage.getSpecialcharacteristicAddSuccess(), specialCharacteristicEntity.getCharacteristicNameEn());
     }
 
     @Override
-    public void addSpecialCharacteristicJson(SpecialCharacteristicJson specialCharacteristicJson) {
+    public String addSpecialCharacteristicJson(SpecialCharacteristicJson specialCharacteristicJson) {
         SpecialCharacteristicEntity specialCharacteristicEntity = new SpecialCharacteristicEntity();
         specialCharacteristicEntity.setCharacteristicNameKk(specialCharacteristicJson.getCharacteristicNameKk());
         specialCharacteristicEntity.setCharacteristicNameRu(specialCharacteristicJson.getCharacteristicNameRu());
@@ -78,8 +85,9 @@ public class DefaultSpecialCharacteristicService implements SpecialCharacteristi
         this.specialCharacteristicRepository.save(specialCharacteristicEntity);
         log.info("New special characteristic added via JSON, name: " + specialCharacteristicJson.getCharacteristicNameEn()
             + ". Time: " + new Date());
-    }
+        return java.text.MessageFormat.format( returnMessage.getSpecialcharacteristicAddSuccess(), specialCharacteristicEntity.getCharacteristicNameEn());
 
+    }
     @Override
     public String updateCharacteristic(Long characteristicId, SpecialCharacteristicJson specialCharacteristicJson) {
         SpecialCharacteristicEntity specialCharacteristicEntity = this.specialCharacteristicRepository.findById
@@ -95,9 +103,12 @@ public class DefaultSpecialCharacteristicService implements SpecialCharacteristi
             if (specialCharacteristicJson.getAddInfo() != null)
                 specialCharacteristicEntity.setAddInfo(specialCharacteristicJson.getAddInfo());
             specialCharacteristicRepository.save(specialCharacteristicEntity);
-            return "Характеристика обновлена";
+
+            return java.text.MessageFormat.format(returnMessage.getSpecialcharacteristicUpdateSuccess(), specialCharacteristicEntity.getCharacteristicNameEn());
+
         }
-        return "Характеристики с данным ID не существует";
+        return java.text.MessageFormat.format(returnMessage.getSpecialcharacteristicUpdateError(), specialCharacteristicEntity.getCharacteristicNameEn());
+
     }
 
     @Override
@@ -106,8 +117,10 @@ public class DefaultSpecialCharacteristicService implements SpecialCharacteristi
             (characteristicId).orElse(null);
         if (Objects.nonNull(specialCharacteristicEntity)) {
             this.specialCharacteristicRepository.delete(specialCharacteristicEntity);
-            return "Характеристика удалена";
+            return returnMessage.getSpecialcharacteristicDeleteSuccess();
+
         }
-        return "Характеристики с данным ID не существует";
+        return java.text.MessageFormat.format(returnMessage.getSpecialcharacteristicDeleteError(), specialCharacteristicEntity.getCharacteristicNameEn());
+
     }
 }

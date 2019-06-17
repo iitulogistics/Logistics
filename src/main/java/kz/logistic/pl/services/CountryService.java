@@ -13,7 +13,7 @@ public interface CountryService {
 
     DefaultCountry showCountry(Long countryId);
 
-    CountryEntity addCountry(String countryNameKk, String countryNameRu, String countryNameEn);
+    String addCountry(String countryNameKk, String countryNameRu, String countryNameEn);
 
     String addCountryJson(CountryJson countryJson);
 
