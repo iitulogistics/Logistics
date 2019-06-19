@@ -110,4 +110,10 @@ public class ProductsController {
         }
     }
 
+    @ApiOperation("Получить список товаров по id категории")
+    @GetMapping("/productCategory/{id}")
+    public ResponseEntity<?> byCategoryId(@PathVariable(value = "id") Long productCategoryId){
+        return ResponseEntity.ok(this.productService.showProductsByCategoryId(productCategoryId));
+    }
+
 }

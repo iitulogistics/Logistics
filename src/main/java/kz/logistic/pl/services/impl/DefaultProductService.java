@@ -117,6 +117,28 @@ public class DefaultProductService implements ProductService {
     }
 
     @Override
+    public List<Product> showProductsByCategoryId(Long productCategoryId){
+        List<ProductsEntity> productsEntityList = this.productRepository.findByProductCategoryId(productCategoryId);
+        return productsEntityList.stream().map(productsEntity -> DefaultProduct.builder()
+            .productId(productsEntity.getProductId())
+            .productNameKk(productsEntity.getProductNameKk())
+            .productNameRu(productsEntity.getProductNameRu())
+            .productNameEn(productsEntity.getProductNameEn())
+            .productDescription(productsEntity.getProductDescription())
+            .sellerCompanyId(productsEntity.getSellerCompanyId())
+            .manufacturer(productsEntity.getManufacturer())
+            .price(productsEntity.getPrice())
+            .productCategoryId(productsEntity.getProductCategoryId())
+            .productSubcategoryId(productsEntity.getProductSubcategoryId())
+            .size(productsEntity.getSize())
+            .weight(productsEntity.getWeight())
+            .photoUrlsList(productsEntity.getProductsImg())
+            .specialCharacteristicsId(productsEntity.getSpecialCharacteristicId())
+            .serialNumber(productsEntity.getSerialNumber())
+            .uniqueIdNumber(productsEntity.getUniqueIdNumber())
+            .build()).collect(Collectors.toList());
+    }
+    @Override
     public DefaultProduct showProduct(Long productId) {
         ProductsEntity productsEntity = this.productRepository.findById(productId).orElse(null);
         return DefaultProduct.builder()
