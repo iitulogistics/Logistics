@@ -148,5 +148,19 @@ public class DefaultProductSubCategoryService implements ProductSubCategoryServi
             .subCategoryAddInfo(productsSubCategoryEntity.getSubCategoryAddInfo()).build();
     }
 
+    @Override
+    public List<ProductSubCategory> showProductCategory(Long productId) {
+        List<ProductsSubCategoryEntity> entities = this.productSubCategoryRepository.findByProductCategoryId(productId);
 
+        return entities.stream().map(productsSubCategoryEntity -> DefaultProductSubCategory.builder()
+            .id(productsSubCategoryEntity.getProductSubcategoryId())
+            .subCategoryName(
+                localizedMessageBuilderFactory.builder()
+                    .kk(productsSubCategoryEntity.getSubCategoryNameKk())
+                    .ru(productsSubCategoryEntity.getSubCategoryNameRu())
+                    .en(productsSubCategoryEntity.getSubCategoryNameEn()).build())
+            .productCategoryId(productsSubCategoryEntity.getProductCategoryId())
+            .subCategoryAddInfo(productsSubCategoryEntity.getSubCategoryAddInfo())
+            .build()).collect(Collectors.toList());
+    }
 }
