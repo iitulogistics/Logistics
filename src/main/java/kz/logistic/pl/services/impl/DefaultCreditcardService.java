@@ -1,5 +1,6 @@
 package kz.logistic.pl.services.impl;
 
+import kz.logistic.pl.utils.ReturnMessage;
 import kz.logistic.pl.models.entities.CreditCardEntity;
 import kz.logistic.pl.models.pojos.CreditCard;
 import kz.logistic.pl.models.pojos.impl.DefaultCreditCard;
@@ -10,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -21,7 +21,12 @@ import java.util.stream.Collectors;
 public class DefaultCreditcardService implements CreditCardService {
 
     private CreditCardRepository creditCardRepository;
+    private ReturnMessage returnMessage;
 
+    @Autowired(required = false)
+    public void setReturnMessage(ReturnMessage returnMessage) {
+        this.returnMessage = returnMessage;
+    }
     @Autowired(required = false)
     public void setCreditCardRepository(CreditCardRepository creditCardRepository) {
         this.creditCardRepository = creditCardRepository;
@@ -38,11 +43,11 @@ public class DefaultCreditcardService implements CreditCardService {
                 .holderName(creditCardEntity.getHolderName()).build()).collect(Collectors.toList());
     }
 
-    public boolean exists(Integer creditCardNumber, String holderName) {
-        List<CreditCardEntity> creditCardEntities = this.creditCardRepository.findByCreditCardNumberAndHolderName(
-            creditCardNumber, holderName);
-        return creditCardEntities.size() > 0;
-    }
+  public boolean exists(Integer creditCardNumber, String holderName) {
+    List<CreditCardEntity> creditCardEntities = this.creditCardRepository.findCreditCardByNumberAndHolderName(
+      creditCardNumber, holderName);
+    return creditCardEntities.size() > 0;
+  }
 
     @Override
     public DefaultCreditCard showCreditCard(Long creditCardId) {
@@ -57,7 +62,7 @@ public class DefaultCreditcardService implements CreditCardService {
     @Override
     public String addCreditCard(Integer creditCardNumber, String holderName, Date expireDate) {
         if (exists(creditCardNumber, holderName)) {
-            return "Эта кредитная карта уже зарегистрирована";
+            return java.text.MessageFormat.format(returnMessage.getCreditcardAddError(), creditCardNumber);
         }
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         Timestamp expDate;
@@ -67,14 +72,15 @@ public class DefaultCreditcardService implements CreditCardService {
         creditCardEntity.setExpireDate(expireDate);
         this.creditCardRepository.save(creditCardEntity);
         log.info("Added new credit card " + creditCardNumber);
-        return "Новый кредитная карта добавлена";
+        return java.text.MessageFormat.format(returnMessage.getCreditcardAddSuccess(), creditCardNumber);
     }
 
 
     @Override
     public String addCreditCardJson(CreditCardJson creditCardJson) {
         if (exists(creditCardJson.getCreditCardNumber(), creditCardJson.getHolderName())) {
-            return "Эта кредитная карта уже зарегистрирована";
+            return java.text.MessageFormat.format(returnMessage.getCreditcardAddError(), creditCardJson.getCreditCardNumber());
+
         }
         CreditCardEntity creditCardEntity = new CreditCardEntity();
         creditCardEntity.setCreditCardNumber(creditCardJson.getCreditCardNumber());
@@ -82,7 +88,7 @@ public class DefaultCreditcardService implements CreditCardService {
         creditCardEntity.setExpireDate(creditCardJson.getExpireDate());
         this.creditCardRepository.save(creditCardEntity);
         log.info("Added new credit card " + creditCardJson.getCreditCardNumber());
-        return "Новый кредитная карта добавлена добавлен посредством JSON";
+        return java.text.MessageFormat.format(returnMessage.getCreditcardAddSuccess(), creditCardJson.getCreditCardNumber());
     }
 
     @Override
@@ -100,9 +106,12 @@ public class DefaultCreditcardService implements CreditCardService {
             }
             this.creditCardRepository.save(creditCardEntity);
             log.info("Updated " + creditCardJson.getCreditCardNumber() + " credit card");
-            return "Кредитная карта успешно обнавлен";
+            return java.text.MessageFormat.format(returnMessage.getCreditcardUpdateSuccess(), creditCardJson.getCreditCardNumber());
+
+
         } else {
-            return "Адрес с таким id не существует";
+            return java.text.MessageFormat.format(returnMessage.getCreditcardUpdateError(), creditCardJson.getCreditCardNumber());
+
         }
     }
 
@@ -112,9 +121,10 @@ public class DefaultCreditcardService implements CreditCardService {
         if (Objects.nonNull(creditCardEntity)) {
             this.creditCardRepository.deleteById(creditCardEntity.getCcId());
             log.info("Deleted " + creditCardEntity.getCreditCardNumber() + " credit card");
-            return "Кредитная карта успешно удалена";
+            return java.text.MessageFormat.format(returnMessage.getCreditcardDeleteSuccess(), creditCardId);
+
         } else {
-            return "Кредитная карт с таким id не существует";
+            return java.text.MessageFormat.format(returnMessage.getCreditcardDeleteError(), creditCardId);
         }
     }
 }

@@ -12,11 +12,11 @@ public interface ProductSubCategoryService {
     List<ProductSubCategory> showAllProductSubCategory();
 
     //Добавить новую подкатегорию
-    void addProductSubCategory(String subCategoryNameKk, String subCategoryNameRu,
+    String addProductSubCategory(String subCategoryNameKk, String subCategoryNameRu,
                                String subCategoryNameEn, Long productCategoryId,
                                String subCategoryAddInfo);
 
-    void addProductSubCategoryJson(ProductSubCategoryJson productSubCategoryJson);
+    String addProductSubCategoryJson(ProductSubCategoryJson productSubCategoryJson);
 
     String updateProductSubCategory(
         Long productSubCategoryId, ProductSubCategoryJson productSubCategoryJson);
@@ -24,5 +24,7 @@ public interface ProductSubCategoryService {
     String deleteProductSubCategory(Long productCategoryId);
 
     ProductSubCategory showProductSubCategory(Long productSubCategoryId);
+
+    List<ProductSubCategory> showProductCategory(Long productId);
 
 }

@@ -9,12 +9,15 @@ import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.elasticsearch.index.settings.IndexDynamicSettings;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 
 @Setter
 @Getter
 @Entity
 @Table(name = "products")
+@Document(indexName = "prod_indexes", type = "products")
 public class ProductsEntity {
 
     @Id

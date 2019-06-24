@@ -72,4 +72,10 @@ public class ProductsSubCategoryController {
         return ResponseEntity.ok(this.productSubCategoryService.showProductSubCategory(productSubCategoryId));
     }
 
+    @ApiOperation(value = "Показывает подкатегорию продуктов по productId")
+    @GetMapping("/category/{productId}")
+    public ResponseEntity<?> getProductId(@PathVariable(value = "productId") Long productId) {
+        return ResponseEntity.ok(this.productSubCategoryService.showProductCategory(productId));
+    }
+
 }

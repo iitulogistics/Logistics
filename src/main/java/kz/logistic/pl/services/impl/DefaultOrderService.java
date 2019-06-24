@@ -1,5 +1,6 @@
 package kz.logistic.pl.services.impl;
 
+import kz.logistic.pl.utils.ReturnMessage;
 import kz.logistic.pl.models.entities.OrdersEntity;
 import kz.logistic.pl.models.pojos.Order;
 import kz.logistic.pl.models.pojos.impl.DefaultOrder;
@@ -19,7 +20,13 @@ import java.util.stream.Collectors;
 public class DefaultOrderService implements OrderService {
 
   private OrdersRepository ordersRepository;
+  private ReturnMessage returnMessage;
 
+    @Autowired(required = false)
+
+    public void setReturnMessage(ReturnMessage returnMessage) {
+        this.returnMessage = returnMessage;
+    }
   @Autowired
   private void setOrdersRepository(OrdersRepository ordersRepository) {
     this.ordersRepository = ordersRepository;
@@ -84,8 +91,8 @@ public class DefaultOrderService implements OrderService {
     ordersEntity.setUnitPrice(unitPrice);
     ordersRepository.save(ordersEntity);
     log.info("New order added " + ordersEntity.getOrderNumber() + " " + new Date());
-    return "Заказ добавлен";
-  }
+      return java.text.MessageFormat.format(returnMessage.getOrderAddSuccess(), productId);
+    }
 
   @Override
   public String addOrderJson(OrderJson orderJson) {
@@ -106,7 +113,7 @@ public class DefaultOrderService implements OrderService {
 
     ordersRepository.save(ordersEntity);
     log.info("New order " + ordersEntity.getOrderNumber() + " added via Json" + " " + new Date());
-    return "Заказ добавлен посредством JSON";
+      return java.text.MessageFormat.format(returnMessage.getOrderAddSuccess(), ordersEntity.getOrderNumber());
   }
 
   @Override
@@ -139,9 +146,10 @@ public class DefaultOrderService implements OrderService {
       }
       ordersRepository.save(ordersEntity);
       log.info("Updated order " + ordersEntity.getOrderNumber());
-      return "Заказ обнавлен";
+        return java.text.MessageFormat.format(returnMessage.getOrderUpdateSuccess(), ordersEntity.getOrderNumber());
     } else {
-      return "Заказ с таким id не существует";
+        return java.text.MessageFormat.format(returnMessage.getOrderUpdateError(), ordersEntity.getOrderNumber());
+
     }
   }
 
@@ -151,9 +159,10 @@ public class DefaultOrderService implements OrderService {
     if (Objects.nonNull(ordersEntity)) {
       log.info("Deleted order " + ordersEntity.getOrderNumber());
       this.ordersRepository.deleteById(ordersEntity.getOrderId());
-      return "Заказ удален";
+        return java.text.MessageFormat.format(returnMessage.getOrderDeleteSuccess(), ordersEntity.getOrderNumber());
+
     } else {
-      return "Заказ с таким id не существует";
+        return java.text.MessageFormat.format(returnMessage.getOrderDeleteError(), ordersEntity.getOrderNumber());
     }
   }
 }

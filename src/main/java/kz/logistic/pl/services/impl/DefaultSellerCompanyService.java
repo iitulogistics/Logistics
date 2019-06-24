@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import kz.logistic.pl.utils.ReturnMessage;
 import kz.logistic.pl.models.entities.LoginEntity;
 import kz.logistic.pl.models.entities.SellerCompanyEntity;
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
@@ -24,7 +25,12 @@ public class DefaultSellerCompanyService implements SellerCompanyService {
     private SellerCompanyRepository sellerCompanyRepository;
     private LocalizedMessageBuilderFactory localizedMessageBuilderFactory;
     private LoginRepository loginRepository;
+    private ReturnMessage returnMessage;
 
+    @Autowired(required = false)
+    public void setReturnMessage(ReturnMessage returnMessage) {
+        this.returnMessage = returnMessage;
+    }
     @Autowired(required = false)
     public void setSellerCompanyRepository(SellerCompanyRepository sellerCompanyRepository) {
         this.sellerCompanyRepository = sellerCompanyRepository;
@@ -96,7 +102,7 @@ public class DefaultSellerCompanyService implements SellerCompanyService {
                                    String sellerCompanyEmail, String username, String password) {
 
         if (exists(username))
-            return "This username is already taken";
+            return returnMessage.getSellercompanyAddError();
         SellerCompanyEntity sellerCompanyEntity = new SellerCompanyEntity();
         sellerCompanyEntity.setCompanyNameKk(sellerCompanyNameKk);
         sellerCompanyEntity.setCompanyNameRu(sellerCompanyNameRu);
@@ -115,14 +121,14 @@ public class DefaultSellerCompanyService implements SellerCompanyService {
         loginEntity.setSellerCompanyEntity(sellerCompanyEntity);
         this.loginRepository.save(loginEntity);
         log.info("Added new seller company: " + sellerCompanyNameRu + " " + new Date());
-        return "Seller company added";
+        return returnMessage.getSellercompanyAddSuccess();
 
     }
 
     @Override
     public String addSellerCompanyJson(SellerCompanyJson sellerCompanyJson) {
         if (exists(sellerCompanyJson.getUsername()))
-            return "This username is already taken";
+            return returnMessage.getSellercompanyAddError();
         SellerCompanyEntity sellerCompanyEntity = new SellerCompanyEntity();
         sellerCompanyEntity.setCompanyNameKk(sellerCompanyJson.getSellerCompanyNameKk());
         sellerCompanyEntity.setCompanyNameRu(sellerCompanyJson.getSellerCompanyNameRu());
@@ -144,8 +150,7 @@ public class DefaultSellerCompanyService implements SellerCompanyService {
 
         log.info("Added new seller company: "
             + sellerCompanyJson.getSellerCompanyNameRu() + " via Json" + new Date());
-
-        return "Seller company added";
+        return java.text.MessageFormat.format(returnMessage.getSellercompanyAddSuccess(), sellerCompanyEntity.getCompanyNameEn());
     }
 
     @Override
@@ -181,9 +186,11 @@ public class DefaultSellerCompanyService implements SellerCompanyService {
             this.loginRepository.save(loginEntity);
             this.sellerCompanyRepository.save(sellerCompanyEntity);
             log.info("Updated " + sellerCompanyId + " sellerCompany " + new Date());
-            return "Компания-продавец обновлена";
+            return java.text.MessageFormat.format(returnMessage.getSellercompanyUpdateSuccess(), sellerCompanyEntity.getCompanyNameEn());
+
         } else {
-            return "Компании-продавца с таким ID не существует";
+            return java.text.MessageFormat.format(returnMessage.getSellercompanyUpdateError(), sellerCompanyEntity.getCompanyNameEn());
+
         }
     }
 
@@ -193,6 +200,7 @@ public class DefaultSellerCompanyService implements SellerCompanyService {
         LoginEntity loginEntity = this.loginRepository.findById(sellerCompanyEntity.getLoginEntity().getLoginId()).orElse(null);
         this.loginRepository.deleteById(loginEntity.getLoginId());
         this.sellerCompanyRepository.deleteById(sellerCompanyEntity.getSellerCompanyId());
-        return "Данные компании-продавца удалены";
+        return java.text.MessageFormat.format(returnMessage.getSellercompanyDeleteSuccess(), sellerCompanyEntity.getCompanyNameEn());
+
     }
 }

@@ -9,37 +9,39 @@ import kz.logistic.pl.models.pojos.json.ProductJson;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-
 @Service
 public interface ProductService {
 
-    void addProduct(String productNameKk,
-                    String productNameRu,
-                    String productNameEn,
-                    Long productCategoryId,
-                    Long productSubcategoryId,
-                    String uniqueIdNumber,
-                    String serialNumber,
-                    String manufacturer,
-                    String size,
-                    Integer weight,
-                    Integer price,
-                    String productDescription,
-                    Long sellerCompanyId,
-                    Long specialCharacteristicsId);
+  void addProduct(String productNameKk,
+                  String productNameRu,
+                  String productNameEn,
+                  Long productCategoryId,
+                  Long productSubcategoryId,
+                  String uniqueIdNumber,
+                  String serialNumber,
+                  String manufacturer,
+                  String size,
+                  Integer weight,
+                  Integer price,
+                  String productDescription,
+                  Long sellerCompanyId,
+                  Long specialCharacteristicsId);
 
-    void addProductJson(ProductJson productJson);
+  void addProductJson(ProductJson productJson);
 
-    List<Product> showAllProducts();
+  void addProductExcel(MultipartFile multipartFile);
 
-    DefaultProduct showProduct(Long productId);
+  List<Product> showAllProducts();
 
-    String updateProduct(Long productId, ProductJson productJson);
+  DefaultProduct showProduct(Long productId);
 
-    String deleteProduct(Long productId);
+  String updateProduct(Long productId, ProductJson productJson);
 
-    String addPhoto(Long id, MultipartFile file);
+  String deleteProduct(Long productId);
 
-    byte[] getPhoto(String name) throws IOException;
+  String addPhoto(Long id, MultipartFile file);
 
+  List<Product> getProductsByName(String name);
+
+  List<Product> getProductsByCategoryId(Long id);
 }

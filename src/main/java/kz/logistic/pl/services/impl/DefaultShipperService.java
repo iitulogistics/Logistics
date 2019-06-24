@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import kz.logistic.pl.utils.ReturnMessage;
 import kz.logistic.pl.models.entities.LoginEntity;
 import kz.logistic.pl.models.entities.ShipperEntity;
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
@@ -24,7 +25,12 @@ public class DefaultShipperService implements ShipperService {
     private ShipperRepository shipperRepository;
     private LoginRepository loginRepository;
     private LocalizedMessageBuilderFactory localizedMessageBuilderFactory;
+    private ReturnMessage returnMessage;
 
+    @Autowired(required = false)
+    public void setReturnMessage(ReturnMessage returnMessage) {
+        this.returnMessage = returnMessage;
+    }
     @Autowired
     void setShipperRepository(ShipperRepository shipperRepository) {
         this.shipperRepository = shipperRepository;
@@ -50,7 +56,7 @@ public class DefaultShipperService implements ShipperService {
     @Override
     public String addShipperJson(ShipperJson shipperJson) {
         if (exists(shipperJson.getUsername())) {
-            return "Данный логин уже занят";
+            return java.text.MessageFormat.format(returnMessage.getShipperAddError(), shipperJson.getShipperNameEn());
         }
         LoginEntity loginEntity = new LoginEntity();
         loginEntity.setUsername(shipperJson.getUsername());
@@ -68,7 +74,9 @@ public class DefaultShipperService implements ShipperService {
         loginEntity.setShipperEntity(shipperEntity);
         loginRepository.save(loginEntity);
         log.info("New shipper added, username: " + shipperJson.getUsername() + ". Time: " + new Date());
-        return "OK";
+
+        return java.text.MessageFormat.format(returnMessage.getShipperAddSuccess(), shipperJson.getShipperNameEn());
+
     }
 
     @Override
@@ -82,7 +90,8 @@ public class DefaultShipperService implements ShipperService {
                              String email,
                              String address) {
         if (exists(username)) {
-            return "Данный логин уже занят";
+            return java.text.MessageFormat.format(returnMessage.getShipperAddError(), shipperNameEn);
+
         }
         LoginEntity loginEntity = new LoginEntity();
         loginEntity.setUsername(username);
@@ -100,7 +109,8 @@ public class DefaultShipperService implements ShipperService {
         loginEntity.setShipperEntity(shipperEntity);
         loginRepository.save(loginEntity);
         log.info("New shipper added, username: " + username + ". Time: " + new Date());
-        return "OK";
+        return java.text.MessageFormat.format(returnMessage.getShipperAddSuccess(), shipperNameEn);
+
     }
 
     @Override
@@ -174,9 +184,11 @@ public class DefaultShipperService implements ShipperService {
             this.loginRepository.save(loginEntity);
             this.shipperRepository.save(shipperEntity);
             log.info("Updated " + shipperId + " shipper " + new Date());
-            return "Доставщик обнавлен";
+            return java.text.MessageFormat.format(returnMessage.getShipperUpdateSuccess(), shipperEntity.getShipperNameEn());
+
         } else {
-            return "Доставщика с таким ID не существует";
+            return java.text.MessageFormat.format(returnMessage.getShipperUpdateError(), shipperEntity.getShipperNameEn());
+
         }
     }
 
@@ -186,6 +198,7 @@ public class DefaultShipperService implements ShipperService {
         LoginEntity loginEntity = this.loginRepository.findById(shipperEntity.getLoginEntity().getLoginId()).orElse(null);
         this.loginRepository.deleteById(loginEntity.getLoginId());
         this.shipperRepository.deleteById(shipperEntity.getShipperId());
-        return "Данные доставщика удалены";
+        return java.text.MessageFormat.format(returnMessage.getShipperDeleteSuccess(), shipperEntity.getShipperNameEn());
+
     }
 }

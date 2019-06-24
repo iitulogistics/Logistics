@@ -1,5 +1,6 @@
 package kz.logistic.pl.services.impl;
 
+import kz.logistic.pl.utils.ReturnMessage;
 import kz.logistic.pl.models.entities.AddressesEntity;
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
 import kz.logistic.pl.models.pojos.Address;
@@ -21,7 +22,11 @@ public class DefaultAddressService implements AddressService {
 
     private AddressRepository addressRepository;
     private LocalizedMessageBuilderFactory localizedMessageBuilderFactory;
-
+    private ReturnMessage returnMessage;
+    @Autowired(required = false)
+    public void setReturnMessage(ReturnMessage returnMessage) {
+        this.returnMessage = returnMessage;
+    }
     @Autowired(required = false)
     public void setAddressRepository(AddressRepository addressRepository) {
         this.addressRepository = addressRepository;
@@ -51,10 +56,10 @@ public class DefaultAddressService implements AddressService {
 
     }
 
-    public boolean exists(String streetNameEn, String buildingNumber, String flatNumber, String zipCode) {
-        ArrayList<AddressesEntity> addressesEntities = this.addressRepository.findByStreetNameEnAndBuildingNumberAndFlatNumberAndZipCode(streetNameEn, buildingNumber, flatNumber, zipCode);
-        return addressesEntities.size() > 0;
-    }
+  public boolean exists(String streetNameEn, String buildingNumber, String flatNumber, String zipCode) {
+    ArrayList<AddressesEntity> addressesEntities = this.addressRepository.findLocation(streetNameEn, buildingNumber, flatNumber, zipCode);
+    return addressesEntities.size() > 0;
+  }
 
     @Override
     public DefaultAddress showAddress(Long addressId) {
@@ -71,13 +76,12 @@ public class DefaultAddressService implements AddressService {
             .addressAssign(addressesEntity.getAddressAssign())
             .addressId(addressesEntity.getAddressId()).build();
     }
-
     @Override
     public String addAddress(String streetNameKk, String streetNameRu, String streetNameEn, Long inhLocalityId,
                              Long districtId, String buildingNumber, String flatNumber,
                              String zipCode, Integer addressAssign) {
         if (exists(streetNameEn, buildingNumber, flatNumber, zipCode)) {
-            return "Этот адресс уже занят";
+            return java.text.MessageFormat.format(returnMessage.getAddressAddError(), streetNameEn);
         }
         AddressesEntity addressesEntity = new AddressesEntity();
         addressesEntity.setStreetNameEn(streetNameEn);
@@ -92,13 +96,13 @@ public class DefaultAddressService implements AddressService {
 
         this.addressRepository.save(addressesEntity);
         log.info("Added new address " + streetNameEn + " " + new Date());
-        return "Новый адрес добавлен";
+        return java.text.MessageFormat.format(returnMessage.getAddressAddSuccess(), streetNameEn);
     }
 
     @Override
     public String addAddressJson(AddressJson addressJson) {
         if (exists(addressJson.getStreetNameEn(), addressJson.getBuildingNumber(), addressJson.getFlatNumber(), addressJson.getZipCode())) {
-            return "Этот адресс уже занят";
+            return java.text.MessageFormat.format(returnMessage.getAddressAddError(), addressJson.getStreetNameEn());
         }
         AddressesEntity addressesEntity = new AddressesEntity();
         addressesEntity.setStreetNameEn(addressJson.getStreetNameEn());
@@ -113,7 +117,7 @@ public class DefaultAddressService implements AddressService {
 
         this.addressRepository.save(addressesEntity);
         log.info("Added new address " + addressJson.getStreetNameEn() + " " + new Date());
-        return "Новый адрес добавлен посредством JSON";
+        return java.text.MessageFormat.format(returnMessage.getAddressAddSuccess(), addressJson.getStreetNameEn());
     }
 
     @Override
@@ -149,9 +153,9 @@ public class DefaultAddressService implements AddressService {
             }
             this.addressRepository.save(addressesEntity);
             log.info("Updated " + addressJson.getStreetNameEn() + " " + new Date());
-            return "Адрес обнавлен";
+            return java.text.MessageFormat.format(returnMessage.getAddressUpdateSuccess(), addressJson.getStreetNameEn());
         } else {
-            return "Адрес с таким id не существует";
+            return returnMessage.getAddressUpdateError();
         }
     }
 
@@ -161,9 +165,9 @@ public class DefaultAddressService implements AddressService {
         if (Objects.nonNull(addressesEntity)) {
             this.addressRepository.deleteById(addressesEntity.getAddressId());
             log.info("Deleted " + addressesEntity.getStreetNameEn() + " address" + new Date());
-            return "Адрес успешно удален";
+            return java.text.MessageFormat.format(returnMessage.getAddressDeleteSuccess(), addressesEntity.getStreetNameEn());
         } else {
-            return "Адрес с таким id не существует";
+            return java.text.MessageFormat.format(returnMessage.getAddressDeleteError(), addressesEntity.getStreetNameEn());
         }
     }
 }

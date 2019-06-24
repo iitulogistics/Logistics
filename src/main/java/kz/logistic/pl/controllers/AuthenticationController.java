@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import kz.logistic.pl.services.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +32,17 @@ public class AuthenticationController {
         if (!this.authenticationService.isCorrect(username, password))
             return "Incorrect username or password";
         return this.authenticationService.generateToken(username);
+    }
+
+    @PostMapping(value = "/loginObject")
+    @ApiOperation(value = "Возврат объекта login")
+    public ResponseEntity<?> loginObject(
+        @RequestParam String username,
+        @RequestParam String password
+    ) {
+        if (!this.authenticationService.isCorrect(username, password))
+            return ResponseEntity.ok("Incorrect username or password");
+        return ResponseEntity.ok(this.authenticationService.loginObject(username,password));
     }
 
     @GetMapping(value = "/validate")

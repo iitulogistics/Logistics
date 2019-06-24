@@ -3,6 +3,8 @@ package kz.logistic.pl.services.impl;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.SignatureException;
 import kz.logistic.pl.models.entities.LoginEntity;
+import kz.logistic.pl.models.pojos.Login;
+import kz.logistic.pl.models.pojos.impl.DefaultLogin;
 import kz.logistic.pl.repositories.LoginRepository;
 import kz.logistic.pl.services.AuthenticationService;
 
@@ -57,6 +59,62 @@ public class DefaultAuthenticationService implements AuthenticationService {
     public boolean isCorrect(String username, String password) {
         LoginEntity loginEntity = this.loginRepository.findByUsernameAndPassword(username, password);
         return loginEntity != null;
+    }
+
+    @Override
+    public Login loginObject(String username, String password) {
+        LoginEntity loginEntity = this.loginRepository.findByUsernameAndPassword(username,password);
+        Long sellerId;
+        Long customerId;
+        Long shipperId;
+        Long rolesId;
+        try {
+            if (loginEntity.getSellerCompanyEntity().getSellerCompanyId() != null) {
+                sellerId = loginEntity.getSellerCompanyEntity().getSellerCompanyId();
+            }
+        } catch (NullPointerException e) {
+            sellerId = 0L;
+        } finally {
+            sellerId = 0L;
+        }
+
+
+        try {
+            if (loginEntity.getCustomerEntity().getCustomerId() != null) {
+                customerId = loginEntity.getCustomerEntity().getCustomerId();
+            }
+        } catch (NullPointerException e) {
+            customerId = 0L;
+        } finally {
+            customerId = 0L;
+        }
+
+
+        try{
+            if(loginEntity.getShipperEntity().getShipperId() != null){
+                shipperId = loginEntity.getShipperEntity().getShipperId();
+            }
+        } catch (NullPointerException e){
+            shipperId = 0L;
+        } finally {
+            shipperId = 0L;
+        }
+
+        if (loginEntity.getRolesId() == null){
+            rolesId = 0L;
+        } else{
+            rolesId = loginEntity.getRolesId();
+        }
+
+        return DefaultLogin.builder()
+            .loginId(loginEntity.getLoginId())
+            .username(loginEntity.getUsername())
+            .password(loginEntity.getPassword())
+            .rolesId(rolesId)
+            .customerId(customerId)
+            .sellerCompanyId(sellerId)
+            .shipperId(shipperId)
+            .build();
     }
 
     @Override

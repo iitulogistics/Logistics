@@ -7,8 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.nio.charset.Charset;
 
 
 @Setter
@@ -28,7 +31,13 @@ public class CountryEntity {
     private String countryNameRu;
 
     @Column(name = "country_name_en")
+    @Setter(AccessLevel.NONE)
     private String countryNameEn;
 
-
+    public void setCountryNameEn(String countryNameEn) {
+        if (Charset.forName("US-ASCII").newEncoder().canEncode(countryNameEn)) {
+            this.countryNameEn = countryNameEn;
+        } else
+            this.countryNameEn = null;
+    }
 }

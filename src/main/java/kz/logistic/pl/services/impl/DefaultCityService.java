@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import kz.logistic.pl.utils.ReturnMessage;
 import kz.logistic.pl.models.entities.CityEntity;
 import kz.logistic.pl.models.factories.LocalizedMessageBuilderFactory;
 import kz.logistic.pl.models.pojos.City;
@@ -16,13 +17,17 @@ import kz.logistic.pl.services.CityService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 @Slf4j
 public class DefaultCityService implements CityService {
 
     private CityRepository cityRepository;
     private LocalizedMessageBuilderFactory localizedMessageBuilderFactory;
+    private ReturnMessage returnMessage;
 
+    @Autowired(required = false)
+    public void setReturnMessage(ReturnMessage returnMessage) {
+        this.returnMessage = returnMessage;
+    }
     @Autowired(required = false)
     public void setCityRepository(CityRepository cityRepository) {
         this.cityRepository = cityRepository;
@@ -64,18 +69,17 @@ public class DefaultCityService implements CityService {
             .countryId(cityEntity.getCountryId()).build();
     }
 
-    public boolean exists(Long countryId, String cityNameEn) {
-        ArrayList<CityEntity> cityEntity =
-            this.cityRepository.findByCountryIdAndCityNameEn(countryId, cityNameEn);
-        return cityEntity.size() > 0;
-    }
-
+  public boolean exists(Long countryId, String cityNameEn) {
+    ArrayList<CityEntity> cityEntity =
+      this.cityRepository.checkCityInCountry(countryId, cityNameEn);
+    return cityEntity.size() > 0;
+  }
     @Override
     public String addCity(String cityNameKk, String cityNameRu,
                           String cityNameEn, Long regionId, Long countryId) {
 
         if (exists(countryId, cityNameEn)) {
-            return "В этой стране такой город уже существует";
+            return java.text.MessageFormat.format(returnMessage.getCityAddError(), cityNameEn);
         }
         CityEntity cityEntity = new CityEntity();
         cityEntity.setCityNameEn(cityNameEn);
@@ -87,13 +91,14 @@ public class DefaultCityService implements CityService {
 
         this.cityRepository.save(cityEntity);
         log.info("Added new city " + cityNameRu + " " + new Date());
-        return "Новый город добавлен";
+        System.out.println(returnMessage.getCityAddSuccess());
+        return java.text.MessageFormat.format(returnMessage.getCityAddSuccess(), cityNameEn);
     }
 
     @Override
     public String addCityJson(CityJson cityJson) {
         if (exists(cityJson.getCountryId(), cityJson.getCityNameEn())) {
-            return "В этой стране такой город уже существует";
+            return returnMessage.getCityAddError();
         }
         CityEntity cityEntity = new CityEntity();
         cityEntity.setCityNameKk(cityJson.getCityNameKk());
@@ -104,7 +109,7 @@ public class DefaultCityService implements CityService {
 
         this.cityRepository.save(cityEntity);
         log.info("Added new city " + cityJson.getCityNameRu() + " via JSON " + new Date());
-        return "Новый город добавлен посредством JSON";
+        return java.text.MessageFormat.format(returnMessage.getCityAddSuccess(), cityEntity.getCityNameEn());
     }
 
     @Override
@@ -128,9 +133,9 @@ public class DefaultCityService implements CityService {
             }
             this.cityRepository.save(cityEntity);
             log.info("Updated " + cityJson.getCityNameRu() + " city" + new Date());
-            return "Город обновлен";
+            return java.text.MessageFormat.format(returnMessage.getCityUpdateSuccess(), cityEntity.getCityNameEn());
         } else {
-            return "Город с таким id не существует";
+            return java.text.MessageFormat.format(returnMessage.getCityUpdateError(), cityEntity.getCityNameEn());
         }
     }
 
@@ -140,9 +145,9 @@ public class DefaultCityService implements CityService {
         if (Objects.nonNull(cityEntity)) {
             log.info("Deleted " + cityEntity.getCityNameRu() + " city" + new Date());
             this.cityRepository.delete(cityEntity);
-            return "Город удален";
+            return java.text.MessageFormat.format( returnMessage.getCityDeleteSuccess(), cityEntity.getCityNameEn());
         } else {
-            return "Город с таким id не существует";
+            return java.text.MessageFormat.format( returnMessage.getCityDeleteError(), cityEntity.getCityNameEn());
         }
     }
 }
