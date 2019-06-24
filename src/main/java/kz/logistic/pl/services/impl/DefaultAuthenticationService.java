@@ -64,41 +64,23 @@ public class DefaultAuthenticationService implements AuthenticationService {
     @Override
     public Login loginObject(String username, String password) {
         LoginEntity loginEntity = this.loginRepository.findByUsernameAndPassword(username,password);
-        Long sellerId;
-        Long customerId;
-        Long shipperId;
+        Long sellerId = 0L;
+        Long customerId = 0L;
+        Long shipperId = 0L;
         Long rolesId;
-        try {
-            if (loginEntity.getSellerCompanyEntity().getSellerCompanyId() != null) {
+
+            if (loginEntity.getSellerCompanyEntity() != null) {
                 sellerId = loginEntity.getSellerCompanyEntity().getSellerCompanyId();
             }
-        } catch (NullPointerException e) {
-            sellerId = 0L;
-        } finally {
-            sellerId = 0L;
-        }
 
-
-        try {
-            if (loginEntity.getCustomerEntity().getCustomerId() != null) {
+            if (loginEntity.getCustomerEntity() != null) {
                 customerId = loginEntity.getCustomerEntity().getCustomerId();
             }
-        } catch (NullPointerException e) {
-            customerId = 0L;
-        } finally {
-            customerId = 0L;
-        }
 
-
-        try{
-            if(loginEntity.getShipperEntity().getShipperId() != null){
+            if(loginEntity.getShipperEntity() != null){
                 shipperId = loginEntity.getShipperEntity().getShipperId();
             }
-        } catch (NullPointerException e){
-            shipperId = 0L;
-        } finally {
-            shipperId = 0L;
-        }
+
 
         if (loginEntity.getRolesId() == null){
             rolesId = 0L;
