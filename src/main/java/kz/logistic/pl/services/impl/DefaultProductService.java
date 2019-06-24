@@ -210,7 +210,7 @@ public class DefaultProductService implements ProductService {
                 productsEntity.setProductsImg(photosUrlList + "," + filename);
             this.productRepository.save(productsEntity);
             return ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/products/uploads/")
+                .path("/product/uploads/")
                 .path(filename)
                 .toUriString();
         } catch (IOException e) {
