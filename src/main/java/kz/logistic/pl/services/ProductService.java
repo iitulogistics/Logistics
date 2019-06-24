@@ -41,6 +41,8 @@ public interface ProductService {
 
   String addPhoto(Long id, MultipartFile file);
 
+  byte[] getPhoto(String name) throws IOException;
+
   List<Product> getProductsByName(String name);
 
   List<Product> getProductsByCategoryId(Long id);
