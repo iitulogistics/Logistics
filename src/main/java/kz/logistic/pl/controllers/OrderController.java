@@ -30,6 +30,18 @@ public class OrderController {
     return ResponseEntity.ok(this.orderService.showAllOrders());
   }
 
+    @ApiOperation(value = "Получение списка моих заказов для продавца")
+    @GetMapping("/{sellerCompanyId}")
+    public ResponseEntity<?> showOrdersBySeller(@PathVariable Long sellerCompanyId) {
+        return ResponseEntity.ok(this.orderService.showOrdersBySeller(sellerCompanyId));
+    }
+
+    @ApiOperation(value = " Получение списка моих заказов для покупателя")
+    @GetMapping("/{customerId}")
+    public ResponseEntity<?> showOrdersByCustomer(@PathVariable Long customerId) {
+        return ResponseEntity.ok(this.orderService.showOrdersByCustomer(customerId));
+    }
+
   @ApiOperation(value = "Показывает заказ по ID")
   @GetMapping("/{id}")
   public ResponseEntity<?> getId(@PathVariable(value = "id") Long orderId) {

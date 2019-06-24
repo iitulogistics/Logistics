@@ -33,6 +33,8 @@ public interface ProductService {
 
   List<Product> showAllProducts();
 
+  List<Product> showProductBySeller(Long sellerCompanyId);
+
   DefaultProduct showProduct(Long productId);
 
   String updateProduct(Long productId, ProductJson productJson);

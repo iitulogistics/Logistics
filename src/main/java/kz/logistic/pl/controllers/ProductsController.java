@@ -86,8 +86,15 @@ public class ProductsController {
   @GetMapping("/all")
   public ResponseEntity<?> all() {
     return ResponseEntity.ok(this.productService.showAllProducts());
-    //return ResponseEntity.ok(productDAO.getAllProduct());
   }
+
+  @ApiOperation(value = "Получение списка моих товаров для продавца")
+  @GetMapping("/{sellerCompanyId}")
+  public ResponseEntity<?> getProductsBySeller(@PathVariable Long sellerCompanyId) {
+      return ResponseEntity.ok(this.productService.showProductBySeller(sellerCompanyId));
+
+  }
+
 
   @ApiOperation(value = "Показывает продукт")
   @GetMapping("{id}")

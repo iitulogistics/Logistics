@@ -11,6 +11,10 @@ public interface OrderService {
 
   List<Order> showAllOrders();
 
+  List<Order> showOrdersBySeller(Long sellerCompanyId);
+
+  List<Order> showOrdersByCustomer(Long customerId);
+
   DefaultOrder showOrder(Long orderId);
 
   String addOrder(
