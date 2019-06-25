@@ -66,7 +66,7 @@ public class DefaultProductService implements ProductService {
         productRepository.save(productsEntity);
         log.info("New product added:\nName: "
             + productNameEn + "\nseller company id: " + sellerCompanyId);
-        return java.text.MessageFormat.format( returnMessage.getProductAddSuccess(), productsEntity.getProductNameEn());
+        return java.text.MessageFormat.format( returnMessage.getProductAddSuccess(), productsEntity.getProductId());
     }
 
     @Override
@@ -90,7 +90,7 @@ public class DefaultProductService implements ProductService {
         log.info("New product added:\nName: "
             + productJson.getProductNameEn() + "\nseller company id: "
             + productJson.getSellerCompanyId());
-        return java.text.MessageFormat.format( returnMessage.getProductAddSuccess(), productsEntity.getProductNameEn());
+        return java.text.MessageFormat.format( returnMessage.getProductAddSuccess(), productsEntity.getProductId());
     }
 
     @Override
