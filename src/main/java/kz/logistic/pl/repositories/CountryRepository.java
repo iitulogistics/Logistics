@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public interface CountryRepository extends JpaRepository<CountryEntity, Long> {
 
-  @Query("select c from CountryEntity c where c.countryNameEn = ?1")
+  @Query("from CountryEntity c where c.countryNameEn = ?1")
   ArrayList<CountryEntity> existCountry(String countryNameEn);
 
   @Query("select c from CountryEntity c where c.countryNameEn like %?1% " +

@@ -1,6 +1,7 @@
 package kz.logistic.pl.services.impl;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.Period;
@@ -16,6 +17,7 @@ import kz.logistic.pl.repositories.ProductRepository;
 import kz.logistic.pl.services.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
@@ -103,44 +105,27 @@ public class DefaultProductService implements ProductService {
     List<ProductsEntity> productsEntityList = new ArrayList<>();
     Iterable<ProductsEntity> iterable = this.productRepository.findAll();
     iterable.forEach(productsEntityList::add);
-    return productsEntityList.stream().map(productsEntity -> DefaultProduct.builder()
-      .productId(productsEntity.getProductId())
-      .productNameKk(productsEntity.getProductNameKk())
-      .productNameRu(productsEntity.getProductNameRu())
-      .productNameEn(productsEntity.getProductNameEn())
-      .productDescription(productsEntity.getProductDescription())
-      .sellerCompanyId(productsEntity.getSellerCompanyId())
-      .manufacturer(productsEntity.getManufacturer())
-      .price(productsEntity.getPrice())
-      .productCategoryId(productsEntity.getProductCategoryId())
-      .productSubcategoryId(productsEntity.getProductSubcategoryId())
-      .size(productsEntity.getSize())
-      .weight(productsEntity.getWeight())
-      .specialCharacteristicsId(productsEntity.getSpecialCharacteristicId())
-      .serialNumber(productsEntity.getSerialNumber())
-      .uniqueIdNumber(productsEntity.getUniqueIdNumber())
-      .build()).collect(Collectors.toList());
+    return getCollectProduct(productsEntityList);
   }
+
+    private List<Product> getCollectProduct(List<ProductsEntity> productsEntityList) {
+        return productsEntityList.stream().map(productsEntity ->
+            getProduct(productsEntity))
+            .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Product> showProductBySeller(Long sellerCompanyId) {
+        List<ProductsEntity> productsEntityList = new ArrayList<>();
+        Iterable<ProductsEntity> iterable = this.productRepository.findBySellerCompanyId(sellerCompanyId);
+        iterable.forEach(productsEntityList::add);
+        return getCollectProduct(productsEntityList);
+    }
 
   @Override
   public DefaultProduct showProduct(Long productId) {
     ProductsEntity productsEntity = this.productRepository.findById(productId).orElse(null);
-    return DefaultProduct.builder()
-      .productId(productsEntity.getProductId())
-      .productNameKk(productsEntity.getProductNameKk())
-      .productNameRu(productsEntity.getProductNameRu())
-      .productNameEn(productsEntity.getProductNameEn())
-      .productDescription(productsEntity.getProductDescription())
-      .sellerCompanyId(productsEntity.getSellerCompanyId())
-      .manufacturer(productsEntity.getManufacturer())
-      .price(productsEntity.getPrice())
-      .productCategoryId(productsEntity.getProductCategoryId())
-      .productSubcategoryId(productsEntity.getProductSubcategoryId())
-      .size(productsEntity.getSize())
-      .weight(productsEntity.getWeight())
-      .specialCharacteristicsId(productsEntity.getSpecialCharacteristicId())
-      .serialNumber(productsEntity.getSerialNumber())
-      .uniqueIdNumber(productsEntity.getUniqueIdNumber()).build();
+    return getProduct(productsEntity);
   }
 
   @Override
@@ -205,7 +190,7 @@ public class DefaultProductService implements ProductService {
       return "Продукта с таким ID не существует";
     try {
       String filename = UUID.randomUUID() + "." + FilenameUtils.getExtension(file.getOriginalFilename());
-      File transferFile = new File(uploadDir + "\\" + filename);
+      File transferFile = new File(uploadDir + filename);
       file.transferTo(transferFile);
 
       String photosUrlList = productsEntity.getProductsImg();
@@ -217,7 +202,7 @@ public class DefaultProductService implements ProductService {
         productsEntity.setProductsImg(photosUrlList + "," + filename);
       this.productRepository.save(productsEntity);
       return ServletUriComponentsBuilder.fromCurrentContextPath()
-        .path("/products/uploads/")
+        .path("/product/uploads/")
         .path(filename)
         .toUriString();
     } catch (IOException e) {
@@ -226,49 +211,46 @@ public class DefaultProductService implements ProductService {
   }
 
   @Override
+    public byte[] getPhoto(String name) throws IOException {
+        File file = new File(uploadDir + name);
+        FileInputStream fileInputStream = new FileInputStream(file);
+        return IOUtils.toByteArray(fileInputStream);
+    }
+
+  @Override
   public List<Product> getProductsByName(String name) {
     List<ProductsEntity> productsEntityList = productRepository.getProductsByName(name);
 
-    return productsEntityList.stream().map(productsEntity -> DefaultProduct.builder()
-      .productId(productsEntity.getProductId())
-      .productNameKk(productsEntity.getProductNameKk())
-      .productNameRu(productsEntity.getProductNameRu())
-      .productNameEn(productsEntity.getProductNameEn())
-      .productDescription(productsEntity.getProductDescription())
-      .sellerCompanyId(productsEntity.getSellerCompanyId())
-      .manufacturer(productsEntity.getManufacturer())
-      .price(productsEntity.getPrice())
-      .productCategoryId(productsEntity.getProductCategoryId())
-      .productSubcategoryId(productsEntity.getProductSubcategoryId())
-      .size(productsEntity.getSize())
-      .weight(productsEntity.getWeight())
-      .specialCharacteristicsId(productsEntity.getSpecialCharacteristicId())
-      .serialNumber(productsEntity.getSerialNumber())
-      .uniqueIdNumber(productsEntity.getUniqueIdNumber())
-      .build()).collect(Collectors.toList());
+    return productsEntityList.stream().map(productsEntity ->
+        getProduct(productsEntity)
+    ).collect(Collectors.toList());
   }
 
-  @Override
+    private DefaultProduct getProduct(ProductsEntity productsEntity) {
+        return DefaultProduct.builder()
+            .productId(productsEntity.getProductId())
+            .productNameKk(productsEntity.getProductNameKk())
+            .productNameRu(productsEntity.getProductNameRu())
+            .productNameEn(productsEntity.getProductNameEn())
+            .productDescription(productsEntity.getProductDescription())
+            .sellerCompanyId(productsEntity.getSellerCompanyId())
+            .manufacturer(productsEntity.getManufacturer())
+            .price(productsEntity.getPrice())
+            .productCategoryId(productsEntity.getProductCategoryId())
+            .productSubcategoryId(productsEntity.getProductSubcategoryId())
+            .size(productsEntity.getSize())
+            .weight(productsEntity.getWeight())
+            .photoUrlsList(productsEntity.getProductsImg())
+            .specialCharacteristicsId(productsEntity.getSpecialCharacteristicId())
+            .serialNumber(productsEntity.getSerialNumber())
+            .uniqueIdNumber(productsEntity.getUniqueIdNumber()).build();
+    }
+
+    @Override
   public List<Product> getProductsByCategoryId(Long id) {
     List<ProductsEntity> productsEntityList = productRepository.getProductsByCategoryId(id);
 
-    return productsEntityList.stream().map(productsEntity -> DefaultProduct.builder()
-      .productId(productsEntity.getProductId())
-      .productNameKk(productsEntity.getProductNameKk())
-      .productNameRu(productsEntity.getProductNameRu())
-      .productNameEn(productsEntity.getProductNameEn())
-      .productDescription(productsEntity.getProductDescription())
-      .sellerCompanyId(productsEntity.getSellerCompanyId())
-      .manufacturer(productsEntity.getManufacturer())
-      .price(productsEntity.getPrice())
-      .productCategoryId(productsEntity.getProductCategoryId())
-      .productSubcategoryId(productsEntity.getProductSubcategoryId())
-      .size(productsEntity.getSize())
-      .weight(productsEntity.getWeight())
-      .specialCharacteristicsId(productsEntity.getSpecialCharacteristicId())
-      .serialNumber(productsEntity.getSerialNumber())
-      .uniqueIdNumber(productsEntity.getUniqueIdNumber())
-      .build()).collect(Collectors.toList());
+    return productsEntityList.stream().map(productsEntity -> getProduct(productsEntity)).collect(Collectors.toList());
   }
 
   @Override

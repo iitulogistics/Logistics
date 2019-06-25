@@ -25,4 +25,6 @@ public interface ProductSubCategoryService {
 
     ProductSubCategory showProductSubCategory(Long productSubCategoryId);
 
+    List<ProductSubCategory> showProductCategory(Long productId);
+
 }

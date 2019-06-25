@@ -33,6 +33,8 @@ public interface ProductService {
 
   List<Product> showAllProducts();
 
+  List<Product> showProductBySeller(Long sellerCompanyId);
+
   DefaultProduct showProduct(Long productId);
 
   String updateProduct(Long productId, ProductJson productJson);
@@ -40,6 +42,8 @@ public interface ProductService {
   String deleteProduct(Long productId);
 
   String addPhoto(Long id, MultipartFile file);
+
+  byte[] getPhoto(String name) throws IOException;
 
   List<Product> getProductsByName(String name);
 

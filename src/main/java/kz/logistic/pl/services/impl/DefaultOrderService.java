@@ -36,7 +36,31 @@ public class DefaultOrderService implements OrderService {
   public List<Order> showAllOrders() {
     List<OrdersEntity> ordersEntities = this.ordersRepository.findAll();
 
-    return ordersEntities.stream().map(ordersEntity -> DefaultOrder.builder()
+    return ordersEntities.stream().map(ordersEntity ->
+        getOrderBuilder(ordersEntity)
+    ).collect(Collectors.toList());
+  }
+
+    @Override
+    public List<Order> showOrdersBySeller(Long sellerCompanyId) {
+        List<OrdersEntity> ordersEntities = this.ordersRepository.findBySellerCompanyId(sellerCompanyId);
+
+        return ordersEntities.stream().map(ordersEntity ->
+            getOrderBuilder(ordersEntity)
+        ).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Order> showOrdersByCustomer(Long customerId) {
+        List<OrdersEntity> ordersEntities = this.ordersRepository.findByCustomerId(customerId);
+
+        return ordersEntities.stream().map(ordersEntity ->
+            getOrderBuilder(ordersEntity)
+        ).collect(Collectors.toList());
+    }
+
+    private DefaultOrder getOrderBuilder(OrdersEntity ordersEntity) {
+        return DefaultOrder.builder()
       .customerId(ordersEntity.getCustomerId())
       .deliveringStatus(ordersEntity.getDeliveringStatus())
       .orderAmount(ordersEntity.getOrderAmount())
@@ -48,28 +72,15 @@ public class DefaultOrderService implements OrderService {
       .productId(ordersEntity.getProductId())
       .totalPrice(ordersEntity.getTotalPrice())
       .sellerCompanyId(ordersEntity.getSellerCompanyId())
-      .unitPrice(ordersEntity.getUnitPrice()).build()
-    ).collect(Collectors.toList());
-  }
+      .unitPrice(ordersEntity.getUnitPrice()).build();
+    }
 
-  @Override
+    @Override
   public DefaultOrder showOrder(Long orderId) {
 
     OrdersEntity ordersEntity = this.ordersRepository.findById(orderId).orElse(null);
 
-    return DefaultOrder.builder()
-      .orderId(ordersEntity.getOrderId())
-      .orderNumber(ordersEntity.getOrderNumber())
-      .unitPrice(ordersEntity.getUnitPrice())
-      .sellerCompanyId(ordersEntity.getSellerCompanyId())
-      .productId(ordersEntity.getProductId())
-      .productCount(ordersEntity.getProductCount())
-      .productAmount(ordersEntity.getProductAmount())
-      .orderNumber(ordersEntity.getOrderNumber())
-      .orderDate(ordersEntity.getOrderDate())
-      .orderAmount(ordersEntity.getOrderAmount())
-      .deliveringStatus(ordersEntity.getDeliveringStatus())
-      .customerId(ordersEntity.getCustomerId()).build();
+    return  getOrderBuilder(ordersEntity);
   }
 
   @Override

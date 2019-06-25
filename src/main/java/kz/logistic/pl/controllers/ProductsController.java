@@ -9,9 +9,12 @@ import kz.logistic.pl.models.pojos.json.ProductJson;
 import kz.logistic.pl.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Api(tags = {"Продукты"}, description = "API для продуктов")
 @RestController
@@ -83,8 +86,15 @@ public class ProductsController {
   @GetMapping("/all")
   public ResponseEntity<?> all() {
     return ResponseEntity.ok(this.productService.showAllProducts());
-    //return ResponseEntity.ok(productDAO.getAllProduct());
   }
+
+  @ApiOperation(value = "Получение списка моих товаров для продавца")
+  @GetMapping("/{sellerCompanyId}")
+  public ResponseEntity<?> getProductsBySeller(@PathVariable Long sellerCompanyId) {
+      return ResponseEntity.ok(this.productService.showProductBySeller(sellerCompanyId));
+
+  }
+
 
   @ApiOperation(value = "Показывает продукт")
   @GetMapping("{id}")
@@ -118,6 +128,16 @@ public class ProductsController {
   public ResponseEntity<?> getProductsByName(String name) {
     return ResponseEntity.ok(this.productDAO.getProductByName(name));
   }
+
+    @ApiOperation("Возвращает фотографию по названию на сервере")
+    @GetMapping("/uploads/{name}")
+    public ResponseEntity<?> getPhoto(@PathVariable("name") String name) {
+        try {
+            return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(this.productService.getPhoto(name));
+        } catch (IOException e) {
+            return ResponseEntity.ok("Данной фотографий не существует");
+        }
+    }
 
 //  @ApiOperation("Искать продукт по Id категории")
 //  @PostMapping("/getProductsByName")
