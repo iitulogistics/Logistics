@@ -46,6 +46,7 @@ public class DefaultOrderService implements OrderService {
       .productAmount(ordersEntity.getProductAmount())
       .productCount(ordersEntity.getProductCount())
       .productId(ordersEntity.getProductId())
+      .totalPrice(ordersEntity.getTotalPrice())
       .sellerCompanyId(ordersEntity.getSellerCompanyId())
       .unitPrice(ordersEntity.getUnitPrice()).build()
     ).collect(Collectors.toList());
@@ -95,25 +96,31 @@ public class DefaultOrderService implements OrderService {
     }
 
   @Override
-  public String addOrderJson(OrderJson orderJson) {
-    OrdersEntity ordersEntity = new OrdersEntity();
+  public String addOrderJson(List<OrderJson> orderJson) {
 
-    ordersEntity.setOrderNumber(UniqueSeq.getNext());
-    ordersEntity.setProductId(orderJson.getProductId());
-    ordersEntity.setSellerCompanyId(orderJson.getSellerCompanyId());
-    ordersEntity.setUnitPrice(orderJson.getUnitPrice());
-    ordersEntity.setOrderDate(orderJson.getOrderDate());
-    ordersEntity.setProductCount(orderJson.getProductCount());
-    ordersEntity.setUnitPrice(orderJson.getUnitPrice());
-    ordersEntity.setTotalPrice(orderJson.getTotalPrice());
-    ordersEntity.setCustomerId(orderJson.getCustomerId());
-    ordersEntity.setDeliveringStatus(orderJson.getDeliveringStatus());
-    ordersEntity.setProductAmount(orderJson.getProductAmount());
-    ordersEntity.setOrderAmount(orderJson.getOrderAmount());
 
-    ordersRepository.save(ordersEntity);
-    log.info("New order " + ordersEntity.getOrderNumber() + " added via Json" + " " + new Date());
-      return java.text.MessageFormat.format(returnMessage.getOrderAddSuccess(), ordersEntity.getOrderNumber());
+      for (OrderJson order :
+           orderJson) {
+          OrdersEntity ordersEntity = new OrdersEntity();
+          ordersEntity.setOrderNumber(UniqueSeq.getNext());
+          ordersEntity.setProductId(order.getProductId());
+          ordersEntity.setSellerCompanyId(order.getSellerCompanyId());
+          ordersEntity.setUnitPrice(order.getUnitPrice());
+          ordersEntity.setOrderDate(order.getOrderDate());
+          ordersEntity.setProductCount(order.getProductCount());
+          ordersEntity.setUnitPrice(order.getUnitPrice());
+          ordersEntity.setTotalPrice(order.getTotalPrice());
+          ordersEntity.setCustomerId(order.getCustomerId());
+          ordersEntity.setDeliveringStatus(order.getDeliveringStatus());
+          ordersEntity.setProductAmount(order.getProductAmount());
+          ordersEntity.setOrderAmount(order.getOrderAmount());
+
+          ordersRepository.save(ordersEntity);
+      }
+
+ return  "good";
+    //log.info("New order " + ordersEntity.getOrderNumber() + " added via Json" + " " + new Date());
+      //return java.text.MessageFormat.format(returnMessage.getOrderAddSuccess(), ordersEntity.getOrderNumber());
   }
 
   @Override
