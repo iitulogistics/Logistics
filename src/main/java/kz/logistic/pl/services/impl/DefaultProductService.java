@@ -122,6 +122,22 @@ public class DefaultProductService implements ProductService {
         return getCollectProduct(productsEntityList);
     }
 
+    @Override
+    public List<Product> showProductByCategoryId(Long productCategoryId) {
+        List<ProductsEntity> productsEntityList = new ArrayList<>();
+        Iterable<ProductsEntity> iterable = this.productRepository.findByProductCategoryId(productCategoryId);
+        iterable.forEach(productsEntityList::add);
+        return getCollectProduct(productsEntityList);
+    }
+
+    @Override
+    public List<Product> showProductBySubCategoryId(Long productSubCategoryId) {
+        List<ProductsEntity> productsEntityList = new ArrayList<>();
+        Iterable<ProductsEntity> iterable = this.productRepository.findByProductSubcategoryId(productSubCategoryId);
+        iterable.forEach(productsEntityList::add);
+        return getCollectProduct(productsEntityList);
+    }
+
   @Override
   public DefaultProduct showProduct(Long productId) {
     ProductsEntity productsEntity = this.productRepository.findById(productId).orElse(null);

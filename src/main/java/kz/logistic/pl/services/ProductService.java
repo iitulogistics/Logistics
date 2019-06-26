@@ -1,13 +1,13 @@
 package kz.logistic.pl.services;
 
-import java.io.IOException;
-import java.util.List;
-
 import kz.logistic.pl.models.pojos.Product;
 import kz.logistic.pl.models.pojos.impl.DefaultProduct;
 import kz.logistic.pl.models.pojos.json.ProductJson;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.List;
 
 @Service
 public interface ProductService {
@@ -34,6 +34,10 @@ public interface ProductService {
   List<Product> showAllProducts();
 
   List<Product> showProductBySeller(Long sellerCompanyId);
+
+  List<Product> showProductByCategoryId(Long productCategoryId);
+
+  List<Product> showProductBySubCategoryId(Long productSubCategoryId);
 
   DefaultProduct showProduct(Long productId);
 
