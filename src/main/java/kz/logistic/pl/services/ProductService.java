@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public interface ProductService {
 
-  void addProduct(String productNameKk,
+  String addProduct(String productNameKk,
                   String productNameRu,
                   String productNameEn,
                   Long productCategoryId,
@@ -27,7 +27,7 @@ public interface ProductService {
                   Long sellerCompanyId,
                   Long specialCharacteristicsId);
 
-  void addProductJson(ProductJson productJson);
+  String addProductJson(ProductJson productJson);
 
   void addProductExcel(MultipartFile multipartFile);
 
