@@ -106,25 +106,30 @@ public class DefaultOrderService implements OrderService {
     }
 
   @Override
-  public String addOrderJson(OrderJson orderJson) {
-    OrdersEntity ordersEntity = new OrdersEntity();
+  public String addOrderJson(List<OrderJson> orderJson) {
 
-    ordersEntity.setOrderNumber(UniqueSeq.getNext());
-    ordersEntity.setProductId(orderJson.getProductId());
-    ordersEntity.setSellerCompanyId(orderJson.getSellerCompanyId());
-    ordersEntity.setUnitPrice(orderJson.getUnitPrice());
-    ordersEntity.setOrderDate(orderJson.getOrderDate());
-    ordersEntity.setProductCount(orderJson.getProductCount());
-    ordersEntity.setUnitPrice(orderJson.getUnitPrice());
-    ordersEntity.setTotalPrice(orderJson.getTotalPrice());
-    ordersEntity.setCustomerId(orderJson.getCustomerId());
-    ordersEntity.setDeliveringStatus(orderJson.getDeliveringStatus());
-    ordersEntity.setProductAmount(orderJson.getProductAmount());
-    ordersEntity.setOrderAmount(orderJson.getOrderAmount());
+        orderJson.forEach(orderJson1 -> {
+            OrdersEntity ordersEntity = new OrdersEntity();
 
-    ordersRepository.save(ordersEntity);
-    log.info("New order " + ordersEntity.getOrderNumber() + " added via Json" + " " + new Date());
-      return java.text.MessageFormat.format(returnMessage.getOrderAddSuccess(), ordersEntity.getOrderNumber());
+            ordersEntity.setOrderNumber(UniqueSeq.getNext());
+            ordersEntity.setProductId(orderJson1.getProductId());
+            ordersEntity.setSellerCompanyId(orderJson1.getSellerCompanyId());
+            ordersEntity.setUnitPrice(orderJson1.getUnitPrice());
+            ordersEntity.setOrderDate(orderJson1.getOrderDate());
+            ordersEntity.setProductCount(orderJson1.getProductCount());
+            ordersEntity.setUnitPrice(orderJson1.getUnitPrice());
+            ordersEntity.setTotalPrice(orderJson1.getTotalPrice());
+            ordersEntity.setCustomerId(orderJson1.getCustomerId());
+            ordersEntity.setDeliveringStatus(orderJson1.getDeliveringStatus());
+            ordersEntity.setProductAmount(orderJson1.getProductAmount());
+            ordersEntity.setOrderAmount(orderJson1.getOrderAmount());
+
+            ordersRepository.save(ordersEntity);
+            log.info("New order " + ordersEntity.getOrderNumber() + " added via Json" + " " + new Date());
+        });
+
+
+      return "Orders added";
   }
 
   @Override

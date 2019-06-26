@@ -28,7 +28,7 @@ public interface OrderService {
     Integer productAmount,
     Integer orderAmount);
 
-  String addOrderJson(OrderJson orderJson);
+  String addOrderJson(List<OrderJson> orderJson);
 
   String updateOrder(Long orderId, OrderJson orderJson);
 
