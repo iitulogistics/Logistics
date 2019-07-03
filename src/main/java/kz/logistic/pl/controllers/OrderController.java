@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
-import java.util.List;
 
 @Api(tags = "Список заказов", description = "API для списка заказов")
 @RestController
@@ -69,7 +68,7 @@ public class OrderController {
   @ApiOperation(value = "Добавляет заказ посредством JSON")
   @PostMapping("/addJson")
   public ResponseEntity<?> addJson(
-      @RequestBody List<OrderJson> orderJson
+    @RequestBody OrderJson orderJson
   ) {
     return ResponseEntity.ok(this.orderService.addOrderJson(orderJson));
   }
