@@ -106,23 +106,26 @@ public class DefaultOrderService implements OrderService {
     }
 
   @Override
-  public String addOrderJson(OrderJson orderJson) {
+  public String addOrderJson(List<OrderJson> orderJsons) {
     OrdersEntity ordersEntity = new OrdersEntity();
 
-    ordersEntity.setOrderNumber(UniqueSeq.getNext());
-    ordersEntity.setProductId(orderJson.getProductId());
-    ordersEntity.setSellerCompanyId(orderJson.getSellerCompanyId());
-    ordersEntity.setUnitPrice(orderJson.getUnitPrice());
-    ordersEntity.setOrderDate(orderJson.getOrderDate());
-    ordersEntity.setProductCount(orderJson.getProductCount());
-    ordersEntity.setUnitPrice(orderJson.getUnitPrice());
-    ordersEntity.setTotalPrice(orderJson.getTotalPrice());
-    ordersEntity.setCustomerId(orderJson.getCustomerId());
-    ordersEntity.setDeliveringStatus(orderJson.getDeliveringStatus());
-    ordersEntity.setProductAmount(orderJson.getProductAmount());
-    ordersEntity.setOrderAmount(orderJson.getOrderAmount());
+    orderJsons.forEach(orderJson -> {
+        ordersEntity.setOrderNumber(UniqueSeq.getNext());
+        ordersEntity.setProductId(orderJson.getProductId());
+        ordersEntity.setSellerCompanyId(orderJson.getSellerCompanyId());
+        ordersEntity.setUnitPrice(orderJson.getUnitPrice());
+        ordersEntity.setOrderDate(orderJson.getOrderDate());
+        ordersEntity.setProductCount(orderJson.getProductCount());
+        ordersEntity.setUnitPrice(orderJson.getUnitPrice());
+        ordersEntity.setTotalPrice(orderJson.getTotalPrice());
+        ordersEntity.setCustomerId(orderJson.getCustomerId());
+        ordersEntity.setDeliveringStatus(orderJson.getDeliveringStatus());
+        ordersEntity.setProductAmount(orderJson.getProductAmount());
+        ordersEntity.setOrderAmount(orderJson.getOrderAmount());
+        ordersRepository.save(ordersEntity);
+    });
 
-    ordersRepository.save(ordersEntity);
+
     log.info("New order " + ordersEntity.getOrderNumber() + " added via Json" + " " + new Date());
       return java.text.MessageFormat.format(returnMessage.getOrderAddSuccess(), ordersEntity.getOrderNumber());
   }
