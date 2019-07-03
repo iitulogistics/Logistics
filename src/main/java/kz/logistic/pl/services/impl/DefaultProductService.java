@@ -15,6 +15,7 @@ import kz.logistic.pl.models.pojos.json.ProductJson;
 import kz.logistic.pl.poi.ReadExcelFile;
 import kz.logistic.pl.repositories.ProductRepository;
 import kz.logistic.pl.services.ProductService;
+import kz.logistic.pl.utils.ReturnMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
@@ -30,6 +31,13 @@ public class DefaultProductService implements ProductService {
   @Value("${upload.path}")
   private String uploadDir;
   private ProductRepository productRepository;
+    private ReturnMessage returnMessage;
+
+
+    @Autowired(required = false)
+    public void setReturnMessage(ReturnMessage returnMessage) {
+        this.returnMessage = returnMessage;
+    }
 
   @Autowired
   public void setProductRepository(ProductRepository productRepository) {
@@ -37,7 +45,7 @@ public class DefaultProductService implements ProductService {
   }
 
   @Override
-  public void addProduct(
+  public String addProduct(
     String productNameKk, String productNameRu, String productNameEn, Long productCategoryId,
     Long productSubcategoryId, String uniqueIdNumber, String serialNumber, String manufacturer,
     String size, Integer weight, Integer price, String productDescription, Long sellerCompanyId,
@@ -60,10 +68,11 @@ public class DefaultProductService implements ProductService {
     productRepository.save(productsEntity);
     log.info("New product added:\nName: "
       + productNameEn + "\nseller company id: " + sellerCompanyId);
+      return java.text.MessageFormat.format( returnMessage.getProductAddSuccess(), productsEntity.getProductId());
   }
 
   @Override
-  public void addProductJson(ProductJson productJson) {
+  public String addProductJson(ProductJson productJson) {
     ProductsEntity productsEntity = new ProductsEntity();
     productsEntity.setProductNameKk(productJson.getProductNameKk());
     productsEntity.setProductNameRu(productJson.getProductNameRu());
@@ -83,6 +92,7 @@ public class DefaultProductService implements ProductService {
     log.info("New product added:\nName: "
       + productJson.getProductNameEn() + "\nseller company id: "
       + productJson.getSellerCompanyId());
+      return java.text.MessageFormat.format( returnMessage.getProductAddSuccess(), productsEntity.getProductId());
   }
 
   @Override
@@ -118,6 +128,22 @@ public class DefaultProductService implements ProductService {
     public List<Product> showProductBySeller(Long sellerCompanyId) {
         List<ProductsEntity> productsEntityList = new ArrayList<>();
         Iterable<ProductsEntity> iterable = this.productRepository.findBySellerCompanyId(sellerCompanyId);
+        iterable.forEach(productsEntityList::add);
+        return getCollectProduct(productsEntityList);
+    }
+
+    @Override
+    public List<Product> showProductByCategoryId(Long productCategoryId) {
+        List<ProductsEntity> productsEntityList = new ArrayList<>();
+        Iterable<ProductsEntity> iterable = this.productRepository.findByProductCategoryId(productCategoryId);
+        iterable.forEach(productsEntityList::add);
+        return getCollectProduct(productsEntityList);
+    }
+
+    @Override
+    public List<Product> showProductBySubCategoryId(Long productSubCategoryId) {
+        List<ProductsEntity> productsEntityList = new ArrayList<>();
+        Iterable<ProductsEntity> iterable = this.productRepository.findByProductSubcategoryId(productSubCategoryId);
         iterable.forEach(productsEntityList::add);
         return getCollectProduct(productsEntityList);
     }
@@ -177,9 +203,9 @@ public class DefaultProductService implements ProductService {
 
       this.productRepository.save(productsEntity);
       log.info("Updated " + productsEntity.getProductNameEn() + " product" + new Date());
-      return "Продукт обновлен";
+        return java.text.MessageFormat.format(returnMessage.getProductUpdateSuccess(), productsEntity.getProductNameEn());
     } else {
-      return "Продукт с таким id не существует";
+        return java.text.MessageFormat.format(returnMessage.getProductUpdateError(), productsEntity.getProductNameEn());
     }
   }
 
@@ -187,7 +213,7 @@ public class DefaultProductService implements ProductService {
   public String addPhoto(Long id, MultipartFile file) {
     ProductsEntity productsEntity = this.productRepository.getOne(id);
     if (productsEntity == null)
-      return "Продукта с таким ID не существует";
+        return returnMessage.getProductUpdateError();
     try {
       String filename = UUID.randomUUID() + "." + FilenameUtils.getExtension(file.getOriginalFilename());
       File transferFile = new File(uploadDir + filename);

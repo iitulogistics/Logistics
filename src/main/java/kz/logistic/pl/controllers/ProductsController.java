@@ -92,9 +92,19 @@ public class ProductsController {
   @GetMapping("/{sellerCompanyId}")
   public ResponseEntity<?> getProductsBySeller(@PathVariable Long sellerCompanyId) {
       return ResponseEntity.ok(this.productService.showProductBySeller(sellerCompanyId));
-
   }
 
+    @ApiOperation(value = "Получить список товваров по id категории")
+    @GetMapping("/{productCategoryId}")
+    public ResponseEntity<?> getProductsByCategory(@PathVariable Long productCategoryId) {
+        return ResponseEntity.ok(this.productService.showProductByCategoryId(productCategoryId));
+    }
+
+    @ApiOperation(value = "Получить список товваров по id подкатегории")
+    @GetMapping("/{productSubCategoryId}")
+    public ResponseEntity<?> getProductsBySubCategory(@PathVariable Long productSubCategoryId) {
+        return ResponseEntity.ok(this.productService.showProductBySubCategoryId(productSubCategoryId));
+    }
 
   @ApiOperation(value = "Показывает продукт")
   @GetMapping("{id}")
