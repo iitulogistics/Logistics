@@ -45,6 +45,12 @@ public class ServiceConfig {
   }
 
   @Bean
+  @Qualifier("defaultBasketService")
+  public DefaultBasketService basketService() {
+        return new DefaultBasketService();
+  }
+
+  @Bean
   @Qualifier("defaultCreditCardService")
   public DefaultCreditcardService creditCardService() {
     return new DefaultCreditcardService();

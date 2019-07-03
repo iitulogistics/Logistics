@@ -51,6 +51,18 @@ public class ReturnMessage {
     String addressDeleteSuccess;
     @Value("${address.delete.error}")
     String addressDeleteError;
+    @Value("${basket.add.success}")
+    String basketAddSuccess;
+    @Value("${basket.add.error}")
+    String basketAddError;
+    @Value("${basket.update.success}")
+    String basketUpdateSuccess;
+    @Value("${basket.update.error}")
+    String basketUpdateError;
+    @Value("${basket.delete.success}")
+    String basketDeleteSuccess;
+    @Value("${basket.delete.error}")
+    String basketDeleteError;
     @Value("${creditcard.add.success}")
     String creditcardAddSuccess;
     @Value("${creditcard.add.error}")
