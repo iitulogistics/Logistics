@@ -2,7 +2,10 @@ package kz.logistic.pl.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import kz.logistic.pl.models.pojos.Customer;
 import kz.logistic.pl.models.pojos.json.OrderJson;
+import kz.logistic.pl.services.BasketService;
+import kz.logistic.pl.services.CustomerService;
 import kz.logistic.pl.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,11 +21,25 @@ import java.util.List;
 public class OrderController {
 
   private OrderService orderService;
+  private BasketService basketService;
+  private CustomerService customerService;
 
   @Autowired(required = false)
   @Qualifier("defaultOrderService")
   private void setOrderService(OrderService orderService) {
     this.orderService = orderService;
+  }
+
+  @Autowired(required = false)
+  @Qualifier("defaultBasketService")
+  private void setBasketService(BasketService basketService) {
+    this.basketService = basketService;
+  }
+
+  @Autowired(required = false)
+  @Qualifier("defaultCustomerService")
+  private void setBasketService(CustomerService customerService) {
+    this.customerService = customerService;
   }
 
   @ApiOperation(value = "Показывает весь список заказов")
@@ -31,17 +48,17 @@ public class OrderController {
     return ResponseEntity.ok(this.orderService.showAllOrders());
   }
 
-    @ApiOperation(value = "Получение списка моих заказов для продавца")
-    @GetMapping("/{sellerCompanyId}")
-    public ResponseEntity<?> showOrdersBySeller(@PathVariable Long sellerCompanyId) {
-        return ResponseEntity.ok(this.orderService.showOrdersBySeller(sellerCompanyId));
-    }
+  @ApiOperation(value = "Получение списка моих заказов для продавца")
+  @GetMapping("/{sellerCompanyId}")
+  public ResponseEntity<?> showOrdersBySeller(@PathVariable Long sellerCompanyId) {
+    return ResponseEntity.ok(this.orderService.showOrdersBySeller(sellerCompanyId));
+  }
 
-    @ApiOperation(value = " Получение списка моих заказов для покупателя")
-    @GetMapping("/{customerId}")
-    public ResponseEntity<?> showOrdersByCustomer(@PathVariable Long customerId) {
-        return ResponseEntity.ok(this.orderService.showOrdersByCustomer(customerId));
-    }
+  @ApiOperation(value = " Получение списка моих заказов для покупателя")
+  @GetMapping("/{customerId}")
+  public ResponseEntity<?> showOrdersByCustomer(@PathVariable Long customerId) {
+    return ResponseEntity.ok(this.orderService.showOrdersByCustomer(customerId));
+  }
 
   @ApiOperation(value = "Показывает заказ по ID")
   @GetMapping("/{id}")
@@ -61,6 +78,13 @@ public class OrderController {
     @RequestParam String deliveringStatus,
     @RequestParam Integer productAmount,
     @RequestParam Integer orderAmount) {
+
+    try {
+      basketService.deleteByLoginId(customerService.showCustomer(customerId).getLoginId());
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
     return ResponseEntity.ok(this.orderService.addOrder(
       productId, sellerCompanyId, orderDate, productCount, unitPrice,
       customerId, deliveringStatus, productAmount, orderAmount));
@@ -71,6 +95,14 @@ public class OrderController {
   public ResponseEntity<?> addJson(
     @RequestBody List<OrderJson> orderJson
   ) {
+    try {
+      if (orderJson.size() != 0) {
+        basketService.deleteByLoginId(customerService.showCustomer(orderJson.get(0).getCustomerId()).getLoginId());
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
     return ResponseEntity.ok(this.orderService.addOrderJson(orderJson));
   }
 
