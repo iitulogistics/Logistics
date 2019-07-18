@@ -52,4 +52,6 @@ public interface ProductService {
   List<Product> getProductsByName(String name);
 
   List<Product> getProductsByCategoryId(Long id);
+
+  List<Product> getProductsByIds(List<Long> id);
 }

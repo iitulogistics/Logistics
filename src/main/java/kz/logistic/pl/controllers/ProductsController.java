@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import kz.logistic.pl.dao.ProductDAO;
 import kz.logistic.pl.models.entities.ProductsEntity;
+import kz.logistic.pl.models.pojos.Product;
 import kz.logistic.pl.models.pojos.impl.DefaultProduct;
 import kz.logistic.pl.models.pojos.json.ProductJson;
 import kz.logistic.pl.services.ProductService;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Api(tags = {"Продукты"}, description = "API для продуктов")
 @RestController
@@ -58,7 +61,7 @@ public class ProductsController {
       uniqueIdNumber, serialNumber, manufacturer, size, weight, price, productDescription,
       sellerCompanyId, specialCharacteristicsId);
     productDAO.addProduct(
-        productNameKk, productNameRu, productNameEn, productCategoryId, productSubcategoryId,
+      productNameKk, productNameRu, productNameEn, productCategoryId, productSubcategoryId,
       uniqueIdNumber, serialNumber, manufacturer, size, weight, price, productDescription,
       sellerCompanyId, specialCharacteristicsId);
     return ResponseEntity.ok("Новый продукт добавлен");
@@ -68,6 +71,7 @@ public class ProductsController {
   @PostMapping("/addJson")
   public ResponseEntity<?> addJson(
     @RequestBody ProductJson productJson) {
+    if (productJson.getPrice() == null) productJson.setPrice(0);
     this.productService.addProductJson(productJson);
     productDAO.addProductJson(productJson);
     return ResponseEntity.ok("Новой продукт добавлен посредством JSON");
@@ -91,20 +95,20 @@ public class ProductsController {
   @ApiOperation(value = "Получение списка моих товаров для продавца")
   @GetMapping("/{sellerCompanyId}")
   public ResponseEntity<?> getProductsBySeller(@PathVariable Long sellerCompanyId) {
-      return ResponseEntity.ok(this.productService.showProductBySeller(sellerCompanyId));
+    return ResponseEntity.ok(this.productService.showProductBySeller(sellerCompanyId));
   }
 
-    @ApiOperation(value = "Получить список товваров по id категории")
-    @GetMapping("/{productCategoryId}")
-    public ResponseEntity<?> getProductsByCategory(@PathVariable Long productCategoryId) {
-        return ResponseEntity.ok(this.productService.showProductByCategoryId(productCategoryId));
-    }
+  @ApiOperation(value = "Получить список товваров по id категории")
+  @GetMapping("/{productCategoryId}")
+  public ResponseEntity<?> getProductsByCategory(@PathVariable Long productCategoryId) {
+    return ResponseEntity.ok(this.productService.showProductByCategoryId(productCategoryId));
+  }
 
-    @ApiOperation(value = "Получить список товваров по id подкатегории")
-    @GetMapping("/{productSubCategoryId}")
-    public ResponseEntity<?> getProductsBySubCategory(@PathVariable Long productSubCategoryId) {
-        return ResponseEntity.ok(this.productService.showProductBySubCategoryId(productSubCategoryId));
-    }
+  @ApiOperation(value = "Получить список товваров по id подкатегории")
+  @GetMapping("/{productSubCategoryId}")
+  public ResponseEntity<?> getProductsBySubCategory(@PathVariable Long productSubCategoryId) {
+    return ResponseEntity.ok(this.productService.showProductBySubCategoryId(productSubCategoryId));
+  }
 
   @ApiOperation(value = "Показывает продукт")
   @GetMapping("{id}")
@@ -139,16 +143,21 @@ public class ProductsController {
     return ResponseEntity.ok(this.productDAO.getProductByName(name));
   }
 
-    @ApiOperation("Возвращает фотографию по названию на сервере")
-    @GetMapping("/uploads/{name}")
-    public ResponseEntity<?> getPhoto(@PathVariable("name") String name) {
-        try {
-            return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(this.productService.getPhoto(name));
-        } catch (IOException e) {
-            return ResponseEntity.ok("Данной фотографий не существует");
-        }
+  @ApiOperation("Возвращает фотографию по названию на сервере")
+  @GetMapping("/uploads/{name}")
+  public ResponseEntity<?> getPhoto(@PathVariable("name") String name) {
+    try {
+      return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(this.productService.getPhoto(name));
+    } catch (IOException e) {
+      return ResponseEntity.ok("Данной фотографий не существует");
     }
+  }
 
+  @ApiOperation("Вернуть массив продуктов по массиву id")
+  @PostMapping("/getProductsByIds")
+  public ResponseEntity<?> getProductsByIds(@RequestParam List<Long> ids) {
+    return ResponseEntity.ok(productService.getProductsByIds(ids));
+  }
 //  @ApiOperation("Искать продукт по Id категории")
 //  @PostMapping("/getProductsByName")
 //  public ResponseEntity<?> getProductsByCategoryId(Long id) {
