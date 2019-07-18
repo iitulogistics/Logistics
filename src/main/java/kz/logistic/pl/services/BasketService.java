@@ -22,4 +22,6 @@ public interface BasketService {
 
     String deleteBasket(Long basketId);
 
+    String deleteByLoginId(Long loginId);
+
 }
