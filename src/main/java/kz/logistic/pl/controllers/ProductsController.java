@@ -111,7 +111,7 @@ public class ProductsController {
   }
 
   @ApiOperation(value = "Показывает продукт")
-  @GetMapping("{id}")
+  @GetMapping("id/{id}")
   public ResponseEntity<?> show(@PathVariable(value = "id") Long productId) {
     return ResponseEntity.ok(this.productService.showProduct(productId));
   }
@@ -155,7 +155,7 @@ public class ProductsController {
 
   @ApiOperation("Вернуть массив продуктов по массиву id")
   @PostMapping("/getProductsByIds")
-  public ResponseEntity<?> getProductsByIds(@RequestParam List<Long> ids) {
+  public ResponseEntity<?> getProductsByIds(@RequestBody List<Long> ids) {
     return ResponseEntity.ok(productService.getProductsByIds(ids));
   }
 //  @ApiOperation("Искать продукт по Id категории")
