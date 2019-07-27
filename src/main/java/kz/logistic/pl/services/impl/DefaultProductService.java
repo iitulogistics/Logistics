@@ -31,13 +31,13 @@ public class DefaultProductService implements ProductService {
   @Value("${upload.path}")
   private String uploadDir;
   private ProductRepository productRepository;
-    private ReturnMessage returnMessage;
+  private ReturnMessage returnMessage;
 
 
-    @Autowired(required = false)
-    public void setReturnMessage(ReturnMessage returnMessage) {
-        this.returnMessage = returnMessage;
-    }
+  @Autowired(required = false)
+  public void setReturnMessage(ReturnMessage returnMessage) {
+    this.returnMessage = returnMessage;
+  }
 
   @Autowired
   public void setProductRepository(ProductRepository productRepository) {
@@ -68,7 +68,7 @@ public class DefaultProductService implements ProductService {
     productRepository.save(productsEntity);
     log.info("New product added:\nName: "
       + productNameEn + "\nseller company id: " + sellerCompanyId);
-      return java.text.MessageFormat.format( returnMessage.getProductAddSuccess(), productsEntity.getProductId());
+    return java.text.MessageFormat.format(returnMessage.getProductAddSuccess(), productsEntity.getProductId());
   }
 
   @Override
@@ -92,7 +92,7 @@ public class DefaultProductService implements ProductService {
     log.info("New product added:\nName: "
       + productJson.getProductNameEn() + "\nseller company id: "
       + productJson.getSellerCompanyId());
-      return java.text.MessageFormat.format( returnMessage.getProductAddSuccess(), productsEntity.getProductId());
+    return java.text.MessageFormat.format(returnMessage.getProductAddSuccess(), productsEntity.getProductId());
   }
 
   @Override
@@ -100,7 +100,7 @@ public class DefaultProductService implements ProductService {
     ReadExcelFile readExcelFile = new ReadExcelFile();
     try {
       List<ProductsEntity> list = readExcelFile.readProductFromExcelFile(multipartFile);
-      for(ProductsEntity productsEntity : list){
+      for (ProductsEntity productsEntity : list) {
         productRepository.save(productsEntity);
         log.info("New product added: " + productsEntity.getProductNameEn());
       }
@@ -118,35 +118,35 @@ public class DefaultProductService implements ProductService {
     return getCollectProduct(productsEntityList);
   }
 
-    private List<Product> getCollectProduct(List<ProductsEntity> productsEntityList) {
-        return productsEntityList.stream().map(productsEntity ->
-            getProduct(productsEntity))
-            .collect(Collectors.toList());
-    }
+  private List<Product> getCollectProduct(List<ProductsEntity> productsEntityList) {
+    return productsEntityList.stream().map(productsEntity ->
+      getProduct(productsEntity))
+      .collect(Collectors.toList());
+  }
 
-    @Override
-    public List<Product> showProductBySeller(Long sellerCompanyId) {
-        List<ProductsEntity> productsEntityList = new ArrayList<>();
-        Iterable<ProductsEntity> iterable = this.productRepository.findBySellerCompanyId(sellerCompanyId);
-        iterable.forEach(productsEntityList::add);
-        return getCollectProduct(productsEntityList);
-    }
+  @Override
+  public List<Product> showProductBySeller(Long sellerCompanyId) {
+    List<ProductsEntity> productsEntityList = new ArrayList<>();
+    Iterable<ProductsEntity> iterable = this.productRepository.findBySellerCompanyId(sellerCompanyId);
+    iterable.forEach(productsEntityList::add);
+    return getCollectProduct(productsEntityList);
+  }
 
-    @Override
-    public List<Product> showProductByCategoryId(Long productCategoryId) {
-        List<ProductsEntity> productsEntityList = new ArrayList<>();
-        Iterable<ProductsEntity> iterable = this.productRepository.findByProductCategoryId(productCategoryId);
-        iterable.forEach(productsEntityList::add);
-        return getCollectProduct(productsEntityList);
-    }
+  @Override
+  public List<Product> showProductByCategoryId(Long productCategoryId) {
+    List<ProductsEntity> productsEntityList = new ArrayList<>();
+    Iterable<ProductsEntity> iterable = this.productRepository.findByProductCategoryId(productCategoryId);
+    iterable.forEach(productsEntityList::add);
+    return getCollectProduct(productsEntityList);
+  }
 
-    @Override
-    public List<Product> showProductBySubCategoryId(Long productSubCategoryId) {
-        List<ProductsEntity> productsEntityList = new ArrayList<>();
-        Iterable<ProductsEntity> iterable = this.productRepository.findByProductSubcategoryId(productSubCategoryId);
-        iterable.forEach(productsEntityList::add);
-        return getCollectProduct(productsEntityList);
-    }
+  @Override
+  public List<Product> showProductBySubCategoryId(Long productSubCategoryId) {
+    List<ProductsEntity> productsEntityList = new ArrayList<>();
+    Iterable<ProductsEntity> iterable = this.productRepository.findByProductSubcategoryId(productSubCategoryId);
+    iterable.forEach(productsEntityList::add);
+    return getCollectProduct(productsEntityList);
+  }
 
   @Override
   public DefaultProduct showProduct(Long productId) {
@@ -203,9 +203,9 @@ public class DefaultProductService implements ProductService {
 
       this.productRepository.save(productsEntity);
       log.info("Updated " + productsEntity.getProductNameEn() + " product" + new Date());
-        return java.text.MessageFormat.format(returnMessage.getProductUpdateSuccess(), productsEntity.getProductNameEn());
+      return java.text.MessageFormat.format(returnMessage.getProductUpdateSuccess(), productsEntity.getProductNameEn());
     } else {
-        return java.text.MessageFormat.format(returnMessage.getProductUpdateError(), productsEntity.getProductNameEn());
+      return java.text.MessageFormat.format(returnMessage.getProductUpdateError(), productsEntity.getProductNameEn());
     }
   }
 
@@ -213,7 +213,7 @@ public class DefaultProductService implements ProductService {
   public String addPhoto(Long id, MultipartFile file) {
     ProductsEntity productsEntity = this.productRepository.getOne(id);
     if (productsEntity == null)
-        return returnMessage.getProductUpdateError();
+      return returnMessage.getProductUpdateError();
     try {
       String filename = UUID.randomUUID() + "." + FilenameUtils.getExtension(file.getOriginalFilename());
       File transferFile = new File(uploadDir + filename);
@@ -237,46 +237,55 @@ public class DefaultProductService implements ProductService {
   }
 
   @Override
-    public byte[] getPhoto(String name) throws IOException {
-        File file = new File(uploadDir + name);
-        FileInputStream fileInputStream = new FileInputStream(file);
-        return IOUtils.toByteArray(fileInputStream);
-    }
+  public byte[] getPhoto(String name) throws IOException {
+    File file = new File(uploadDir + name);
+    FileInputStream fileInputStream = new FileInputStream(file);
+    return IOUtils.toByteArray(fileInputStream);
+  }
 
   @Override
   public List<Product> getProductsByName(String name) {
     List<ProductsEntity> productsEntityList = productRepository.getProductsByName(name);
 
     return productsEntityList.stream().map(productsEntity ->
-        getProduct(productsEntity)
+      getProduct(productsEntity)
     ).collect(Collectors.toList());
   }
 
-    private DefaultProduct getProduct(ProductsEntity productsEntity) {
-        return DefaultProduct.builder()
-            .productId(productsEntity.getProductId())
-            .productNameKk(productsEntity.getProductNameKk())
-            .productNameRu(productsEntity.getProductNameRu())
-            .productNameEn(productsEntity.getProductNameEn())
-            .productDescription(productsEntity.getProductDescription())
-            .sellerCompanyId(productsEntity.getSellerCompanyId())
-            .manufacturer(productsEntity.getManufacturer())
-            .price(productsEntity.getPrice())
-            .productCategoryId(productsEntity.getProductCategoryId())
-            .productSubcategoryId(productsEntity.getProductSubcategoryId())
-            .size(productsEntity.getSize())
-            .weight(productsEntity.getWeight())
-            .photoUrlsList(productsEntity.getProductsImg())
-            .specialCharacteristicsId(productsEntity.getSpecialCharacteristicId())
-            .serialNumber(productsEntity.getSerialNumber())
-            .uniqueIdNumber(productsEntity.getUniqueIdNumber()).build();
-    }
+  private DefaultProduct getProduct(ProductsEntity productsEntity) {
+    return DefaultProduct.builder()
+      .productId(productsEntity.getProductId())
+      .productNameKk(productsEntity.getProductNameKk())
+      .productNameRu(productsEntity.getProductNameRu())
+      .productNameEn(productsEntity.getProductNameEn())
+      .productDescription(productsEntity.getProductDescription())
+      .sellerCompanyId(productsEntity.getSellerCompanyId())
+      .manufacturer(productsEntity.getManufacturer())
+      .price(productsEntity.getPrice())
+      .productCategoryId(productsEntity.getProductCategoryId())
+      .productSubcategoryId(productsEntity.getProductSubcategoryId())
+      .size(productsEntity.getSize())
+      .weight(productsEntity.getWeight())
+      .photoUrlsList(productsEntity.getProductsImg())
+      .specialCharacteristicsId(productsEntity.getSpecialCharacteristicId())
+      .serialNumber(productsEntity.getSerialNumber())
+      .uniqueIdNumber(productsEntity.getUniqueIdNumber()).build();
+  }
 
-    @Override
+  @Override
   public List<Product> getProductsByCategoryId(Long id) {
     List<ProductsEntity> productsEntityList = productRepository.getProductsByCategoryId(id);
 
     return productsEntityList.stream().map(productsEntity -> getProduct(productsEntity)).collect(Collectors.toList());
+  }
+
+  @Override
+  public List<Product> getProductsByIds(List<Long> ids) {
+    List<Product> products = new ArrayList<>();
+    for (Long id : ids) {
+      products.add(getProduct(productRepository.getOne(id)));
+    }
+    return products;
   }
 
   @Override

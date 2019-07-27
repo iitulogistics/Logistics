@@ -123,4 +123,12 @@ public class DefaultBasketService implements BasketService {
             return  MessageFormat.format(returnMessage.getBasketDeleteError(), basketId);
         }
     }
+
+  @Override
+  public String deleteByLoginId(Long loginId) {
+    for(Basket basket : showBasketByLoginId(loginId)){
+      deleteBasket(basket.getBasketId());
+    }
+    return "Корзина очищена";
+  }
 }
