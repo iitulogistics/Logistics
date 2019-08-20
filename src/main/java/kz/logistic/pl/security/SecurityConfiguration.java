@@ -15,8 +15,8 @@ import javax.sql.DataSource;
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-  @Autowired
-  DataSource repository;
+//  @Autowired
+//  DataSource repository;
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
@@ -25,7 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
       //.antMatchers("/product/add", "/product/addJson").denyAll()
       //.antMatchers("/product/add", "/product/addJson").hasAuthority("sellerCompany")
       .antMatchers("/").permitAll()
-      .antMatchers("/swagger-ui.html").authenticated()
+//      .antMatchers("/swagger-ui.html").authenticated()
       .and()
       .formLogin()
       .permitAll()
@@ -33,14 +33,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
       .addFilterAfter(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
   }
 
-  @Override
-  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.jdbcAuthentication()
-      .dataSource(repository)
-      .passwordEncoder(NoOpPasswordEncoder.getInstance())
-      .usersByUsernameQuery("select username, password, active from login where username=?")
-      .authoritiesByUsernameQuery("select u.username, ur.role_name from login u inner join roles ur on u.roles_id = ur.role_id where u.username=?");
-  }
+//  @Override
+//  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//    auth.jdbcAuthentication()
+//      .dataSource(repository)
+//      .passwordEncoder(NoOpPasswordEncoder.getInstance())
+//      .usersByUsernameQuery("select username, password, active from login where username=?")
+//      .authoritiesByUsernameQuery("select u.username, ur.role_name from login u inner join roles ur on u.roles_id = ur.role_id where u.username=?");
+//  }
   @Bean
   public JwtAuthenticationFilter jwtAuthenticationFilter() {
     return new JwtAuthenticationFilter();

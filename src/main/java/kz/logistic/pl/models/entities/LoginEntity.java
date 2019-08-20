@@ -33,8 +33,8 @@ public class LoginEntity {
   private Long rolesId;
   //  @Column(name = "customer_id")
   //  private Integer customerId;
-  @Column(name = "active")
-  private boolean active;
+//  @Column(name = "active")
+//  private boolean active;
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "seller_company_id")
   private SellerCompanyEntity sellerCompanyEntity;
