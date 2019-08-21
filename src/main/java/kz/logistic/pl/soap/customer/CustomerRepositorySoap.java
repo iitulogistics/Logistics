@@ -26,7 +26,7 @@ public class CustomerRepositorySoap {
   public void initData() {
     List<CustomerEntity> entities = this.customerRepository.findAll();
     entities.forEach(customerEntity -> {
-      Customer customer = convertToCustomerCard(customerEntity);
+      Customer customer = convertToCustomer(customerEntity);
 
       customerMap.put(customer.getCustomerId(), customer);
     });
@@ -53,13 +53,13 @@ public class CustomerRepositorySoap {
 
     customerRepository.save(customerEntity);
 
-    Customer customer = convertToCustomerCard(customerEntity);
+    Customer customer = convertToCustomer(customerEntity);
     customerMap.put(customer.getCustomerId(), customer);
 
     return customer;
 }
 
-  public Customer updateCustomerCard(Long id,
+  public Customer updateCustomer(Long id,
                                      String customerNameEn, String customerNameRu, String customerNameKk,
                                      String addInfo, String email,
                                      String iinOrBin, String mobilePhone, String phoneNumber,
@@ -92,7 +92,7 @@ public class CustomerRepositorySoap {
     }
   }
 
-  private Customer convertToCustomerCard(CustomerEntity entity) {
+  private Customer convertToCustomer(CustomerEntity entity) {
     Customer customer = new Customer();
     customer.setCustomerNameEn(entity.getCustomerNameEn());
     customer.setCustomerNameRu(entity.getCustomerNameRu());

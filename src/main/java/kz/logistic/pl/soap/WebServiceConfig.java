@@ -103,6 +103,16 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     return wsdl11Definition;
   }
 
+  @Bean(name = "order")
+  public DefaultWsdl11Definition defaultWsdl11DefinitionOrder(XsdSchema orderSchema) {
+    DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+    wsdl11Definition.setPortTypeName("OrderPort");
+    wsdl11Definition.setLocationUri("/ws");
+    wsdl11Definition.setTargetNamespace("http://logistic.soap/order");
+    wsdl11Definition.setSchema(orderSchema);
+    return wsdl11Definition;
+  }
+
   @Bean
   public XsdSchema countrySchema() {
     return new SimpleXsdSchema(new ClassPathResource("country.xsd"));
@@ -141,5 +151,10 @@ public class WebServiceConfig extends WsConfigurerAdapter {
   @Bean
   public XsdSchema customerSchema() {
     return new SimpleXsdSchema(new ClassPathResource("customer.xsd"));
+  }
+
+  @Bean
+  public XsdSchema orderSchema() {
+    return new SimpleXsdSchema(new ClassPathResource("order.xsd"));
   }
 }

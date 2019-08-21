@@ -12,14 +12,14 @@ import java.text.ParseException;
 
 @Log
 @Endpoint
-public class CustomerCardEndpoint {
+public class CustomerEndpoint {
 
   private static final String NAMESPACE_URI = "http://logistic.soap/customer";
 
   private CustomerRepositorySoap customerRepositorySoap;
 
   @Autowired
-  public CustomerCardEndpoint(CustomerRepositorySoap customerRepositorySoap) {
+  public CustomerEndpoint(CustomerRepositorySoap customerRepositorySoap) {
     this.customerRepositorySoap = customerRepositorySoap;
   }
 
@@ -56,7 +56,7 @@ public class CustomerCardEndpoint {
   @ResponsePayload
   public UpdateCustomerResponse updateCustomer(@RequestPayload UpdateCustomerRequest request) throws ParseException {
     UpdateCustomerResponse response = new UpdateCustomerResponse();
-    response.setCustomer(customerRepositorySoap.updateCustomerCard(request.getCustomerId(), request.getCustomerNameEn(), request.getCustomerNameRu(),
+    response.setCustomer(customerRepositorySoap.updateCustomer(request.getCustomerId(), request.getCustomerNameEn(), request.getCustomerNameRu(),
       request.getCustomerNameKk(), request.getAddInfo(), request.getEmail(),
       request.getIinOrBin(), request.getMobilePhone(), request.getPhoneNumber(),
       request.getAddressId()));
