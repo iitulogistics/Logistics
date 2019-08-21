@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://logistic.soap/credit_card"
+           targetNamespace="http://logistic.soap/credit_card"
+           elementFormDefault="qualified">
+  <!-- get CreditCard by id -->
+  <xs:element name="getCreditCardIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="getCreditCardIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="credit_card" type="tns:credit_card"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- add CreditCard by id -->
+
+  <xs:element name="addCreditCardRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="creditCardNumber" type="xs:int"/>
+        <xs:element name="holderName" type="xs:string"/>
+        <xs:element name="expireDate" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="addCreditCardResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="credit_card" type="tns:credit_card"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- delete CreditCard by id -->
+
+  <xs:element name="deleteCreditCardIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="deleteCreditCardIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="credit_card" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- update CreditCard -->
+  <xs:element name="updateCreditCardRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ccId" type="xs:long"/>
+        <xs:element name="creditCardNumber" type="xs:int"/>
+        <xs:element name="holderName" type="xs:string"/>
+        <xs:element name="expireDate" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="updateCreditCardResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="credit_card" type="tns:credit_card"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- -->
+
+  <xs:complexType name="credit_card">
+    <xs:sequence>
+      <xs:element name="ccId" type="xs:long"/>
+      <xs:element name="creditCardNumber" type="xs:int"/>
+      <xs:element name="holderName" type="xs:string"/>
+      <xs:element name="expireDate" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

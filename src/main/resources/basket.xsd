@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://logistic.soap/basket"
+           targetNamespace="http://logistic.soap/basket"
+           elementFormDefault="qualified">
+  <!-- get basket by id -->
+  <xs:element name="getBasketIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="getBasketIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="basket" type="tns:basket"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- add basket by id -->
+
+  <xs:element name="addBasketRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="loginId" type="xs:long"/>
+        <xs:element name="productId" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="addBasketResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="basket" type="tns:basket"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- delete basket by id -->
+
+  <xs:element name="deleteBasketIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="deleteBasketIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="basket" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- update Basket -->
+  <xs:element name="updateBasketRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="basketId" type="xs:long"/>
+        <xs:element name="loginId" type="xs:long"/>
+        <xs:element name="productId" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="updateBasketResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="basket" type="tns:basket"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- -->
+
+  <xs:complexType name="basket">
+    <xs:sequence>
+      <xs:element name="basketId" type="xs:long"/>
+      <xs:element name="loginId" type="xs:long"/>
+      <xs:element name="productId" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

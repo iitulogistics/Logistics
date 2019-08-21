@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://logistic.soap/customer"
+           targetNamespace="http://logistic.soap/customer"
+           elementFormDefault="qualified">
+  <!-- get customer by id -->
+  <xs:element name="getCustomerIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="getCustomerIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="customer" type="tns:customer"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- add customer by id -->
+
+  <xs:element name="addCustomerRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="customerNameKk" type="xs:string"/>
+        <xs:element name="customerNameRu" type="xs:string"/>
+        <xs:element name="customerNameEn" type="xs:string"/>
+        <xs:element name="iinOrBin" type="xs:string"/>
+        <xs:element name="mobilePhone" type="xs:string"/>
+        <xs:element name="phoneNumber" type="xs:string"/>
+        <xs:element name="email" type="xs:string"/>
+        <xs:element name="addInfo" type="xs:string"/>
+        <xs:element name="addressId" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="addCustomerResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="customer" type="tns:customer"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- delete customer by id -->
+
+  <xs:element name="deleteCustomerIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="deleteCustomerIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="customer" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- update customer -->
+  <xs:element name="updateCustomerRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="customerId" type="xs:long"/>
+        <xs:element name="customerNameKk" type="xs:string"/>
+        <xs:element name="customerNameRu" type="xs:string"/>
+        <xs:element name="customerNameEn" type="xs:string"/>
+        <xs:element name="iinOrBin" type="xs:string"/>
+        <xs:element name="mobilePhone" type="xs:string"/>
+        <xs:element name="phoneNumber" type="xs:string"/>
+        <xs:element name="email" type="xs:string"/>
+        <xs:element name="addInfo" type="xs:string"/>
+        <xs:element name="addressId" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="updateCustomerResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="customer" type="tns:customer"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- customer -->
+
+  <xs:complexType name="customer">
+    <xs:sequence>
+      <xs:element name="customerId" type="xs:long"/>
+      <xs:element name="customerNameKk" type="xs:string"/>
+      <xs:element name="customerNameRu" type="xs:string"/>
+      <xs:element name="customerNameEn" type="xs:string"/>
+      <xs:element name="iinOrBin" type="xs:string"/>
+      <xs:element name="mobilePhone" type="xs:string"/>
+      <xs:element name="phoneNumber" type="xs:string"/>
+      <xs:element name="email" type="xs:string"/>
+      <xs:element name="addInfo" type="xs:string"/>
+      <xs:element name="addressId" type="xs:long"/>
+<!--      <xs:element name="login" type=""/>-->
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

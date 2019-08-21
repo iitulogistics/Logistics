@@ -14,13 +14,8 @@ public interface CityRepository extends JpaRepository<CityEntity, Long> {
   @Query("select c from CityEntity c where c.countryId = ?1 and c.cityNameEn = ?2")
   ArrayList<CityEntity> checkCityInCountry(Long countryId, String cityNameEn);
 
-
-
-
-    @Modifying(clearAutomatically = true)
-    @Transactional
-    @Query("update CityEntity c set c.cityNameEn = ?2, " + "c.cityNameRu = ?3, c.cityNameKk = ?4 where c.cityId = ?1")
-    void updateCityById(Long id, String nameKk, String nameRu, String nameEn);
-
-
+  @Modifying(clearAutomatically = true)
+  @Transactional
+  @Query("update CityEntity c set c.cityNameEn = ?2, " + "c.cityNameRu = ?3, c.cityNameKk = ?4 where c.cityId = ?1")
+  void updateCityById(Long id, String nameKk, String nameRu, String nameEn);
 }

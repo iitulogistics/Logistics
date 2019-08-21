@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://logistic.soap/address"
+           targetNamespace="http://logistic.soap/address"
+           elementFormDefault="qualified">
+  <!-- get address by id -->
+  <xs:element name="getAddressIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="getAddressIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="address" type="tns:address"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- add address by id -->
+
+  <xs:element name="addAddressRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="districtId" type="xs:long"/>
+        <xs:element name="ihnLocalityId" type="xs:long"/>
+        <xs:element name="streetNameKk" type="xs:string"/>
+        <xs:element name="streetNameRu" type="xs:string"/>
+        <xs:element name="streetNameEn" type="xs:string"/>
+        <xs:element name="buildingNumber" type="xs:string"/>
+        <xs:element name="flatNumber" type="xs:string"/>
+        <xs:element name="zipCode" type="xs:string"/>
+        <xs:element name="addressAssign" type="xs:int"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="addAddressResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="address" type="tns:address"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- delete address by id -->
+
+  <xs:element name="deleteAddressIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="deleteAddressIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="address" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- update Address -->
+  <xs:element name="updateAddressRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+        <xs:element name="districtId" type="xs:long"/>
+        <xs:element name="ihnLocalityId" type="xs:long"/>
+        <xs:element name="streetNameKk" type="xs:string"/>
+        <xs:element name="streetNameRu" type="xs:string"/>
+        <xs:element name="streetNameEn" type="xs:string"/>
+        <xs:element name="buildingNumber" type="xs:string"/>
+        <xs:element name="flatNumber" type="xs:string"/>
+        <xs:element name="zipCode" type="xs:string"/>
+        <xs:element name="addressAssign" type="xs:int"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="updateAddressResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="address" type="tns:address"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- -->
+
+  <xs:complexType name="address">
+    <xs:sequence>
+      <xs:element name="addressId" type="xs:long"/>
+      <xs:element name="districtId" type="xs:long"/>
+      <xs:element name="ihnLocalityId" type="xs:long"/>
+      <xs:element name="streetNameKk" type="xs:string"/>
+      <xs:element name="streetNameRu" type="xs:string"/>
+      <xs:element name="streetNameEn" type="xs:string"/>
+      <xs:element name="buildingNumber" type="xs:string"/>
+      <xs:element name="flatNumber" type="xs:string"/>
+      <xs:element name="zipCode" type="xs:string"/>
+      <xs:element name="addressAssign" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
