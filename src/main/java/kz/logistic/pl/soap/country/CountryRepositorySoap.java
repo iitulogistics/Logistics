@@ -84,9 +84,9 @@ public class CountryRepositorySoap {
     CountryEntity countryEntity = this.repository.findById(id).orElse(null);
     if (countryEntity != null) {
       this.repository.deleteById(id);
-      return "Id" + id + " удалена из базы данных";
+      return "Id " + id + " удалена из базы данных";
     } else {
-      return "Id" + id + " не удалена из базы данных";
+      return "Id " + id + " не удалена из базы данных";
     }
   }
 }

@@ -66,9 +66,9 @@ public class BasketRepositorySoap {
 
     if (basketEntity != null) {
       this.basketRepository.deleteById(id);
-      return "id" + id + "удалён";
+      return "id " + id + " удалён";
     } else {
-      return "id" + id + "не удалён";
+      return "id " + id + " не удалён";
     }
   }
 

@@ -81,10 +81,10 @@ public class RegionRepositorySoap {
 
         if(regionEntity != null){
             this.regionRepository.deleteById(id);
-            return "регион" + id + "удалён";
+            return "регион " + id + " удалён";
         }
         else{
-            return "регион" + id + "не удалён";
+            return "регион " + id + " не удалён";
         }
     }
 

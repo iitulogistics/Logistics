@@ -88,10 +88,10 @@ public class CityRepositorySoap {
 
         if(cityEntity != null){
             this.cityRepo.deleteById(id);
-            return "id" + id + "удалён";
+            return "id " + id + " удалён";
         }
         else{
-            return "id" + id + "не удалён";
+            return "id " + id + " не удалён";
         }
     }
 

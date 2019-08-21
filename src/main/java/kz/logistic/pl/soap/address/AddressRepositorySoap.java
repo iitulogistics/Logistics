@@ -95,9 +95,9 @@ public class AddressRepositorySoap {
 
     if (addressesEntity != null) {
       this.addressRepository.deleteById(id);
-      return "id" + id + "удалён";
+      return "id " + id + " удалён";
     } else {
-      return "id" + id + "не удалён";
+      return "id " + id + " не удалён";
     }
   }
 

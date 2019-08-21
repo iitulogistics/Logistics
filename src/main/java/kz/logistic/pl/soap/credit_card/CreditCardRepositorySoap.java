@@ -75,9 +75,9 @@ public class CreditCardRepositorySoap {
 
     if (creditCardEntity != null) {
       this.creditCardRepository.deleteById(id);
-      return "id" + id + "удалён";
+      return "id " + id + " удалён";
     } else {
-      return "id" + id + "не удалён";
+      return "id " + id + " не удалён";
     }
   }
 
