@@ -113,6 +113,73 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     return wsdl11Definition;
   }
 
+  @Bean(name = "otp")
+  public DefaultWsdl11Definition defaultWsdl11DefinitionOtp(XsdSchema otpSchema) {
+    DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+    wsdl11Definition.setPortTypeName("OtpPort");
+    wsdl11Definition.setLocationUri("/ws");
+    wsdl11Definition.setTargetNamespace("http://logistic.soap/otp");
+    wsdl11Definition.setSchema(otpSchema);
+    return wsdl11Definition;
+  }
+
+  @Bean(name = "payment")
+  public DefaultWsdl11Definition defaultWsdl11DefinitionPayment(XsdSchema paymentSchema) {
+    DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+    wsdl11Definition.setPortTypeName("PaymentPort");
+    wsdl11Definition.setLocationUri("/ws");
+    wsdl11Definition.setTargetNamespace("http://logistic.soap/payment");
+    wsdl11Definition.setSchema(paymentSchema);
+    return wsdl11Definition;
+  }
+
+  @Bean(name = "product")
+  public DefaultWsdl11Definition defaultWsdl11DefinitionProduct(XsdSchema productSchema) {
+    DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+    wsdl11Definition.setPortTypeName("ProductPort");
+    wsdl11Definition.setLocationUri("/ws");
+    wsdl11Definition.setTargetNamespace("http://logistic.soap/product");
+    wsdl11Definition.setSchema(productSchema);
+    return wsdl11Definition;
+  }
+
+  @Bean(name = "product_category")
+  public DefaultWsdl11Definition defaultWsdl11DefinitionProductCategory(XsdSchema productCategorySchema) {
+    DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+    wsdl11Definition.setPortTypeName("ProductCategoryPort");
+    wsdl11Definition.setLocationUri("/ws");
+    wsdl11Definition.setTargetNamespace("http://logistic.soap/product_category");
+    wsdl11Definition.setSchema(productCategorySchema);
+    return wsdl11Definition;
+  }
+  @Bean(name = "product_subcategory")
+  public DefaultWsdl11Definition defaultWsdl11DefinitionProductSubCategory(XsdSchema productSubCategorySchema) {
+    DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+    wsdl11Definition.setPortTypeName("ProductSubCategoryPort");
+    wsdl11Definition.setLocationUri("/ws");
+    wsdl11Definition.setTargetNamespace("http://logistic.soap/product_subcategory");
+    wsdl11Definition.setSchema(productSubCategorySchema);
+    return wsdl11Definition;
+  }
+  @Bean(name = "seller_category")
+  public DefaultWsdl11Definition defaultWsdl11DefinitionSellerCategory(XsdSchema sellerCategorySchema) {
+    DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+    wsdl11Definition.setPortTypeName("SellerCategoryPort");
+    wsdl11Definition.setLocationUri("/ws");
+    wsdl11Definition.setTargetNamespace("http://logistic.soap/seller_category");
+    wsdl11Definition.setSchema(sellerCategorySchema);
+    return wsdl11Definition;
+  }
+
+  @Bean(name = "seller_company")
+  public DefaultWsdl11Definition defaultWsdl11DefinitionSellerCompany(XsdSchema sellerCompanySchema) {
+    DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+    wsdl11Definition.setPortTypeName("SellerCompanyPort");
+    wsdl11Definition.setLocationUri("/ws");
+    wsdl11Definition.setTargetNamespace("http://logistic.soap/seller_company");
+    wsdl11Definition.setSchema(sellerCompanySchema);
+    return wsdl11Definition;
+  }
   @Bean
   public XsdSchema countrySchema() {
     return new SimpleXsdSchema(new ClassPathResource("country.xsd"));
@@ -156,5 +223,37 @@ public class WebServiceConfig extends WsConfigurerAdapter {
   @Bean
   public XsdSchema orderSchema() {
     return new SimpleXsdSchema(new ClassPathResource("order.xsd"));
+  }
+
+  @Bean
+  public XsdSchema otpSchema() {
+    return new SimpleXsdSchema(new ClassPathResource("otp.xsd"));
+  }
+
+  @Bean
+  public XsdSchema paymentSchema() {
+    return new SimpleXsdSchema(new ClassPathResource("payment.xsd"));
+  }
+
+  @Bean
+  public XsdSchema productSchema() {
+    return new SimpleXsdSchema(new ClassPathResource("product.xsd"));
+  }
+
+  @Bean
+  public XsdSchema productCategorySchema() {
+    return new SimpleXsdSchema(new ClassPathResource("product_category.xsd"));
+  }
+  @Bean
+  public XsdSchema productSubCategorySchema() {
+    return new SimpleXsdSchema(new ClassPathResource("product_subcategory.xsd"));
+  }
+  @Bean
+  public XsdSchema sellerCategorySchema() {
+    return new SimpleXsdSchema(new ClassPathResource("seller_category.xsd"));
+  }
+  @Bean
+  public XsdSchema sellerCompanySchema() {
+    return new SimpleXsdSchema(new ClassPathResource("seller_company.xsd"));
   }
 }
