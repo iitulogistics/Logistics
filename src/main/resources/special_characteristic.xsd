@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://logistic.soap/special_characteristics"
+           targetNamespace="http://logistic.soap/special_characteristics"
+           elementFormDefault="qualified">
+  <!-- get special characteristics by id -->
+  <xs:element name="getSpecialCharacteristicsIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="getSpecialCharacteristicsIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="special_characteristics" type="tns:special_characteristics"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- add special characteristics by id -->
+
+  <xs:element name="addSpecialCharacteristicsRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="characteristicsNameKk" type="xs:string"/>
+        <xs:element name="characteristicsNameRu" type="xs:string"/>
+        <xs:element name="characteristicsNameEn" type="xs:string"/>
+        <xs:element name="addInfo" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="addSpecialCharacteristicsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="special_characteristics" type="tns:special_characteristics"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- delete special characteristics by id -->
+
+  <xs:element name="deleteSpecialCharacteristicsIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="deleteSpecialCharacteristicsIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="special_characteristics" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- update special characteristics -->
+  <xs:element name="updateSpecialCharacteristicsRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="specialCharacteristicId" type="xs:long"/>
+        <xs:element name="characteristicsNameKk" type="xs:string"/>
+        <xs:element name="characteristicsNameRu" type="xs:string"/>
+        <xs:element name="characteristicsNameEn" type="xs:string"/>
+        <xs:element name="addInfo" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="updateSpecialCharacteristicsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="special_characteristics" type="tns:special_characteristics"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- special characteristics -->
+
+  <xs:complexType name="special_characteristics">
+    <xs:sequence>
+      <xs:element name="specialCharacteristicId" type="xs:long"/>
+      <xs:element name="characteristicsNameKk" type="xs:string"/>
+      <xs:element name="characteristicsNameRu" type="xs:string"/>
+      <xs:element name="characteristicsNameEn" type="xs:string"/>
+      <xs:element name="addInfo" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

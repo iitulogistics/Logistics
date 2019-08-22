@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://logistic.soap/shipper"
+           targetNamespace="http://logistic.soap/shipper"
+           elementFormDefault="qualified">
+  <!-- get shipper by id -->
+  <xs:element name="getShipperIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="getShipperIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="shipper" type="tns:shipper"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- add shipper by id -->
+
+  <xs:element name="addShipperRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="shipperId" type="xs:long"/>
+        <xs:element name="shipperNameKk" type="xs:string"/>
+        <xs:element name="shipperNameRu" type="xs:string"/>
+        <xs:element name="shipperNameEn" type="xs:string"/>
+        <xs:element name="phoneNumber" type="xs:string"/>
+        <xs:element name="mobilePhone" type="xs:string"/>
+        <xs:element name="bin" type="xs:string"/>
+        <xs:element name="email" type="xs:string"/>
+        <xs:element name="address" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="addShipperResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="shipper" type="tns:shipper"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- delete shipper by id -->
+
+  <xs:element name="deleteShipperIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="deleteShipperIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="shipper" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- update shipper -->
+  <xs:element name="updateShipperRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="shipperId" type="xs:long"/>
+        <xs:element name="shipperNameKk" type="xs:string"/>
+        <xs:element name="shipperNameRu" type="xs:string"/>
+        <xs:element name="shipperNameEn" type="xs:string"/>
+        <xs:element name="phoneNumber" type="xs:string"/>
+        <xs:element name="mobilePhone" type="xs:string"/>
+        <xs:element name="bin" type="xs:string"/>
+        <xs:element name="email" type="xs:string"/>
+        <xs:element name="address" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="updateShipperResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="shipper" type="tns:shipper"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- shipper -->
+
+  <xs:complexType name="shipper">
+    <xs:sequence>
+      <xs:element name="shipperId" type="xs:long"/>
+      <xs:element name="shipperNameKk" type="xs:string"/>
+      <xs:element name="shipperNameRu" type="xs:string"/>
+      <xs:element name="shipperNameEn" type="xs:string"/>
+      <xs:element name="phoneNumber" type="xs:string"/>
+      <xs:element name="mobilePhone" type="xs:string"/>
+      <xs:element name="bin" type="xs:string"/>
+      <xs:element name="email" type="xs:string"/>
+      <xs:element name="address" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

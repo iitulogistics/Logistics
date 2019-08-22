@@ -152,6 +152,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     wsdl11Definition.setSchema(productCategorySchema);
     return wsdl11Definition;
   }
+
   @Bean(name = "product_subcategory")
   public DefaultWsdl11Definition defaultWsdl11DefinitionProductSubCategory(XsdSchema productSubCategorySchema) {
     DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
@@ -161,6 +162,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     wsdl11Definition.setSchema(productSubCategorySchema);
     return wsdl11Definition;
   }
+
   @Bean(name = "seller_category")
   public DefaultWsdl11Definition defaultWsdl11DefinitionSellerCategory(XsdSchema sellerCategorySchema) {
     DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
@@ -177,6 +179,26 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     wsdl11Definition.setPortTypeName("SellerCompanyPort");
     wsdl11Definition.setLocationUri("/ws");
     wsdl11Definition.setTargetNamespace("http://logistic.soap/seller_company");
+    wsdl11Definition.setSchema(sellerCompanySchema);
+    return wsdl11Definition;
+  }
+
+  @Bean(name = "shipper")
+  public DefaultWsdl11Definition defaultWsdl11DefinitionShipper(XsdSchema shipperSchema) {
+    DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+    wsdl11Definition.setPortTypeName("ShipperPort");
+    wsdl11Definition.setLocationUri("/ws");
+    wsdl11Definition.setTargetNamespace("http://logistic.soap/shipper");
+    wsdl11Definition.setSchema(shipperSchema);
+    return wsdl11Definition;
+  }
+
+  @Bean(name = "special_characteristic")
+  public DefaultWsdl11Definition defaultWsdl11DefinitionSpecialCharacteristic(XsdSchema sellerCompanySchema) {
+    DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+    wsdl11Definition.setPortTypeName("SpecialCharacteristicPort");
+    wsdl11Definition.setLocationUri("/ws");
+    wsdl11Definition.setTargetNamespace("http://logistic.soap/special_characteristic");
     wsdl11Definition.setSchema(sellerCompanySchema);
     return wsdl11Definition;
   }
@@ -244,16 +266,29 @@ public class WebServiceConfig extends WsConfigurerAdapter {
   public XsdSchema productCategorySchema() {
     return new SimpleXsdSchema(new ClassPathResource("product_category.xsd"));
   }
+
   @Bean
   public XsdSchema productSubCategorySchema() {
     return new SimpleXsdSchema(new ClassPathResource("product_subcategory.xsd"));
   }
+
   @Bean
   public XsdSchema sellerCategorySchema() {
     return new SimpleXsdSchema(new ClassPathResource("seller_category.xsd"));
   }
+
   @Bean
   public XsdSchema sellerCompanySchema() {
     return new SimpleXsdSchema(new ClassPathResource("seller_company.xsd"));
+  }
+
+  @Bean
+  public XsdSchema shipperSchema() {
+    return new SimpleXsdSchema(new ClassPathResource("shipper.xsd"));
+  }
+
+  @Bean
+  public XsdSchema specialCharacteristicSchema() {
+    return new SimpleXsdSchema(new ClassPathResource("special_characteristic.xsd"));
   }
 }

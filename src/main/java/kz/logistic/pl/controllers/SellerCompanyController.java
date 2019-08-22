@@ -13,73 +13,75 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/seller/company")
 public class SellerCompanyController {
-    private SellerCompanyService sellerCompanyService;
+  private SellerCompanyService sellerCompanyService;
 
 
-    @Qualifier("defaultSellerCompanyService")
-    @Autowired(required = false)
-    public void setSellerCompanyService(SellerCompanyService sellerCompanyService) {
-        this.sellerCompanyService = sellerCompanyService;
-    }
+  @Qualifier("defaultSellerCompanyService")
+  @Autowired(required = false)
+  public void setSellerCompanyService(SellerCompanyService sellerCompanyService) {
+    this.sellerCompanyService = sellerCompanyService;
+  }
 
-    @ApiOperation(value = "Показывает всю компанию продавцов")
-    @GetMapping("/all")
-    public ResponseEntity<?> all() {
-        return ResponseEntity.ok(this.sellerCompanyService.showAllSellerCompanies());
-    }
+  @ApiOperation(value = "Показывает всю компанию продавцов")
+  @GetMapping("/all")
+  public ResponseEntity<?> all() {
+    return ResponseEntity.ok(this.sellerCompanyService.showAllSellerCompanies());
+  }
 
-    @ApiOperation(value = "Показывает компанию продавцов ID")
-    @GetMapping("{id}")
-    public ResponseEntity<?> getId(@PathVariable(value = "id") Long sellerCompanyId) {
-        return ResponseEntity.ok(this.sellerCompanyService.showSellerCompany(sellerCompanyId));
-    }
+  @ApiOperation(value = "Показывает компанию продавцов ID")
+  @GetMapping("{id}")
+  public ResponseEntity<?> getId(@PathVariable(value = "id") Long sellerCompanyId) {
+    return ResponseEntity.ok(this.sellerCompanyService.showSellerCompany(sellerCompanyId));
+  }
 
-    @ApiOperation(value = "Добавляет новую компанию продавца")
-    @PostMapping("/add")
-    public ResponseEntity<?> add(
-        @RequestParam String sellerCompanyNameRu,
-        @RequestParam(required = false) String sellerCompanyNameKk,
-        @RequestParam(required = false) String sellerCompanyNameEn,
-        @RequestParam String sellerCompanyPhone,
-        @RequestParam String sellerCompanyMobilePhone,
-        @RequestParam String sellerCompanyBin,
-        @RequestParam String sellerCompanyEmail,
-        @RequestParam String username,
-        @RequestParam String password) {
-        return ResponseEntity.ok(this.sellerCompanyService.addSellerCompany(
-            sellerCompanyNameKk,
-            sellerCompanyNameRu,
-            sellerCompanyNameEn,
-            sellerCompanyPhone,
-            sellerCompanyMobilePhone,
-            sellerCompanyBin,
-            sellerCompanyEmail,
-            username,
-            password));
-    }
-
-
-    @ApiOperation(value = "Добавляет новую компанию продавца посредством JSON")
-    @RequestMapping(value = "/addJson", method = RequestMethod.POST)
-    public ResponseEntity<?> addJson(
-        @RequestBody SellerCompanyJson sellerCompanyJson
-    ) {
-        return ResponseEntity.ok(this.sellerCompanyService.addSellerCompanyJson(sellerCompanyJson));
-    }
-
-    @ApiOperation(value = "Обновляет компанию продавца")
-    @PatchMapping("{id}")
-    public ResponseEntity<?> update(
-        @PathVariable(value = "id") Long sellerCompanyid,
-        @RequestBody SellerCompanyJson sellerCompanyJson) {
-        return ResponseEntity.ok(this.sellerCompanyService.updateSellerCompany(sellerCompanyid, sellerCompanyJson));
-    }
+  @ApiOperation(value = "Добавляет новую компанию продавца")
+  @PostMapping("/add")
+  public ResponseEntity<?> add(
+    @RequestParam String sellerCompanyNameRu,
+    @RequestParam(required = false) String sellerCompanyNameKk,
+    @RequestParam(required = false) String sellerCompanyNameEn,
+    @RequestParam String sellerCompanyPhone,
+    @RequestParam String sellerCompanyMobilePhone,
+    @RequestParam String sellerCompanyBin,
+    @RequestParam String sellerCompanyEmail,
+    @RequestParam String username,
+    @RequestParam String password,
+    @RequestParam Long sellerCompanyCategoryId) {
+    return ResponseEntity.ok(this.sellerCompanyService.addSellerCompany(
+      sellerCompanyNameKk,
+      sellerCompanyNameRu,
+      sellerCompanyNameEn,
+      sellerCompanyPhone,
+      sellerCompanyMobilePhone,
+      sellerCompanyBin,
+      sellerCompanyEmail,
+      username,
+      password,
+      sellerCompanyCategoryId));
+  }
 
 
-    @ApiOperation(value = "Удаляет компанию продавца")
-    @DeleteMapping("{id}")
-    public ResponseEntity<?> delete(@PathVariable(value = "id") Long sellerCompanyId) {
-        return ResponseEntity.ok(this.sellerCompanyService.deleteSellerCompany(sellerCompanyId));
-    }
+  @ApiOperation(value = "Добавляет новую компанию продавца посредством JSON")
+  @RequestMapping(value = "/addJson", method = RequestMethod.POST)
+  public ResponseEntity<?> addJson(
+    @RequestBody SellerCompanyJson sellerCompanyJson
+  ) {
+    return ResponseEntity.ok(this.sellerCompanyService.addSellerCompanyJson(sellerCompanyJson));
+  }
+
+  @ApiOperation(value = "Обновляет компанию продавца")
+  @PatchMapping("{id}")
+  public ResponseEntity<?> update(
+    @PathVariable(value = "id") Long sellerCompanyid,
+    @RequestBody SellerCompanyJson sellerCompanyJson) {
+    return ResponseEntity.ok(this.sellerCompanyService.updateSellerCompany(sellerCompanyid, sellerCompanyJson));
+  }
+
+
+  @ApiOperation(value = "Удаляет компанию продавца")
+  @DeleteMapping("{id}")
+  public ResponseEntity<?> delete(@PathVariable(value = "id") Long sellerCompanyId) {
+    return ResponseEntity.ok(this.sellerCompanyService.deleteSellerCompany(sellerCompanyId));
+  }
 
 }
