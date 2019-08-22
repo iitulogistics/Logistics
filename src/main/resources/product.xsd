@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://logistic.soap/product"
+           targetNamespace="http://logistic.soap/product"
+           elementFormDefault="qualified">
+  <!-- get product by id -->
+  <xs:element name="getProductIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="getProductIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="product" type="tns:product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- add product by id -->
+
+  <xs:element name="addProductRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="productNameKk" type="xs:string"/>
+        <xs:element name="productNameRu" type="xs:string"/>
+        <xs:element name="productNameEn" type="xs:string"/>
+        <xs:element name="productSubcategoryId" type="xs:long"/>
+        <xs:element name="productCategoryId" type="xs:long"/>
+        <xs:element name="uniqueIdNumber" type="xs:string"/>
+        <xs:element name="serialNumber" type="xs:string"/>
+        <xs:element name="manufacturer" type="xs:string"/>
+        <xs:element name="size" type="xs:string"/>
+        <xs:element name="weight" type="xs:int"/>
+        <xs:element name="price" type="xs:int"/>
+        <xs:element name="productDescription" type="xs:string"/>
+        <xs:element name="sellerCompanyId" type="xs:long"/>
+        <xs:element name="specialCharacteristicId" type="xs:long"/>
+        <xs:element name="productsImg" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="addProductResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="product" type="tns:product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- delete product by id -->
+
+  <xs:element name="deleteProductIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="deleteProductIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="product" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- update product -->
+  <xs:element name="updateProductRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="productId" type="xs:long"/>
+        <xs:element name="productNameKk" type="xs:string"/>
+        <xs:element name="productNameRu" type="xs:string"/>
+        <xs:element name="productNameEn" type="xs:string"/>
+        <xs:element name="productSubcategoryId" type="xs:long"/>
+        <xs:element name="productCategoryId" type="xs:long"/>
+        <xs:element name="uniqueIdNumber" type="xs:string"/>
+        <xs:element name="serialNumber" type="xs:string"/>
+        <xs:element name="manufacturer" type="xs:string"/>
+        <xs:element name="size" type="xs:string"/>
+        <xs:element name="weight" type="xs:int"/>
+        <xs:element name="price" type="xs:int"/>
+        <xs:element name="productDescription" type="xs:string"/>
+        <xs:element name="sellerCompanyId" type="xs:long"/>
+        <xs:element name="specialCharacteristicId" type="xs:long"/>
+        <xs:element name="productsImg" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="updateProductResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="product" type="tns:product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- product -->
+
+  <xs:complexType name="product">
+    <xs:sequence>
+      <xs:element name="productId" type="xs:long"/>
+      <xs:element name="productNameKk" type="xs:string"/>
+      <xs:element name="productNameRu" type="xs:string"/>
+      <xs:element name="productNameEn" type="xs:string"/>
+      <xs:element name="productSubcategoryId" type="xs:long"/>
+      <xs:element name="productCategoryId" type="xs:long"/>
+      <xs:element name="uniqueIdNumber" type="xs:string"/>
+      <xs:element name="serialNumber" type="xs:string"/>
+      <xs:element name="manufacturer" type="xs:string"/>
+      <xs:element name="size" type="xs:string"/>
+      <xs:element name="weight" type="xs:int"/>
+      <xs:element name="price" type="xs:int"/>
+      <xs:element name="productDescription" type="xs:string"/>
+      <xs:element name="sellerCompanyId" type="xs:long"/>
+      <xs:element name="specialCharacteristicId" type="xs:long"/>
+      <xs:element name="productsImg" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

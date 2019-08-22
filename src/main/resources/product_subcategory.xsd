@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://logistic.soap/product_subcategory"
+           targetNamespace="http://logistic.soap/product_subcategory"
+           elementFormDefault="qualified">
+  <!-- get product subcategory by id -->
+  <xs:element name="getProductSubcategoryIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="getProductSubcategoryIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="product_subcategory" type="tns:product_subcategory"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- add product subcategory by id -->
+
+  <xs:element name="addProductSubcategoryRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="categoryNameKk" type="xs:string"/>
+        <xs:element name="categoryNameRu" type="xs:string"/>
+        <xs:element name="categoryNameEn" type="xs:string"/>
+        <xs:element name="productCategoryId" type="xs:long"/>
+        <xs:element name="subCategoryAddInfo" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="addProductSubcategoryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="product_subcategory" type="tns:product_subcategory"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- delete product subcategory by id -->
+
+  <xs:element name="deleteProductSubcategoryIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="deleteProductSubcategoryIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="product_subcategory" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- update product subcategory -->
+  <xs:element name="updateProductSubcategoryRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="productSubcategoryId" type="xs:long"/>
+        <xs:element name="categoryNameKk" type="xs:string"/>
+        <xs:element name="categoryNameRu" type="xs:string"/>
+        <xs:element name="categoryNameEn" type="xs:string"/>
+        <xs:element name="productCategoryId" type="xs:long"/>
+        <xs:element name="subCategoryAddInfo" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="updateProductSubcategoryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="product_subcategory" type="tns:product_subcategory"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- product -->
+
+  <xs:complexType name="product_subcategory">
+    <xs:sequence>
+      <xs:element name="productSubcategoryId" type="xs:long"/>
+      <xs:element name="categoryNameKk" type="xs:string"/>
+      <xs:element name="categoryNameRu" type="xs:string"/>
+      <xs:element name="categoryNameEn" type="xs:string"/>
+      <xs:element name="productCategoryId" type="xs:long"/>
+      <xs:element name="subCategoryAddInfo" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

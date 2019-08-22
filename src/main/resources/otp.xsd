@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://logistic.soap/otp"
+           targetNamespace="http://logistic.soap/otp"
+           elementFormDefault="qualified">
+  <!-- get otp by id -->
+  <xs:element name="getOptIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="getOtpIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="otp" type="tns:otp"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- add otp by id -->
+
+  <xs:element name="addOtpRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="mobilePhone" type="xs:string"/>
+        <xs:element name="otp" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="addOtpResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="otp" type="tns:otp"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- delete otp by id -->
+
+  <xs:element name="deleteOtpIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="deleteOtpIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="otp" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- update otp -->
+  <xs:element name="updateOtpRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+        <xs:element name="mobilePhone" type="xs:string"/>
+        <xs:element name="otp" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="updateOtpResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="otp" type="tns:otp"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- otp -->
+
+  <xs:complexType name="otp">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element name="mobilePhone" type="xs:string"/>
+      <xs:element name="otp" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://logistic.soap/payment"
+           targetNamespace="http://logistic.soap/payment"
+           elementFormDefault="qualified">
+  <!-- get payment by id -->
+  <xs:element name="getPaymentIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="getPaymentIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="payment" type="tns:payment"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- add payment by id -->
+
+  <xs:element name="addPaymentRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="paymentAmount" type="xs:int"/>
+        <xs:element name="paymentState" type="xs:int"/>
+        <xs:element name="timestamp" type="xs:string"/>
+        <xs:element name="orderId" type="xs:long"/>
+        <xs:element name="ccId" type="xs:long"/>
+        <xs:element name="paymentStatus" type="xs:int"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="addPaymentResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="payment" type="tns:payment"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- delete payment by id -->
+
+  <xs:element name="deletePaymentIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="deletePaymentIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="payment" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- update payment -->
+  <xs:element name="updatePaymentRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="paymentId" type="xs:long"/>
+        <xs:element name="paymentAmount" type="xs:int"/>
+        <xs:element name="paymentState" type="xs:int"/>
+        <xs:element name="timestamp" type="xs:string"/>
+        <xs:element name="orderId" type="xs:long"/>
+        <xs:element name="ccId" type="xs:long"/>
+        <xs:element name="paymentStatus" type="xs:int"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="updatePaymentResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="payment" type="tns:payment"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- payment -->
+
+  <xs:complexType name="payment">
+    <xs:sequence>
+      <xs:element name="paymentId" type="xs:long"/>
+      <xs:element name="paymentAmount" type="xs:int"/>
+      <xs:element name="paymentState" type="xs:int"/>
+      <xs:element name="timestamp" type="xs:string"/>
+      <xs:element name="orderId" type="xs:long"/>
+      <xs:element name="ccId" type="xs:long"/>
+      <xs:element name="paymentStatus" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

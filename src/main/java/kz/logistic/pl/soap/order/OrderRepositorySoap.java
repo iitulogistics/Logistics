@@ -46,7 +46,7 @@ public class OrderRepositorySoap {
     ordersEntity.setCustomerId(customerId);
     ordersEntity.setDeliveringStatus(deliveringStatus);
     ordersEntity.setOrderAmount(orderAmount);
-    ordersEntity.setOrderDate(new SimpleDateFormat().parse(orderDate));
+    ordersEntity.setOrderDate(new SimpleDateFormat("yyyy-MM-dd").parse(orderDate));
     ordersEntity.setOrderNumber(orderNumber);
     ordersEntity.setProductAmount(productAmount);
     ordersEntity.setProductId(productId);
@@ -81,7 +81,7 @@ public class OrderRepositorySoap {
     order.setProductCount(productCount);
 
     ordersRepository.updateOrderById(id, customerId, deliveringStatus, orderAmount,
-      new SimpleDateFormat().parse(orderDate), orderNumber, productAmount, productId, sellerCompanyId,
+      new SimpleDateFormat("yyyy-MM-dd").parse(orderDate), orderNumber, productAmount, productId, sellerCompanyId,
       totalPrice, unitPrice, productCount);
     return order;
   }

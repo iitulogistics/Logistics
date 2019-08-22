@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://logistic.soap/seller_company"
+           targetNamespace="http://logistic.soap/seller_company"
+           elementFormDefault="qualified">
+  <!-- get seller_company by id -->
+  <xs:element name="getSellerCompanyIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="getSellerCompanyIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="seller_company" type="tns:seller_company"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- add seller_company by id -->
+
+  <xs:element name="addSellerCompanyRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="companyNameKk" type="xs:string"/>
+        <xs:element name="companyNameRu" type="xs:string"/>
+        <xs:element name="companyNameEn" type="xs:string"/>
+        <xs:element name="phone" type="xs:string"/>
+        <xs:element name="mobilePhone" type="xs:string"/>
+        <xs:element name="bin" type="xs:string"/>
+        <xs:element name="email" type="xs:string"/>
+        <xs:element name="sellerCategoryId" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="addSellerCompanyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="seller_company" type="tns:seller_company"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- delete seller_company by id -->
+
+  <xs:element name="deleteSellerCompanyIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="deleteSellerCompanyIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="seller_company" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- update seller_company -->
+  <xs:element name="updateSellerCompanyRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="sellerCompanyId" type="xs:long"/>
+        <xs:element name="companyNameKk" type="xs:string"/>
+        <xs:element name="companyNameRu" type="xs:string"/>
+        <xs:element name="companyNameEn" type="xs:string"/>
+        <xs:element name="phone" type="xs:string"/>
+        <xs:element name="mobilePhone" type="xs:string"/>
+        <xs:element name="bin" type="xs:string"/>
+        <xs:element name="email" type="xs:string"/>
+        <xs:element name="sellerCategoryId" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="updateSellerCompanyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="seller_company" type="tns:seller_company"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- seller_company -->
+
+  <xs:complexType name="seller_company">
+    <xs:sequence>
+      <xs:element name="sellerCompanyId" type="xs:long"/>
+      <xs:element name="companyNameKk" type="xs:string"/>
+      <xs:element name="companyNameRu" type="xs:string"/>
+      <xs:element name="companyNameEn" type="xs:string"/>
+      <xs:element name="phone" type="xs:string"/>
+      <xs:element name="mobilePhone" type="xs:string"/>
+      <xs:element name="bin" type="xs:string"/>
+      <xs:element name="email" type="xs:string"/>
+      <xs:element name="sellerCategoryId" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://logistic.soap/product_category"
+           targetNamespace="http://logistic.soap/product_category"
+           elementFormDefault="qualified">
+  <!-- get product category by id -->
+  <xs:element name="getProductCategoryIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="getProductCategoryIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="product_category" type="tns:product_category"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- add product category by id -->
+
+  <xs:element name="addProductCategoryRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="categoryNameKk" type="xs:string"/>
+        <xs:element name="categoryNameRu" type="xs:string"/>
+        <xs:element name="categoryNameEn" type="xs:string"/>
+        <xs:element name="addInfo" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="addProductCategoryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="product_category" type="tns:product_category"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- delete product category by id -->
+
+  <xs:element name="deleteProductCategoryIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="deleteProductCategoryIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="product_category" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- update product category -->
+  <xs:element name="updateProductCategoryRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="productCategoryId" type="xs:long"/>
+        <xs:element name="categoryNameKk" type="xs:string"/>
+        <xs:element name="categoryNameRu" type="xs:string"/>
+        <xs:element name="categoryNameEn" type="xs:string"/>
+        <xs:element name="addInfo" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="updateProductCategoryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="product_category" type="tns:product_category"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- product -->
+
+  <xs:complexType name="product_category">
+    <xs:sequence>
+      <xs:element name="productCategoryId" type="xs:long"/>
+      <xs:element name="categoryNameKk" type="xs:string"/>
+      <xs:element name="categoryNameRu" type="xs:string"/>
+      <xs:element name="categoryNameEn" type="xs:string"/>
+      <xs:element name="addInfo" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
