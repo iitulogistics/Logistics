@@ -204,91 +204,91 @@ public class WebServiceConfig extends WsConfigurerAdapter {
   }
   @Bean
   public XsdSchema countrySchema() {
-    return new SimpleXsdSchema(new ClassPathResource("country.xsd"));
+    return new SimpleXsdSchema(new ClassPathResource("soap/country.xsd"));
   }
 
   @Bean
   public XsdSchema citySchema() {
-    return new SimpleXsdSchema(new ClassPathResource("city.xsd"));
+    return new SimpleXsdSchema(new ClassPathResource("soap/city.xsd"));
   }
 
   @Bean
   public XsdSchema regionSchema() {
-    return new SimpleXsdSchema(new ClassPathResource("region.xsd"));
+    return new SimpleXsdSchema(new ClassPathResource("soap/region.xsd"));
   }
 
   @Bean
   public XsdSchema districtSchema() {
-    return new SimpleXsdSchema(new ClassPathResource("district.xsd"));
+    return new SimpleXsdSchema(new ClassPathResource("soap/district.xsd"));
   }
 
   @Bean
   public XsdSchema addressSchema() {
-    return new SimpleXsdSchema(new ClassPathResource("address.xsd"));
+    return new SimpleXsdSchema(new ClassPathResource("soap/address.xsd"));
   }
 
   @Bean
   public XsdSchema basketSchema() {
-    return new SimpleXsdSchema(new ClassPathResource("basket.xsd"));
+    return new SimpleXsdSchema(new ClassPathResource("soap/basket.xsd"));
   }
 
   @Bean
   public XsdSchema creditCardSchema() {
-    return new SimpleXsdSchema(new ClassPathResource("credit_card.xsd"));
+    return new SimpleXsdSchema(new ClassPathResource("soap/credit_card.xsd"));
   }
 
   @Bean
   public XsdSchema customerSchema() {
-    return new SimpleXsdSchema(new ClassPathResource("customer.xsd"));
+    return new SimpleXsdSchema(new ClassPathResource("soap/customer.xsd"));
   }
 
   @Bean
   public XsdSchema orderSchema() {
-    return new SimpleXsdSchema(new ClassPathResource("order.xsd"));
+    return new SimpleXsdSchema(new ClassPathResource("soap/order.xsd"));
   }
 
   @Bean
   public XsdSchema otpSchema() {
-    return new SimpleXsdSchema(new ClassPathResource("otp.xsd"));
+    return new SimpleXsdSchema(new ClassPathResource("soap/otp.xsd"));
   }
 
   @Bean
   public XsdSchema paymentSchema() {
-    return new SimpleXsdSchema(new ClassPathResource("payment.xsd"));
+    return new SimpleXsdSchema(new ClassPathResource("soap/payment.xsd"));
   }
 
   @Bean
   public XsdSchema productSchema() {
-    return new SimpleXsdSchema(new ClassPathResource("product.xsd"));
+    return new SimpleXsdSchema(new ClassPathResource("soap/product.xsd"));
   }
 
   @Bean
   public XsdSchema productCategorySchema() {
-    return new SimpleXsdSchema(new ClassPathResource("product_category.xsd"));
+    return new SimpleXsdSchema(new ClassPathResource("soap/product_category.xsd"));
   }
 
   @Bean
   public XsdSchema productSubCategorySchema() {
-    return new SimpleXsdSchema(new ClassPathResource("product_subcategory.xsd"));
+    return new SimpleXsdSchema(new ClassPathResource("soap/product_subcategory.xsd"));
   }
 
   @Bean
   public XsdSchema sellerCategorySchema() {
-    return new SimpleXsdSchema(new ClassPathResource("seller_category.xsd"));
+    return new SimpleXsdSchema(new ClassPathResource("soap/seller_category.xsd"));
   }
 
   @Bean
   public XsdSchema sellerCompanySchema() {
-    return new SimpleXsdSchema(new ClassPathResource("seller_company.xsd"));
+    return new SimpleXsdSchema(new ClassPathResource("soap/seller_company.xsd"));
   }
 
   @Bean
   public XsdSchema shipperSchema() {
-    return new SimpleXsdSchema(new ClassPathResource("shipper.xsd"));
+    return new SimpleXsdSchema(new ClassPathResource("soap/shipper.xsd"));
   }
 
   @Bean
   public XsdSchema specialCharacteristicSchema() {
-    return new SimpleXsdSchema(new ClassPathResource("special_characteristic.xsd"));
+    return new SimpleXsdSchema(new ClassPathResource("soap/special_characteristic.xsd"));
   }
 }
