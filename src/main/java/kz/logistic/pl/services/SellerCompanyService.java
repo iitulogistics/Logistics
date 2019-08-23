@@ -19,7 +19,8 @@ public interface SellerCompanyService {
     String addSellerCompany(String sellerCompanyNameKk, String sellerCompanyNameRu,
                             String sellerCompanyNameEn, String sellerCompanyPhone,
                             String sellerCompanyMobilePhone, String sellerCompanyBin,
-                            String sellerCompanyEmail, String username, String password);
+                            String sellerCompanyEmail, String username, String password,
+                            Long sellerCompanyCategoryId);
 
     String addSellerCompanyJson(SellerCompanyJson sellerCompanyJson);
 

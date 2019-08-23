@@ -99,7 +99,8 @@ public class DefaultSellerCompanyService implements SellerCompanyService {
     public String addSellerCompany(String sellerCompanyNameKk, String sellerCompanyNameRu,
                                    String sellerCompanyNameEn, String sellerCompanyPhone,
                                    String sellerCompanyMobilePhone, String sellerCompanyBin,
-                                   String sellerCompanyEmail, String username, String password) {
+                                   String sellerCompanyEmail, String username, String password,
+                                   Long sellerCompanyCategoryId) {
 
         if (exists(username))
             return returnMessage.getSellercompanyAddError();
@@ -111,7 +112,7 @@ public class DefaultSellerCompanyService implements SellerCompanyService {
         sellerCompanyEntity.setMobilePhone(sellerCompanyMobilePhone);
         sellerCompanyEntity.setBin(sellerCompanyBin);
         sellerCompanyEntity.setEmail(sellerCompanyEmail);
-
+        sellerCompanyEntity.setSellerCategoryId(sellerCompanyCategoryId);
 
         LoginEntity loginEntity = new LoginEntity();
         loginEntity.setUsername(username);
