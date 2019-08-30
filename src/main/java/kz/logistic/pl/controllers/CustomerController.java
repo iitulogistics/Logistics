@@ -89,6 +89,8 @@ public class CustomerController {
     @RequestParam String password) throws IOException {
     ResponseMessage message = new ResponseMessage();
     message.setMessage(this.customerService.addCustomer(username, password));
+    message.setStatus(customerService.exists(username) ? "fail" :"success");
+
     return ResponseEntity.ok(message);
   }
 
