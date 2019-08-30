@@ -24,6 +24,8 @@ public interface CustomerService {
 
     boolean exists(MobilePhone username);
 
+    boolean exists(String username);
+
     String updateCustomer(Long customerId, CustomerJson customerJson);
 
     String deleteCustomer(Long customerId);

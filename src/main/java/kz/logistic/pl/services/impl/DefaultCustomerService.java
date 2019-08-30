@@ -110,11 +110,17 @@ public class DefaultCustomerService implements CustomerService {
         return loginEntity != null;
     }
 
-    @Override
+  @Override
+  public boolean exists(String username) {
+    LoginEntity loginEntity = this.loginRepository.findByUsername(username);
+    return loginEntity != null;
+  }
+
+  @Override
     public String addCustomer(String username, String password) throws IOException {
-//    if (exists(username)) {
-//      return "Данный логин уже занят";
-//    }
+    if (exists(username)) {
+      return "Данный логин уже занят";
+    }
         LoginEntity loginEntity = new LoginEntity();
         loginEntity.setUsername(username);
         loginEntity.setPassword(password);
@@ -129,9 +135,9 @@ public class DefaultCustomerService implements CustomerService {
 
     @Override
     public String addCustomerJson(CustomerJson customerJson) {
-//    if (exists(customerJson.getUsername())) {
-//      return "Данный логин уже занят";
-//    }
+    if (exists(customerJson.getUsername())) {
+        return "Данный логин уже занят";
+      }
         LoginEntity loginEntity = new LoginEntity();
         loginEntity.setUsername(customerJson.getUsername());
         loginEntity.setPassword(customerJson.getPassword());
