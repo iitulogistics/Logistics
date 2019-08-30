@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Import;
 @Import(SwaggerConfig.class)
 @SpringBootApplication
 public class PlApplication {
-    private String test;
+
     public static void main(String[] args) {
         SpringApplication.run(PlApplication.class, args);
     }

@@ -103,7 +103,7 @@ public class CustomerRepositorySoap {
     customer.setIinOrBin(entity.getIinOrBin());
     customer.setMobilePhone(entity.getMobilePhone());
     customer.setPhoneNumber(entity.getPhoneNumber());
-    customer.setAddressId(entity.getAddressId());
+//    customer.setAddressId(entity.getAddressId());
 
     return customer;
   }
