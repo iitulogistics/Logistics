@@ -2,6 +2,8 @@ package kz.logistic.pl.repositories;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import kz.logistic.pl.models.entities.LoginEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,5 +20,5 @@ public interface LoginRepository extends JpaRepository<LoginEntity, Long> {
   LoginEntity findByUsernameAndPassword(String username, String password);
 
   @Query("select l from LoginEntity l where l.username = ?1")
-  LoginEntity findByUsername(String username);
+  Optional<LoginEntity> findByUsername(String username);
 }

@@ -45,7 +45,7 @@ public class DefaultAuthenticationService implements AuthenticationService {
 
     @Override
     public String getRoleByUsername(String username) {
-        LoginEntity loginEntity = this.loginRepository.findByUsername(username);
+        LoginEntity loginEntity = this.loginRepository.findByUsername(username).orElse(null);
         if (loginEntity.getCustomerEntity() != null)
             return "customer";
         if (loginEntity.getSellerCompanyEntity() != null)

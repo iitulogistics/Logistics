@@ -106,13 +106,15 @@ public class DefaultCustomerService implements CustomerService {
 
     @Override
     public boolean exists(MobilePhone username) {
-        LoginEntity loginEntity = this.loginRepository.findByUsername(username.getMobilePhone());
+        LoginEntity loginEntity = this.loginRepository
+          .findByUsername(username.getMobilePhone())
+          .orElse(null);
         return loginEntity != null;
     }
 
   @Override
   public boolean exists(String username) {
-    LoginEntity loginEntity = this.loginRepository.findByUsername(username);
+    LoginEntity loginEntity = this.loginRepository.findByUsername(username).orElse(null);
     return loginEntity != null;
   }
 

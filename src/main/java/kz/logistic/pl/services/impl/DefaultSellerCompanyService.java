@@ -49,7 +49,7 @@ public class DefaultSellerCompanyService implements SellerCompanyService {
 
     @Override
     public boolean exists(String username) {
-        LoginEntity loginEntity = this.loginRepository.findByUsername(username);
+        LoginEntity loginEntity = this.loginRepository.findByUsername(username).orElse(null);
         return loginEntity != null;
     }
 
