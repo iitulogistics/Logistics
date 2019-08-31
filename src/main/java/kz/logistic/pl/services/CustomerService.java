@@ -19,6 +19,13 @@ public interface CustomerService {
     //Добавить нового клиента
     String addCustomer(String username, String password) throws IOException;
 
+    String addCustomerAllParams(String username, String password,
+                       String customerNameKk, String customerNameRu,
+                       String customerNameEn, String mobilePhone,
+                       String email, String phoneNumber ,
+                       String addInfo, String iinOrBin
+                       ) throws IOException;
+
     //Добавить нового клиента посредством JSON
     String addCustomerJson(CustomerJson customerJson);
 
